@@ -271,7 +271,7 @@ export VISUAL=nvim
 export IGNOREEOF=1
 
 # Load private stuff
-source ./bash_profile_private
+source ~/.bash_profile_private
 
 # }}}
 
