@@ -1,0 +1,11 @@
+*~
+.DS_Store
+
+tags
+tags.lock
+tags.temp
+.notags
+
+.nvmrc
+
+Session.vim

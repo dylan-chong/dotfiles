@@ -1,0 +1,45 @@
+{
+  "title": "Map extra buttons on mouse to switch workspaces",
+  "rules": [
+
+    {
+      "description": "Map extra buttons on mouse to switch workspaces",
+      "manipulators": [
+
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button6"
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "left_control",
+                "left_shift"
+              ]
+            }
+          ]
+        },
+
+        {
+          "type": "basic",
+          "from": {
+            "pointing_button": "button4"
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "left_control",
+                "left_shift"
+              ]
+            }
+          ]
+        }
+
+      ]
+    }
+
+  ]
+}

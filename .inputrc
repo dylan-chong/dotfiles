@@ -1,0 +1,16 @@
+set editing-mode vi
+
+# Ctrl+L to clear
+# (https://unix.stackexchange.com/questions/104094/is-there-any-way-to-enable-ctrll-to-clear-screen-when-set-o-vi-is-set)
+$if mode=vi
+    set keymap vi-command
+    # these are for vi-command mode
+    Control-l: clear-screen
+
+    set keymap vi-insert
+    # these are for vi-insert mode
+    Control-l: clear-screen
+$endif
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward

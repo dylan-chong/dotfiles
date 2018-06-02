@@ -1,0 +1,29 @@
+[core]
+	editor = nvim
+	excludesfile = /Users/Dylan/.gitignore_global
+[user]
+	name = Dylan Chong
+	email = dylan.chong@icloud.com
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[color]
+	ui = true
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
+[commit]
+	template = /Users/Dylan/.stCommitMsg
+[gui]
+[diff]
+	tool = vimdiff
+[gui]
+	recentrepo = /Users/Dylan/Development/Cloudsource/thor

@@ -1,0 +1,44 @@
+source ~/.vimrc
+
+" Surround plugin
+set surround
+
+
+
+" Remap mappings to intellij equivalents
+" {{{
+
+" Override reloading rc file
+nnoremap <leader>sv :source ~/.ideavimrc<CR>
+
+" Fix some IntelliJ IDEAVim pane-switching shortcuts not working
+nnoremap <C-w><left> <C-w><h>
+nnoremap <C-w><right> <C-w><l>
+nnoremap <C-w><down> <C-w><j>
+nnoremap <C-w><up> <C-w><k>
+
+" 'Inspections'
+" {{{
+" Put a new line at the start and end of the selection
+" Hackily fixed by: <C-j> replaced with i<CR><C-c>
+vmap <leader>i<C-j> <ESC><Right>i<CR><C-c>gvo<ESC>i<CR><C-c>
+" Split params by comma and start/end of selection (Doesnt work if nested macro calls)
+" Hackily fixed by pasting in macro calls
+vmap <leader>i<CR> <ESC><Right>i<CR><C-c>gvo<ESC>i<CR><C-c>V<leader>i,
+" }}}
+
+" Search files
+nnoremap <leader>f :action SearchEverywhere<CR>
+
+" Recent files
+nnoremap <leader>F :action RecentFiles<CR>
+
+" Files TODO Doesn't work
+nnoremap <leader>n :action ActivateProjectToolWindow<CR>
+
+" }}}
+
+
+
+" Hack to fix the extra undos required
+nnoremap u uu
