@@ -1,4 +1,5 @@
-# Personal Unix Settings
+# Varioius Unix Settings
 
 All my settings, plugins, and colour schemes that I have found on the Internet
-can be found here. Hopefully you can find something useful in there somewhere.
+can be found here. Take what you want! Hopefully you can find something useful
+in there somewhere.
