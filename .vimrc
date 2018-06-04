@@ -200,9 +200,10 @@ let g:airline#extensions#tabline#fnametruncate = 20
 let g:livepreview_previewer = 'open -a Preview'
 
 " Deoplete
-let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#enable_at_startup = 0
+au InsertEnter * call deoplete#enable() " Lazy load
 
 " NERDTree
 let g:nerdtree_tabs_open_on_gui_startup = 2
