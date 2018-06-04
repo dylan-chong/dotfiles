@@ -280,9 +280,9 @@ nmap [h <Plug>GitGutterPrevHunk
 nmap ]h <Plug>GitGutterNextHunk
 
 " PlantUML Previewer
-augroup plantuml_previewer_config 
+augroup plantuml_previewer_config
   au!
-  au FileType plantuml let g:plantuml_previewer#plantuml_jar_path = 
+  au FileType plantuml let g:plantuml_previewer#plantuml_jar_path =
         \ substitute(
         \   system("cat `which plantuml` | grep 'plantuml.jar' | perl -pe 's/.* (\\S+plantuml\\.jar).*/\\1/'"),
         \   '\n', '', 'g'
@@ -290,6 +290,11 @@ augroup plantuml_previewer_config
 augroup END
 let g:plantuml_previewer#plantuml_jar_path = '/usr/local/Cellar/plantuml/1.2018.3/libexec/plantuml.jar'
 
+" Markdown (part of polyglot)
+" Hack to fix bulet point problem
+autocmd FileType markdown
+    \ set formatoptions-=q |
+    \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
 
 " }}}
 
