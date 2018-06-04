@@ -90,6 +90,7 @@ alias brewupgrade="echo 'Calling: brew upgrade' && \
     brew cleanup"
 
 alias iex='rlwrap -a foo iex'
+alias kotlinc='rlwrap -a foo kotlinc'
 
 alias soba="source ~/.bash_profile"
 
