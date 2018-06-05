@@ -22,6 +22,7 @@ Plugin 'chriskempson/base16-vim'
 
 " CTags
 Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'octref/RootIgnore'
 
 " NERDTree
 Plugin 'scrooloose/nerdtree'
@@ -107,32 +108,6 @@ let mapleader=" "
 " Plugin Config
 " {{{
 
-" TODO look at using https://github.com/octref/RootIgnore
-" Wildignore is first in case it is referenced
-set wildignore +=
-      \bower_components
-      \,node_modules
-      \,plugins
-      \,out
-      \,dist
-      \,build
-      \,_build
-      \,deps
-      \,platforms/android
-      \,platforms/ios
-      \,MacroSystem
-      \,js
-      \,www
-      \,tags
-      \,*.swp
-      \,vendor
-      \,plugins-src/ThorCordova-ios/Carthage
-      \,*.min.js
-      \,*.bundle.js
-      \,cover
-      \,Session.vim
-      \,_tmp
-
 " Command-T
 nmap <silent> <Leader>f <Plug>(CommandT)
 nmap <silent> <Leader>F <Plug>(CommandTMRU)
@@ -166,7 +141,6 @@ let g:CommandTInputDebounce = 50
 let g:CommandTAcceptSelectionSplitMap = '<C-b>'
 
 " EasyGrep
-let g:EasyGrepFilesToExclude = &wildignore . ",doc"
 let g:EasyGrepJumpToMatch = 0
 let g:EasyGrepRecursive = 1
 let g:EasyGrepCommand = "ag" " NOTE: Set to 'grep' if there are special characters
@@ -219,6 +193,8 @@ let g:NERDDefaultAlign = 'start'
 let g:NERDRemoveExtraSpaces = 0
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDSpaceDelims = 1
+nmap gc <leader>c<space>
+vmap gc <leader>c<space>
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
