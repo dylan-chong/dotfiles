@@ -108,6 +108,8 @@ let mapleader=" "
 " Plugin Config
 " {{{
 
+set wildignore+=Carthage
+
 " Command-T
 nmap <silent> <Leader>f <Plug>(CommandT)
 nmap <silent> <Leader>F <Plug>(CommandTMRU)
