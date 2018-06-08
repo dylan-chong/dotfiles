@@ -297,7 +297,7 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-materia
 
 " Highlight line/column
-set cursorline
+" set cursorline
 
 " End column
 hi ColorColumn ctermbg=52
@@ -430,6 +430,7 @@ endif
 "
 " Scrolling
 set scrolloff=4
+set sidescrolloff=4
 
 " Text width
 set textwidth=79
@@ -513,6 +514,7 @@ set lazyredraw
 
 " Spelling
 setglobal spelllang=en_nz
+set dictionary+=/usr/share/dict/words
 autocmd FileType markdown,text,bib,latex,plaintex setlocal spell
 
 " TODO Use a plugin and instead of making the function myself
