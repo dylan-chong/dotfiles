@@ -274,6 +274,12 @@ autocmd FileType markdown
     \ set formatoptions-=q |
     \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
 
+" Fugitive
+nnoremap <Leader>gcm :w<CR>:Gcommit -v
+nnoremap <Leader>gap :w<CR>:Git add -p<CR>i
+nnoremap <Leader>gdf :w<CR>:Git diff<CR>
+nnoremap <Leader>gs :w<CR>:Git status<CR>
+
 " }}}
 
 
@@ -371,6 +377,7 @@ vnoremap > >gv
 
 " Duplicate buffer in new tab
 nnoremap <C-w>d <C-w>s<C-w>T
+nmap <C-w>D <C-w>d:tabm-<CR>
 
 " Switch to last tab
 let g:lasttab = 1
@@ -395,6 +402,7 @@ nnoremap <C-g><C-]> <C-w>s<C-w>Tg<C-]>
 
 " File operations
 nnoremap <C-q> :w<CR>
+nnoremap <C-c> :wqa
 
 " Moving tabs
 nnoremap <C-w>< :tabm-<CR>
