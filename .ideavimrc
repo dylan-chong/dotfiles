@@ -38,7 +38,10 @@ nnoremap <leader>n :action ActivateProjectToolWindow<CR>
 
 " }}}
 
+nnoremap <leader>an :action GotoNextError<CR>
+nnoremap <leader>ap :action GotoPreviousError<CR>
 
+nnoremap <leader>f :action SearchEverywhere<CR>
 
 " Hack to fix the extra undos required
-nnoremap u uu
+" nnoremap u uu

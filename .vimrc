@@ -108,7 +108,7 @@ let mapleader=" "
 " Plugin Config
 " {{{
 
-set wildignore+=Carthage
+set wildignore+=Carthage,package-lock.json,yarn.lock,tags,Session.vim
 
 " Command-T
 nmap <silent> <Leader>f <Plug>(CommandT)
@@ -187,7 +187,7 @@ let g:nerdtree_tabs_open_on_console_startup = g:nerdtree_tabs_open_on_gui_startu
 let NERDTreeShowLineNumbers=1 " enable line numbers
 autocmd FileType nerdtree setlocal relativenumber
 let NERDTreeShowHidden=1
-nmap <leader>n :NERDTreeTabsToggle<cr>
+nmap <leader>n :NERDTreeToggle<cr>
 nmap <leader>N :NERDTreeFind<cr>
 
 " Nerd Commenter
@@ -342,8 +342,9 @@ vnoremap <C-r> ygv"zy:%s/<C-r>z/<C-r>z
 " Reload .vimrc
 nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
 
-" EasyDoc (my thing)
-nnoremap <Leader>de :w<CR>:!doc export '%'<CR>
+" Exporting documents
+nnoremap <Leader>dm :w<CR>:!doc export '%'<CR>
+nnoremap <Leader>dt :w<CR>:!pdflatex '%' && open %:r.pdf<CR>
 
 " Smart indent when entering insert mode with i on empty lines
 " https://stackoverflow.com/a/3003636/1726450
@@ -401,7 +402,7 @@ nnoremap <Leader>% :call CopyToClipboard(expand('%'))<Left><Left><Left>
 nnoremap <C-g><C-]> <C-w>s<C-w>Tg<C-]>
 
 " File operations
-nnoremap <C-q> :w<CR>
+nnoremap <C-q> :wa<CR>
 nnoremap <C-c> :wqa
 
 " Moving tabs
@@ -475,7 +476,7 @@ set guioptions-=r
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Autosave
-au FocusLost,BufLeave * silent! :wa
+au FocusLost * silent! :wa
 
 " Auto reload
 set autoread
