@@ -84,12 +84,12 @@ Plugin 'Galooshi/vim-import-js'
 " Wintabs (must be after vim-airline)
 Plugin 'zefei/vim-wintabs'
 Plugin 'zefei/vim-wintabs-powerline'
-Plugin 'xolox/vim-session'
 
 " Miscellaneous
 Plugin 'xolox/vim-misc'
 Plugin 'tyru/open-browser.vim' " Required by tyru/open-browser.vim
 Plugin 'arecarn/vim-crunch'
+Plugin 'xolox/vim-session'
 
 " }
 
@@ -289,6 +289,17 @@ nnoremap <Leader>gpl :w<CR>:Gpull<Space>
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
+if !has('idea')
+  nnoremap <Leader>gh gT
+  nnoremap <Leader>g<Left> gT
+  nnoremap <Leader>gl gt
+  nnoremap <Leader>g<Right> gt
+
+  nnoremap gh :WintabsPrevious<CR>
+  nnoremap g<Left> :WintabsPrevious<CR>
+  nnoremap gl :WintabsNext<CR>
+  nnoremap g<Right> :WintabsNext<CR>
+endif
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
@@ -333,15 +344,6 @@ cal matchadd('ColorColumn', '\%81v', 100)
 " Clear highlighting
 nnoremap <silent> <esc> <esc>:noh<cr>
 inoremap <silent> <esc> <esc>:noh<cr>
-
-
-" Easier tab changing
-" left
-nnoremap gh gT
-nnoremap g<Left> gT
-" right
-nnoremap gl gt
-nnoremap g<Right> gt
 
 " Splitting lines
 nnoremap <C-j> i<CR><ESC>
