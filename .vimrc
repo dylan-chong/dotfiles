@@ -27,10 +27,10 @@ Plugin 'octref/RootIgnore'
 " NERDTree
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " File-related stuff
 Plugin 'wincent/Command-T'
-Plugin 'tpope/vim-obsession'
 Plugin 'dkprice/vim-easygrep'
 " TODO try https://github.com/rking/ag.vim
 
@@ -80,6 +80,11 @@ Plugin 'weirongxu/plantuml-previewer.vim'
 
 " Javascript
 Plugin 'Galooshi/vim-import-js'
+
+" Wintabs (must be after vim-airline)
+Plugin 'zefei/vim-wintabs'
+Plugin 'zefei/vim-wintabs-powerline'
+Plugin 'xolox/vim-session'
 
 " Miscellaneous
 Plugin 'xolox/vim-misc'
@@ -279,6 +284,20 @@ nnoremap <Leader>gcm :w<CR>:Gcommit -v
 nnoremap <Leader>gap :w<CR>:Git add -p<CR>i
 nnoremap <Leader>gdf :w<CR>:Git diff<CR>
 nnoremap <Leader>gs :w<CR>:Git status<CR>
+nnoremap <Leader>gph :w<CR>:Gpush<Space>
+nnoremap <Leader>gpl :w<CR>:Gpull<Space>
+
+" Win Tabs
+let g:wintabs_ui_vimtab_name_format = '%t'
+
+" Vim Session
+" Settings to get it to work like vim-obsession (save session in current directory)
+let g:session_autoload = 'no'
+let g:session_autosave = 'yes'
+let g:session_autosave_silent = 1
+let g:session_lock_enabled = 0
+let g:session_directory = './' 
+let g:session_default_name = 'Session'
 
 " }}}
 
@@ -552,5 +571,9 @@ set hlsearch
 " Open quickfix window matches in new/existing tab
 " set switchbuf+=usetab,newtab
 " TODO https://github.com/yssl/QFEnter
+
+" Scroll speed customisation
+" map <ScrollWheelUp> <C-Y>
+" map <ScrollWheelDown> <C-E>
 
 " }}}
