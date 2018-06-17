@@ -300,6 +300,7 @@ nnoremap <Leader>gpl :w<CR>:Gpull<Space>
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
 let g:wintabs_autoclose_vim = 1
+let g:wintabs_autoclose_vimtab = 1
 if !has('idea')
   " Change tabs
   nnoremap <Leader>gh gT
@@ -316,16 +317,17 @@ if !has('idea')
   " Other buffer stuff
   nmap <Leader>qu <Plug>(wintabs_undo)
   nmap <Leader>qq <Plug>(wintabs_close)
+  nmap <Leader>qm :WintabsMove<Space>
 
   " Override q,q!,wq to avoid accidentally closing all of the buffers in the
-  " window
-  function! SaveAndCloseCurrentTab()
+  " tab
+  function! SaveAndCloseCurrentBuffer()
     :w
     call wintabs#close()
   endfunction
   call CommandCabbr('q', 'call wintabs#close()')
   call CommandCabbr('q!', 'call wintabs#close()')
-  call CommandCabbr('wq', 'call SaveAndCloseCurrentTab()')
+  call CommandCabbr('wq', 'call SaveAndCloseCurrentBuffer()')
 endif
 
 " Vim Session
