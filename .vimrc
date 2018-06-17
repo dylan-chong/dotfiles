@@ -316,16 +316,17 @@ endif
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
-let g:session_autoload = 'no'
-let g:session_autosave = 'no'
 let g:session_autosave_silent = 1
+let g:session_autoload = 'no'
+let g:session_autosave = 'prompt'
 let g:session_lock_enabled = 0
 let g:session_directory = './' 
 let g:session_default_name = 'Session'
-augroup vim_session_autosave
-  au!
-  au FocusLost,BufWritePost,VimLeave * silent! :SaveSession
-augroup END
+let g:session_autosave_periodic = 1
+" augroup vim_session_autosave
+"   au!
+"   au FocusLost,BufWritePost,VimLeave * silent! :SaveSession
+" augroup END
 
 
 " Gutentags
