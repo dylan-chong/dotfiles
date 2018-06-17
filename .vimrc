@@ -287,6 +287,7 @@ nnoremap <Leader>gpl :w<CR>:Gpull<Space>
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
 if !has('idea')
+  " Change tabs
   nnoremap <Leader>gh gT
   nnoremap <Leader>g<Left> gT
   nnoremap <Leader>gl gt
@@ -301,13 +302,21 @@ endif
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
 let g:session_autoload = 'no'
-let g:session_autosave = 'yes'
+let g:session_autosave = 'no'
 let g:session_autosave_silent = 1
 let g:session_lock_enabled = 0
 let g:session_directory = './' 
 let g:session_default_name = 'Session'
+augroup vim_session_autosave
+  au!
+  au FocusLost,BufWritePost,VimLeave * :SaveSession
+augroup END
+
 
 " Gutentags
+" TODO Use ag for listing the files because currently it will not work if there
+" is no git repository. Ag currently does not ignore nested git ignore files.
+" See https://github.com/ggreer/the_silver_searcher/issues/1237
 let g:gutentags_file_list_command = "git ls-files | ag -v '(json|plist)$'"
 let g:gutentags_define_advanced_commands = 1
 
