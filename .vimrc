@@ -299,6 +299,7 @@ nnoremap <Leader>gpl :w<CR>:Gpull<Space>
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
+let g:wintabs_autoclose_vim = 1
 if !has('idea')
   " Change tabs
   nnoremap <Leader>gh gT
@@ -337,7 +338,7 @@ let g:session_directory = './'
 let g:session_default_name = 'Session'
 augroup vim_session_autosave
   au!
-  au FocusLost,BufWritePost,VimLeave * :SaveSession
+  au FocusLost,BufWritePost,VimLeave * silent! :SaveSession
 augroup END
 
 
