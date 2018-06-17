@@ -22,7 +22,6 @@ Plugin 'chriskempson/base16-vim'
 
 " CTags
 Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'octref/RootIgnore'
 
 " NERDTree
 Plugin 'scrooloose/nerdtree'
@@ -112,8 +111,6 @@ let mapleader=" "
 
 " Plugin Config
 " {{{
-
-set wildignore+=Carthage,package-lock.json,yarn.lock,tags,Session.vim
 
 " Command-T
 nmap <silent> <Leader>f <Plug>(CommandT)
@@ -309,6 +306,10 @@ let g:session_autosave_silent = 1
 let g:session_lock_enabled = 0
 let g:session_directory = './' 
 let g:session_default_name = 'Session'
+
+" Gutentags
+let g:gutentags_file_list_command = "git ls-files | ag -v '(json|plist)$'"
+let g:gutentags_define_advanced_commands = 1
 
 " }}}
 
@@ -582,12 +583,14 @@ set linebreak
 " Highlight search results
 set hlsearch
 
-" Open quickfix window matches in new/existing tab
-" set switchbuf+=usetab,newtab
-" TODO https://github.com/yssl/QFEnter
-
 " Scroll speed customisation
 " map <ScrollWheelUp> <C-Y>
 " map <ScrollWheelDown> <C-E>
+
+" Show substitution results as you are typing the regex out (Neovim only)
+set inccommand=nosplit
+
+" Wildignore
+set wildignore+=package-lock.json,yarn.lock,tags,Session.vim
 
 " }}}
