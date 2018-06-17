@@ -31,7 +31,6 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " File-related stuff
 Plugin 'wincent/Command-T'
 Plugin 'dkprice/vim-easygrep'
-" TODO try https://github.com/rking/ag.vim
 
 " Git
 Plugin 'tpope/vim-fugitive'
@@ -130,37 +129,21 @@ nmap <silent> <Leader>f <Plug>(CommandT)
 nmap <silent> <Leader>F <Plug>(CommandTMRU)
 " TODO don't duplicate from gitignore
 let g:CommandTWildIgnore = '
-      \*/bower_components
-      \,*/node_modules
-      \,*/plugins
-      \,*/out
-      \,*/dist
-      \,*/build
-      \,*/_build
-      \,*/deps
-      \,*/platforms/android
-      \,*/platforms/ios
-      \,*/MacroSystem
-      \,*/_js
-      \,*/www
+      \*/MacroSystem
       \,*/tags
-      \,*/*.swp
       \,*/vendor
       \,*/plugins-src/ThorCordova-ios/Carthage
-      \,*/*.min.js
-      \,*/*.bundle.js
-      \,*/doc " Not in wildignore because Vundle breaks
-      \,*/cover
       \,*/Session.vim
-      \,*/_tmp
       \'
 let g:CommandTInputDebounce = 50
 let g:CommandTAcceptSelectionSplitMap = '<C-b>'
+let g:CommandTFileScanner = 'rg'
+let g:CommandTMaxFiles = 30000
 
 " EasyGrep
 let g:EasyGrepJumpToMatch = 0
 let g:EasyGrepRecursive = 1
-let g:EasyGrepCommand = "ag" " NOTE: Set to 'grep' if there are special characters
+let g:EasyGrepCommand = 'rg' " NOTE: Set to 'grep' if there are special characters
 let g:EasyGrepReplaceWindowMode = 2
 
 " Vim Airline Plugin
@@ -345,10 +328,9 @@ augroup END
 
 
 " Gutentags
-" TODO Use ag for listing the files because currently it will not work if there
-" is no git repository. Ag currently does not ignore nested git ignore files.
-" See https://github.com/ggreer/the_silver_searcher/issues/1237
-let g:gutentags_file_list_command = "git ls-files | ag -v '(json|plist)$'"
+" rg respects gitignore files. This command also filters out certain file types
+" that we do not want tags for
+let g:gutentags_file_list_command = "rg -l '.' | rg -v '(json|plist)$'"
 let g:gutentags_define_advanced_commands = 1
 
 " }}}
