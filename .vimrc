@@ -115,7 +115,7 @@ let mapleader=" "
 " Command-T
 nmap <silent> <Leader>f <Plug>(CommandT)
 nmap <silent> <Leader>F <Plug>(CommandTMRU)
-" TODO don't duplicate above
+" TODO don't duplicate from gitignore
 let g:CommandTWildIgnore = '
       \*/bower_components
       \,*/node_modules
@@ -573,9 +573,13 @@ function! g:PlantUMLOpenImage()
 endfunction
 command! PlantUMLOpenImage silent call g:PlantUMLOpenImage()
 
-" Case
+" Case (and smart case in command mode)
 set ignorecase
-set smartcase
+augroup dynamic_smartcase
+  autocmd!
+  autocmd CmdLineEnter : set nosmartcase
+  autocmd CmdLineLeave : set smartcase
+augroup END
 
 " Don't wrap in the middle of a word
 set linebreak
