@@ -43,7 +43,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " Space/indenting
-" Plugin 'tpope/vim-sleuth' " Detects space/tab sizes of current file
+Plugin 'tpope/vim-sleuth' " Detects space/tab sizes of current file
 Plugin 'skopciewski/vim-better-whitespace'
 " Plugin 'ntpeters/vim-better-whitespace' TODO Put this back after this pull request is merged https://github.com/ntpeters/vim-better-whitespace/pull/85
 " TODO Use this plugin for whitespace https://github.com/thirtythreeforty/lessspace.vim
@@ -458,9 +458,21 @@ set sidescrolloff=4
 set textwidth=79
 
 " Indenting defaults
-autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml setlocal expandtab tabstop=2 shiftwidth=2
 " Default to 4 spaces for most filetypes
 if get(g:, '_has_set_default_indent_settings', 0) == 0
+  autocmd FileType
+        \ typescript,
+        \ javascript,
+        \ jsx,
+        \ tsx,
+        \ css,
+        \ html,
+        \ ruby,
+        \ elixir,
+        \ kotlin,
+        \ vim,
+        \ plantuml
+        \ setlocal expandtab tabstop=2 shiftwidth=2
   set expandtab
   set tabstop=4
   set shiftwidth=4
