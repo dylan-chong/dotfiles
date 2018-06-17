@@ -105,6 +105,19 @@ filetype plugin indent on    " required
 " Easy leader
 let mapleader=" "
 
+" Function to replace built in commands
+" Taken from: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
+function! CommandCabbr(abbreviation, expansion)
+  execute 'cabbr '
+        \. a:abbreviation
+        \. ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "'
+        \. a:expansion
+        \. '" : "'
+        \. a:abbreviation
+        \. '"<CR>'
+endfunction
+
+
 " }}}
 
 
@@ -293,10 +306,25 @@ if !has('idea')
   nnoremap <Leader>gl gt
   nnoremap <Leader>g<Right> gt
 
-  nnoremap gh :WintabsPrevious<CR>
-  nnoremap g<Left> :WintabsPrevious<CR>
-  nnoremap gl :WintabsNext<CR>
-  nnoremap g<Right> :WintabsNext<CR>
+  " Change buffers
+  nmap gh <Plug>(wintabs_previous)
+  nmap g<Left> <Plug>(wintabs_previous)
+  nmap gl <Plug>(wintabs_next)
+  nmap g<Right> <Plug>(wintabs_next)
+
+  " Other buffer stuff
+  nmap <Leader>qu <Plug>(wintabs_undo)
+  nmap <Leader>qq <Plug>(wintabs_close)
+
+  " Override q,q!,wq to avoid accidentally closing all of the buffers in the
+  " window
+  function! SaveAndCloseCurrentTab()
+    :w
+    call wintabs#close()
+  endfunction
+  call CommandCabbr('q', 'call wintabs#close()')
+  call CommandCabbr('q!', 'call wintabs#close()')
+  call CommandCabbr('wq', 'call SaveAndCloseCurrentTab()')
 endif
 
 " Vim Session
