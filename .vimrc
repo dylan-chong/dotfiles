@@ -284,6 +284,7 @@ nnoremap <Leader>gpl :w<CR>:Gpull<Space>
 let g:wintabs_ui_vimtab_name_format = '%t'
 let g:wintabs_autoclose_vim = 1
 let g:wintabs_autoclose_vimtab = 1
+let g:wintabs_autoclose = 2
 if !has('idea')
   " Change tabs
   nnoremap <Leader>gh gT
@@ -481,15 +482,13 @@ set sidescrolloff=4
 set textwidth=79
 
 " Indenting defaults
-" Default to 4 spaces for most filetypes
-if get(g:, '_has_set_default_indent_settings', 0) == 0
-  autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml
-        \ setlocal expandtab tabstop=2 shiftwidth=2
-  set expandtab
-  set tabstop=4
-  set shiftwidth=4
-  let g:_has_set_default_indent_settings = 1
-endif
+" Defaults to 4 spaces for most filetypes
+autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml
+      \ setlocal expandtab tabstop=2 shiftwidth=2
+" setglobal seems to not override sleuth when reloading vimrc
+setglobal expandtab
+setglobal tabstop=4
+setglobal shiftwidth=4
 
 " Line Numbers
 set relativenumber
