@@ -313,6 +313,9 @@ if !has('idea')
   call CommandCabbr('q!', 'call wintabs#close()')
   call CommandCabbr('wq', 'call SaveAndCloseCurrentBuffer()')
 endif
+" Show git commit file in tabline
+let g:wintabs_ignored_filetypes = []
+autocmd FileType gitcommit set buflisted
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
