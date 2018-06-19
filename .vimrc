@@ -139,6 +139,8 @@ let g:CommandTInputDebounce = 50
 let g:CommandTAcceptSelectionSplitMap = '<C-b>'
 let g:CommandTFileScanner = 'rg'
 let g:CommandTMaxFiles = 30000
+" Enable escape to exit (breaks on some terminals according to command-t docs)
+let g:CommandTCancelMap = ['<ESC>', '<C-c>']
 
 " EasyGrep
 let g:EasyGrepJumpToMatch = 0
