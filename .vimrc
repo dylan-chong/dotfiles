@@ -52,7 +52,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-endwise'
 Plugin 'scrooloose/nerdcommenter'
-" Plugin 'justinmk/vim-sneak' " TODO remap to f/F
+Plugin 'godlygeek/tabular'
 
 " Language packs
 Plugin 'sheerun/vim-polyglot'
@@ -323,7 +323,7 @@ autocmd FileType gitcommit set buflisted
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
-let g:session_autosave_silent = 0
+let g:session_autosave_silent = 1
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 let g:session_lock_enabled = 0
