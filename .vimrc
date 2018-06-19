@@ -268,9 +268,11 @@ let g:plantuml_previewer#plantuml_jar_path = '/usr/local/Cellar/plantuml/1.2018.
 
 " Markdown (part of polyglot)
 " Hack to fix bulet point problem
-autocmd FileType markdown
-    \ set formatoptions-=q |
-    \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
+" autocmd FileType markdown
+"     \ set formatoptions-=q |
+"     \ set formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^\\s*\[-*+]\\s\\+
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
 
 " Fugitive
 nnoremap <Leader>gcm :w<CR>:Gcommit -v
