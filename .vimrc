@@ -136,7 +136,7 @@ let g:CommandTWildIgnore = '
       \,*/Session.vim
       \'
 let g:CommandTInputDebounce = 50
-let g:CommandTAcceptSelectionSplitMap = '<C-b>'
+let g:CommandTAcceptSelectionSplitMap = '<C-x>'
 let g:CommandTFileScanner = 'rg'
 let g:CommandTMaxFiles = 30000
 " Enable escape to exit (breaks on some terminals according to command-t docs)
@@ -575,9 +575,6 @@ function! g:CopyToClipboard(string)
   silent exec "!echo " . a:string . " | pbcopy"
   echom "Copied: '" . a:string . "'"
 endfunction
-
-" Split shortcut (to be compatible with Command-T)
-nnoremap <C-w>b <C-w>s
 
 " Export plantuml
 function! g:PlantUMLSave()
