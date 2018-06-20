@@ -314,11 +314,11 @@ let g:gutentags_file_list_command = "rg -l '.' | rg -v '(json|plist)$'"
 let g:gutentags_define_advanced_commands = 1
 
 " FZF
-nnoremap <silent> <Leader>ff :Files<CR>
-nnoremap <silent> <Leader>fh :History<CR>
+nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>F :History<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
