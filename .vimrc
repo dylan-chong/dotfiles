@@ -29,7 +29,6 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " File-related stuff
-Plugin 'wincent/Command-T'
 Plugin 'dkprice/vim-easygrep'
 
 " FZF
@@ -126,25 +125,6 @@ endfunction
 
 " Plugin Config
 " {{{
-
-" Command-T
-nmap <silent> <Leader>f <Plug>(CommandT)
-nmap <silent> <Leader>F <Plug>(CommandTMRU)
-let g:CommandTWildIgnore = '
-      \*/MacroSystem
-      \,*/tags
-      \,*/vendor
-      \,*/plugins-src/ThorCordova-ios/Carthage
-      \,*/Session.vim
-      \'
-let g:CommandTInputDebounce = 50
-let g:CommandTFileScanner = 'rg' " Respects gitignore
-" I set this MaxFiles limit low enough so the max isn't hit on my projects.
-" Increase it when it isn't enough
-let g:CommandTMaxFiles = 30000
-" Enable escape to exit (breaks on some terminals according to command-t docs)
-let g:CommandTCancelMap = ['<ESC>', '<C-c>']
-let g:CommandTAcceptSelectionSplitMap = '<C-x>'
 
 " EasyGrep
 let g:EasyGrepJumpToMatch = 0
@@ -334,12 +314,15 @@ let g:gutentags_file_list_command = "rg -l '.' | rg -v '(json|plist)$'"
 let g:gutentags_define_advanced_commands = 1
 
 " FZF
+nnoremap <silent> <Leader>ff :Files<CR>
+nnoremap <silent> <Leader>fh :History<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+cnoreabbrev rg Rg
 
 " }}}
 
@@ -595,14 +578,15 @@ set linebreak
 " Highlight search results
 set hlsearch
 
-" Scroll speed customisation
-" map <ScrollWheelUp> <C-Y>
-" map <ScrollWheelDown> <C-E>
-
 " Show substitution results as you are typing the regex out (Neovim only)
 set inccommand=nosplit
 
 " Wildignore
 set wildignore+=package-lock.json,yarn.lock,tags,Session.vim
+
+" Don't care about accidental capitals
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev WQ wq
 
 " }}}

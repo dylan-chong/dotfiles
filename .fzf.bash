@@ -25,3 +25,9 @@ fbr() {
     | uniq \
     | fzf`
 }
+
+# Various Settings
+# ---------------
+# Respect gitignore
+export FZF_DEFAULT_COMMAND='rg -l "."'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
