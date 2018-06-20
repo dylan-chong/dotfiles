@@ -278,5 +278,10 @@ export IGNOREEOF=1
 # Load private stuff
 source ~/.bash_profile_private
 
+# Load bashrc
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
+
 # }}}
 

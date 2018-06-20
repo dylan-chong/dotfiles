@@ -42,9 +42,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 " Space/indenting
 Plugin 'tpope/vim-sleuth' " Detects space/tab sizes of current file
-Plugin 'skopciewski/vim-better-whitespace'
-" Plugin 'ntpeters/vim-better-whitespace' TODO Put this back after this pull request is merged https://github.com/ntpeters/vim-better-whitespace/pull/85
-" TODO Use this plugin for whitespace https://github.com/thirtythreeforty/lessspace.vim
+Plugin 'thirtythreeforty/lessspace.vim' " Strip whitespace from lines changed
 
 " Low level editing
 Plugin 'dhruvasagar/vim-table-mode'
@@ -127,7 +125,6 @@ endfunction
 " Command-T
 nmap <silent> <Leader>f <Plug>(CommandT)
 nmap <silent> <Leader>F <Plug>(CommandTMRU)
-" TODO don't duplicate from gitignore
 let g:CommandTWildIgnore = '
       \*/MacroSystem
       \,*/tags
@@ -136,11 +133,13 @@ let g:CommandTWildIgnore = '
       \,*/Session.vim
       \'
 let g:CommandTInputDebounce = 50
-let g:CommandTAcceptSelectionSplitMap = '<C-x>'
-let g:CommandTFileScanner = 'rg'
+let g:CommandTFileScanner = 'rg' " Respects gitignore
+" I set this MaxFiles limit low enough so the max isn't hit on my projects.
+" Increase it when it isn't enough
 let g:CommandTMaxFiles = 30000
 " Enable escape to exit (breaks on some terminals according to command-t docs)
 let g:CommandTCancelMap = ['<ESC>', '<C-c>']
+let g:CommandTAcceptSelectionSplitMap = '<C-x>'
 
 " EasyGrep
 let g:EasyGrepJumpToMatch = 0
@@ -237,20 +236,6 @@ nnoremap <leader>af :ALEFix<CR>
 
 " Import JS
 nnoremap <leader>jj :ImportJSWord<CR>
-
-" Better Whitespace
-let g:better_whitespace_filetypes_blacklist = [
-      \  'swift',
-      \  'm',
-      \  'h',
-      \  'diff',
-      \  'gitcommit',
-      \  'unite',
-      \  'qf',
-      \  'help',
-      \  'markdown'
-      \]
-let g:better_whitespace_enabled = 0
 
 " Git Gutter
 set updatetime=300
@@ -539,13 +524,6 @@ set tags=./tags;
 
 " Don't wrap long lines onto the next line on the screen
 set nowrap
-
-" Clear highlighting and StripWhitespace
-" autocmd BufEnter * if index(g:better_whitespace_filetypes_blacklist, &ft) < 0
-"       \ |   exec 'EnableStripWhitespaceOnSave'
-"       \ | else
-"       \ |   exec 'DisableStripWhitespaceOnSave'
-"       \ | endif
 
 " No double space after running `gq` on a line with a '.' at the end
 set nojoinspaces
