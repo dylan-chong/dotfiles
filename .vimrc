@@ -173,9 +173,6 @@ let g:airline#extensions#tabline#fnametruncate = 1
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#fnametruncate = 20
 
-" Latex Live Preview
-let g:livepreview_previewer = 'open -a Preview'
-
 " Deoplete
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#auto_complete_start_length = 1
@@ -571,8 +568,9 @@ function! g:PlantUMLOpenImage()
 endfunction
 command! PlantUMLOpenImage silent call g:PlantUMLOpenImage()
 
-" Case (and smart case in command mode)
+" Case (and ignore case in command mode)
 set ignorecase
+set smartcase
 augroup dynamic_smartcase
   autocmd!
   autocmd CmdLineEnter : set nosmartcase
