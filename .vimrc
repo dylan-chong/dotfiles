@@ -579,7 +579,9 @@ set linebreak
 set hlsearch
 
 " Show substitution results as you are typing the regex out (Neovim only)
-set inccommand=nosplit
+if has('nvim')
+  set inccommand=nosplit
+endif
 
 " Wildignore
 set wildignore+=package-lock.json,yarn.lock,tags,Session.vim
