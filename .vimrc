@@ -32,6 +32,10 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'wincent/Command-T'
 Plugin 'dkprice/vim-easygrep'
 
+" FZF
+set rtp+=/usr/local/opt/fzf
+Plugin 'junegunn/fzf.vim'
+
 " Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
@@ -328,6 +332,14 @@ augroup END
 " that we do not want tags for
 let g:gutentags_file_list_command = "rg -l '.' | rg -v '(json|plist)$'"
 let g:gutentags_define_advanced_commands = 1
+
+" FZF
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " }}}
 

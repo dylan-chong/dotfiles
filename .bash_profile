@@ -261,7 +261,9 @@ alias vi="nvim"
 # Prevent stupidity
 alias rm="rmtrash"
 
+# Max line length when searching
 alias ag="ag -W 100"
+alias rg="rg -M 100"
 
 # Tmux Count Panes
 alias tmuxcount="tmux list-windows -a \
