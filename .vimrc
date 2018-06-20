@@ -316,9 +316,17 @@ let g:gutentags_define_advanced_commands = 1
 " FZF
 nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>F :History<CR>
+nnoremap <silent> <Leader>zc :Commands<CR>
+nnoremap <silent> <Leader>zb :Buffers<CR>
+nnoremap <silent> <Leader>zt :Tags<CR>
+nnoremap <silent> <Leader>zl :BLines<CR>
+nnoremap <silent> <Leader>z/ :History/<CR>
+nnoremap <silent> <Leader>z: :History:<CR>
+nnoremap <silent> <Leader>zh :Helptags<CR>
+nnoremap <silent> <Leader>zm :Maps<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
