@@ -43,6 +43,7 @@ Plugin 'vim-airline/vim-airline-themes'
 " Space/indenting
 Plugin 'tpope/vim-sleuth' " Detects space/tab sizes of current file
 Plugin 'thirtythreeforty/lessspace.vim' " Strip whitespace from lines changed
+Plugin 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
 
 " Low level editing
 Plugin 'dhruvasagar/vim-table-mode'
@@ -144,6 +145,7 @@ let g:CommandTAcceptSelectionSplitMap = '<C-x>'
 " EasyGrep
 let g:EasyGrepJumpToMatch = 0
 let g:EasyGrepRecursive = 1
+" rg respects gitignore files
 let g:EasyGrepCommand = 'rg' " NOTE: Set to 'grep' if there are special characters
 let g:EasyGrepReplaceWindowMode = 2
 
@@ -237,6 +239,9 @@ nnoremap <leader>af :ALEFix<CR>
 " Import JS
 nnoremap <leader>jj :ImportJSWord<CR>
 
+" Better Whitespace
+let g:better_whitespace_enabled = 0
+
 " Git Gutter
 set updatetime=300
 nmap [h <Plug>GitGutterPrevHunk
@@ -312,7 +317,7 @@ let g:session_autosave_silent = 1
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 let g:session_lock_enabled = 0
-let g:session_directory = './' 
+let g:session_directory = './'
 let g:session_default_name = 'Session'
 let g:session_autosave_periodic = 1
 let g:session_autosave_only_with_explicit_session = 1
