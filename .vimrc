@@ -89,7 +89,7 @@ Plugin 'zefei/vim-wintabs-powerline'
 Plugin 'xolox/vim-misc'
 Plugin 'tyru/open-browser.vim' " Required by tyru/open-browser.vim
 Plugin 'arecarn/vim-crunch'
-Plugin 'xolox/vim-session'
+Plugin 'dylan-chong/vim-session'
 
 " }
 
@@ -206,7 +206,8 @@ let g:ale_type_map = {
             \ }
 let g:ale_fixers = {
             \ 'typescript': ['tslint --fix'],
-            \ 'javascript': ['eslint']
+            \ 'javascript': ['eslint'],
+            \ 'python': ['autopep8']
             \ }
 let g:ale_typescript_tslint_use_global = 0
 let g:ale_typescript_tsserver_use_global = 0
@@ -300,7 +301,7 @@ let g:session_autosave = 'yes'
 let g:session_lock_enabled = 0
 let g:session_directory = './'
 let g:session_default_name = 'Session'
-let g:session_autosave_periodic = 1
+let g:session_autosave_periodic = 0
 let g:session_autosave_only_with_explicit_session = 1
 augroup vim_session_autosave
   au!
@@ -364,7 +365,12 @@ cal matchadd('ColorColumn', '\%81v', 100)
 " {{{
 
 " Clear highlighting
-nnoremap <silent> <esc> <esc>:noh<cr>
+if !has('nvim') && !has('idea') && !has("gui_running")
+  " Is normal vim. escape mappings break it:
+  " https://github.com/vim/vim/issues/3080#issuecomment-399738110
+else
+  nnoremap <silent> <esc> <esc>:noh<cr>
+endif
 inoremap <silent> <esc> <esc>:noh<cr>
 
 " Splitting lines

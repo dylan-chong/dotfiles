@@ -133,7 +133,7 @@ gphd() {
 }
 
 alias gplph="git pull --rebase && git push"
-alias gfa="git fetch --all --prune"
+alias gfa="git fetch --all --prune --tags"
 alias grmt="git remote"
 alias grmtv="git remote -v"
 
