@@ -475,12 +475,15 @@ set textwidth=79
 
 " Indenting defaults
 " Defaults to 4 spaces for most filetypes
-autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml
-      \ setlocal expandtab tabstop=2 shiftwidth=2
-" setglobal seems to not override sleuth when reloading vimrc
-setglobal expandtab
-setglobal tabstop=4
-setglobal shiftwidth=4
+if get(g:, '_has_set_default_indent_settings', 0) == 0
+  autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml
+        \ setlocal expandtab tabstop=2 shiftwidth=2
+  " setglobal seems to not override sleuth when reloading vimrc
+  set expandtab
+  set tabstop=4
+  set shiftwidth=4
+  let g:_has_set_default_indent_settings = 1
+endif
 
 " Line Numbers
 set relativenumber
@@ -530,7 +533,7 @@ set nojoinspaces
 " Get bg color to work in tmux
 set t_ut=
 
-" Colors in vimr
+" Colors in neovim
 set termguicolors
 
 " No swapfiles
