@@ -146,16 +146,6 @@ let g:airline_detect_spelllang=0
 let g:airline_detect_paste=1
 let g:airline#extensions#hunks#enabled = 0
 set laststatus=2 " Always show status line
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#tabs_label = ''
-let g:airline#extensions#tabline#fnametruncate = 1
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#fnametruncate = 20
 
 " Deoplete
 let g:deoplete#enable_ignore_case = 1
@@ -292,6 +282,16 @@ endif
 " Show git commit file in tabline
 let g:wintabs_ignored_filetypes = []
 autocmd FileType gitcommit set buflisted
+highlight! link Tabline Visual
+au VimEnter * call g:Base16hi(
+      \ 'TablineSel',
+      \ g:base16_gui00,
+      \ g:base16_gui0D,
+      \ g:base16_cterm00,
+      \ g:base16_cterm0D,
+      \ 'bold',
+      \ ''
+      \ )
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
@@ -394,18 +394,6 @@ nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
 " Exporting documents
 nnoremap <Leader>dm :w<CR>:!doc export '%'<CR>
 nnoremap <Leader>dt :w<CR>:!pdflatex '%' && open %:r.pdf<CR>
-
-" Smart indent when entering insert mode with i on empty lines
-" https://stackoverflow.com/a/3003636/1726450
-function! IndentWithI(default)
-    if len(getline('.')) == 0
-        return "\"_cc"
-    else
-        return a:default
-    endif
-endfunction
-nnoremap <expr> i IndentWithI("i")
-nnoremap <expr> a IndentWithI("a")
 
 " 'Inspections'
 " {{{
