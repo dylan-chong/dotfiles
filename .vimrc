@@ -282,7 +282,7 @@ endif
 " Show git commit file in tabline
 let g:wintabs_ignored_filetypes = []
 autocmd FileType gitcommit set buflisted
-highlight! link Tabline Visual
+" Fix this plugin overriding the styling for vim-airline
 au VimEnter * call g:Base16hi(
       \ 'TablineSel',
       \ g:base16_gui00,
@@ -292,6 +292,17 @@ au VimEnter * call g:Base16hi(
       \ 'bold',
       \ ''
       \ )
+au VimEnter * call g:Base16hi(
+      \ 'Tabline',
+      \ g:base16_gui04,
+      \ g:base16_gui02,
+      \ g:base16_cterm04,
+      \ g:base16_cterm02,
+      \ '',
+      \ ''
+      \ )
+let g:wintabs_powerline_sep_buffer = ''
+let g:wintabs_powerline_sep_tab = ''
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
