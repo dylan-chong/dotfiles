@@ -54,7 +54,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-endwise'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'godlygeek/tabular'
+Plugin 'godlygeek/tabular' " Space out code into tables
 
 " Language packs
 Plugin 'sheerun/vim-polyglot'
@@ -85,10 +85,13 @@ Plugin 'Galooshi/vim-import-js'
 Plugin 'zefei/vim-wintabs'
 Plugin 'zefei/vim-wintabs-powerline'
 
+" JSON
+Plugin 'tpope/vim-jdaddy' " JSON formatting
+
 " Miscellaneous
 Plugin 'xolox/vim-misc'
 Plugin 'tyru/open-browser.vim' " Required by tyru/open-browser.vim
-Plugin 'arecarn/vim-crunch'
+Plugin 'arecarn/vim-crunch' " Evaluate maths expressions
 Plugin 'dylan-chong/vim-session'
 
 " }
@@ -118,6 +121,30 @@ function! CommandCabbr(abbreviation, expansion)
         \. '"<CR>'
 endfunction
 
+
+" }}}
+
+
+
+" Coloring
+" {{{
+
+" General
+syntax on
+let g:enable_bold_font = 1
+
+" Colorscheme
+set background=dark
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-materia
+
+" Highlight line/column
+" set cursorline
+
+" End column
+hi ColorColumn ctermbg=52
+" Highlight only if there is a character on the column
+cal matchadd('ColorColumn', '\%81v', 100)
 
 " }}}
 
@@ -241,8 +268,8 @@ let g:vim_markdown_new_list_item_indent = 0
 " Fugitive
 nnoremap <Leader>gcm :w<CR>:Gcommit -v
 nnoremap <Leader>gap :w<CR>:Git add -p<CR>i
-nnoremap <Leader>gdf :w<CR>:Git diff<CR>
-nnoremap <Leader>gs :w<CR>:Git status<CR>
+nnoremap <Leader>gdf :w<CR>:Git diff<CR>i
+nnoremap <Leader>gs :w<CR>:Git status<CR>i
 nnoremap <Leader>gph :w<CR>:Gpush<Space>
 nnoremap <Leader>gpl :w<CR>:Gpull<Space>
 
@@ -283,7 +310,7 @@ endif
 let g:wintabs_ignored_filetypes = []
 autocmd FileType gitcommit set buflisted
 " Fix this plugin overriding the styling for vim-airline
-au VimEnter * call g:Base16hi(
+call g:Base16hi(
       \ 'TablineSel',
       \ g:base16_gui00,
       \ g:base16_gui0D,
@@ -292,7 +319,7 @@ au VimEnter * call g:Base16hi(
       \ 'bold',
       \ ''
       \ )
-au VimEnter * call g:Base16hi(
+call g:Base16hi(
       \ 'Tabline',
       \ g:base16_gui04,
       \ g:base16_gui02,
@@ -343,30 +370,6 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 cnoreabbrev rg Rg
-
-" }}}
-
-
-
-" Coloring
-" {{{
-
-" General
-syntax on
-let g:enable_bold_font = 1
-
-" Colorscheme
-set background=dark
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-materia
-
-" Highlight line/column
-" set cursorline
-
-" End column
-hi ColorColumn ctermbg=52
-" Highlight only if there is a character on the column
-cal matchadd('ColorColumn', '\%81v', 100)
 
 " }}}
 
