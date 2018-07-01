@@ -88,11 +88,17 @@ Plugin 'zefei/vim-wintabs-powerline'
 " JSON
 Plugin 'tpope/vim-jdaddy' " JSON formatting
 
-" Miscellaneous
-Plugin 'xolox/vim-misc'
-Plugin 'tyru/open-browser.vim' " Required by tyru/open-browser.vim
-Plugin 'arecarn/vim-crunch' " Evaluate maths expressions
+" REPL
+Plugin 'metakirby5/codi.vim'
+Plugin 'zweifisch/pipe2eval'
+
+" Session
+Plugin 'xolox/vim-misc' " Required by vim-session
 Plugin 'dylan-chong/vim-session'
+
+" Miscellaneous
+Plugin 'tyru/open-browser.vim' " Required by plantuml-previewer.vim
+Plugin 'arecarn/vim-crunch' " Evaluate maths expressions
 
 " }
 
@@ -330,6 +336,8 @@ call g:Base16hi(
       \ )
 let g:wintabs_powerline_sep_buffer = ''
 let g:wintabs_powerline_sep_tab = ''
+" Reinitialise when reloading vimrc to make it look right
+call wintabs_powerline#init()
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
@@ -370,6 +378,15 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 cnoreabbrev rg Rg
+
+" Codi
+let g:codi#rightalign = 1
+let g:codi#width = 100
+let g:codi#autocmd = 'InsertLeave' " TODO update when pasting
+
+" pipe2eval
+let g:pipe2eval_map_key = '<Leader>p'
+nmap <Leader>p ggvG<Leader>p
 
 " }}}
 
@@ -490,7 +507,7 @@ set textwidth=79
 " Indenting defaults
 " Defaults to 4 spaces for most filetypes
 if get(g:, '_has_set_default_indent_settings', 0) == 0
-  autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,plantuml
+  autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,tmux,plantuml
         \ setlocal expandtab tabstop=2 shiftwidth=2
   " setglobal seems to not override sleuth when reloading vimrc
   set expandtab
@@ -609,5 +626,8 @@ set wildignore+=package-lock.json,yarn.lock,tags,Session.vim
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev WQ wq
+
+" Open help split vertically
+autocmd FileType help wincmd L
 
 " }}}
