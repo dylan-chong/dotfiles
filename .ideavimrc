@@ -33,15 +33,9 @@ nnoremap <leader>f :action SearchEverywhere<CR>
 " Recent files
 nnoremap <leader>F :action RecentFiles<CR>
 
-" Files TODO Doesn't work
-nnoremap <leader>n :action ActivateProjectToolWindow<CR>
-
-" }}}
-
+" Match ale error shortcuts
 nnoremap <leader>an :action GotoNextError<CR>
 nnoremap <leader>ap :action GotoPreviousError<CR>
-
-nnoremap <leader>f :action SearchEverywhere<CR>
 
 " Easier tab changing
 " left
@@ -50,3 +44,5 @@ nnoremap g<Left> gT
 " right
 nnoremap gl gt
 nnoremap g<Right> gt
+
+" }}}
