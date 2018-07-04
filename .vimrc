@@ -90,7 +90,6 @@ Plugin 'tpope/vim-jdaddy' " JSON formatting
 
 " REPL
 Plugin 'metakirby5/codi.vim'
-Plugin 'zweifisch/pipe2eval'
 
 " Session
 Plugin 'xolox/vim-misc' " Required by vim-session
@@ -192,11 +191,12 @@ let g:nerdtree_tabs_open_on_console_startup = g:nerdtree_tabs_open_on_gui_startu
 let NERDTreeShowLineNumbers=1 " enable line numbers
 autocmd FileType nerdtree setlocal relativenumber
 let NERDTreeShowHidden=1
+let g:NERDTreeWinSize=45
 nmap <leader>n :NERDTreeToggle<cr>
 nmap <leader>N :NERDTreeFind<cr>
 
 " Nerd Commenter
-let g:NERDDefaultAlign = 'start'
+" let g:NERDDefaultAlign = 'start'
 let g:NERDRemoveExtraSpaces = 0
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDSpaceDelims = 1
@@ -385,10 +385,6 @@ let g:codi#rightalign = 1
 let g:codi#width = 100
 let g:codi#autocmd = 'InsertLeave' " TODO update when pasting
 
-" pipe2eval
-let g:pipe2eval_map_key = '<Leader>p'
-nmap <Leader>p ggvG<Leader>p
-
 " }}}
 
 
@@ -548,6 +544,9 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Autosave
 au FocusLost * silent! :wa
+" Autosave when doing some actions
+set autowrite
+set autowriteall
 
 " Auto reload
 set autoread
