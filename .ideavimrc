@@ -28,7 +28,7 @@ vmap <leader>i<CR> <ESC><Right>i<CR><C-c>gvo<ESC>i<CR><C-c>V<leader>i,
 " }}}
 
 " Search files
-nnoremap <leader>f :action SearchEverywhere<CR>
+nnoremap <leader>f :action GotoFile<CR>
 
 " Recent files
 nnoremap <leader>F :action RecentFiles<CR>
