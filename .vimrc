@@ -404,20 +404,23 @@ inoremap <silent> <esc> <esc>:noh<cr>
 " Splitting lines
 nnoremap <C-j> i<CR><ESC>
 
-" Align paragraph
+" Wrap paragraph
 nnoremap gqp gwip
+
+" Save one keystroke when aligning code
+nnoremap =p =ap
 
 " Whole file operatoins
 nnoremap yaf mzggVGy`z
 nnoremap daf mzggVGd`z
 vnoremap af mzggoG$
 
-" Replace
+" Replace (a (local) variable name)
 " Part 1: Yank current selection (for example a variableName)
 vnoremap <C-r> "xyV
 " Part 2: Start the search with the template (containing variableName as a
 " search term and replaced term), in the selected range
-vnoremap <C-t> :s/\<<C-r>x\>/<C-r>x/g<Left><Left>
+vnoremap <C-t> :s/\C\V\<<C-r>x\>/<C-r>x/g<Left><Left>
 
 " Reload .vimrc
 nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
