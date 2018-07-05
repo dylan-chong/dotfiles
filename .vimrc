@@ -412,9 +412,11 @@ nnoremap yaf mzggVGy`z
 nnoremap daf mzggVGd`z
 vnoremap af mzggoG$
 
-" Replace (copy visual selection and paste in cmdline)
-" (copy into z buffer because IntelliJ is buggy)
-vnoremap <C-r> ygv"zy:%s/<C-r>z/<C-r>z
+" Replace
+" Part 1: Yank current selection
+vnoremap <C-r> "xyV
+" Part 2: Start the search with the template, in the selected range
+vnoremap <C-t> :s/\<<C-r>x\>/<C-r>x/g<Left><Left>
 
 " Reload .vimrc
 nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
