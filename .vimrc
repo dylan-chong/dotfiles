@@ -413,9 +413,10 @@ nnoremap daf mzggVGd`z
 vnoremap af mzggoG$
 
 " Replace
-" Part 1: Yank current selection
+" Part 1: Yank current selection (for example a variableName)
 vnoremap <C-r> "xyV
-" Part 2: Start the search with the template, in the selected range
+" Part 2: Start the search with the template (containing variableName as a
+" search term and replaced term), in the selected range
 vnoremap <C-t> :s/\<<C-r>x\>/<C-r>x/g<Left><Left>
 
 " Reload .vimrc
