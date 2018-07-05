@@ -408,7 +408,7 @@ nnoremap <C-j> i<CR><ESC>
 nnoremap gqp gwip
 
 " Save one keystroke when aligning code
-nnoremap =p =ap
+nnoremap =p mz=ap`z
 
 " Whole file operatoins
 nnoremap yaf mzggVGy`z
@@ -417,10 +417,17 @@ vnoremap af mzggoG$
 
 " Replace (a (local) variable name)
 " Part 1: Yank current selection (for example a variableName)
-vnoremap <C-r> "xyV
+vnoremap <C-p> "xyV
+" Part 1.1: (Optional variant of part 1 - select current word)
+nnoremap <C-p> viw"xyV
 " Part 2: Start the search with the template (containing variableName as a
-" search term and replaced term), in the selected range
-vnoremap <C-t> :s/\C\V\<<C-r>x\>/<C-r>x/g<Left><Left>
+" search term and replaced term), in the selected range. Assumes gdefault is on
+if has('idea')
+  " \< doesnt work in ideavim so needs be changed to \\<
+  vnoremap <C-o> :s/\C\V\\<<C-r>x\>/<C-r>x
+else
+  vnoremap <C-o> :s/\C\V\<<C-r>x\>/<C-r>x
+endif
 
 " Reload .vimrc
 nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
@@ -620,10 +627,16 @@ set linebreak
 " Highlight search results
 set hlsearch
 
+" Move cursor to next search result
+set incsearch
+
 " Show substitution results as you are typing the regex out (Neovim only)
 if has('nvim')
   set inccommand=nosplit
 endif
+
+" Automatically add g option with substitute
+set gdefault
 
 " Wildignore
 set wildignore+=package-lock.json,yarn.lock,tags,Session.vim

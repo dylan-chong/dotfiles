@@ -4,6 +4,7 @@ source ~/.vimrc
 set surround
 
 
+" TODO move mapping stuff stuff into vimrc file with if has 'idea'
 
 " Remap mappings to intellij equivalents
 " {{{
