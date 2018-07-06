@@ -423,10 +423,10 @@ nnoremap <C-p> viw"xyV
 " Part 2: Start the search with the template (containing variableName as a
 " search term and replaced term), in the selected range. Assumes gdefault is on
 if has('idea')
-  " \< doesnt work in ideavim so needs be changed to \\<
-  vnoremap <C-o> :s/\C\V\\<<C-r>x\>/<C-r>x
+  " \< doesnt work in ideavim
+  vnoremap <C-r> :s/\C\V<C-r>x\>/<C-r>x
 else
-  vnoremap <C-o> :s/\C\V\<<C-r>x\>/<C-r>x
+  vnoremap <C-r> :s/\C\V\<<C-r>x\>/<C-r>x
 endif
 
 " Reload .vimrc

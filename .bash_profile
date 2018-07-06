@@ -149,6 +149,8 @@ git_prune_branches() {
 alias gcm="git commit -v"
 alias gap="git add -p"
 alias gaa="git add -A"
+# "Git add whitespace"
+alias gaw="git diff -w --no-color | git apply --cached --ignore-whitespace"
 
 alias grth="git reset --hard"
 
@@ -284,6 +286,10 @@ source ~/.bash_profile_private
 if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
+
+
+# Load z (https://github.com/rupa/z)
+. /usr/local/etc/profile.d/z.sh
 
 # }}}
 
