@@ -4,8 +4,6 @@ source ~/.vimrc
 set surround
 
 
-" TODO move mapping stuff stuff into vimrc file with if has 'idea'
-
 " Remap mappings to intellij equivalents
 " {{{
 
@@ -45,5 +43,9 @@ nnoremap g<Left> gT
 " right
 nnoremap gl gt
 nnoremap g<Right> gt
+
+" Replace
+" \< doesnt work in ideavim
+vnoremap <C-r> :s/\C\V<C-r>x\>/
 
 " }}}

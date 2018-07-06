@@ -421,13 +421,11 @@ vnoremap <C-p> "xyV
 " Part 1.1: (Optional variant of part 1 - select current word)
 nnoremap <C-p> viw"xyV
 " Part 2: Start the search with the template (containing variableName as a
-" search term and replaced term), in the selected range. Assumes gdefault is on
-if has('idea')
-  " \< doesnt work in ideavim
-  vnoremap <C-r> :s/\C\V<C-r>x\>/<C-r>x
-else
-  vnoremap <C-r> :s/\C\V\<<C-r>x\>/<C-r>x
-endif
+" search term and replaced term), in the selected range. Assumes gdefault is
+" on. You can optionally type <C-r>x to paste what we are going to replace. You
+" can also adjust the selection area after pressing <C-r> by pressing
+" <ESC>ADJUST_YOUR_SEARCH_AREA_NOW<Up>.
+vnoremap <C-r> :s/\C\V\<<C-r>x\>/
 
 " Reload .vimrc
 nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
@@ -439,7 +437,7 @@ nnoremap <Leader>dt :w<CR>:!pdflatex '%' && open %:r.pdf<CR>
 " 'Inspections'
 " {{{
 " Split list/params by comma (except trailing comma)
-vnoremap <leader>i, mz:s/,\(\s*$\)\@\!/,\r/g<CR>=ap`z
+vnoremap <leader>i, mz:s/,\(\s*$\)\@\!/,\r<CR>=ap`z
 " Put a new line at the start and end of the selection
 vmap <leader>i<C-j> <ESC><Right><C-j>gvo<ESC><C-j>
 " Split params by comma and start/end of selection (Doesnt work if nested method calls)
@@ -447,7 +445,7 @@ vmap <leader>i<CR> <leader>i<C-j>V<leader>i,
 " Same as above, but selects automatically
 nmap <leader>i<CR> v%<Right>o%%<Left><leader>i<CR>
 " Split line into multiple lines by '.'
-vnoremap <leader>i. :s/\./\r\./g<CR><ESC>mz=ap`z
+vnoremap <leader>i. :s/\./\r\.<CR><ESC>mz=ap`z
 " }}}
 
 " Don't deselect text on indent
