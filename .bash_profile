@@ -61,10 +61,13 @@ alias stree="open -a SourceTree ./"
 alias prof="nvim ~/.bash_profile"
 alias virc="nvim ~/.vimrc"
 
-alias ll="ls -lah"
-function cl {
-    cd "$@" && echo "" && ll
+alias l="ls -lah"
+function c {
+    cd "$@" && echo "" && l
     #cd "$@" && echo -e $(pwd) && echo "" && ls -G
+}
+function cl { # For backwards compatibility
+    c "$@"
 }
 
 mkc() {

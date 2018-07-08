@@ -424,7 +424,7 @@ nnoremap <C-p> viw"xyV
 " search term and replaced term), in the selected range. Assumes gdefault is
 " on. You can optionally type <C-r>x to paste what we are going to replace. You
 " can also adjust the selection area after pressing <C-r> by pressing
-" <ESC>ADJUST_YOUR_SEARCH_AREA_NOW<Up>.
+" <ESC>gvADJUST_YOUR_SEARCH_AREA_NOW:<Up>.
 vnoremap <C-r> :s/\C\V\<<C-r>x\>/
 
 " Reload .vimrc
