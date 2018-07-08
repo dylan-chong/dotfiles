@@ -18,9 +18,6 @@ function! CommandCabbr(abbreviation, expansion)
         \. '"<CR>'
 endfunction
 
-" Polyglot
-let g:polyglot_disabled = ['markdown']
-
 " }}}
 
 
@@ -95,7 +92,7 @@ if !has('nvim')
   Plugin 'roxma/nvim-yarp'
   Plugin 'roxma/vim-hug-neovim-rpc'
 endif
-Plugin 'slashmili/alchemist.vim'
+Plugin 'slashmili/alchemist.vim' " Elixir
 
 " Lilypond
 Plugin 'gisraptor/vim-lilypond-integrator'
