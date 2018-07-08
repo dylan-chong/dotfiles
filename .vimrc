@@ -1,4 +1,30 @@
+" Must be first stuff
+" {{{
+
 set encoding=utf-8
+
+" Easy leader
+let mapleader=" "
+
+" Function to replace built in commands
+" Taken from: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
+function! CommandCabbr(abbreviation, expansion)
+  execute 'cabbr '
+        \. a:abbreviation
+        \. ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "'
+        \. a:expansion
+        \. '" : "'
+        \. a:abbreviation
+        \. '"<CR>'
+endfunction
+
+" Polyglot
+let g:polyglot_disabled = ['markdown']
+
+" }}}
+
+
+
 " Vundle
 " {{{
 
@@ -103,29 +129,6 @@ Plugin 'arecarn/vim-crunch' " Evaluate maths expressions
 
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-" }}}
-
-
-
-" Must be first stuff
-" {{{
-
-" Easy leader
-let mapleader=" "
-
-" Function to replace built in commands
-" Taken from: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
-function! CommandCabbr(abbreviation, expansion)
-  execute 'cabbr '
-        \. a:abbreviation
-        \. ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "'
-        \. a:expansion
-        \. '" : "'
-        \. a:abbreviation
-        \. '"<CR>'
-endfunction
-
 
 " }}}
 
