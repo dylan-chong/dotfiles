@@ -152,7 +152,7 @@ git_prune_branches() {
 alias gcm="git commit -v"
 alias gap="git add -p"
 alias gaa="git add -A"
-# "Git add whitespace"
+# "Git add (without) whitespace"
 alias gaw="git diff -w --no-color | git apply --cached --ignore-whitespace"
 
 alias grth="git reset --hard"
@@ -166,6 +166,13 @@ alias glga="glgo --all"
 alias glgad="glga --date-order"
 
 alias gsh="git stash"
+
+function gpr() {
+    base=`git remote get-url origin | perl -pe 's/\.git$//'`
+    url="$base/pull/`current_branch`"
+    echo $url | pbcopy
+    echo "Copy to clipboard: $url"
+}
 
 # }}}
 
