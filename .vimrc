@@ -485,6 +485,28 @@ nnoremap <C-c> :wqa
 nnoremap <C-w>< :tabm-<CR>
 nnoremap <C-w>> :tabm+<CR>
 
+" Stay in visual mode when in command mode and pressing escape
+" Copied from: https://vi.stackexchange.com/a/16681/11136
+let s:was_visual = 0
+function! EnterCommandLineFromVisualMode()
+  let s:was_visual = 1
+  return ':'
+endfunction
+function! HandleEscapeInCommandLine()
+  if s:was_visual
+    let s:was_visual = 0
+    return "\<esc>gv"
+  endif
+  return "\<esc>"
+endfunction
+vnoremap <expr> : EnterCommandLineFromVisualMode()
+cnoremap <expr> <esc> HandleEscapeInCommandLine()
+
+" Change case of current word in insert mode
+inoremap <C-b>~ <Esc>mzb~`za
+inoremap <C-b>u <Esc>mzguiw`za
+inoremap <C-b>U <Esc>mzgUiw`za
+
 " }}}
 
 
