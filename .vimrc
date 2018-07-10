@@ -68,7 +68,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 " Space/indenting
 Plugin 'tpope/vim-sleuth' " Detects space/tab sizes of current file
-Plugin 'thirtythreeforty/lessspace.vim' " Strip whitespace from lines changed
+Plugin 'tweekmonster/wstrip.vim' " Strip whitespace from lines changed
 Plugin 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
 
 " Low level editing
@@ -384,6 +384,10 @@ cnoreabbrev rg Rg
 let g:codi#rightalign = 1
 let g:codi#width = 100
 let g:codi#autocmd = 'InsertLeave' " TODO update when pasting
+
+" WStrip
+" Globally enabled for all filetypes
+let g:wstrip_auto = 1
 
 " }}}
 
