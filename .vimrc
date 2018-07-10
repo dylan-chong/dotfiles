@@ -506,10 +506,49 @@ endfunction
 vnoremap <expr> : EnterCommandLineFromVisualMode()
 cnoremap <expr> <esc> HandleEscapeInCommandLine()
 
+" Change case of first letter of current word in insert mode
+inoremap <C-b>b <Esc>mzviwo<Esc>~`za
+inoremap <C-b>B <Esc>mzviWo<Esc>~`za
+
 " Change case of current word in insert mode
-inoremap <C-b>~ <Esc>mzb~`za
 inoremap <C-b>u <Esc>mzguiw`za
 inoremap <C-b>U <Esc>mzgUiw`za
+
+" Delete whole word
+inoremap <C-b><C-w> <Esc>ciW
+
+" Place cursor on the tag when jumping to it
+" (https://vi.stackexchange.com/a/16679/11136)
+func! ModifiedTagJump()
+    " remember the WORD under the cursor and do the tag jump
+    let tag_word = expand('<cword>')
+    exec "norm! \<C-]>"
+    echo 'executed'
+    echo tag_word
+
+    let landed_word = expand('<cword>')
+    if tag_word != landed_word
+        let curpos = getcurpos()
+        let curline = curpos[1]
+        let curcol = curpos[2]
+
+        " Look for tag_word as a standalone string on the current
+        " line (it shouldn't be a sub-string)
+        let srchres = searchpos("\\<" . tag_word . "\\>", 'zn')
+        echo 'first if'
+        echo srchres
+
+        if srchres[0] == curline && srchres[1] > curcol
+            " A match. Move the cursor forward.
+            exec "norm! " . srchres[1] . "|"
+            echo 'second if'
+        endif
+    endif
+endfunc
+nnoremap <C-]> :call ModifiedTagJump()<CR>
+
+" Unpop tag stack
+nnoremap <silent> <C-\> :tag<CR>
 
 " }}}
 
