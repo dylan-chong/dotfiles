@@ -223,14 +223,14 @@ let g:ale_linters = {
       \ }
 " Turn linting errors into warnings
 let g:ale_type_map = {
-            \ 'tslint': {'ES': 'WS', 'E': 'W'},
-            \ 'credo': {'ES': 'WS', 'E': 'W'}
-            \ }
+      \ 'tslint': {'ES': 'WS', 'E': 'W'},
+      \ 'credo': {'ES': 'WS', 'E': 'W'}
+      \ }
 let g:ale_fixers = {
-            \ 'typescript': ['tslint --fix'],
-            \ 'javascript': ['eslint'],
-            \ 'python': ['autopep8']
-            \ }
+      \ 'typescript': ['tslint --fix'],
+      \ 'javascript': ['eslint'],
+      \ 'python': ['autopep8']
+      \ }
 let g:ale_typescript_tslint_use_global = 0
 let g:ale_typescript_tsserver_use_global = 0
 let g:ale_elixir_credo_use_global = 0
@@ -373,11 +373,11 @@ nnoremap <silent> <Leader>z: :History:<CR>
 nnoremap <silent> <Leader>zh :Helptags<CR>
 nnoremap <silent> <Leader>zm :Maps<CR>
 command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+      \ call fzf#vim#grep(
+      \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
 cnoreabbrev rg Rg
 
 " Codi
@@ -516,25 +516,25 @@ inoremap <C-b><C-w> <Esc>ciW
 " Place cursor on the tag when jumping to it
 " (https://vi.stackexchange.com/a/16679/11136)
 func! ModifiedTagJump()
-    " remember the WORD under the cursor and do the tag jump
-    let tag_word = expand('<cword>')
-    exec "norm! \<C-]>"
+  " remember the WORD under the cursor and do the tag jump
+  let tag_word = expand('<cword>')
+  exec "norm! \<C-]>"
 
-    let landed_word = expand('<cword>')
-    if tag_word != landed_word
-        let curpos = getcurpos()
-        let curline = curpos[1]
-        let curcol = curpos[2]
+  let landed_word = expand('<cword>')
+  if tag_word != landed_word
+    let curpos = getcurpos()
+    let curline = curpos[1]
+    let curcol = curpos[2]
 
-        " Look for tag_word as a standalone string on the current
-        " line (it shouldn't be a sub-string)
-        let srchres = searchpos("\\<" . tag_word . "\\>", 'zn')
+    " Look for tag_word as a standalone string on the current
+    " line (it shouldn't be a sub-string)
+    let srchres = searchpos("\\<" . tag_word . "\\>", 'zn')
 
-        if srchres[0] == curline && srchres[1] > curcol
-            " A match. Move the cursor forward.
-            exec "norm! " . srchres[1] . "|"
-        endif
+    if srchres[0] == curline && srchres[1] > curcol
+      " A match. Move the cursor forward.
+      exec "norm! " . srchres[1] . "|"
     endif
+  endif
 endfunc
 nnoremap <C-]> :call ModifiedTagJump()<CR>
 
