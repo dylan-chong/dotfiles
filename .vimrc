@@ -40,7 +40,6 @@ Plugin 'VundleVim/Vundle.vim'
 " {
 "
 " Themes
-Plugin 'morhetz/gruvbox'
 Plugin 'chriskempson/base16-vim'
 
 " CTags
