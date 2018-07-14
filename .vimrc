@@ -363,6 +363,7 @@ let g:gutentags_define_advanced_commands = 1
 " FZF
 nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>F :History<CR>
+nnoremap <silent> <Leader>zg :GFiles?<CR>
 nnoremap <silent> <Leader>zc :Commands<CR>
 nnoremap <silent> <Leader>zb :Buffers<CR>
 nnoremap <silent> <Leader>zt :Tags<CR>
@@ -707,6 +708,6 @@ cnoreabbrev Q q
 cnoreabbrev WQ wq
 
 " Open help split vertically
-autocmd FileType help wincmd L
+" autocmd FileType help wincmd L
 
 " }}}
