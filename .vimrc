@@ -22,109 +22,108 @@ endfunction
 
 
 
-" Vundle
+" Vim-Plug
 " {{{
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
+" Automatically install vim-plug if not installed
+" (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " PLUGINS GO HERE
 " {
-"
+
 " Themes
-Plugin 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 
 " CTags
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 " NERDTree
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " File-related stuff
-Plugin 'dkprice/vim-easygrep'
+Plug 'dkprice/vim-easygrep'
 
 " FZF
 set rtp+=/usr/local/opt/fzf
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 
 " Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Space/indenting
-Plugin 'tpope/vim-sleuth' " Detects space/tab sizes of current file
-Plugin 'tweekmonster/wstrip.vim' " Strip whitespace from lines changed
-Plugin 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
+Plug 'tpope/vim-sleuth' " Detects space/tab sizes of current file
+Plug 'tweekmonster/wstrip.vim' " Strip whitespace from lines changed
+Plug 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
 
 " Low level editing
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-endwise'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'godlygeek/tabular' " Space out code into tables
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'scrooloose/nerdcommenter'
+Plug 'godlygeek/tabular' " Space out code into tables
 
 " Language packs
-Plugin 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 
 " Linting
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " Completion
-Plugin 'ervandew/supertab'
-Plugin 'Shougo/deoplete.nvim'
-if !has('nvim')
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
+Plug 'ervandew/supertab'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plugin 'slashmili/alchemist.vim' " Elixir
+Plug 'slashmili/alchemist.vim' " Elixir
 
 " Lilypond
-Plugin 'gisraptor/vim-lilypond-integrator'
+Plug 'gisraptor/vim-lilypond-integrator'
 
 " PlantUML
-Plugin 'aklt/plantuml-syntax'
-Plugin 'weirongxu/plantuml-previewer.vim'
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
 
 " Javascript
-Plugin 'Galooshi/vim-import-js'
+Plug 'Galooshi/vim-import-js'
 
 " Wintabs (must be after vim-airline)
-Plugin 'zefei/vim-wintabs'
-Plugin 'zefei/vim-wintabs-powerline'
+Plug 'zefei/vim-wintabs'
+Plug 'zefei/vim-wintabs-powerline'
 
 " JSON
-Plugin 'tpope/vim-jdaddy' " JSON formatting
+Plug 'tpope/vim-jdaddy' " JSON formatting
 
 " REPL
-Plugin 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim'
 
 " Session
-Plugin 'xolox/vim-misc' " Required by vim-session
-Plugin 'dylan-chong/vim-session'
+Plug 'xolox/vim-misc' " Required by vim-session
+Plug 'dylan-chong/vim-session'
 
 " Miscellaneous
-Plugin 'tyru/open-browser.vim' " Required by plantuml-previewer.vim
-Plugin 'arecarn/vim-crunch' " Evaluate maths expressions
+Plug 'tyru/open-browser.vim' " Required by plantuml-previewer.vim
+Plug 'arecarn/vim-crunch' " Evaluate maths expressions
 
 " }
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 " }}}
 
