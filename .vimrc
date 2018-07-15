@@ -477,14 +477,11 @@ nnoremap gV ^v$<Left>
 
 " Copy current file to clipboard
 " TODO Use a plugin and instead of making the function myself
-function! g:CopyToClipboard(string)
+function! g:CopySingleLine(string)
   silent exec "!echo " . a:string . " | tr -d '\\n' | pbcopy"
   echom "Copied: '" . a:string . "'"
 endfunction
-nnoremap <Leader>% :call CopyToClipboard(expand('%'))<Left><Left><Left>
-
-" Jump to definition - tjump in new tab
-nnoremap <C-g><C-]> <C-w>s<C-w>Tg<C-]>
+nnoremap <Leader>% :call CopySingleLine(expand('%'))<Left><Left><Left>
 
 " File operations
 nnoremap <C-q> :wa<CR>
