@@ -83,6 +83,12 @@ Plug 'sheerun/vim-polyglot'
 " Linting
 Plug 'w0rp/ale'
 
+" LSP
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+
 " Completion
 Plug 'ervandew/supertab'
 if has('nvim')
@@ -388,6 +394,18 @@ let g:codi#autocmd = 'InsertLeave' " TODO update when pasting
 " WStrip
 " Globally enabled for all filetypes
 let g:wstrip_auto = 1
+
+" LanguageClient neovim
+set hidden " Required for operations modifying multiple buffers like rename.
+let g:LanguageClient_serverCommands = {
+      \ 'typescript': ['typescript-language-server', '--stdio'],
+      \ }
+let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
+let g:LanguageClient_loggingLevel = 'INFO'
+let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
+
+nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
+nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
 
 " }}}
 
