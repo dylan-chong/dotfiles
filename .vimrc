@@ -303,10 +303,9 @@ if !has('idea')
   nmap g<Right> <Plug>(wintabs_next)
 
   " Other buffer stuff
-  nmap <Leader>qu <Plug>(wintabs_undo)
-  nmap <Leader>qq <Plug>(wintabs_close)
-  nmap <Leader>qm :WintabsMove<Space>
-  nmap <Leader>qo <Plug>(wintabs_only)
+  nmap <Leader>wu <Plug>(wintabs_undo)
+  nmap <Leader>wm :WintabsMove<Space>
+  nmap <Leader>wo <Plug>(wintabs_only)
 
   " Override q,q!,wq to avoid accidentally closing all of the buffers in the
   " tab
