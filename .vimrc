@@ -237,7 +237,7 @@ let g:ale_elixir_credo_use_global = 0
 let g:ale_lint_on_enter = 0
 nnoremap <leader>an :ALENextWrap<CR>
 nnoremap <leader>ap :ALEPreviousWrap<CR>
-nnoremap <leader>aj :ALEGoToDefinitionInTab<CR>
+nnoremap <leader>ad :ALEGoToDefinition<CR>
 nnoremap <leader>af :ALEFix<CR>
 
 " Import JS
@@ -476,6 +476,11 @@ nnoremap gp `[v`]
 nnoremap gV ^v$<Left>
 
 " Copy current file to clipboard
+" TODO Use a plugin and instead of making the function myself
+function! g:CopyToClipboard(string)
+  silent exec "!echo " . a:string . " | tr -d '\\n' | pbcopy"
+  echom "Copied: '" . a:string . "'"
+endfunction
 nnoremap <Leader>% :call CopyToClipboard(expand('%'))<Left><Left><Left>
 
 " Jump to definition - tjump in new tab
@@ -654,12 +659,6 @@ set lazyredraw
 setglobal spelllang=en_nz
 set dictionary+=/usr/share/dict/words
 autocmd FileType markdown,text,bib,latex,plaintex setlocal spell
-
-" TODO Use a plugin and instead of making the function myself
-function! g:CopyToClipboard(string)
-  silent exec "!echo " . a:string . " | pbcopy"
-  echom "Copied: '" . a:string . "'"
-endfunction
 
 " Export plantuml
 function! g:PlantUMLSave()
