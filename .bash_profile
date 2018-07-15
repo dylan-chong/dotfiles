@@ -161,7 +161,7 @@ alias gdf="git diff"
 alias gdfc="git diff --cached"
 
 alias glg="git log --graph --decorate --topo-order"
-alias glgo="glg --oneline"
+alias glgo="glg --format='%C(auto)%h%d %s %C(black)%C(bold)%cr'"
 alias glga="glgo --all"
 alias glgad="glga --date-order"
 
