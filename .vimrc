@@ -402,9 +402,9 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
-
 nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
 nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
+nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
 
 " }}}
 
