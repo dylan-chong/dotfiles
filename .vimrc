@@ -366,6 +366,7 @@ let g:gutentags_file_list_command = "rg -l '.' | rg -v '(json|plist)$'"
 let g:gutentags_define_advanced_commands = 1
 
 " FZF
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>F :History<CR>
 nnoremap <silent> <Leader>zg :GFiles?<CR>
