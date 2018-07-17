@@ -168,10 +168,19 @@ alias glgad="glga --date-order"
 alias gsh="git stash"
 
 function gpr() {
-    base=`git remote get-url origin | perl -pe 's/\.git$//'`
-    url="$base/pull/`current_branch`"
-    echo $url | pbcopy
-    echo "Copy to clipboard: $url"
+    local base=`git remote get-url origin | perl -pe 's/\.git$//'`
+    local url="$base/pull/`current_branch`"
+    case $1 in
+        s)
+            open -a 'Safari' $url
+            ;;
+        g)
+            open -a 'Google Chrome' $url
+            ;;
+        *)
+            echo $url | pbcopy
+            echo "Copied to clipboard: $url"
+    esac
 }
 
 # }}}
