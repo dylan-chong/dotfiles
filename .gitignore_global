@@ -7,5 +7,6 @@ tags.temp
 .notags
 
 .nvmrc
+.envrc
 
 Session.vim

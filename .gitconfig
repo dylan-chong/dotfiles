@@ -1,6 +1,7 @@
 [core]
 	editor = nvim
 	excludesfile = /Users/Dylan/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
 	name = Dylan Chong
 	email = dylan.chong@icloud.com
@@ -27,3 +28,15 @@
 	tool = vimdiff
 [gui]
 	recentrepo = /Users/Dylan/Development/Cloudsource/thor
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

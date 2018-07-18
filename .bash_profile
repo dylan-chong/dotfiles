@@ -102,14 +102,13 @@ alias kotlinc='rlwrap -a foo kotlinc'
 alias soba="source ~/.bash_profile"
 
 alias aenser="python ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/server_osx.py"
-alias aengram="goaen && vi aenea-grammars/_charwise_vim/_charwise_vim.py"
 
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
 function fp() {
     P=`pwd`/$1;
     echo "Copied to clipboard: $P"
-    echo $P | pbcopy
+    echo $P | tr -d '\n' | pbcopy
 }
 
 # }}}
