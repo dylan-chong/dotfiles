@@ -448,6 +448,8 @@ nnoremap <C-p> viw"xyV
 " can also adjust the selection area after pressing <C-r> by pressing
 " <ESC>gvADJUST_YOUR_SEARCH_AREA_NOW:<Up>.
 vnoremap <C-r> :s@\C\V\<<C-r>x\>@
+" Part 2.1: Start the search without the end and start of word match
+vnoremap g<C-r> :s@\C\V<C-r>x@
 
 " Reload .vimrc
 nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
@@ -723,5 +725,9 @@ cnoreabbrev WQ wq
 
 " Open help split vertically
 " autocmd FileType help wincmd L
+
+" Open up split windows and the more intuitive place
+set splitright
+set splitbelow
 
 " }}}
