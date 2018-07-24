@@ -50,7 +50,9 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " File-related stuff
-Plug 'dkprice/vim-easygrep'
+Plug 'nhuizing/vim-easygrep', {
+      \ 'branch': 'feature/bugfix_git_grep'
+      \ }
 
 " FZF
 set rtp+=/usr/local/opt/fzf
@@ -166,17 +168,14 @@ cal matchadd('ColorColumn', '\%81v', 100)
 " EasyGrep
 let g:EasyGrepJumpToMatch = 0
 let g:EasyGrepRecursive = 1
-" rg respects gitignore files
-let g:EasyGrepCommand = 'rg' " NOTE: Set to 'grep' if there are special characters
+let g:EasyGrepCommand = 'git'
 let g:EasyGrepReplaceWindowMode = 2
 
 " Vim Airline Plugin
 let g:airline_detect_modified=0
 let g:airline_powerline_fonts=1
 let g:airline_theme='base16'
-" let g:airline_section_b = ''
 let g:airline_section_x = ''
-" let g:airline_section_y = ''
 let g:airline_section_z = '%v'
 let g:airline_detect_spell=0
 let g:airline_detect_spelllang=0
