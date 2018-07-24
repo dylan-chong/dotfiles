@@ -69,6 +69,7 @@ function c {
 function cl { # For backwards compatibility
     c "$@"
 }
+alias ..="c .."
 
 mkc() {
     mkdir "$@" && cl "$@"
