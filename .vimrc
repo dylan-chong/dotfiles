@@ -196,7 +196,7 @@ let NERDTreeShowLineNumbers=1 " enable line numbers
 autocmd FileType nerdtree setlocal relativenumber
 let NERDTreeShowHidden=1
 let g:NERDTreeWinSize=45
-nmap <leader>n :NERDTreeToggle<cr>
+nmap <leader>n :NERDTreeMirrorToggle<cr>
 nmap <leader>N :NERDTreeFind<cr>
 
 " Nerd Commenter
@@ -386,9 +386,8 @@ command! -bang -nargs=* Rg
 cnoreabbrev rg Rg
 
 " Codi
-let g:codi#rightalign = 1
-let g:codi#width = 100
-let g:codi#autocmd = 'InsertLeave' " TODO update when pasting
+let g:codi#rightalign = 0
+let g:codi#width = 70
 
 " WStrip
 " Globally enabled for all filetypes
@@ -404,6 +403,7 @@ let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
 nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
 nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
+nnoremap <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
 
 " }}}
@@ -563,9 +563,9 @@ nnoremap <C-]> :call ModifiedTagJump()<CR>
 nnoremap <silent> <C-\> :tag<CR>
 
 " Tab
-nnoremap <Leader>Tn :tabnew<CR>
-nnoremap <Leader>Tc :tabclose
-nnoremap <Leader>To :tabonly
+nnoremap <Leader>Tn :tabnew<Space>
+nnoremap <Leader>Tc :tabclose<CR>
+nnoremap <Leader>To :tabonly<CR>
 nnoremap <Leader>T< :tabm<Space>-
 nnoremap <Leader>T> :tabm<Space>+
 
