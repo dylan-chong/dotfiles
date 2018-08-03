@@ -582,7 +582,7 @@ set textwidth=79
 " Indenting defaults
 " Defaults to 4 spaces for most filetypes
 if get(g:, '_has_set_default_indent_settings', 0) == 0
-  autocmd FileType typescript,javascript,jsx,tsx,css,html,ruby,elixir,kotlin,vim,tmux,plantuml
+  autocmd FileType typescript,javascript,jsx,tsx,scss,css,html,ruby,elixir,kotlin,vim,tmux,plantuml
         \ setlocal expandtab tabstop=2 shiftwidth=2
   " setglobal seems to not override sleuth when reloading vimrc
   set expandtab
