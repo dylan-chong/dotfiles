@@ -8,5 +8,5 @@ while true; do
     open -a 'AppPolice'
 
     echo 'Waiting for next cycle...'
-    sleep 60
+    sleep 20
 done
