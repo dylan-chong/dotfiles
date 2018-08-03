@@ -276,12 +276,12 @@ let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
 " Fugitive
-nnoremap <Leader>gcm :w<CR>:Gcommit -v
-nnoremap <Leader>gap :w<CR>:Git add -p<CR>i
-nnoremap <Leader>gdf :w<CR>:Git diff<CR>i
-nnoremap <Leader>gs :w<CR>:Git status<CR>i
-nnoremap <Leader>gph :w<CR>:Gpush<Space>
-nnoremap <Leader>gpl :w<CR>:Gpull<Space>
+nnoremap <Leader>gcm :wa<CR>:Gcommit -v
+nnoremap <Leader>gap :wa<CR>:Git add -p<CR>i
+nnoremap <Leader>gdf :wa<CR>:Git diff<CR>i
+nnoremap <Leader>gs :wa<CR>:Git status<CR>i
+nnoremap <Leader>gph :wa<CR>:Gpush<Space>
+nnoremap <Leader>gpl :wa<CR>:Gpull<Space>
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
