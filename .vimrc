@@ -129,6 +129,7 @@ Plug 'dylan-chong/vim-session'
 " Miscellaneous
 Plug 'tyru/open-browser.vim' " Required by plantuml-previewer.vim
 Plug 'arecarn/vim-crunch' " Evaluate maths expressions
+Plug 'RRethy/vim-illuminate' " Highlight uses of the word under the cursor on screen
 
 " }
 
@@ -174,7 +175,6 @@ let g:EasyGrepReplaceWindowMode = 2
 " Vim Airline Plugin
 let g:airline_detect_modified=0
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16'
 let g:airline_section_x = ''
 let g:airline_section_z = '%v'
 let g:airline_detect_spell=0
