@@ -401,6 +401,7 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
+let g:LanguageClient_windowLogMessageLevel = 'Error'
 nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
 nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
 nnoremap <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
