@@ -225,7 +225,7 @@ let g:ale_sign_column_always = 0
 let g:ale_completion_delay = 500
 let g:ale_linters = {
       \ 'java': [],
-      \ 'typescript': [],
+      \ 'typescript': ['tslint'],
       \ }
 " Turn linting errors into warnings
 let g:ale_type_map = {
@@ -237,8 +237,8 @@ let g:ale_fixers = {
       \ 'javascript': ['eslint'],
       \ 'python': ['autopep8']
       \ }
-" let g:ale_typescript_tslint_use_global = 0
-" let g:ale_elixir_credo_use_global = 0
+let g:ale_typescript_tslint_use_global = 0
+let g:ale_elixir_credo_use_global = 0
 let g:ale_lint_on_enter = 0
 nnoremap <leader>an :ALENextWrap<CR>
 nnoremap <leader>ap :ALEPreviousWrap<CR>
