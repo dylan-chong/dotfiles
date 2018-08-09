@@ -130,6 +130,7 @@ Plug 'dylan-chong/vim-session'
 Plug 'tyru/open-browser.vim' " Required by plantuml-previewer.vim
 Plug 'arecarn/vim-crunch' " Evaluate maths expressions
 Plug 'RRethy/vim-illuminate' " Highlight uses of the word under the cursor on screen
+Plug 'ap/vim-css-color' " Highlight css colours
 
 " }
 
@@ -377,6 +378,7 @@ nnoremap <silent> <Leader>z/ :History/<CR>
 nnoremap <silent> <Leader>z: :History:<CR>
 nnoremap <silent> <Leader>zh :Helptags<CR>
 nnoremap <silent> <Leader>zm :Maps<CR>
+nnoremap <Leader>zr :Rg<Space>
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
       \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
@@ -402,6 +404,7 @@ let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
 let g:LanguageClient_loggingLevel = 'INFO'
 let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
 let g:LanguageClient_windowLogMessageLevel = 'Error'
+let g:LanguageClient_diagnosticsList = 'Disabled'
 nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
 nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
 nnoremap <Leader>la :call LanguageClient#textDocument_codeAction()<CR>

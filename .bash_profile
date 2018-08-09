@@ -6,7 +6,7 @@ function gitinspect() {
         --grading \
         --format=htmlembedded \
         --file-types=** \
-        --exclude="package-lock.json|yarn.lock" . $@ > .inspection.html \
+        --exclude="package-lock.json|yarn.lock" $@ > .inspection.html \
         && open .inspection.html \
         && sleep 2 \
         && rm .inspection.html
