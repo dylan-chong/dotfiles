@@ -50,7 +50,7 @@
                         ]
                     },
                     {
-                        "description": "Remap keys to use Dvorak keyboard layout",
+                        "description": "Remap keys to use Colemak keyboard layout",
                         "manipulators": [
                             {
                                 "from": {
@@ -60,10 +60,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -82,10 +82,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -104,10 +104,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -126,10 +126,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -148,10 +148,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -170,10 +170,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -192,10 +192,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -214,10 +214,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -236,10 +236,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -258,10 +258,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -280,16 +280,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "open_bracket"
+                                        "key_code": "hyphen"
                                     }
                                 ],
                                 "type": "basic"
@@ -302,16 +302,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "close_bracket"
+                                        "key_code": "equal_sign"
                                     }
                                 ],
                                 "type": "basic"
@@ -324,16 +324,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "quote"
+                                        "key_code": "q"
                                     }
                                 ],
                                 "type": "basic"
@@ -346,16 +346,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "comma"
+                                        "key_code": "w"
                                     }
                                 ],
                                 "type": "basic"
@@ -368,16 +368,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "period"
+                                        "key_code": "f"
                                     }
                                 ],
                                 "type": "basic"
@@ -390,10 +390,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -412,54 +412,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "y"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "y",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "u",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -472,60 +428,38 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "i",
+                                    "key_code": "y",
                                     "modifiers": {
                                         "optional": [
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "c"
+                                        "key_code": "j"
                                     }
                                 ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
-                                    "key_code": "o",
+                                    "key_code": "u",
                                     "modifiers": {
                                         "optional": [
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "r"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "p",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -538,22 +472,88 @@
                             },
                             {
                                 "from": {
+                                    "key_code": "i",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "u"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "y"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "semicolon"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "open_bracket",
                                     "modifiers": {
                                         "optional": [
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "slash"
+                                        "key_code": "open_bracket"
                                     }
                                 ],
                                 "type": "basic"
@@ -566,16 +566,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "equal_sign"
+                                        "key_code": "close_bracket"
                                     }
                                 ],
                                 "type": "basic"
@@ -588,10 +588,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -610,10 +610,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -632,16 +632,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "o"
+                                        "key_code": "r"
                                     }
                                 ],
                                 "type": "basic"
@@ -654,164 +654,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "e"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "f",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "u"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "g",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "i"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "d"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "h"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "t"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "n"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "semicolon",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -824,22 +670,176 @@
                             },
                             {
                                 "from": {
+                                    "key_code": "f",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "t"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "g",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "d"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "h"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "n"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "e"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "i"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "o"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "quote",
                                     "modifiers": {
                                         "optional": [
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "hyphen"
+                                        "key_code": "quote"
                                     }
                                 ],
                                 "type": "basic"
@@ -852,16 +852,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "semicolon"
+                                        "key_code": "z"
                                     }
                                 ],
                                 "type": "basic"
@@ -874,76 +874,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "q"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "c",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "j"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "v",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "k"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "b",
-                                    "modifiers": {
-                                        "optional": [
-                                            "caps_lock",
-                                            "left_command",
-                                            "left_control",
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -956,16 +890,60 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "n",
+                                    "key_code": "c",
                                     "modifiers": {
                                         "optional": [
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "c"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "v",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "v"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "b",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -978,16 +956,38 @@
                             },
                             {
                                 "from": {
+                                    "key_code": "n",
+                                    "modifiers": {
+                                        "optional": [
+                                            "caps_lock",
+                                            "left_command",
+                                            "left_control",
+                                            "left_alt",
+                                            "right_command",
+                                            "right_control",
+                                            "right_alt"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "k"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "m",
                                     "modifiers": {
                                         "optional": [
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1006,16 +1006,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "w"
+                                        "key_code": "comma"
                                     }
                                 ],
                                 "type": "basic"
@@ -1028,16 +1028,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "v"
+                                        "key_code": "period"
                                     }
                                 ],
                                 "type": "basic"
@@ -1050,16 +1050,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "z"
+                                        "key_code": "slash"
                                     }
                                 ],
                                 "type": "basic"
@@ -1075,10 +1075,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1103,10 +1103,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1131,10 +1131,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1159,10 +1159,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1187,10 +1187,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1215,10 +1215,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1243,10 +1243,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1271,10 +1271,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1299,10 +1299,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1327,10 +1327,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1355,16 +1355,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "open_bracket",
+                                        "key_code": "hyphen",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1383,16 +1383,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "close_bracket",
+                                        "key_code": "equal_sign",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1411,16 +1411,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "quote",
+                                        "key_code": "q",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1439,16 +1439,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "comma",
+                                        "key_code": "w",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1467,16 +1467,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "period",
+                                        "key_code": "f",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1495,10 +1495,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1523,16 +1523,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "y",
+                                        "key_code": "g",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1551,16 +1551,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "f",
+                                        "key_code": "j",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1579,16 +1579,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "g",
+                                        "key_code": "l",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1607,16 +1607,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "c",
+                                        "key_code": "u",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1635,16 +1635,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "r",
+                                        "key_code": "y",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1663,16 +1663,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "l",
+                                        "key_code": "semicolon",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1691,16 +1691,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "slash",
+                                        "key_code": "open_bracket",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1719,16 +1719,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "equal_sign",
+                                        "key_code": "close_bracket",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1747,10 +1747,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1775,10 +1775,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -1803,16 +1803,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "o",
+                                        "key_code": "r",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1831,16 +1831,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "e",
+                                        "key_code": "s",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1859,16 +1859,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "u",
+                                        "key_code": "t",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1887,16 +1887,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "i",
+                                        "key_code": "d",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1915,16 +1915,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "d",
+                                        "key_code": "h",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1943,16 +1943,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "h",
+                                        "key_code": "n",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1971,16 +1971,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "t",
+                                        "key_code": "e",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1999,16 +1999,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "n",
+                                        "key_code": "i",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2027,16 +2027,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "s",
+                                        "key_code": "o",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2055,16 +2055,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "hyphen",
+                                        "key_code": "quote",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2083,16 +2083,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "semicolon",
+                                        "key_code": "z",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2111,16 +2111,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "q",
+                                        "key_code": "x",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2139,16 +2139,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "j",
+                                        "key_code": "c",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2167,16 +2167,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "k",
+                                        "key_code": "v",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2195,16 +2195,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "x",
+                                        "key_code": "b",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2223,16 +2223,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "b",
+                                        "key_code": "k",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2251,10 +2251,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2279,16 +2279,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "w",
+                                        "key_code": "comma",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2307,16 +2307,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "v",
+                                        "key_code": "period",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2335,16 +2335,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "z",
+                                        "key_code": "slash",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -2363,10 +2363,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2391,10 +2391,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2419,10 +2419,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2447,10 +2447,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2475,10 +2475,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2503,10 +2503,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2531,10 +2531,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2559,10 +2559,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2587,10 +2587,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2615,10 +2615,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2643,16 +2643,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "open_bracket",
+                                        "key_code": "hyphen",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2671,16 +2671,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "close_bracket",
+                                        "key_code": "equal_sign",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2699,16 +2699,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "quote",
+                                        "key_code": "q",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2727,16 +2727,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "comma",
+                                        "key_code": "w",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2755,16 +2755,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "period",
+                                        "key_code": "f",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2783,10 +2783,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -2811,16 +2811,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "y",
+                                        "key_code": "g",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2839,16 +2839,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "f",
+                                        "key_code": "j",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2867,16 +2867,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "g",
+                                        "key_code": "l",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2895,16 +2895,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "c",
+                                        "key_code": "u",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2923,16 +2923,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "r",
+                                        "key_code": "y",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2951,16 +2951,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "l",
+                                        "key_code": "semicolon",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -2979,16 +2979,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "slash",
+                                        "key_code": "open_bracket",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3007,16 +3007,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "equal_sign",
+                                        "key_code": "close_bracket",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3035,10 +3035,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -3063,10 +3063,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -3091,16 +3091,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "o",
+                                        "key_code": "r",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3119,16 +3119,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "e",
+                                        "key_code": "s",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3147,16 +3147,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "u",
+                                        "key_code": "t",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3175,16 +3175,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "i",
+                                        "key_code": "d",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3203,16 +3203,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "d",
+                                        "key_code": "h",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3231,16 +3231,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "h",
+                                        "key_code": "n",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3259,16 +3259,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "t",
+                                        "key_code": "e",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3287,16 +3287,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "n",
+                                        "key_code": "i",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3315,16 +3315,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "s",
+                                        "key_code": "o",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3343,16 +3343,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "hyphen",
+                                        "key_code": "quote",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3371,16 +3371,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "semicolon",
+                                        "key_code": "z",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3399,16 +3399,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "q",
+                                        "key_code": "x",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3427,16 +3427,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "j",
+                                        "key_code": "c",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3455,16 +3455,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "k",
+                                        "key_code": "v",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3483,16 +3483,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "x",
+                                        "key_code": "b",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3511,16 +3511,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "b",
+                                        "key_code": "k",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3539,10 +3539,10 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
@@ -3567,16 +3567,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "w",
+                                        "key_code": "comma",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3595,16 +3595,16 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "v",
+                                        "key_code": "period",
                                         "modifiers": [
                                             "right_shift"
                                         ]
@@ -3623,19 +3623,30 @@
                                             "caps_lock",
                                             "left_command",
                                             "left_control",
-                                            "left_option",
+                                            "left_alt",
                                             "right_command",
                                             "right_control",
-                                            "right_option"
+                                            "right_alt"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "z",
+                                        "key_code": "slash",
                                         "modifiers": [
                                             "right_shift"
                                         ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "caps_lock"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace"
                                     }
                                 ],
                                 "type": "basic"
