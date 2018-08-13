@@ -491,9 +491,11 @@ let g:lasttab = 1
 nnoremap <Leader>gt :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-" Auto format comments
+" Toggling options
 nnoremap <leader>oa :set formatoptions+=a<CR>
 nnoremap <leader>oA :set formatoptions-=a<CR>
+nnoremap <leader>ow :set nowrap<CR>
+nnoremap <leader>oW :set wrap<CR>
 
 " Select recently pasted text
 nnoremap gp `[v`]
