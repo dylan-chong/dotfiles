@@ -3786,6 +3786,22 @@
                     "to": {
                         "key_code": "left_control"
                     }
+                },
+                {
+                    "from": {
+                        "key_code": "delete_or_backspace"
+                    },
+                    "to": {
+                        "key_code": "right_arrow"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "spacebar"
+                    },
+                    "to": {
+                        "key_code": "right_arrow"
+                    }
                 }
             ],
             "virtual_hid_keyboard": {
