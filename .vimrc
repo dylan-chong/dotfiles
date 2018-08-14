@@ -369,9 +369,9 @@ let g:gutentags_define_advanced_commands = 1
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>F :History<CR>
-" Search for files similar to the current one (ignoring extensions in filenames
-" like feed.component.spec.ts)
-nnoremap <silent> <Leader><C-f> :FZF -q '%:t:r:r:r.<CR>
+" Search for files similar to the current one (ignoring the current file
+" extensions in filenames like feed.component.spec.ts)
+nnoremap <silent> <Leader><C-f> :FZF -q !%\ '/%:t:r:r:r.<CR>
 nnoremap <silent> <Leader>zg :GFiles?<CR>
 nnoremap <silent> <Leader>zc :Commands<CR>
 nnoremap <silent> <Leader>zb :Buffers<CR>
