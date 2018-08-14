@@ -172,7 +172,7 @@
                         "key_code": "b"
                     },
                     "to": {
-                        "key_code": "c"
+                        "key_code": "e"
                     }
                 },
                 {
@@ -213,14 +213,6 @@
                     },
                     "to": {
                         "key_code": "right_arrow"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "f"
-                    },
-                    "to": {
-                        "key_code": "a"
                     }
                 },
                 {
