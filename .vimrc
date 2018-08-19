@@ -283,6 +283,7 @@ nnoremap <Leader>gdf :wa<CR>:Git diff<CR>i
 nnoremap <Leader>gs :wa<CR>:Git status<CR>i
 nnoremap <Leader>gph :wa<CR>:Gpush<Space>
 nnoremap <Leader>gpl :wa<CR>:Gpull<Space>
+nnoremap <Leader>gb :wa<CR>:Gblame<CR>
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
@@ -310,7 +311,7 @@ if !has('idea')
   " Override q,q!,wq to avoid accidentally closing all of the buffers in the
   " tab
   function! SaveAndCloseCurrentBuffer()
-    :w
+    :up
     call wintabs#close()
   endfunction
   call CommandCabbr('q', 'call wintabs#close()')
@@ -371,7 +372,8 @@ nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>F :History<CR>
 " Search for files similar to the current one (ignoring the current file
 " extensions in filenames like feed.component.spec.ts)
-nnoremap <silent> <Leader><C-f> :FZF -q !%\ '/%:t:r:r:r.<CR>
+" TODO write some vim script to and allows switching from my-file-test.js
+nnoremap <silent> <Leader><C-f> :FZF -q !^%$\ '/%:t:r:r:r.<CR>
 nnoremap <silent> <Leader>zg :GFiles?<CR>
 nnoremap <silent> <Leader>zc :Commands<CR>
 nnoremap <silent> <Leader>zb :Buffers<CR>
@@ -382,6 +384,8 @@ nnoremap <silent> <Leader>z: :History:<CR>
 nnoremap <silent> <Leader>zh :Helptags<CR>
 nnoremap <silent> <Leader>zm :Maps<CR>
 nnoremap <Leader>r :Rg<Space>
+nnoremap <Leader>R :Rg<Space><C-r><C-w>
+vnoremap <Leader>r "ry:Rg<Space><C-r>r
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
       \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
@@ -588,6 +592,9 @@ set sidescrolloff=4
 " Text width
 set textwidth=79
 
+" Don't wrap on typing
+set formatoptions-=t
+
 " Indenting defaults
 " Defaults to 4 spaces for most filetypes
 if get(g:, '_has_set_default_indent_settings', 0) == 0
@@ -630,7 +637,7 @@ set guioptions-=r
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Autosave
-au FocusLost * silent! :wa
+au FocusLost,BufLeave * silent! :wa
 " Autosave when doing some actions
 set autowrite
 set autowriteall

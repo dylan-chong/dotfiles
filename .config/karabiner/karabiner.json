@@ -345,14 +345,6 @@
                 },
                 {
                     "from": {
-                        "key_code": "semicolon"
-                    },
-                    "to": {
-                        "key_code": "s"
-                    }
-                },
-                {
-                    "from": {
                         "key_code": "slash"
                     },
                     "to": {
