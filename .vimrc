@@ -307,6 +307,7 @@ if !has('idea')
   nmap <Leader>wu <Plug>(wintabs_undo)
   nmap <Leader>wm :WintabsMove<Space>
   nmap <Leader>wo <Plug>(wintabs_only)
+  nnoremap <Leader>wO :tabonly<Bar>call<Space>wintabs#only()<Bar>only
 
   " Override q,q!,wq to avoid accidentally closing all of the buffers in the
   " tab
