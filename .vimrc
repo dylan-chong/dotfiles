@@ -404,10 +404,9 @@ function! s:fzf_open_similar_files()
   " Get rid of -test and such
   let base_file_name = substitute(base_file_name, '\v\c%(-|_)%(test|spec)', '', '')
 
-	" TODO SOMETIME only place a / before the face file name if the current file
-	" is in a subdirectory
+  " TODO SOMETIME only place a / before the face file name if the current file
+  " is in a subdirectory
   let query = '!^' . expand('%') . "$\\ '/" . base_file_name
-	echo query
   let command = ':FZF --tiebreak=end,length -q ' . query
   execute command
 endfunction
