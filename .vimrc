@@ -57,6 +57,7 @@ Plug 'nhuizing/vim-easygrep', {
 " FZF
 set rtp+=/usr/local/opt/fzf
 Plug 'junegunn/fzf.vim'
+Plug 'tweekmonster/fzf-filemru'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -369,8 +370,29 @@ let g:gutentags_define_advanced_commands = 1
 
 " FZF
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+" An action can be a reference to a function that processes selected lines
+function! s:fzf_build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+" TODO does the enter key already do this
+function! s:fzf_open_buffers(lines)
+  echom "Hello"
+  echom string(a:lines)
+  for file_name in a:lines
+    execute 'e ' . fnameescape(file_name)
+  endfor
+endfunction
+let g:fzf_action = {
+      \ 'ctrl-q': function('s:fzf_build_quickfix_list'),
+      \ 'ctrl-b': function('s:fzf_open_buffers'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit',
+      \ }
 nnoremap <silent> <Leader>f :Files<CR>
-nnoremap <silent> <Leader>F :History<CR>
+nnoremap <silent> <Leader>F :FilesMru --tiebreak=end<cr>
 " Search for files similar to the current one (ignoring the current file
 " extensions in filenames like feed.component.spec.ts)
 " TODO write some vim script to and allows switching from my-file-test.js
