@@ -396,9 +396,22 @@ let g:fzf_action = {
 nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>F :FilesMru --tiebreak=end<cr>
 " Search for files similar to the current one (ignoring the current file
-" extensions in filenames like feed.component.spec.ts)
-" TODO write some vim script to and allows switching from my-file-test.js
-nnoremap <silent> <Leader><C-f> :FZF -q !^%$\ '/%:t:r:r:r.<CR>
+" extensions in filenames like feed.component.spec.ts and also '-test' in
+" 'game-test.js')
+function! s:fzf_open_similar_files()
+  " Get rid of extensions
+  let base_file_name = substitute(expand('%:t'), '\v([^\.]+)%(\..*|$)', '\1', '')
+  " Get rid of -test and such
+  let base_file_name = substitute(base_file_name, '\v\c%(-|_)%(test|spec)', '', '')
+
+	" TODO SOMETIME only place a / before the face file name if the current file
+	" is in a subdirectory
+  let query = '!^' . expand('%') . "$\\ '/" . base_file_name
+	echo query
+  let command = ':FZF --tiebreak=end,length -q ' . query
+  execute command
+endfunction
+nnoremap <silent> <Leader><C-f> :call <SID>fzf_open_similar_files()<CR>
 nnoremap <silent> <Leader>zg :GFiles?<CR>
 nnoremap <silent> <Leader>zc :Commands<CR>
 nnoremap <silent> <Leader>zb :Buffers<CR>
