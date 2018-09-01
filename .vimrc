@@ -346,6 +346,8 @@ let g:wintabs_powerline_sep_buffer = ''
 let g:wintabs_powerline_sep_tab = ''
 " Reinitialise when reloading vimrc to make it look right
 call wintabs_powerline#init()
+" Jump to existing buffer when opening file with FZF
+set switchbuf=usetab
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
