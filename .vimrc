@@ -53,6 +53,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'nhuizing/vim-easygrep', {
       \ 'branch': 'feature/bugfix_git_grep'
       \ }
+Plug 'tpope/vim-eunuch'
 
 " FZF
 set rtp+=/usr/local/opt/fzf
