@@ -133,6 +133,9 @@ Plug 'tyru/open-browser.vim' " Required by plantuml-previewer.vim
 Plug 'arecarn/vim-crunch' " Evaluate maths expressions
 Plug 'RRethy/vim-illuminate' " Highlight uses of the word under the cursor on screen
 Plug 'ap/vim-css-color' " Highlight css colours
+if !has('nvim')
+  Plug 'wincent/terminus' " Improve cursor look, mouse support, focus reporting
+endif
 
 " }
 
@@ -468,8 +471,8 @@ if !has('nvim') && !has('idea') && !has("gui_running")
   " https://github.com/vim/vim/issues/3080#issuecomment-399738110
 else
   nnoremap <silent> <esc> <esc>:noh<cr>
+  inoremap <silent> <esc> <esc>:noh<cr>
 endif
-inoremap <silent> <esc> <esc>:noh<cr>
 
 " Splitting lines
 nnoremap <C-j> i<CR><ESC>
