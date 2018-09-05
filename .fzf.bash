@@ -8,6 +8,8 @@ fi
 # ---------------
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.bash" 2> /dev/null
 
+complete -F _fzf_dir_completion -o default -o bashdefault tree l c
+
 # Key bindings
 # ------------
 source "/usr/local/opt/fzf/shell/key-bindings.bash"
