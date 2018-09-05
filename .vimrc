@@ -382,7 +382,6 @@ function! s:fzf_build_quickfix_list(lines)
   copen
   cc
 endfunction
-" TODO does the enter key already do this
 function! s:fzf_open_buffers(lines)
   echom "Hello"
   echom string(a:lines)
@@ -408,9 +407,14 @@ function! s:fzf_open_similar_files()
   " Get rid of -test and such
   let base_file_name = substitute(base_file_name, '\v\c%(-|_)%(test|spec)', '', '')
 
-  " TODO SOMETIME only place a / before the face file name if the current file
-  " is in a subdirectory
-  let query = '!^' . expand('%') . "$\\ '/" . base_file_name
+  let is_in_subdirectory = expand('%') =~ '/'
+  if is_in_subdirectory
+    let base_name_search_term = '/' . base_file_name
+  else
+    let base_name_search_term = base_file_name
+  endif
+
+  let query = '!^' . expand('%') . "$\\ '" . base_name_search_term
   let command = ':FZF --tiebreak=end,length -q ' . query
   execute command
 endfunction
