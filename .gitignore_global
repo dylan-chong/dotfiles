@@ -10,3 +10,6 @@ tags.temp
 .envrc
 
 Session.vim
+
+# Microsoft Office temporary files
+~*
