@@ -12,4 +12,4 @@ tags.temp
 Session.vim
 
 # Microsoft Office temporary files
-~*
+~$*

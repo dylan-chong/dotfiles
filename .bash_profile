@@ -212,6 +212,8 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export GOPATH="$HOME/go"
 export PATH=$GOPATH/bin:$PATH:/usr/local/opt/go/libexec/bin
 
+export PATH=/usr/local/anaconda3/bin:"$PATH"
+
 # }}}
 
 
