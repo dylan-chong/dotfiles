@@ -51,4 +51,7 @@ vnoremap <C-r> :s/\C\V<C-r>x\>/
 " Unmap jump to definition mapping
 nnoremap <C-]> <C-]>
 
+" Comment line, without moving the cursor down one line
+nnoremap gc :action CommentByLineComment<CR>:action EditorUp<CR>
+
 " }}}

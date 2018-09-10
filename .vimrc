@@ -627,6 +627,10 @@ nnoremap <Leader>To :tabonly<CR>
 nnoremap <Leader>T< :tabm<Space>-
 nnoremap <Leader>T> :tabm<Space>+
 
+" Goto start of line in command mode (make going to the end and start of lines
+" consistent with terminal emacs shortcuts)
+cnoremap <C-a> <C-b>
+
 " }}}
 
 
