@@ -66,6 +66,26 @@
                                     }
                                 ],
                                 "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "t"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "t"
+                                    },
+                                    {
+                                        "key_code": "m"
+                                    },
+                                    {
+                                        "key_code": "u"
+                                    },
+                                    {
+                                        "key_code": "x"
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     }
@@ -358,14 +378,6 @@
                 {
                     "from": {
                         "key_code": "slash"
-                    },
-                    "to": {
-                        "key_code": "e"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "t"
                     },
                     "to": {
                         "key_code": "e"
