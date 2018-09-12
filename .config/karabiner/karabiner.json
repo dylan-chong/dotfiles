@@ -48,6 +48,26 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Macro keys",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "q"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "grave_accent_and_tilde",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
@@ -314,14 +334,6 @@
                 {
                     "from": {
                         "key_code": "period"
-                    },
-                    "to": {
-                        "key_code": "e"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "q"
                     },
                     "to": {
                         "key_code": "e"
