@@ -228,7 +228,7 @@
                         "key_code": "close_bracket"
                     },
                     "to": {
-                        "key_code": "d"
+                        "key_code": "volume_up"
                     }
                 },
                 {
@@ -236,7 +236,7 @@
                         "key_code": "comma"
                     },
                     "to": {
-                        "key_code": "d"
+                        "key_code": "vk_consumer_brightness_down"
                     }
                 },
                 {
@@ -332,7 +332,7 @@
                         "key_code": "open_bracket"
                     },
                     "to": {
-                        "key_code": "d"
+                        "consumer_key_code": "volume_decrement"
                     }
                 },
                 {
@@ -348,7 +348,7 @@
                         "key_code": "period"
                     },
                     "to": {
-                        "key_code": "d"
+                        "key_code": "display_brightness_increment"
                     }
                 },
                 {
