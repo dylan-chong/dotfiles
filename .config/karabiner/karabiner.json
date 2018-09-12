@@ -54,7 +54,7 @@
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "q"
+                                    "key_code": "d"
                                 },
                                 "to": [
                                     {
@@ -212,7 +212,7 @@
                         "key_code": "b"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -228,7 +228,7 @@
                         "key_code": "close_bracket"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -236,15 +236,7 @@
                         "key_code": "comma"
                     },
                     "to": {
-                        "key_code": "e"
-                    }
-                },
-                {
-                    "from": {
                         "key_code": "d"
-                    },
-                    "to": {
-                        "key_code": "e"
                     }
                 },
                 {
@@ -260,7 +252,7 @@
                         "key_code": "g"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -268,7 +260,7 @@
                         "key_code": "h"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -276,7 +268,7 @@
                         "key_code": "i"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -284,7 +276,7 @@
                         "key_code": "j"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -292,7 +284,7 @@
                         "key_code": "k"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -300,7 +292,7 @@
                         "key_code": "l"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -316,7 +308,7 @@
                         "key_code": "m"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -324,7 +316,7 @@
                         "key_code": "n"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -332,7 +324,7 @@
                         "key_code": "o"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -340,7 +332,7 @@
                         "key_code": "open_bracket"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -348,7 +340,7 @@
                         "key_code": "p"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -356,7 +348,7 @@
                         "key_code": "period"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -364,7 +356,7 @@
                         "key_code": "quote"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -372,7 +364,7 @@
                         "key_code": "r"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -380,7 +372,7 @@
                         "key_code": "slash"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -388,7 +380,7 @@
                         "key_code": "v"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -396,7 +388,7 @@
                         "key_code": "w"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -404,7 +396,7 @@
                         "key_code": "x"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 },
                 {
@@ -412,7 +404,7 @@
                         "key_code": "y"
                     },
                     "to": {
-                        "key_code": "e"
+                        "key_code": "d"
                     }
                 }
             ],
