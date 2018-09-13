@@ -212,6 +212,14 @@
             "simple_modifications": [
                 {
                     "from": {
+                        "key_code": "caps_lock"
+                    },
+                    "to": {
+                        "key_code": "left_control"
+                    }
+                },
+                {
+                    "from": {
                         "key_code": "delete_or_backspace"
                     },
                     "to": {
@@ -220,10 +228,50 @@
                 },
                 {
                     "from": {
-                        "key_code": "caps_lock"
+                        "key_code": "slash"
                     },
                     "to": {
-                        "key_code": "left_control"
+                        "key_code": "vk_none"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "period"
+                    },
+                    "to": {
+                        "key_code": "apple_display_brightness_increment"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "comma"
+                    },
+                    "to": {
+                        "key_code": "apple_display_brightness_decrement"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "open_bracket"
+                    },
+                    "to": {
+                        "consumer_key_code": "volume_decrement"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "close_bracket"
+                    },
+                    "to": {
+                        "consumer_key_code": "volume_increment"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "quote"
+                    },
+                    "to": {
+                        "key_code": "vk_none"
                     }
                 }
             ],
