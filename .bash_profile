@@ -102,7 +102,7 @@ alias kotlinc='rlwrap -a foo kotlinc'
 
 alias soba="source ~/.bash_profile"
 
-alias aenser="python ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/server_osx.py"
+alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/server_osx.py"
 
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
