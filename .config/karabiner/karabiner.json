@@ -55,7 +55,6 @@
                             { "from": { "key_code": "q" }, "to": [ { "key_code": "grave_accent_and_tilde", "modifiers": [ "left_control", "left_command" ] } ], "type": "basic" },
                             { "from": { "key_code": "w" }, "to": [ { "key_code": "grave_accent_and_tilde", "modifiers": [ "left_control", "left_command" ] } ], "type": "basic" },
                             { "from": { "key_code": "r" }, "to": [ { "key_code": "grave_accent_and_tilde", "modifiers": [ "left_control", "left_command" ] } ], "type": "basic" },
-                            { "from": { "key_code": "t" }, "to": [ { "key_code": "grave_accent_and_tilde", "modifiers": [ "left_control", "left_command" ] } ], "type": "basic" },
                             { "from": { "key_code": "y" }, "to": [ { "key_code": "grave_accent_and_tilde", "modifiers": [ "left_control", "left_command" ] } ], "type": "basic" },
                             { "from": { "key_code": "i" }, "to": [ { "key_code": "grave_accent_and_tilde", "modifiers": [ "left_control", "left_command" ] } ], "type": "basic" },
                             { "from": { "key_code": "o" }, "to": [ { "key_code": "grave_accent_and_tilde", "modifiers": [ "left_control", "left_command" ] } ], "type": "basic" },
