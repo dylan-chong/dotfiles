@@ -212,6 +212,14 @@
             "simple_modifications": [
                 {
                     "from": {
+                        "key_code": "delete_or_backspace"
+                    },
+                    "to": {
+                        "key_code": "vk_none"
+                    }
+                },
+                {
+                    "from": {
                         "key_code": "caps_lock"
                     },
                     "to": {
