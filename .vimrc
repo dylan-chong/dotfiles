@@ -253,6 +253,7 @@ nnoremap <leader>af :ALEFix<CR>
 
 " Import JS
 nnoremap <leader>jj :ImportJSWord<CR>
+nnoremap <leader>jf :ImportJSFix<CR>
 
 " Better Whitespace
 let g:better_whitespace_enabled = 0
