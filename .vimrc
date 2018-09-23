@@ -133,6 +133,7 @@ Plug 'tyru/open-browser.vim' " Required by plantuml-previewer.vim
 Plug 'arecarn/vim-crunch' " Evaluate maths expressions
 Plug 'RRethy/vim-illuminate' " Highlight uses of the word under the cursor on screen
 Plug 'ap/vim-css-color' " Highlight css colours
+Plug 'tpope/vim-abolish' " 3 unrelated plugins
 if !has('nvim')
   Plug 'wincent/terminus' " Improve cursor look, mouse support, focus reporting
 endif
@@ -523,6 +524,8 @@ nnoremap <C-p> viw"xyV
 vnoremap <C-r> :s@\C\V\<<C-r>x\>@
 " Part 2.1: Start the search without the end and start of word match
 vnoremap g<C-r> :s@\C\V<C-r>x@
+" Part 2.2: Use abolish.vim Substitute
+vnoremap g<C-u> :S@<C-r>x@
 
 " Reload .vimrc
 nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
