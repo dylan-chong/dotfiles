@@ -15,14 +15,17 @@ complete -F _fzf_dir_completion -o default -o bashdefault tree l c
 source "/usr/local/opt/fzf/shell/key-bindings.bash"
 
 fbr() {
-  # Copied from https://github.com/junegunn/fzf/wiki/Examples#git
-  # but i removed the git checkout to so at the end this function can be used
-  # more generally, and remove the maximum count
-  local branches branch
-  branches=$(git for-each-ref --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##"
+  # list branches, including remotes
+  # - remove star on current branch, and leading spaces
+  # - remove remote/ from each line
+  # - convert stuff like "origin/master" into "origin/master\nmaster"
+  git branch -a \
+    | perl -pe 's/^\s*\*?\s*//' \
+    | perl -pe 's/remotes\///' \
+    | perl -pe 's/(\w+)\/(.*)/\1\/\2\n\2/' \
+    | sort \
+    | uniq \
+    | fzf
 }
 
 # Various Settings
