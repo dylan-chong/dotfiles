@@ -19,11 +19,10 @@ fbr() {
   # - remove star on current branch, and leading spaces
   # - remove remote/ from each line
   # - convert stuff like "origin/master" into "origin/master\nmaster"
-  git branch -a \
+  git branch -a --sort=-committerdate \
     | perl -pe 's/^\s*\*?\s*//' \
     | perl -pe 's/remotes\///' \
     | perl -pe 's/(\w+)\/(.*)/\1\/\2\n\2/' \
-    | sort \
     | uniq \
     | fzf
 }
