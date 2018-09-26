@@ -1,5 +1,14 @@
 set editing-mode vi
 
+# https://stackoverflow.com/a/42107711/1726450
+# assumes you have bash > 4.x
+set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[6 q\2
+set vi-cmd-mode-string \1\e[2 q\2
+
+# https://unix.stackexchange.com/questions/318433/bash-urxvt-delay-after-esc-in-vi-mode
+set keyseq-timeout 200
+
 # Ctrl+L to clear
 # (https://unix.stackexchange.com/questions/104094/is-there-any-way-to-enable-ctrll-to-clear-screen-when-set-o-vi-is-set)
 $if mode=vi
