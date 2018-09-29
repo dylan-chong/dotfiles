@@ -222,7 +222,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:alchemist#elixir_erlang_src = '~/.elixir-completion/'
 
 " AutoPairs
-let g:AutoPairsMapSpace = 0
+let g:AutoPairsMapSpace = 1
 let g:AutoPairsMultilineClose = 0
 
 " Ale
@@ -567,6 +567,12 @@ nnoremap <leader>oa :set formatoptions+=a<CR>
 nnoremap <leader>oA :set formatoptions-=a<CR>
 nnoremap <leader>ow :set nowrap<CR>
 nnoremap <leader>oW :set wrap<CR>
+nnoremap <leader>oF :set filetype=
+nnoremap <leader>ofp :set filetype=python<CR>
+nnoremap <leader>ofj :set filetype=javascript<CR>
+nnoremap <leader>ofe :set filetype=elixir<CR>
+nnoremap <leader>ofr :set filetype=ruby<CR>
+nnoremap <leader>ofm :set filetype=markdown<CR>
 
 " Select recently pasted text
 nnoremap gp `[v`]
