@@ -399,7 +399,7 @@ let g:fzf_action = {
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit',
       \ }
-nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>f :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
 nnoremap <silent> <Leader>F :FilesMru --tiebreak=end<cr>
 " Search for files similar to the current one (ignoring the current file
 " extensions in filenames like feed.component.spec.ts and also '-test' in
@@ -454,8 +454,7 @@ vnoremap <Leader>r "ry:Rg<Space><C-r>r
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
       \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   fzf#vim#with_preview('right:50%'),
       \   <bang>0)
 cnoreabbrev rg Rg
 
