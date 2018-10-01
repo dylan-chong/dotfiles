@@ -454,7 +454,7 @@ vnoremap <Leader>r "ry:Rg<Space><C-r>r
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
       \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
-      \   fzf#vim#with_preview('right:50%'),
+      \   fzf#vim#with_preview('right:35%'),
       \   <bang>0)
 cnoreabbrev rg Rg
 
