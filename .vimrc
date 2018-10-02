@@ -668,8 +668,8 @@ set sidescrolloff=4
 " Mouse scrolling speed
 " TODO this has no effect in neovim because of a bug
 " https://github.com/neovim/neovim/issues/6211
-map <ScrollWheelUp> <C-Y>
-map <ScrollWheelDown> <C-E>
+" map <ScrollWheelUp> <C-Y>
+" map <ScrollWheelDown> <C-E>
 
 " Text width
 set textwidth=79
