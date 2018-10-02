@@ -531,6 +531,7 @@ vnoremap g<C-u> :S@<C-r>x@
 nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
 
 " Exporting documents
+nnoremap <Leader>ed :saveas ~/Desktop/
 nnoremap <Leader>dm :w<CR>:!doc export '%'<CR>
 nnoremap <Leader>dt :w<CR>:!pdflatex '%' && open %:r.pdf<CR>
 
