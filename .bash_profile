@@ -307,6 +307,12 @@ export VISUAL=nvim
 # Prevent accidental logging out
 export IGNOREEOF=1
 
+# Remember lots of commands in the command history
+HISTFILESIZE=1000000
+
+# Merge session histories into one
+export SHELL_SESSION_HISTORY=0
+
 # Load private stuff
 source ~/.bash_profile_private
 
@@ -314,7 +320,6 @@ source ~/.bash_profile_private
 if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
-
 
 # Load z (https://github.com/rupa/z)
 . /usr/local/etc/profile.d/z.sh
