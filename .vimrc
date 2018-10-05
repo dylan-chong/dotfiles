@@ -138,6 +138,10 @@ if !has('nvim')
   Plug 'wincent/terminus' " Improve cursor look, mouse support, focus reporting
 endif
 
+" Text objects
+Plug 'kana/vim-textobj-user'
+Plug 'andyl/vim-textobj-elixir'
+
 " }
 
 call plug#end()
