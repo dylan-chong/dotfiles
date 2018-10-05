@@ -140,8 +140,8 @@ alias gfa="git fetch --all --prune --tags"
 alias grmt="git remote"
 alias grmtv="git remote -v"
 
-alias gbr="git branch"
-alias gbrv="git branch -avv"
+alias gbra="git branch"
+alias gbrav="git branch -avv"
 
 alias gchd="git checkout -"
 
