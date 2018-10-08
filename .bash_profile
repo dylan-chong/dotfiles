@@ -128,6 +128,10 @@ alias gph="git push"
 current_branch() {
     git branch | awk '/^\* / { print $2 }'
 }
+copy_current_branch() {
+    current_branch | pbcopy
+}
+
 gphu() {
     git push -u origin $(current_branch)
 }
