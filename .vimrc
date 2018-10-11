@@ -357,8 +357,6 @@ let g:wintabs_powerline_sep_buffer = ''
 let g:wintabs_powerline_sep_tab = ''
 " Reinitialise when reloading vimrc to make it look right
 call wintabs_powerline#init()
-" Jump to existing buffer when opening file with FZF
-set switchbuf=usetab
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
@@ -438,7 +436,7 @@ function! s:fzf_open_similar_files()
     let main_search_term = "'" . base_file_name
   endif
 
-  let query = '!^' . expand('%') . "$\\ " . main_search_term
+  let query = '!^./' . expand('%') . "$\\ " . main_search_term
   let command = ':FZF --tiebreak=end,length -q ' . query
   execute command
 endfunction
