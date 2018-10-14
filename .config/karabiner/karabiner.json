@@ -588,6 +588,14 @@
                 },
                 {
                     "from": {
+                        "key_code": "comma"
+                    },
+                    "to": {
+                        "consumer_key_code": "volume_decrement"
+                    }
+                },
+                {
+                    "from": {
                         "key_code": "delete_or_backspace"
                     },
                     "to": {
@@ -604,6 +612,14 @@
                 },
                 {
                     "from": {
+                        "key_code": "period"
+                    },
+                    "to": {
+                        "consumer_key_code": "volume_increment"
+                    }
+                },
+                {
+                    "from": {
                         "key_code": "quote"
                     },
                     "to": {
@@ -616,22 +632,6 @@
                     },
                     "to": {
                         "key_code": "vk_none"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "period"
-                    },
-                    "to": {
-                        "consumer_key_code": "volume_increment"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "comma"
-                    },
-                    "to": {
-                        "consumer_key_code": "volume_decrement"
                     }
                 }
             ],
