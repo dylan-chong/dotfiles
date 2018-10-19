@@ -388,15 +388,14 @@ function! s:fzf_build_quickfix_list(lines)
   cc
 endfunction
 function! s:fzf_open_buffers(lines)
-  echom "Hello"
-  echom string(a:lines)
   for file_name in a:lines
     execute 'e ' . fnameescape(file_name)
+    WintabsRefresh
   endfor
 endfunction
 let g:fzf_action = {
+      \ 'enter': function('s:fzf_open_buffers'),
       \ 'ctrl-q': function('s:fzf_build_quickfix_list'),
-      \ 'ctrl-b': function('s:fzf_open_buffers'),
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit',
