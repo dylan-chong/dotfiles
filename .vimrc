@@ -400,7 +400,7 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ }
 nnoremap <silent> <Leader>f :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
-nnoremap <silent> <Leader>F :FilesMru --tiebreak=end<cr>
+nnoremap <silent> <Leader>F :ProjectMru --tiebreak=end<cr>
 " Search for files similar to the current one (ignoring the current file
 " extensions in filenames like feed.component.spec.ts and also '-test' in
 " 'game-test.js'). For example, you want to switch between html, css,
