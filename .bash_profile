@@ -311,11 +311,13 @@ export VISUAL=nvim
 # Prevent accidental logging out
 export IGNOREEOF=1
 
-# Remember lots of commands in the command history
-HISTFILESIZE=1000000
-
-# Merge session histories into one
-export SHELL_SESSION_HISTORY=0
+# https://unix.stackexchange.com/a/48113/191743
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=1000000                   # big big history
+export HISTFILESIZE=1000000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # Load private stuff
 source ~/.bash_profile_private
