@@ -382,6 +382,10 @@ let g:gutentags_define_advanced_commands = 1
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 " FZF File MRU
 let g:fzf_filemru_bufwrite = 1
+augroup custom_filemru
+  autocmd!
+  autocmd BufWinEnter * UpdateMru
+augroup END
 " An action can be a reference to a function that processes selected lines
 function! s:fzf_build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
