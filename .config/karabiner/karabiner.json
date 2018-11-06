@@ -739,7 +739,7 @@
                         "key_code": "slash"
                     },
                     "to": {
-                        "key_code": "vk_none"
+                        "consumer_key_code": "play_or_pause"
                     }
                 }
             ],
