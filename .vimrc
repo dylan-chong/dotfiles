@@ -244,7 +244,7 @@ let g:ale_type_map = {
       \ 'credo': {'ES': 'WS', 'E': 'W'}
       \ }
 let g:ale_fixers = {
-      \ 'typescript': ['tslint --fix'],
+      \ 'typescript': ['tslint'],
       \ 'javascript': ['eslint'],
       \ 'python': ['autopep8']
       \ }
