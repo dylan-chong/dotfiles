@@ -172,7 +172,7 @@ alias glgad="glga --date-order"
 alias gsh="git stash"
 
 function gpr() {
-    local base=`git remote get-url origin | perl -pe 's/\.git$//'`
+    local base=`git remote get-url origin | perl -pe 's/\.git$//' | perl -pe 's/git\@github.com:/https:\/\/github.com\//'`
     local url="$base/pull/`current_branch`"
     case $1 in
         s)
