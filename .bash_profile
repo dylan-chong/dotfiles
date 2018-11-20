@@ -214,24 +214,19 @@ export CPPFLAGS="-I/usr/local/opt/node@8/include"
 
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 export GOPATH="$HOME/go"
 export PATH=$GOPATH/bin:$PATH:/usr/local/opt/go/libexec/bin
 
 export PATH=/usr/local/anaconda3/bin:"$PATH"
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 # }}}
-
-
 
 # Terminal Coloured text from:
 
 # http://apple.stackexchange.com/questions/125637/iterm-colors-for-prompt-command-and-output
 # {{{
-
-# Don't know what this thing is
-# s[[ -s "/Users/dwightk/.rvm/scripts/rvm" ]] && source "/Users/dwightk/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
@@ -264,7 +259,6 @@ export CLICOLOR=1
 
 # Set colors to match iTerm2 Terminal Colors
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 # }}}
 
 
