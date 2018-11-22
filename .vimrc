@@ -237,6 +237,7 @@ let g:ale_completion_delay = 500
 let g:ale_linters = {
       \ 'java': [],
       \ 'typescript': ['tslint'],
+      \ 'ruby': ['rubocop'],
       \ }
 " Turn linting errors into warnings
 let g:ale_type_map = {
@@ -246,7 +247,8 @@ let g:ale_type_map = {
 let g:ale_fixers = {
       \ 'typescript': ['tslint'],
       \ 'javascript': ['eslint'],
-      \ 'python': ['autopep8']
+      \ 'python': ['autopep8'],
+      \ 'ruby': ['rubocop'],
       \ }
 let g:ale_typescript_tslint_use_global = 0
 let g:ale_elixir_credo_use_global = 0
@@ -459,7 +461,7 @@ nnoremap <Leader>R :Rg<Space><C-r><C-w>
 vnoremap <Leader>r "ry:Rg<Space><C-r>r
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
-      \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
+      \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden --no-ignore-messages ".shellescape(<q-args>), 1,
       \   fzf#vim#with_preview('right:35%'),
       \   <bang>0)
 cnoreabbrev rg Rg
