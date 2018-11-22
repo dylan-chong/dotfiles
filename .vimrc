@@ -58,6 +58,7 @@ Plug 'nhuizing/vim-easygrep', {
 set rtp+=/usr/local/opt/fzf
 Plug 'junegunn/fzf.vim'
 Plug 'tweekmonster/fzf-filemru'
+Plug 'dylan-chong/fzf_similar.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -409,44 +410,7 @@ let g:fzf_action = {
       \ }
 nnoremap <silent> <Leader>f :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
 nnoremap <silent> <Leader>F :ProjectMru --tiebreak=end<cr>
-" Search for files similar to the current one (ignoring the current file
-" extensions in filenames like feed.component.spec.ts and also '-test' in
-" 'game-test.js'). For example, you want to switch between html, css,
-" javascript and files - or even spec and implementation in different
-" directories. Note: This may pick up irrelevant files, but hopefully they
-" should not appear at the bottom of the search results (where the most
-" relevant ones are).
-function! s:fzf_open_similar_files()
-  " Get rid of extensions
-  let base_file_name = substitute(expand('%:t'), '\v([^\.]+)%(\..*|$)', '\1', '')
-  " Get rid of -test and such
-  let base_file_name = substitute(base_file_name, '\v\c%(-|_)%(test|spec)', '', '')
-
-  let is_in_subdirectory = expand('%') =~ '/'
-  if is_in_subdirectory
-    " Include directory structure in search to improve the accuracy of search
-    " results. Very useful in situations where you have files like
-    " app/controllers/api/v4/foo_controller.rb with v4, v3, etc
-    let simplified_directory = substitute(
-          \   expand('%:h'),
-          \   '\v(app|src|spec|test|__test__|__tests__)',
-          \   '',
-          \   'g'
-          \ )
-    let simplified_directory = substitute(simplified_directory, '//', '/', 'g')
-    let simplified_directory = substitute(simplified_directory, '^/', '', 'g')
-    " simplify_directory may not exactly match the actual directory of the file
-    " you are looking for, but that is okay because fzf does a fuzzy search
-    let main_search_term = simplified_directory . '/' . base_file_name
-  else
-    let main_search_term = "'" . base_file_name
-  endif
-
-  let query = '!^./' . expand('%') . "$\\ " . main_search_term
-  let command = ':FZF --tiebreak=end,length -q ' . query
-  execute command
-endfunction
-nnoremap <silent> <Leader><C-f> :call <SID>fzf_open_similar_files()<CR>
+nnoremap <silent> <Leader><C-f> :call fzf_similar#find_similar_files()<CR>
 nnoremap <silent> <Leader>zg :GFiles?<CR>
 nnoremap <silent> <Leader>zc :Commands<CR>
 nnoremap <silent> <Leader>zb :Buffers<CR>
@@ -461,7 +425,7 @@ nnoremap <Leader>R :Rg<Space><C-r><C-w>
 vnoremap <Leader>r "ry:Rg<Space><C-r>r
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
-      \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden --no-ignore-messages ".shellescape(<q-args>), 1,
+      \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
       \   fzf#vim#with_preview('right:35%'),
       \   <bang>0)
 cnoreabbrev rg Rg
