@@ -783,4 +783,7 @@ cnoreabbrev WQ wq
 set splitright
 set splitbelow
 
+" Get ruby host
+let g:ruby_host_prog = substitute(system('echo `gem environment gemdir`"/bin/neovim-ruby-host"'), '\n', '', 'g')
+
 " }}}
