@@ -219,6 +219,8 @@ export PATH=$GOPATH/bin:$PATH:/usr/local/opt/go/libexec/bin
 
 export PATH=/usr/local/anaconda3/bin:"$PATH"
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 # }}}
 
 # Terminal Coloured text from:
