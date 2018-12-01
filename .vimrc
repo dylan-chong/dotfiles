@@ -208,8 +208,8 @@ let NERDTreeShowLineNumbers=1 " enable line numbers
 autocmd FileType nerdtree setlocal relativenumber
 let NERDTreeShowHidden=1
 let g:NERDTreeWinSize=45
-nmap <leader>n :NERDTreeMirrorToggle<cr>
-nmap <leader>N :NERDTreeFind<cr>
+nnoremap <leader>n :NERDTreeTabsToggle<cr>
+nnoremap <leader>N :NERDTreeFind<cr>
 
 " Nerd Commenter
 " let g:NERDDefaultAlign = 'start'
@@ -410,7 +410,8 @@ let g:fzf_action = {
       \ }
 nnoremap <silent> <Leader>f :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
 nnoremap <silent> <Leader>F :ProjectMru --tiebreak=end<cr>
-nnoremap <silent> <Leader><C-f> :call fzf_similar#find_similar_files()<CR>
+nnoremap <silent> <Leader><C-f>1 :call fzf_similar#find_similar_files()<CR>
+nnoremap <silent> <Leader><C-f>2 :call fzf_similar#find_similarly_named_files()<CR>
 nnoremap <silent> <Leader>zg :GFiles?<CR>
 nnoremap <silent> <Leader>zc :Commands<CR>
 nnoremap <silent> <Leader>zb :Buffers<CR>
