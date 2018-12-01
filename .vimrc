@@ -546,6 +546,7 @@ nnoremap <leader>ofj :set filetype=javascript<CR>
 nnoremap <leader>ofe :set filetype=elixir<CR>
 nnoremap <leader>ofr :set filetype=ruby<CR>
 nnoremap <leader>ofm :set filetype=markdown<CR>
+nnoremap <leader>omR :set makeprg=rubocop\ -f\ e<CR>
 
 " Select recently pasted text
 nnoremap gp `[v`]
@@ -608,12 +609,18 @@ nnoremap <silent> <C-\> :tag<CR>
 nnoremap <Leader>Tn :tabnew<Space>
 nnoremap <Leader>Tc :tabclose<CR>
 nnoremap <Leader>To :tabonly<CR>
-nnoremap <Leader>T< :tabm<Space>-
-nnoremap <Leader>T> :tabm<Space>+
+nnoremap <Leader>Tm :tabm<Space>
 
 " Goto start of line in command mode (make going to the end and start of lines
 " consistent with terminal emacs shortcuts)
 cnoremap <C-a> <C-b>
+
+" Location list window / make
+nnoremap <Leader>mm :lmake <Bar> lclose <Bar> lwindow<CR>
+nnoremap <Leader>mw :lwindow<CR>
+nnoremap <Leader>mn :lnext<CR>
+nnoremap <Leader>mN :lprevious<CR>
+" Also see 'Toggling options' for makeprg mappings
 
 " }}}
 
