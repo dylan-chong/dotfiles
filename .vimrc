@@ -49,6 +49,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" Ranger
+Plug 'francoiscabrol/ranger.vim'
+if has('nvim')
+  Plug 'rbgrouleff/bclose.vim'
+endif
+
 " File-related stuff
 Plug 'nhuizing/vim-easygrep', {
       \ 'branch': 'feature/bugfix_git_grep'
@@ -453,6 +459,9 @@ nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
 nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
 nnoremap <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
+
+" Ranger
+let g:ranger_map_keys = 0
 
 " }}}
 
