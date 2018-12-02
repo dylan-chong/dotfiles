@@ -214,8 +214,8 @@ let NERDTreeShowLineNumbers=1 " enable line numbers
 autocmd FileType nerdtree setlocal relativenumber
 let NERDTreeShowHidden=1
 let g:NERDTreeWinSize=45
-nnoremap <leader>n :NERDTreeTabsToggle<cr>
-nnoremap <leader>N :NERDTreeFind<cr>
+" nnoremap <leader>n :NERDTreeTabsToggle<cr>
+" nnoremap <leader>N :NERDTreeFind<cr>
 
 " Nerd Commenter
 " let g:NERDDefaultAlign = 'start'
@@ -462,6 +462,7 @@ nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
 
 " Ranger
 let g:ranger_map_keys = 0
+nnoremap <leader>n :Ranger<cr>
 
 " }}}
 
