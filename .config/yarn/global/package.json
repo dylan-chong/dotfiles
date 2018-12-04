@@ -6,7 +6,7 @@
     "gulp-cli": "1.4.0",
     "import-js": "^3.0.0",
     "neovim": "^4.2.1",
-    "npm": "5.6",
+    "npm": "6.4.1",
     "react-native-cli": "^2.0.1",
     "typescript-language-server": "^0.3.6"
   }
