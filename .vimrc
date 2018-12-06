@@ -235,6 +235,15 @@ let g:alchemist#elixir_erlang_src = '~/.elixir-completion/'
 " AutoPairs
 let g:AutoPairsMapSpace = 1
 let g:AutoPairsMultilineClose = 0
+" let g:AutoPairs = {
+      " \ '`': '`',
+      " \ '"': '"',
+      " \ '{': '}',
+      " \ '''': '''',
+      " \ '(': ')',
+      " \ '[': ']',
+      " \ '<%': '%>',
+      " \ }
 
 " Ale
 let g:ale_completion_enabled = 1
