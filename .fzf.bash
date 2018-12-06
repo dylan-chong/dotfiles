@@ -15,16 +15,28 @@ complete -F _fzf_dir_completion -o default -o bashdefault tree l c
 source "/usr/local/opt/fzf/shell/key-bindings.bash"
 
 fbr() {
-  # list branches, including remotes
-  # - remove star on current branch, and leading spaces
-  # - remove remote/ from each line
-  # - convert stuff like "origin/master" into "origin/master\nmaster"
-  git branch -a --sort=-committerdate \
-    | perl -pe 's/^\s*\*?\s*//' \
-    | perl -pe 's/remotes\///' \
-    | perl -pe 's/(\w+)\/(.*)/\1\/\2\n\2/' \
-    | uniq \
-    | fzf
+  # TODO later make unique list and sort branches by last commit date like `git
+  # show --format="%ci %cr" master` or something similar
+
+  local trim_leading_star_and_spaces remove_head_arrow
+  local locals combined_list remotes remotes_no_remote_name_prefix
+
+  trim_leading_star_and_spaces() {
+    cat - | perl -pe 's/^\s*\*?\s*//'
+  }
+
+  remove_head_arrow() {
+    # changes `origin/HEAD -> origin/master` to `origin/HEAD`
+    cat - | perl -pe 's/ -> .*//'
+  }
+
+  locals=`git branch --sort=committerdate | trim_leading_star_and_spaces`;
+  remotes=`git branch -r --sort=committerdate | trim_leading_star_and_spaces | remove_head_arrow`;
+  remotes_no_remote_name_prefix=`echo "$remotes" | perl -pe 's/[^\/]+\///'`;
+
+  combined_list="$locals\n$remotes\n$remotes_no_remote_name_prefix"
+
+  printf "$combined_list" | fzf
 }
 
 # Various Settings
