@@ -18,7 +18,7 @@ fbr() {
   # TODO later make unique list and sort branches by last commit date like `git
   # show --format="%ci %cr" master` or something similar
 
-  local trim_leading_star_and_spaces remove_head_arrow
+  local trim_leading_star_and_spaces remove_head_arrow remove_duplicates
   local locals combined_list remotes remotes_no_remote_name_prefix
 
   trim_leading_star_and_spaces() {
@@ -30,13 +30,18 @@ fbr() {
     cat - | perl -pe 's/ -> .*//'
   }
 
-  locals=`git branch --sort=committerdate | trim_leading_star_and_spaces`;
-  remotes=`git branch -r --sort=committerdate | trim_leading_star_and_spaces | remove_head_arrow`;
+  remove_duplicates() {
+    # https://stackoverflow.com/a/11532197/1726450https://stackoverflow.com/a/11532197/1726450
+    cat - | awk '!x[$0]++'
+  }
+
+  locals=`git branch --sort=-committerdate | trim_leading_star_and_spaces`;
+  remotes=`git branch -r --sort=-committerdate | trim_leading_star_and_spaces | remove_head_arrow`;
   remotes_no_remote_name_prefix=`echo "$remotes" | perl -pe 's/[^\/]+\///'`;
 
   combined_list="$locals\n$remotes\n$remotes_no_remote_name_prefix"
 
-  printf "$combined_list" | fzf
+  printf "$combined_list" | remove_duplicates | fzf
 }
 
 # Various Settings
