@@ -172,18 +172,25 @@ alias glgad="glga --date-order"
 alias gsh="git stash"
 
 function gpr() {
-    local base=`git remote get-url origin | perl -pe 's/\.git$//' | perl -pe 's/git\@github.com:/https:\/\/github.com\//'`
-    local url="$base/pull/`current_branch`"
+    # Goes to the URL for creating a new pull request in the browser. For
+    # GitHub, the branch is selected automatically, and if the pull request
+    # already exists for that branch, GitHub will redirect to the existing pull
+    # request. For Bitbucket, the new pull request page is opened.
+    local base=`git remote get-url origin | perl -pe 's/\.git$//' | perl -pe 's/git\@([^:]+):/https:\/\/\1\//'`
+    if [[ $base == 'https://bitbucket.org'* ]]; then
+        local url="$base/pull-requests/new"
+    else
+        local url="$base/pull/`current_branch`"
+    fi
     case $1 in
-        s)
+        safari|s)
             open -a 'Safari' $url
             ;;
-        g)
+        chrome|g|c)
             open -a 'Google Chrome' $url
             ;;
         *)
-            echo $url | pbcopy
-            echo "Copied to clipboard: $url"
+            open $url
     esac
 }
 
