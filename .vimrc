@@ -570,6 +570,8 @@ nnoremap <Leader>% :call CopySingleLine(expand('%'))<Left><Left><Left>
 " File operations
 nnoremap <C-q> :wa<CR>
 nnoremap <C-c> :wqa
+autocmd CmdLineEnter : nunmap <C-c>
+autocmd CmdLineLeave : nnoremap <C-c> :wqa
 
 " Change case of first letter of current word in insert mode
 inoremap <C-b>b <Esc>mzviwo<Esc>~`za
