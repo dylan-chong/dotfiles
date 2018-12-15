@@ -44,11 +44,6 @@ Plug 'chriskempson/base16-vim'
 " CTags
 Plug 'ludovicchabant/vim-gutentags'
 
-" NERDTree
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
 " Ranger
 Plug 'francoiscabrol/ranger.vim'
 if has('nvim')
@@ -206,16 +201,6 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('num_processes', 1) " Temporary workaround https://github.com/Shougo/deoplete.nvim/issues/761#issuecomment-389701983
-
-" NERDTree
-let g:nerdtree_tabs_open_on_gui_startup = 2
-let g:nerdtree_tabs_open_on_console_startup = g:nerdtree_tabs_open_on_gui_startup
-let NERDTreeShowLineNumbers=1 " enable line numbers
-autocmd FileType nerdtree setlocal relativenumber
-let NERDTreeShowHidden=1
-let g:NERDTreeWinSize=45
-" nnoremap <leader>n :NERDTreeTabsToggle<cr>
-" nnoremap <leader>N :NERDTreeFind<cr>
 
 " Nerd Commenter
 " let g:NERDDefaultAlign = 'start'
