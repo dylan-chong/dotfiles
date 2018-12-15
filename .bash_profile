@@ -107,9 +107,15 @@ alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
 function fp() {
-    P=`pwd`/$1;
-    echo "Copied to clipboard: $P"
-    echo $P | tr -d '\n' | pbcopy
+    local path=`pwd`/$1;
+    echo "Copied to clipboard: $path"
+    echo $path | tr -d '\n' | pbcopy
+}
+
+function cr() {
+    ranger --choosedir=$HOME/.rangerdir
+    local LASTDIR=`cat $HOME/.rangerdir`
+    c "$LASTDIR"
 }
 
 # }}}
