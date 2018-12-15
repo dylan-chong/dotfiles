@@ -456,6 +456,7 @@ nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
 
 " Ranger
 let g:ranger_map_keys = 0
+let g:ranger_replace_netrw = 1
 nnoremap <leader>n :Ranger<cr>
 
 " }}}
