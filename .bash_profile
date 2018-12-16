@@ -293,9 +293,6 @@ export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 source ~/.git-completion.bash
 source ~/.git-flow-completion.bash
 
-# iTerm 2 Shell Integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
 # Vim
 alias vi="nvim"
 
@@ -334,8 +331,4 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 
-# Load z (https://github.com/rupa/z)
-. /usr/local/etc/profile.d/z.sh
-
 # }}}
-
