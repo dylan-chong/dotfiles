@@ -239,6 +239,7 @@ let g:ale_linters = {
       \ 'java': [],
       \ 'typescript': ['tslint'],
       \ 'ruby': ['rubocop'],
+      \ 'elixir': ['credo'],
       \ }
 " Turn linting errors into warnings
 let g:ale_type_map = {
