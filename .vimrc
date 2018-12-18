@@ -60,7 +60,7 @@ Plug 'tpope/vim-eunuch'
 set rtp+=/usr/local/opt/fzf
 Plug 'junegunn/fzf.vim'
 Plug 'tweekmonster/fzf-filemru'
-Plug 'dylan-chong/fzf_similar.vim'
+Plug 'dylan-chong/fzf_similar.vim', { 'branch': 'develop' }
 
 " Git
 Plug 'tpope/vim-fugitive'
