@@ -44,6 +44,11 @@ Plug 'chriskempson/base16-vim'
 " CTags
 Plug 'ludovicchabant/vim-gutentags'
 
+" NERDTree
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 " Ranger
 Plug 'francoiscabrol/ranger.vim'
 if has('nvim')
@@ -454,6 +459,12 @@ nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
 nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
 nnoremap <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
+
+" NERDTree
+let NERDTreeShowLineNumbers=1 " enable line numbers
+autocmd FileType nerdtree setlocal relativenumber
+let NERDTreeShowHidden=1
+let g:NERDTreeWinSize=45
 
 " Ranger
 let g:ranger_map_keys = 0
