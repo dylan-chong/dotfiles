@@ -46,7 +46,6 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Ranger
@@ -465,8 +464,8 @@ let NERDTreeShowLineNumbers=1 " enable line numbers
 autocmd FileType nerdtree setlocal relativenumber
 let NERDTreeShowHidden=1
 let g:NERDTreeWinSize=45
-let g:nerdtree_tabs_open_on_gui_startup = 0
-let g:nerdtree_tabs_open_on_console_startup = g:nerdtree_tabs_open_on_gui_startup
+let g:NERDTreeHijackNetrw = 0
+
 
 " Ranger
 let g:ranger_map_keys = 0
