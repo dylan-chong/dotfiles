@@ -118,6 +118,11 @@ function cr() {
     c "$LASTDIR"
 }
 
+function manbash() {
+    # https://unix.stackexchange.com/a/18092
+    man bash | less -p "^       $1 ";
+}
+
 # }}}
 
 
