@@ -322,7 +322,7 @@ export IGNOREEOF=1
 
 # https://unix.stackexchange.com/a/1292
 # Avoid duplicates
-export HISTCONTROL=ignoredups:erasedups
+export HISTCONTROL=ignoreboth:erasedups
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 # After each command, append to the history file and reread it
