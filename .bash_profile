@@ -123,6 +123,24 @@ function manbash() {
     man bash | less -p "^       $1 ";
 }
 
+function dowatch() {
+    # Runs the given command when files change in the current directory
+
+    # works
+    local command=$@
+    rg --files | entr -s "printf '\nFile change detected ...\n\n' && $command"
+
+    # works
+    # local command="$@"
+    # rg --files | entr -s "printf '\nFile change detected ...\n\n' && $command"
+
+    # no works
+    # rg --files | entr -s "printf '\nFile change detected ...\n\n' && $@"
+
+    # no works
+    # rg --files | entr -s "printf '\nFile change detected ...\n\n' && \"$@\""
+}
+
 # }}}
 
 
