@@ -338,6 +338,7 @@ export VISUAL=nvim
 # Prevent accidental logging out
 export IGNOREEOF=1
 
+# Share bash history between all shells
 # https://unix.stackexchange.com/a/1292
 # Avoid duplicates
 export HISTCONTROL=ignoreboth:erasedups
@@ -345,6 +346,10 @@ export HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
 # After each command, append to the history file and reread it
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+# Unlimited bash history
+HISTSIZE=9999999
+HISTFILESIZE=99999999
 
 # Load private stuff
 source ~/.bash_profile_private
