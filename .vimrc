@@ -636,11 +636,16 @@ nnoremap <Leader>Tm :tabm<Space>
 cnoremap <C-a> <C-b>
 
 " Location list window / make
+" (Also see 'Toggling options' for makeprg mappings)
 nnoremap <Leader>mm :lmake <Bar> lclose <Bar> lwindow<CR>
 nnoremap <Leader>mw :lwindow<CR>
 nnoremap <Leader>mn :lnext<CR>
 nnoremap <Leader>mN :lprevious<CR>
-" Also see 'Toggling options' for makeprg mappings
+" Quick fix window regions of above commands
+nnoremap <Leader>qm :make <Bar> cclose <Bar> cwindow<CR>
+nnoremap <Leader>qw :cwindow<CR>
+nnoremap <Leader>qn :cnext<CR>
+nnoremap <Leader>qN :cprevious<CR>
 
 " }}}
 
