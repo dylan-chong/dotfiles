@@ -328,6 +328,19 @@ if !has('idea')
   nmap <Leader>wo <Plug>(wintabs_only)
   nnoremap <Leader>wO :tabonly<Bar>call<Space>wintabs#only()<Bar>only
 
+  " Copied from https://github.com/zefei/vim-wintabs/issues/47#issuecomment-451717800
+  function! WintabsCloseRight()
+    call wintabs#refresh_buflist(0)
+    let buflist = copy(w:wintabs_buflist)
+    call filter(buflist, 'v:key > '.index(buflist, bufnr('%')))
+    " 'v:key < ' for all tabs to the left
+    for buffer in buflist
+      execute 'buffer! '.buffer
+      WintabsClose
+    endfor
+  endfunction
+  nnoremap <Leader>wc<Right> :call WintabsCloseRight()<CR>
+
   " Override q,q!,wq to avoid accidentally closing all of the buffers in the
   " tab
   function! SaveAndCloseCurrentBuffer()
