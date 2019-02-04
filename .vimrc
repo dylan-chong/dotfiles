@@ -504,6 +504,10 @@ endif
 " Splitting lines
 nnoremap <C-j> i<CR><ESC>
 
+" Emacs style moving to the end and start of line
+inoremap <C-a> <Esc>I
+inoremap <C-e> <Esc>A
+
 " Wrap paragraph
 nnoremap gqp gwip
 
