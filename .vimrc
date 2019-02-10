@@ -442,6 +442,7 @@ nnoremap <silent> <Leader>zm :Maps<CR>
 nnoremap <Leader>r :Rg<Space>
 nnoremap <Leader>R :Rg<Space><C-r><C-w>
 vnoremap <Leader>r "ry:Rg<Space><C-r>r
+vnoremap <Leader>R "ry:Rg<Space><C-r>r
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
       \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
@@ -573,8 +574,8 @@ au TabLeave * let g:lasttab = tabpagenr()
 " Toggling options
 nnoremap <leader>oa :set formatoptions+=a<CR>
 nnoremap <leader>oA :set formatoptions-=a<CR>
-nnoremap <leader>ow :set nowrap<CR>
-nnoremap <leader>oW :set wrap<CR>
+nnoremap <leader>ow :set wrap<CR>
+nnoremap <leader>oW :set nowrap<CR>
 nnoremap <leader>oF :set filetype=
 nnoremap <leader>ofp :set filetype=python<CR>
 nnoremap <leader>ofj :set filetype=javascript<CR>
