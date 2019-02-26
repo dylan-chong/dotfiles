@@ -231,10 +231,10 @@ export PKG_CONFIG_PATH='/usr/local/Cellar/imagemagick@6/6.9.8-10/lib/pkgconfig/'
 
 export EASYDOC_DIR=~/Dropbox/Programming/GitHub/easydoc
 
-# These were added as part of instructions for `brew install node@10`
-export PATH="/usr/local/opt/node@10/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/node@10/lib"
-export CPPFLAGS="-I/usr/local/opt/node@10/include"
+# These were added as part of instructions for `brew install node@8`
+export PATH="/usr/local/opt/node@8/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/node@8/lib"
+export CPPFLAGS="-I/usr/local/opt/node@8/include"
 
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
