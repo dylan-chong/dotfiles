@@ -413,7 +413,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_filemru_bufwrite = 1
 augroup custom_filemru
   autocmd!
-  autocmd BufWinEnter * UpdateMru
+  autocmd BufEnter * UpdateMru
 augroup END
 " An action can be a reference to a function that processes selected lines
 function! s:fzf_build_quickfix_list(lines)
@@ -526,6 +526,7 @@ nnoremap =p mz=ap`z
 " Whole file operatoins
 nnoremap yaf mzggVGy`z
 nnoremap daf mzggVGd`z
+nnoremap =af mzggVG=`z
 vnoremap af mzggoG$
 
 " Replace (a (local) variable name)
