@@ -599,7 +599,8 @@ endfunction
 nnoremap <Leader>% :call CopySingleLine(expand('%'))<Left><Left><Left>
 
 " File operations
-nnoremap <C-q> :wa<CR>
+nnoremap <C-q> :w<CR>
+nmap Q :wq<CR>
 nnoremap <C-c> :wqa
 autocmd CmdLineEnter : nunmap <C-c>
 autocmd CmdLineLeave : nnoremap <C-c> :wqa
