@@ -350,6 +350,14 @@ if !has('idea')
   call CommandCabbr('q', 'call wintabs#close()')
   call CommandCabbr('q!', 'call wintabs#close()')
   call CommandCabbr('wq', 'call SaveAndCloseCurrentBuffer()')
+
+  " Override enuch's Delete command to not close the current window, close the
+  " current win tab instead
+  function! DeleteCurrentFile()
+    call delete(expand('%'))
+    call wintabs#close()
+  endfunction
+  autocmd VimEnter * command! Delete call DeleteCurrentFile()
 endif
 " Show git commit file in tabline
 let g:wintabs_ignored_filetypes = []
