@@ -18,6 +18,9 @@ function! CommandCabbr(abbreviation, expansion)
         \. '"<CR>'
 endfunction
 
+" Disable vim-polyglot for certain filetypes
+let g:polyglot_disabled = ['liquid']
+
 " }}}
 
 
