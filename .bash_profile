@@ -126,7 +126,7 @@ function manbash() {
 function dowatch() {
     # Runs the given command when files change in the current directory
     local command=$@
-    rg --files | entr -s "printf '\nFile change detected ...\n\n' && $command"
+    rg --files | entr -s "printf '\n\n\n.......... File change detected ..........\n\n\n\n' && $command"
 }
 
 # }}}
