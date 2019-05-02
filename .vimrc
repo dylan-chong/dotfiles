@@ -207,7 +207,8 @@ set laststatus=2 " Always show status line
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('num_processes', 1) " Temporary workaround https://github.com/Shougo/deoplete.nvim/issues/761#issuecomment-389701983
+" TODO disabled for now cos high cpu usage when typing, cant remember why it was set to 1 cos haven't looked at this url
+" call deoplete#custom#option('num_processes', 1) " Temporary workaround https://github.com/Shougo/deoplete.nvim/issues/761#issuecomment-389701983
 
 " Nerd Commenter
 " let g:NERDDefaultAlign = 'start'
@@ -612,6 +613,7 @@ nnoremap <Leader>% :call CopySingleLine(expand('%'))<Left><Left><Left>
 
 " File operations
 nnoremap <C-q> :w<CR>
+inoremap <C-q> <Esc>:w<CR>
 nmap Q :wq<CR>
 nnoremap <C-c> :wqa
 autocmd CmdLineEnter : nunmap <C-c>
