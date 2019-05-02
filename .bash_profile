@@ -218,15 +218,6 @@ function gpr() {
 # Homes/Paths
 
 # {{{
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export PATH=$JAVA_HOME/bin:$PATH
-
-export ANDROID_HOME=/Users/Dylan/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/emulator
-
 export PKG_CONFIG_PATH='/usr/local/Cellar/imagemagick@6/6.9.8-10/lib/pkgconfig/'
 
 export EASYDOC_DIR=~/Dropbox/Programming/GitHub/easydoc
