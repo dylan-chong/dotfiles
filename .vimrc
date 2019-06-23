@@ -44,7 +44,7 @@ call plug#begin('~/.vim/plugged')
 " {
 
 " Themes
-Plug 'chriskempson/base16-vim'
+Plug 'danielwe/base16-vim'
 
 " CTags
 Plug 'ludovicchabant/vim-gutentags'
@@ -529,7 +529,7 @@ inoremap <C-a> <Esc>I
 inoremap <C-e> <Esc>A
 
 " Wrap paragraph
-nnoremap gqp gwip
+nnoremap gwp gwip
 
 " Save one keystroke when aligning code
 nnoremap =p mz=ap`z
