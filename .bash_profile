@@ -99,6 +99,7 @@ alias brewupgrade="echo 'Calling: brew upgrade' && \
 
 alias iex='rlwrap -a foo iex'
 alias kotlinc='rlwrap -a foo kotlinc'
+alias swipl='rlwrap -a foo swipl'
 
 alias soba="source ~/.bash_profile"
 
@@ -113,7 +114,7 @@ function fp() {
 }
 
 function cr() {
-    ranger --choosedir=$HOME/.rangerdir
+    ranger --choosedir=$HOME/.rangerdir $@
     local LASTDIR=`cat $HOME/.rangerdir`
     c "$LASTDIR"
 }
@@ -182,7 +183,7 @@ alias gdf="git diff"
 alias gdfc="git diff --cached"
 
 alias glg="git log --graph --decorate --topo-order"
-alias glgo="glg --format='%C(auto)%h%d %s %C(black)%C(bold)%cr'"
+alias glgo="glg --format='%C(auto)%h%d %s %C(white)%C(bold)%cr'"
 alias glga="glgo --all"
 alias glgad="glga --date-order"
 
@@ -233,6 +234,9 @@ export GOPATH="$HOME/go"
 export PATH=$GOPATH/bin:$PATH:/usr/local/opt/go/libexec/bin
 
 export PATH=/usr/local/anaconda3/bin:"$PATH"
+
+# Homebrew
+export PATH="/usr/local/sbin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 

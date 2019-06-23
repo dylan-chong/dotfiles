@@ -31,7 +31,7 @@ fbr() {
   }
 
   remove_duplicates() {
-    # https://stackoverflow.com/a/11532197/1726450https://stackoverflow.com/a/11532197/1726450
+    # https://stackoverflow.com/a/11532197/1726450
     cat - | awk '!x[$0]++'
   }
 
