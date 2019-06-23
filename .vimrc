@@ -19,7 +19,9 @@ function! CommandCabbr(abbreviation, expansion)
 endfunction
 
 " Disable vim-polyglot for certain filetypes
-let g:polyglot_disabled = ['liquid']
+" - Liquid thinks markdown pandoc files are liquid
+" - There is another plug in used for latex
+let g:polyglot_disabled = ['liquid', 'latex']
 
 " }}}
 
@@ -92,6 +94,8 @@ Plug 'godlygeek/tabular' " Space out code into tables
 
 " Language packs
 Plug 'sheerun/vim-polyglot'
+Plug 'mxw/vim-prolog'
+Plug 'lervag/vimtex'
 
 " Linting
 Plug 'w0rp/ale'
@@ -498,6 +502,9 @@ let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 1
 nnoremap <leader>n :Ranger<cr>
 
+" Vimtex
+let g:tex_flavor = "latex"
+
 " }}}
 
 
@@ -794,7 +801,7 @@ set lazyredraw
 " Spelling
 setglobal spelllang=en_nz
 set dictionary+=/usr/share/dict/words
-autocmd FileType markdown,text,bib,latex,plaintex setlocal spell
+autocmd FileType markdown,text,bib,latex,tex setlocal spell
 
 " Export plantuml
 function! g:PlantUMLSave()
