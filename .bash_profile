@@ -328,7 +328,14 @@ export HISTCONTROL=ignoreboth:erasedups
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 # After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+prune_bash_history_duplicates() {
+    local history_file="$HOME/.bash_history"
+    # Reverse, then remove duplicates, then reverse again so that recent
+    # history items are placed at the end of the file
+    local unique_history_lines=`cat $history_file | tac | awk '!x[$0]++' | tac`
+    echo "$unique_history_lines" > $history_file
+}
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; prune_bash_history_duplicates; history -r"
 
 # Unlimited bash history
 HISTSIZE=9999999
