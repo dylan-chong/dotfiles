@@ -44,6 +44,11 @@ fbr() {
   printf "$combined_list" | remove_duplicates | fzf
 }
 
+__fzf_history__() {
+  # Overrides fzf history function: Show history without duplicates
+  history | perl -pe 's/ *[0-9]*\*? *//' | tac | awk '!x[$0]++' | fzf +s
+}
+
 # Various Settings
 # ---------------
 # Respect gitignore
