@@ -3,6 +3,8 @@ source ~/.vimrc
 " Surround plugin
 set surround
 
+" Something to do with pasting with ide
+set clipboard+=ideaput
 
 " Remap mappings to intellij equivalents
 " {{{
@@ -46,7 +48,7 @@ nnoremap g<Right> gt
 
 " Replace
 " \< doesnt work in ideavim
-vnoremap <C-r> :s/\C\V<C-r>x\>/
+vnoremap <C-r> :s/\C\V\_<Backspace>\<<C-r>x\>/
 
 " Unmap jump to definition mapping
 nnoremap <C-]> <C-]>

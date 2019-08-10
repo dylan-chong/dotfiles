@@ -307,7 +307,6 @@ let g:vim_markdown_new_list_item_indent = 0
 nnoremap <Leader>gcm :wa<CR>:Gcommit -v
 nnoremap <Leader>gap :wa<CR>:Git add -p<CR>i
 nnoremap <Leader>gdf :wa<CR>:Git diff<CR>i
-nnoremap <Leader>gs :wa<CR>:Git status<CR>i
 nnoremap <Leader>gph :wa<CR>:Gpush<Space>
 nnoremap <Leader>gpl :wa<CR>:Gpull<Space>
 nnoremap <Leader>gb :wa<CR>:Gblame<CR>
@@ -574,6 +573,8 @@ vmap <leader>i<C-j> <ESC><Right><C-j>gvo<ESC><C-j>
 vmap <leader>i<CR> <leader>i<C-j>V<leader>i,
 " Same as above, but selects automatically
 nmap <leader>i<CR> v%<Right>o%%<Left><leader>i<CR>
+" Same as above, but doesn't split by comma
+nmap <leader>i<C-j> v%<Right>o%%<Left><leader>i<C-j>
 " Split line into multiple lines by '.'
 vnoremap <leader>i. :s/\./\r\.<CR><ESC>mz=ap`z
 " }}}
@@ -749,6 +750,8 @@ set backspace=2
 
 " Odd filetypes/extensions
 au BufRead,BufNewFile *.js.applescript set filetype=javascript
+au BufRead,BufNewFile *.L42 set filetype=L42
+au FileType L42 setlocal nocindent nosmartindent indentexpr=
 
 " Markdown bullet indenting
 set autoindent

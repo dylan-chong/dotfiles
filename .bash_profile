@@ -243,6 +243,8 @@ export PATH=$GOPATH/bin:$PATH:/usr/local/opt/go/libexec/bin
 
 export PATH=/usr/local/anaconda3/bin:"$PATH"
 
+export PATH_TO_FX=/Users/Dylan/Downloads/javafx-sdk-11.0.2/
+
 # Homebrew
 export PATH="/usr/local/sbin:$PATH"
 
