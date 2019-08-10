@@ -32,6 +32,7 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 alias godesk="cl ~/Desktop"
 alias gocrap="cl ~/Desktop/crap"
 alias godown="cl ~/Downloads"
+alias godrop="cl ~/Dropbox"
 
 alias gogit="cl ~/Dropbox/Programming/GitHub"
 alias godev="cl ~/Development/"
@@ -130,6 +131,10 @@ function dowatch() {
     rg --files | entr -s "printf '\n\n\n.......... File change detected ..........\n\n\n\n' && $command"
 }
 
+function notifydone() {
+    osascript -e 'display notification "Done!"'
+}
+
 # }}}
 
 
@@ -188,6 +193,9 @@ alias glga="glgo --all"
 alias glgad="glga --date-order"
 
 alias gsh="git stash"
+
+# List untracked files
+alias glsu="git ls-files --others --exclude-standard"
 
 function gpr() {
     # Goes to the URL for creating a new pull request in the browser. For
