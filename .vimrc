@@ -445,6 +445,7 @@ nnoremap <silent> <Leader>f :call fzf#vim#files('', fzf#vim#with_preview('right'
 nnoremap <silent> <Leader>F :ProjectMru --tiebreak=end<cr>
 nnoremap <silent> <Leader><C-f>1 :call fzf_similar#find_similar_files()<CR>
 nnoremap <silent> <Leader><C-f>2 :call fzf_similar#find_similarly_named_files()<CR>
+nnoremap <silent> <Leader><C-f>3 :call fzf_similar#find_files_in_the_same_directory()<CR>
 nnoremap <silent> <Leader>zg :GFiles?<CR>
 nnoremap <silent> <Leader>zc :Commands<CR>
 nnoremap <silent> <Leader>zb :Buffers<CR>
