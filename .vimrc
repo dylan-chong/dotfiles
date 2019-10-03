@@ -758,7 +758,7 @@ set backspace=2
 " Odd filetypes/extensions
 au BufRead,BufNewFile *.js.applescript set filetype=javascript
 au BufRead,BufNewFile *.L42 set filetype=L42
-au FileType L42 setlocal nocindent nosmartindent indentexpr=
+au FileType L42 setlocal nocindent nosmartindent indentexpr= syntax=swift
 
 " Markdown bullet indenting
 set autoindent
