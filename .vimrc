@@ -281,8 +281,8 @@ let g:better_whitespace_enabled = 0
 
 " Git Gutter
 set updatetime=300
-nmap [h <Plug>GitGutterPrevHunk
-nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
 
 " PlantUML Previewer
 augroup plantuml_previewer_config
