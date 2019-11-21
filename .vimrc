@@ -283,6 +283,7 @@ let g:better_whitespace_enabled = 0
 set updatetime=300
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
+let g:gitgutter_preview_win_floating = 0
 
 " PlantUML Previewer
 augroup plantuml_previewer_config
@@ -529,7 +530,7 @@ inoremap <C-a> <Esc>I
 inoremap <C-e> <Esc>A
 
 " Wrap paragraph
-nnoremap gwp gwip
+nnoremap gwp gwip^
 
 " Save one keystroke when aligning code
 nnoremap =p mz=ap`z
