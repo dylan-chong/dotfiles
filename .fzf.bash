@@ -46,7 +46,7 @@ fbr() {
 
 __fzf_history__() {
   # Overrides fzf history function: Show history without duplicates
-  history | perl -pe 's/ *[0-9]*\*? *//' | tac | awk '!x[$0]++' | fzf +s
+  history | perl -pe 's/ *[0-9]*\*? *//' | tac | awk '!x[$0]++' | fzf --no-sort --query="'"
 }
 
 # Various Settings
