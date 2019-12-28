@@ -209,10 +209,10 @@ function gpr() {
         local url="$base/pull/`current_branch`"
     fi
     case $1 in
-        safari|s)
+        --safari|-s)
             open -a 'Safari' $url
             ;;
-        chrome|g|c)
+        --chrome|-g|-c)
             open -a 'Google Chrome' $url
             ;;
         *)
