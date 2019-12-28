@@ -22,7 +22,7 @@ fbr() {
   local locals combined_list remotes remotes_no_remote_name_prefix
 
   trim_leading_star_and_spaces() {
-    cat - | perl -pe 's/^\s*\*?\s*//'
+    cat - | perl -pe 's/^\s*\*?\+?\s*//'
   }
 
   remove_head_arrow() {

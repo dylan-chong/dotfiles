@@ -64,6 +64,7 @@ Plug 'nhuizing/vim-easygrep', {
       \ 'branch': 'feature/bugfix_git_grep'
       \ }
 Plug 'tpope/vim-eunuch'
+Plug 'ronakg/quickr-preview.vim'
 
 " FZF
 set rtp+=/usr/local/opt/fzf
@@ -115,7 +116,8 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'slashmili/alchemist.vim' " Elixir
+" Alchemist is broken
+" Plug 'slashmili/alchemist.vim' " Elixir
 
 " Lilypond
 Plug 'gisraptor/vim-lilypond-integrator'
@@ -183,6 +185,9 @@ hi ColorColumn ctermbg=52
 " Highlight only if there is a character on the column
 cal matchadd('ColorColumn', '\%81v', 100)
 
+" vim-illuminate
+hi illuminatedWord ctermbg=15 guibg=#3B4750
+
 " }}}
 
 
@@ -227,6 +232,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " Alchemist
 let g:alchemist#elixir_erlang_src = '~/.elixir-completion/'
+" let g:alchemist_tag_disable = 0 " It is broken at the moment
 
 " AutoPairs
 let g:AutoPairsMapSpace = 1
@@ -249,20 +255,22 @@ let g:ale_sign_column_always = 0
 let g:ale_completion_delay = 500
 let g:ale_linters = {
       \ 'java': [],
-      \ 'typescript': ['tslint'],
+      \ 'typescript': ['eslint'],
       \ 'ruby': ['rubocop'],
-      \ 'elixir': ['credo'],
+      \ 'elixir': ['mix', 'credo'],
       \ }
 " Turn linting errors into warnings
 let g:ale_type_map = {
-      \ 'tslint': {'ES': 'WS', 'E': 'W'},
+      \ 'eslint': {'ES': 'WS', 'E': 'W'},
       \ 'credo': {'ES': 'WS', 'E': 'W'}
       \ }
 let g:ale_fixers = {
-      \ 'typescript': ['tslint'],
+      \ 'typescript': ['eslint'],
+      \ 'typescriptreact': ['eslint', 'tslint'],
       \ 'javascript': ['eslint'],
       \ 'python': ['autopep8'],
       \ 'ruby': ['rubocop'],
+      \ 'elixir': ['mix_format'],
       \ }
 let g:ale_typescript_tslint_use_global = 0
 let g:ale_elixir_credo_use_global = 0
@@ -310,7 +318,7 @@ nnoremap <Leader>gap :wa<CR>:Git add -p<CR>i
 nnoremap <Leader>gdf :wa<CR>:Git diff<CR>i
 nnoremap <Leader>gph :wa<CR>:Gpush<Space>
 nnoremap <Leader>gpl :wa<CR>:Gpull<Space>
-nnoremap <Leader>gb :wa<CR>:Gblame<CR>
+nnoremap <Leader>gb :w<CR>:Gblame<CR>
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
@@ -412,7 +420,7 @@ augroup END
 " Gutentags
 " rg respects gitignore files. This command also filters out certain file types
 " that we do not want tags for
-let g:gutentags_file_list_command = "rg -l '.' | rg -v '(json|plist)$'"
+let g:gutentags_file_list_command = "rg -l '.' | rg -v '(md|json|plist)$'"
 let g:gutentags_define_advanced_commands = 1
 
 " FZF
@@ -585,9 +593,10 @@ vnoremap <leader>i. :s/\./\r\.<CR><ESC>mz=ap`z
 vnoremap < <gv
 vnoremap > >gv
 
-" Duplicate buffer in new tab
-nnoremap <C-w>d <C-w>s<C-w>T
-nmap <C-w>D <C-w>d:tabm-<CR>
+" Move buffers into splits
+" Doesn't work - probably due to race condition? :(
+" nnoremap g<C-w>s <C-w>s<C-w><C-p>:q<CR><C-w><C-p>
+" nnoremap g<C-w>v <C-w>v<C-w><C-p>:q<CR><C-w><C-p>
 
 " Switch to last tab
 let g:lasttab = 1
@@ -625,9 +634,14 @@ nnoremap <Leader>% :call CopySingleLine(expand('%'))<Left><Left><Left>
 nnoremap <C-q> :w<CR>
 inoremap <C-q> <Esc>:w<CR>
 nmap Q :wq<CR>
+
+" C-c to exit
 nnoremap <C-c> :wqa
-autocmd CmdLineEnter : nunmap <C-c>
-autocmd CmdLineLeave : nnoremap <C-c> :wqa
+augroup control_c_to_exit
+  autocmd!
+  autocmd CmdLineEnter : nunmap <C-c>
+  autocmd CmdLineLeave : nnoremap <C-c> :wqa
+augroup END
 
 " Change case of first letter of current word in insert mode
 inoremap <C-b>b <Esc>mzviwo<Esc>~`za
@@ -674,6 +688,10 @@ nnoremap <Leader>Tc :tabclose<CR>
 nnoremap <Leader>To :tabonly<CR>
 nnoremap <Leader>Tm :tabm<Space>
 
+" Duplicate buffer in new tab
+nnoremap <Leader>Td <C-w>s<C-w>T
+nmap <Leader>TD <C-w>d:tabm-<CR>
+
 " Goto start of line in command mode (make going to the end and start of lines
 " consistent with terminal emacs shortcuts)
 cnoremap <C-a> <C-b>
@@ -689,6 +707,12 @@ nnoremap <Leader>qm :make <Bar> cclose <Bar> cwindow<CR>
 nnoremap <Leader>qw :cwindow<CR>
 nnoremap <Leader>qn :cnext<CR>
 nnoremap <Leader>qN :cprevious<CR>
+
+" Yank as one line
+vmap gy JgVyu
+
+" Don't clear clipboard when pressing S
+nnoremap S "zS
 
 " }}}
 
@@ -869,5 +893,8 @@ set splitbelow
 
 " Get ruby host
 let g:ruby_host_prog = substitute(system('echo `gem environment gemdir`"/bin/neovim-ruby-host"'), '\n', '', 'g')
+
+" Better display for messages
+set cmdheight=2
 
 " }}}

@@ -316,8 +316,8 @@ alias vi="nvim"
 alias rm="rmtrash"
 
 # Max line length when searching
-alias ag="ag -W 100"
-alias rg="rg -M 100 --smart-case"
+alias ag="ag -W 200"
+alias rg="rg -M 200 --smart-case"
 
 # Tmux Count Panes
 alias tmuxcount="tmux list-windows -a \
