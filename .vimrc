@@ -807,19 +807,21 @@ set scrolloff=4
 set sidescrolloff=4
 
 " Mouse scrolling speed
-map <ScrollWheelUp> <C-Y><C-Y>
-map <ScrollWheelDown> <C-E><C-E>
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
 " Modified version of
 " https://github.com/neovim/neovim/issues/6211#issuecomment-537344220
-noremap <2-ScrollWheelUp> <Nop>
-noremap <3-ScrollWheelUp> <Nop>
+noremap <2-ScrollWheelUp> <C-Y><C-Y>
+noremap <3-ScrollWheelUp> <C-Y><C-Y><C-Y>
 noremap <4-ScrollWheelUp> <Nop>
-noremap <2-ScrollWheelDown> <Nop>
-noremap <3-ScrollWheelDown> <Nop>
+noremap <2-ScrollWheelDown> <C-E><C-E>
+noremap <3-ScrollWheelDown> <C-E><C-E><C-E>
 noremap <4-ScrollWheelDown> <Nop>
 
 " Text width
 set textwidth=79
+autocmd FileType elixir
+      \ setlocal textwidth=98
 
 " Don't wrap on typing
 set formatoptions-=t
