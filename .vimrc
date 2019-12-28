@@ -102,10 +102,13 @@ Plug 'lervag/vimtex'
 Plug 'w0rp/ale'
 
 " LSP
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
+" Language client is not really well maintained
+" Plug 'autozimu/LanguageClient-neovim', {
+      " \ 'branch': 'next',
+      " \ 'do': 'bash install.sh',
+      " \ }
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release', 'on': [] }
 
 " Completion
 Plug 'ervandew/supertab'
@@ -116,8 +119,6 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-" Alchemist is broken
-" Plug 'slashmili/alchemist.vim' " Elixir
 
 " Lilypond
 Plug 'gisraptor/vim-lilypond-integrator'
@@ -484,19 +485,20 @@ let g:codi#width = 70
 let g:wstrip_auto = 1
 
 " LanguageClient neovim
-set hidden " Required for operations modifying multiple buffers like rename.
-let g:LanguageClient_serverCommands = {
-      \ 'typescript': ['typescript-language-server', '--stdio'],
-      \ }
-let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
-let g:LanguageClient_loggingLevel = 'INFO'
-let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
-let g:LanguageClient_windowLogMessageLevel = 'Error'
-let g:LanguageClient_diagnosticsList = 'Disabled'
-nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
-nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
-nnoremap <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
-nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
+" set hidden " Required for operations modifying multiple buffers like rename.
+" let g:LanguageClient_serverCommands = {
+      " \ 'typescript': ['typescript-language-server', '--stdio'],
+      " \ 'typescriptreact': ['typescript-language-server', '--stdio'],
+      " \ }
+" let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
+" let g:LanguageClient_loggingLevel = 'INFO'
+" let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
+" let g:LanguageClient_windowLogMessageLevel = 'Error'
+" let g:LanguageClient_diagnosticsList = 'Disabled'
+" nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
+" nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
+" nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
 
 " NERDTree
 let NERDTreeShowLineNumbers=1 " enable line numbers
@@ -514,6 +516,72 @@ nnoremap <leader>n :Ranger<cr>
 " Vimtex
 let g:tex_flavor = "latex"
 
+" JDaddy (json)
+" TODO cant call it yet
+function! PrettifyJson()
+  call wintabs#close()
+  normal gqaj
+endfunction
+call CommandCabbr('PrettifyJson', 'call PrettifyJson()')
+
+" quickr-preview.vim
+let g:quickr_preview_on_cursor = 1
+
+" coc.nvim
+function! s:init_coc()
+  call plug#load('coc.nvim')
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " if hidden is not set, TextEdit might fail.
+  set hidden
+  " Use <c-space> to trigger completion.
+  inoremap <silent><expr> <c-space> coc#refresh()
+  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+  " Coc only does snippet and additional edit on confirm.
+  " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  " Use `[g` and `]g` to navigate diagnostics
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+  " Use K to show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+  " Use `:Format` to format current buffer
+  command! -nargs=0 Format :call CocAction('format')
+  " use `:OR` for organize import of current buffer
+  command! -nargs=0 OrganiseImport :call CocAction('runCommand', 'editor.action.organizeImport')
+  " Remap keys for gotos
+  nmap <silent> <leader>ld <Plug>(coc-definition)
+  nmap <silent> <leader>lD <Plug>(coc-type-definition)
+  nmap <silent> <leader>li <Plug>(coc-implementation)
+  nmap <silent> <leader>lr <Plug>(coc-references)
+  " Using CocList
+  " Show all diagnostics
+  nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
+  " Show commands
+  nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
+  " Find symbol of current document
+  nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
+  " Search workspace symbols
+  nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
+  " Do default action for next item.
+  nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
+  " Do default action for previous item.
+  nnoremap <silent> <leader>lk  :<C-u>CocPrev<CR>
+  " Resume latest coc list
+  nnoremap <silent> <leader>lp  :<C-u>CocListResume<CR>
+  " Work with monorepos
+  " Disable automatic detection of projects
+  let g:coc_root_patterns = ['.vim']
+  autocmd FileType * let b:coc_root_patterns = g:coc_root_patterns
+  " let g:WorkspaceFolders = ['/Users/Dylan/Development/solve/solvedata/solve/api/src/']
+endfunction
+autocmd! InsertEnter * call <SID>init_coc()
 " }}}
 
 
