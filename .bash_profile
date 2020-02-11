@@ -135,6 +135,17 @@ function notifydone() {
     osascript -e 'display notification "Done!"'
 }
 
+function spotdl-playlist() {
+    mkdir spotdl-playlist && \
+        cd spotdl-playlist && \
+        spotdl --playlist $1 && \
+        spotdl --output-ext .m4a --list downloaded-* --search-format '{artist} - {track_name}' --folder `pwd`
+}
+
+function youtube-dl-song() {
+    youtube-dl --extract-audio --audio-format m4a --embed-thumbnail $@
+}
+
 # }}}
 
 
