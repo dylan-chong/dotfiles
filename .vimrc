@@ -92,6 +92,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular' " Space out code into tables
+Plug 'PeterRincker/vim-argumentative'
 
 " Language packs
 Plug 'sheerun/vim-polyglot'
@@ -356,6 +357,8 @@ if !has('idea')
       WintabsClose
     endfor
   endfunction
+  call CommandCabbr('WintabsCloseRight', 'call WintabsCloseRight()')
+  nnoremap <Leader>wcl :call WintabsCloseRight()<CR>
   nnoremap <Leader>wc<Right> :call WintabsCloseRight()<CR>
 
   " Override q,q!,wq to avoid accidentally closing all of the buffers in the
@@ -479,6 +482,12 @@ cnoreabbrev rg Rg
 " Codi
 let g:codi#rightalign = 0
 let g:codi#width = 70
+let g:codi#interpreters = {
+      \   'python': {
+      \     'bin': 'python3',
+      \     'prompt': '^\(>>>\|\.\.\.\) ',
+      \   }
+      \ }
 
 " WStrip
 " Globally enabled for all filetypes
@@ -528,7 +537,12 @@ call CommandCabbr('PrettifyJson', 'call PrettifyJson()')
 let g:quickr_preview_on_cursor = 1
 
 " coc.nvim
+let g:has_initialised_coc = 0
 function! s:init_coc()
+  if g:has_initialised_coc
+    return
+  endif
+  let g:has_initialised_coc = 1
   call plug#load('coc.nvim')
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -561,10 +575,12 @@ function! s:init_coc()
   nmap <silent> <leader>li <Plug>(coc-implementation)
   nmap <silent> <leader>lr <Plug>(coc-references)
   " Using CocList
-  " Show all diagnostics
-  nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
+  " Show all actions
+  nnoremap <silent> <leader>la  :<C-u>CocList actions<cr>
   " Show commands
   nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
+  " Show list
+  nnoremap <silent> <leader>ll  :<C-u>CocList<cr>
   " Find symbol of current document
   nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
   " Search workspace symbols
@@ -820,7 +836,7 @@ noremap <4-ScrollWheelDown> <Nop>
 
 " Text width
 set textwidth=79
-autocmd FileType elixir
+autocmd FileType elixir,typescript
       \ setlocal textwidth=98
 
 " Don't wrap on typing
