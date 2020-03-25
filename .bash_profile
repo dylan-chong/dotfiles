@@ -246,6 +246,11 @@ export EASYDOC_DIR=~/Dropbox/Programming/GitHub/easydoc
 # export PATH="/usr/local/opt/node@8/bin:$PATH"
 # export LDFLAGS="-L/usr/local/opt/node@8/lib"
 # export CPPFLAGS="-I/usr/local/opt/node@8/include"
+function node8() {
+    export PATH="/usr/local/opt/node@8/bin:$PATH";
+    export LDFLAGS="-L/usr/local/opt/node@8/lib";
+    export CPPFLAGS="-I/usr/local/opt/node@8/include";
+}
 
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 

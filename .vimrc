@@ -60,11 +60,8 @@ if has('nvim')
 endif
 
 " File-related stuff
-Plug 'nhuizing/vim-easygrep', {
-      \ 'branch': 'feature/bugfix_git_grep'
-      \ }
+Plug 'brooth/far.vim'
 Plug 'tpope/vim-eunuch'
-Plug 'ronakg/quickr-preview.vim'
 
 " FZF
 set rtp+=/usr/local/opt/fzf
@@ -154,6 +151,7 @@ Plug 'tpope/vim-abolish' " 3 unrelated plugins
 if !has('nvim')
   Plug 'wincent/terminus' " Improve cursor look, mouse support, focus reporting
 endif
+Plug 'junegunn/vim-peekaboo' " Show register contents
 
 " Text objects
 Plug 'kana/vim-textobj-user'
@@ -197,11 +195,11 @@ hi illuminatedWord ctermbg=15 guibg=#3B4750
 " Plugin Config
 " {{{
 
-" EasyGrep
-let g:EasyGrepJumpToMatch = 0
-let g:EasyGrepRecursive = 1
-let g:EasyGrepCommand = 'git'
-let g:EasyGrepReplaceWindowMode = 2
+" Far.vim
+let g:far#source = 'rgnvim'
+let g:far#debug = 1
+nnoremap <Leader>vr "xyiw:Far <C-r>x<Space><Space>*<Left><Left>
+vnoremap <Leader>vr "xy:Far <C-r>x<Space><Space>*<Left><Left>
 
 " Vim Airline Plugin
 let g:airline_detect_modified=0
@@ -217,7 +215,8 @@ set laststatus=2 " Always show status line
 " Deoplete
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1 " TODO disabled while I try out coc.nvim
+let g:deoplete#enable_at_startup = 0
 " TODO disabled for now cos high cpu usage when typing, cant remember why it was set to 1 cos haven't looked at this url
 " call deoplete#custom#option('num_processes', 1) " Temporary workaround https://github.com/Shougo/deoplete.nvim/issues/761#issuecomment-389701983
 
@@ -533,9 +532,6 @@ function! PrettifyJson()
 endfunction
 call CommandCabbr('PrettifyJson', 'call PrettifyJson()')
 
-" quickr-preview.vim
-let g:quickr_preview_on_cursor = 1
-
 " coc.nvim
 let g:has_initialised_coc = 0
 function! s:init_coc()
@@ -577,6 +573,8 @@ function! s:init_coc()
   " Using CocList
   " Show all actions
   nnoremap <silent> <leader>la  :<C-u>CocList actions<cr>
+  " Show all errors
+  nnoremap <silent> <leader>le  :<C-u>CocList diagnostics<cr>
   " Show commands
   nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
   " Show list
@@ -598,6 +596,9 @@ function! s:init_coc()
   " let g:WorkspaceFolders = ['/Users/Dylan/Development/solve/solvedata/solve/api/src/']
 endfunction
 autocmd! InsertEnter * call <SID>init_coc()
+
+" vim-peekaboo
+let g:peekaboo_window = 'vert bo new'
 " }}}
 
 
@@ -768,7 +769,7 @@ nnoremap <silent> <C-\> :tag<CR>
 
 " Tab
 nnoremap <Leader>Tn :tabnew<Space>
-nnoremap <Leader>Tc :tabclose<CR>
+nnoremap <Leader>Tc :tabclose
 nnoremap <Leader>To :tabonly<CR>
 nnoremap <Leader>Tm :tabm<Space>
 
@@ -797,6 +798,22 @@ vmap gy JgVyu
 
 " Don't clear clipboard when pressing S
 nnoremap S "zS
+
+" Turn function call into a pipe (mostly)
+nmap <Leader>t<Bar> ^f(vi,"xdBi<Bar>><Space><Esc>:s/\(<Bar>><Space>[a-zA-Z0-9._]\+\)(,\s\?/\1(/e<CR>O<C-r>x<Esc>
+" Cut first argument: ^f(vi,"xd
+" Insert pipe operator at start of line: I<Bar>><Space><Esc>
+" Replace (, with ( if it is present: :s/\(<Bar>><Space>[a-zA-Z0-9._]\+\)(,\?\s\?/\1(<CR>
+" Paste argument above O<C-r>x<Esc>
+
+" Turn a pipe call into not a pipe call
+nmap <Leader>t( kgV"xddddwf("xpa,<Space><Esc>^:s/, )$/)/e<CR>j
+" Cut the contents of the line above and then delete the entire line: kgV"xddd
+" Delete the pipe and move cursor: dwf(
+" Paste the contents of the line we deleted: "xp
+" Add comma to separate arguments: ,<Space><Esc>
+" Remove the comma if it's unnecessary: ^:s/, )$/)/e
+" Move the cursor into the right place to run the macro again: <CR>j
 
 " }}}
 

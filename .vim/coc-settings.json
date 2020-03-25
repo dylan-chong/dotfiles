@@ -1,3 +1,7 @@
 {
-  "coc.preferences.rootPatterns": []
+  "coc.preferences.rootPatterns": [],
+  "diagnostic.maxWindowHeight": 24,
+  "signature.maxWindowHeight": 24,
+  "list.maxHeight": 24,
+  "elixirLS.dialyzerEnabled": false
 }
