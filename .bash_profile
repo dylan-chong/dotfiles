@@ -98,7 +98,8 @@ alias brewupgrade="echo 'Calling: brew upgrade' && \
     echo 'Calling: brew cleanup' && \
     brew cleanup"
 
-alias iex='rlwrap -a foo iex'
+# alias iex='rlwrap -a foo iex'
+alias iex='iex --erl "-kernel shell_history enabled"'
 alias kotlinc='rlwrap -a foo kotlinc'
 alias swipl='rlwrap -a foo swipl'
 
@@ -139,11 +140,20 @@ function spotdl-playlist() {
     mkdir spotdl-playlist && \
         cd spotdl-playlist && \
         spotdl --playlist $1 && \
-        spotdl --output-ext .m4a --list downloaded-* --search-format '{artist} - {track_name}' --folder `pwd`
+        spotdl --output-ext m4a --list downloaded-* --search-format '{artist} - {track-name}'
 }
 
-function youtube-dl-song() {
-    youtube-dl --extract-audio --audio-format m4a --embed-thumbnail $@
+# use `spotdl -s 'artist - title'` instead
+# function youtube-dl-song() {
+    # youtube-dl --extract-audio --audio-format m4a --embed-thumbnail $@
+# }
+
+function youtube-dl-audio-quick() {
+    youtube-dl --extract-audio $@
+}
+
+function elixir_recompile() {
+    mix deps.clean $1 && mix deps.get && mix deps.compile $1
 }
 
 # }}}
@@ -190,8 +200,7 @@ git_prune_branches() {
 alias gcm="git commit -v"
 alias gap="git add -p"
 alias gaa="git add -A"
-# "Git add (without) whitespace"
-alias gaw="git diff -w --no-color | git apply --cached --ignore-whitespace"
+alias gan="git add -N ."
 
 alias grth="git reset --hard"
 
@@ -242,17 +251,6 @@ export PKG_CONFIG_PATH='/usr/local/Cellar/imagemagick@6/6.9.8-10/lib/pkgconfig/'
 
 export EASYDOC_DIR=~/Dropbox/Programming/GitHub/easydoc
 
-# These were added as part of instructions for `brew install node@8`
-# export PATH="/usr/local/opt/node@8/bin:$PATH"
-# export LDFLAGS="-L/usr/local/opt/node@8/lib"
-# export CPPFLAGS="-I/usr/local/opt/node@8/include"
-function node8() {
-    export PATH="/usr/local/opt/node@8/bin:$PATH";
-    export LDFLAGS="-L/usr/local/opt/node@8/lib";
-    export CPPFLAGS="-I/usr/local/opt/node@8/include";
-}
-
-export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
 export GOPATH="$HOME/go"
 export PATH=$GOPATH/bin:$PATH:/usr/local/opt/go/libexec/bin
@@ -264,7 +262,13 @@ export PATH_TO_FX=/Users/Dylan/Downloads/javafx-sdk-11.0.2/
 # Homebrew
 export PATH="/usr/local/sbin:$PATH"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# NVM TODO replace with asdf sometime?
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# ASDF
+. $(brew --prefix asdf)/asdf.sh
 
 # }}}
 
@@ -320,6 +324,8 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 # Setting PATH for Python 2.7
 # The orginal version is saved in .bash_profile.pysave
 export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+export PATH="/Users/Dylan/Library/Python/3.8/bin:${PATH}"
+
 
 # Git Completion
 source ~/.git-completion.bash
@@ -340,6 +346,11 @@ alias tmuxcount="tmux list-windows -a \
     | egrep -v DUP \
     | perl -pe 's/.*(\\d) panes.*/\\1/' \
     | perl -lne '\$x += \$_; END { print \$x; }'"
+
+# Configure Less
+function less() {
+    `which less` -NS
+}
 
 # v to open nvim in less
 export VISUAL=nvim
