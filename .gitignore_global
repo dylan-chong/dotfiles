@@ -6,7 +6,6 @@ tags.lock
 tags.temp
 .notags
 
-.nvmrc
 .envrc
 
 Session.vim

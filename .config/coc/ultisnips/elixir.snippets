@@ -24,6 +24,10 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-snippet in "Description" w
+snippet ioinspect "Inspect the value"
 |> IO.inspect(label: "_____________________________ #{__MODULE__} AAAAAAAAAAAAAAAAA")
+endsnippet
+
+snippet prydebugger "Pry"
+require IEx; IEx.pry()
 endsnippet
