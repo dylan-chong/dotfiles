@@ -22,6 +22,7 @@ endfunction
 " - Liquid thinks markdown pandoc files are liquid
 " - There is another plug in used for latex
 let g:polyglot_disabled = ['liquid', 'latex']
+let g:vim_markdown_conceal = 0
 
 " }}}
 
@@ -109,14 +110,15 @@ Plug 'w0rp/ale'
 Plug 'neoclide/coc.nvim', { 'branch': 'release', 'on': [] }
 
 " Completion
-Plug 'ervandew/supertab'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" TODO remove all these plugins
+" Plug 'ervandew/supertab' " Disabled because of coc
+" if has('nvim')
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+  " Plug 'Shougo/deoplete.nvim'
+  " Plug 'roxma/nvim-yarp'
+  " Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
 " Lilypond
 Plug 'gisraptor/vim-lilypond-integrator'
@@ -152,10 +154,13 @@ if !has('nvim')
   Plug 'wincent/terminus' " Improve cursor look, mouse support, focus reporting
 endif
 Plug 'junegunn/vim-peekaboo' " Show register contents
+Plug 'chiedo/vim-case-convert'
+Plug 'Yggdroot/indentLine' " Show indenting columns
 
 " Text objects
 Plug 'kana/vim-textobj-user'
 Plug 'andyl/vim-textobj-elixir'
+Plug 'Julian/vim-textobj-variable-segment'
 
 " }
 
@@ -229,7 +234,7 @@ nmap gc <leader>c<space>
 vmap gc <leader>c<space>
 
 " Supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " Alchemist
 let g:alchemist#elixir_erlang_src = '~/.elixir-completion/'
@@ -356,7 +361,7 @@ if !has('idea')
       WintabsClose
     endfor
   endfunction
-  call CommandCabbr('WintabsCloseRight', 'call WintabsCloseRight()')
+  :command WintabsCloseRight call WintabsCloseRight()
   nnoremap <Leader>wcl :call WintabsCloseRight()<CR>
   nnoremap <Leader>wc<Right> :call WintabsCloseRight()<CR>
 
@@ -404,6 +409,19 @@ let g:wintabs_powerline_sep_buffer = ''
 let g:wintabs_powerline_sep_tab = ''
 " Reinitialise when reloading vimrc to make it look right
 call wintabs_powerline#init()
+function! TabCloseRight(bang)
+    let cur=tabpagenr()
+    while cur < tabpagenr('$')
+        exe 'tabclose' . a:bang . ' ' . (cur + 1)
+    endwhile
+endfunction
+function! TabCloseLeft(bang)
+    while tabpagenr() > 1
+        exe 'tabclose' . a:bang . ' 1'
+    endwhile
+endfunction
+command! -bang TabCloseRight call TabCloseRight('<bang>')
+command! -bang TabCloseLeft call TabCloseLeft('<bang>')
 
 " Vim Session
 " Settings to get it to work like vim-obsession (save session in current directory)
@@ -433,6 +451,7 @@ let g:fzf_filemru_bufwrite = 1
 augroup custom_filemru
   autocmd!
   autocmd BufEnter * UpdateMru
+  autocmd BufLeave * UpdateMru
 augroup END
 " An action can be a reference to a function that processes selected lines
 function! s:fzf_build_quickfix_list(lines)
@@ -533,6 +552,7 @@ endfunction
 call CommandCabbr('PrettifyJson', 'call PrettifyJson()')
 
 " coc.nvim
+let g:node_client_debug = 1
 let g:has_initialised_coc = 0
 function! s:init_coc()
   if g:has_initialised_coc
@@ -540,15 +560,41 @@ function! s:init_coc()
   endif
   let g:has_initialised_coc = 1
   call plug#load('coc.nvim')
+
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
   " if hidden is not set, TextEdit might fail.
   set hidden
   " Use <c-space> to trigger completion.
   inoremap <silent><expr> <c-space> coc#refresh()
-  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-  " Coc only does snippet and additional edit on confirm.
-  " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+  " Use tab for trigger completion with characters ahead and navigate.
+  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  " https://github.com/neoclide/coc-snippets version
+  " inoremap <silent><expr> <TAB>
+      " \ pumvisible() ? coc#_select_confirm() :
+      " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      " \ <SID>check_back_space() ? "\<TAB>" :
+      " \ coc#refresh()
+  inoremap <silent><expr> <C-b>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "" :
+      \ coc#refresh()
+  " Original one
+  inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+  " Use <c-space> to trigger completion.
+  inoremap <silent><expr> <c-space> coc#refresh()
+
   " Use `[g` and `]g` to navigate diagnostics
   nmap <silent> [g <Plug>(coc-diagnostic-prev)
   nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -581,6 +627,7 @@ function! s:init_coc()
   nnoremap <silent> <leader>ll  :<C-u>CocList<cr>
   " Find symbol of current document
   nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
+  nnoremap <silent> <leader>lO  :<C-u>CocList output<cr>
   " Search workspace symbols
   nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
   " Do default action for next item.
@@ -599,6 +646,14 @@ autocmd! InsertEnter * call <SID>init_coc()
 
 " vim-peekaboo
 let g:peekaboo_window = 'vert bo new'
+let g:peekaboo_delay = 50 " Don't bring up the window if dragon is typing in a sequence of characters quickly
+
+" indentLine
+set conceallevel=1
+set concealcursor=n
+let g:indentLine_concealcursor = &concealcursor
+let g:indentLine_conceallevel = &conceallevel
+
 " }}}
 
 
@@ -636,9 +691,9 @@ vnoremap af mzggoG$
 
 " Replace (a (local) variable name)
 " Part 1: Yank current selection (for example a variableName)
-vnoremap <C-p> "xyV
+vnoremap <C-k> "xyV
 " Part 1.1: (Optional variant of part 1 - select current word)
-nnoremap <C-p> viw"xyV
+nnoremap <C-k> viw"xyV
 " Part 2: Start the search with the template (containing variableName as a
 " search term and replaced term), in the selected range. Assumes gdefault is
 " on. You can optionally type <C-r>x to paste what we are going to replace. You
@@ -736,8 +791,8 @@ inoremap <C-b>B <Esc>mzviWo<Esc>~`za
 inoremap <C-b>u <Esc>mzguiw`za
 inoremap <C-b>U <Esc>mzgUiw`za
 
-" Delete whole word
-inoremap <C-b><C-w> <Esc>ciW
+" Delete variable segment (depends on Julian/vim-textobj-variable-segment)
+imap <M-BS> <C-O>vivs
 
 " Place cursor on the tag when jumping to it
 " (https://vi.stackexchange.com/a/16679/11136)
@@ -776,6 +831,9 @@ nnoremap <Leader>Tm :tabm<Space>
 " Duplicate buffer in new tab
 nnoremap <Leader>Td <C-w>s<C-w>T
 nmap <Leader>TD <C-w>d:tabm-<CR>
+
+" Maximise window
+nnoremap <C-w>+ <C-w>_<C-w><Bar>
 
 " Goto start of line in command mode (make going to the end and start of lines
 " consistent with terminal emacs shortcuts)
@@ -874,8 +932,6 @@ endif
 " Line Numbers
 set relativenumber
 set number
-au BufEnter * set relativenumber
-au BufEnter * set number
 
 " Somehow maybe gets the Mac clipboard to work
 set clipboard=unnamed
@@ -917,6 +973,10 @@ set tags=./tags;
 
 " Don't wrap long lines onto the next line on the screen
 set nowrap
+
+" If wrapping, indent wrapped lines
+set breakindent
+set breakindentopt=shift:2
 
 " No double space after running `gq` on a line with a '.' at the end
 set nojoinspaces
