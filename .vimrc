@@ -79,7 +79,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Space/indenting
-Plug 'tpope/vim-sleuth' " Detects space/tab sizes of current file
 Plug 'tweekmonster/wstrip.vim' " Strip whitespace from lines changed
 Plug 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
 
@@ -98,7 +97,7 @@ Plug 'mxw/vim-prolog'
 Plug 'lervag/vimtex'
 
 " Linting
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " LSP
 " Language client is not really well maintained
@@ -154,8 +153,8 @@ if !has('nvim')
   Plug 'wincent/terminus' " Improve cursor look, mouse support, focus reporting
 endif
 Plug 'junegunn/vim-peekaboo' " Show register contents
-Plug 'chiedo/vim-case-convert'
 Plug 'Yggdroot/indentLine' " Show indenting columns
+Plug 'terryma/vim-multiple-cursors'
 
 " Text objects
 Plug 'kana/vim-textobj-user'
@@ -252,39 +251,41 @@ let g:AutoPairsMultilineClose = 0
       " \ '[': ']',
       " \ '<%': '%>',
       " \ }
+let g:AutoPairsShortcutJump = ''
+let g:AutoPairsShortcutToggle = ''
 
 " Ale
-let g:ale_completion_enabled = 1
-let g:ale_set_signs = 1
-let g:ale_change_sign_column_color = 0
-let g:ale_sign_column_always = 0
-let g:ale_completion_delay = 500
-let g:ale_linters = {
-      \ 'java': [],
-      \ 'typescript': ['eslint'],
-      \ 'ruby': ['rubocop'],
-      \ 'elixir': ['mix', 'credo'],
-      \ }
-" Turn linting errors into warnings
-let g:ale_type_map = {
-      \ 'eslint': {'ES': 'WS', 'E': 'W'},
-      \ 'credo': {'ES': 'WS', 'E': 'W'}
-      \ }
-let g:ale_fixers = {
-      \ 'typescript': ['eslint'],
-      \ 'typescriptreact': ['eslint', 'tslint'],
-      \ 'javascript': ['eslint'],
-      \ 'python': ['autopep8'],
-      \ 'ruby': ['rubocop'],
-      \ 'elixir': ['mix_format'],
-      \ }
-let g:ale_typescript_tslint_use_global = 0
-let g:ale_elixir_credo_use_global = 0
-let g:ale_lint_on_enter = 0
-nnoremap <leader>an :ALENextWrap<CR>
-nnoremap <leader>ap :ALEPreviousWrap<CR>
-nnoremap <leader>ad :ALEGoToDefinition<CR>
-nnoremap <leader>af :ALEFix<CR>
+" let g:ale_completion_enabled = 1
+" let g:ale_set_signs = 1
+" let g:ale_change_sign_column_color = 0
+" let g:ale_sign_column_always = 0
+" let g:ale_completion_delay = 500
+" let g:ale_linters = {
+      " \ 'java': [],
+      " \ 'typescript': ['eslint'],
+      " \ 'ruby': ['rubocop'],
+      " \ 'elixir': ['mix', 'credo'],
+      " \ }
+" " Turn linting errors into warnings
+" let g:ale_type_map = {
+      " \ 'eslint': {'ES': 'WS', 'E': 'W'},
+      " \ 'credo': {'ES': 'WS', 'E': 'W'}
+      " \ }
+" let g:ale_fixers = {
+      " \ 'typescript': ['eslint'],
+      " \ 'typescriptreact': ['eslint', 'tslint'],
+      " \ 'javascript': ['eslint'],
+      " \ 'python': ['autopep8'],
+      " \ 'ruby': ['rubocop'],
+      " \ 'elixir': ['mix_format'],
+      " \ }
+" let g:ale_typescript_tslint_use_global = 0
+" let g:ale_elixir_credo_use_global = 0
+" let g:ale_lint_on_enter = 0
+" nnoremap <leader>an :ALENextWrap<CR>
+" nnoremap <leader>ap :ALEPreviousWrap<CR>
+" nnoremap <leader>ad :ALEGoToDefinition<CR>
+" nnoremap <leader>af :ALEFix<CR>
 
 " Import JS
 nnoremap <leader>jj :ImportJSWord<CR>
@@ -435,7 +436,7 @@ let g:session_autosave_periodic = 0
 let g:session_autosave_only_with_explicit_session = 1
 augroup vim_session_autosave
   au!
-  au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save()
+  au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save() | echo 'Saved session'
 augroup END
 
 " Gutentags
@@ -620,14 +621,16 @@ function! s:init_coc()
   " Show all actions
   nnoremap <silent> <leader>la  :<C-u>CocList actions<cr>
   " Show all errors
-  nnoremap <silent> <leader>le  :<C-u>CocList diagnostics<cr>
+  nnoremap <silent> <leader>le  :<C-u>CocList --auto-preview diagnostics<cr>
   " Show commands
   nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
   " Show list
-  nnoremap <silent> <leader>ll  :<C-u>CocList<cr>
+  nnoremap <silent> <leader>ll  :<C-u>CocList --auto-preview<cr>
+  " Reshow list
+  nnoremap <silent> <leader>lL  :CocListResume<cr>
   " Find symbol of current document
-  nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
-  nnoremap <silent> <leader>lO  :<C-u>CocList output<cr>
+  nnoremap <silent> <leader>lo  :<C-u>CocList --auto-preview outline<cr>
+  nnoremap <silent> <leader>lO  :<C-u>CocCommand workspace.showOutput<cr>
   " Search workspace symbols
   nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
   " Do default action for next item.
@@ -653,6 +656,10 @@ set conceallevel=1
 set concealcursor=n
 let g:indentLine_concealcursor = &concealcursor
 let g:indentLine_conceallevel = &conceallevel
+
+" vim-multiple-cursors
+let g:multi_cursor_select_all_word_key = '<M-n>'
+let g:multi_cursor_select_all_key      = 'g<M-n>'
 
 " }}}
 
@@ -792,7 +799,7 @@ inoremap <C-b>u <Esc>mzguiw`za
 inoremap <C-b>U <Esc>mzgUiw`za
 
 " Delete variable segment (depends on Julian/vim-textobj-variable-segment)
-imap <M-BS> <C-O>vivs
+imap <M-BS> <Esc>vivs
 
 " Place cursor on the tag when jumping to it
 " (https://vi.stackexchange.com/a/16679/11136)
@@ -843,13 +850,13 @@ cnoremap <C-a> <C-b>
 " (Also see 'Toggling options' for makeprg mappings)
 nnoremap <Leader>mm :lmake <Bar> lclose <Bar> lwindow<CR>
 nnoremap <Leader>mw :lwindow<CR>
-nnoremap <Leader>mn :lnext<CR>
-nnoremap <Leader>mN :lprevious<CR>
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>
 " Quick fix window regions of above commands
 nnoremap <Leader>qm :make <Bar> cclose <Bar> cwindow<CR>
 nnoremap <Leader>qw :cwindow<CR>
-nnoremap <Leader>qn :cnext<CR>
-nnoremap <Leader>qN :cprevious<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>
 
 " Yank as one line
 vmap gy JgVyu
@@ -911,7 +918,7 @@ noremap <4-ScrollWheelDown> <Nop>
 
 " Text width
 set textwidth=79
-autocmd FileType elixir,typescript
+autocmd FileType elixir
       \ setlocal textwidth=98
 
 " Don't wrap on typing
@@ -977,6 +984,9 @@ set nowrap
 " If wrapping, indent wrapped lines
 set breakindent
 set breakindentopt=shift:2
+
+" Round indents if starting with a space
+set shiftround
 
 " No double space after running `gq` on a line with a '.' at the end
 set nojoinspaces

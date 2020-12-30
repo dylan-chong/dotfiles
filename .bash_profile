@@ -143,13 +143,13 @@ function spotdl-playlist() {
         spotdl --output-ext m4a --list downloaded-* --search-format '{artist} - {track-name}'
 }
 
-# use `spotdl -s 'artist - title'` instead
-# function youtube-dl-song() {
-    # youtube-dl --extract-audio --audio-format m4a --embed-thumbnail $@
-# }
+# use `spotdl -s 'artist - title'` instead preferable
+function youtube-dl-song() {
+    youtube-dl --extract-audio --audio-format m4a --embed-thumbnail $@
+}
 
 function youtube-dl-audio-quick() {
-    youtube-dl --extract-audio $@
+    youtube-dl --extract-audio --no-playlist $@
 }
 
 function elixir_recompile() {
@@ -188,10 +188,8 @@ alias gfa="git fetch --all --prune --tags"
 alias grmt="git remote"
 alias grmtv="git remote -v"
 
-alias gbra="git branch"
-alias gbrav="git branch -avv"
-
-alias gchd="git checkout -"
+alias gco='git checkout `fbr`'
+alias gcom="gfa && git checkout origin/master"
 
 git_prune_branches() {
     git branch -v | grep gone | perl -pwe 's/^  ([^\s]+).*/$1/g' | xargs git branch -d
@@ -201,6 +199,8 @@ alias gcm="git commit -v"
 alias gap="git add -p"
 alias gaa="git add -A"
 alias gan="git add -N ."
+alias gai="git add -i"
+alias gae="git add -e"
 
 alias grth="git reset --hard"
 
@@ -324,7 +324,7 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 # Setting PATH for Python 2.7
 # The orginal version is saved in .bash_profile.pysave
 export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-export PATH="/Users/Dylan/Library/Python/3.8/bin:${PATH}"
+export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
 
 
 # Git Completion
@@ -339,7 +339,7 @@ alias rm="rmtrash"
 
 # Max line length when searching
 alias ag="ag -W 200"
-alias rg="rg -M 200 --smart-case"
+alias rag="rg -M 200 --smart-case"
 
 # Tmux Count Panes
 alias tmuxcount="tmux list-windows -a \
@@ -349,7 +349,7 @@ alias tmuxcount="tmux list-windows -a \
 
 # Configure Less
 function less() {
-    `which less` -NS
+    `which less` -NSI $@
 }
 
 # v to open nvim in less

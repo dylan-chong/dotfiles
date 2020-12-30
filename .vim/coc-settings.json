@@ -4,6 +4,7 @@
   "diagnostic.maxWindowHeight": 24,
   "signature.maxWindowHeight": 24,
   "list.maxHeight": 24,
+  "list.source.symbols.defaultOptions": ["--auto-preview"],
   "elixirLS.dialyzerEnabled": false,
   "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh"
 }
