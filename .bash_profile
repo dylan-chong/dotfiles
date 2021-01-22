@@ -57,8 +57,6 @@ alias gopart="cl /Users/Dylan/Dropbox/Sibelius\ Scores/Compositions/2016/partime
 # Useful commands
 
 # {{{
-alias stree="open -a SourceTree ./"
-
 alias prof="nvim ~/.bash_profile"
 alias virc="nvim ~/.vimrc"
 
@@ -109,6 +107,12 @@ alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/
 
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
+function phone-sync() {
+    bash -c "cd /Users/Dylan/Dropbox/Programming/GitHub/itunes-applescripts-no-dev/ && gulp be -s remove-recent" && \
+        osascript ~/phone-sync.applescript && \
+        echo Done
+}
+
 function fp() {
     local path=`pwd`/$1;
     echo "Copied to clipboard: $path"
@@ -139,8 +143,8 @@ function notifydone() {
 function spotdl-playlist() {
     mkdir spotdl-playlist && \
         cd spotdl-playlist && \
-        spotdl --playlist $1 && \
-        spotdl --output-ext m4a --list downloaded-* --search-format '{artist} - {track-name}'
+        spotdl $1 #&& \
+        #spotdl --output-ext m4a --list downloaded-* --search-format '{artist} - {track-name}'
 }
 
 # use `spotdl -s 'artist - title'` instead preferable
@@ -184,6 +188,8 @@ gphd() {
 }
 
 alias gplph="git pull --rebase && git push"
+alias gplom="git pull origin master"
+
 alias gfa="git fetch --all --prune --tags"
 alias grmt="git remote"
 alias grmtv="git remote -v"

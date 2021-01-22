@@ -436,7 +436,7 @@ let g:session_autosave_periodic = 0
 let g:session_autosave_only_with_explicit_session = 1
 augroup vim_session_autosave
   au!
-  au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save() | echo 'Saved session'
+  au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save()
 augroup END
 
 " Gutentags

@@ -5686,10 +5686,10 @@ node-emoji@^1.10.0:
   dependencies:
     lodash.toarray "^4.4.0"
 
-node-fetch@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
-  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+node-fetch@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
+  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -8625,10 +8625,10 @@ yeoman-generator@^4.8.2:
     grouped-queue "^1.1.0"
     yeoman-environment "^2.9.5"
 
-zapier-platform-cli@^10.1.1:
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/zapier-platform-cli/-/zapier-platform-cli-10.1.1.tgz#9745925588a7aac1188b08579c031045d2e87ef7"
-  integrity sha512-O00EHcbOplyqk+6Qu4iWK8RTcIqjfkaETYrCoLd3qwbU0VmOIDDy85JGjVebx04LAQpr/goQzI0sQeOF6Y11gQ==
+zapier-platform-cli@^10.1.2:
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/zapier-platform-cli/-/zapier-platform-cli-10.1.2.tgz#68064a4b4b6e5b2fea4da3629ffc80a619a5e708"
+  integrity sha512-K7OvKO6lj2udaaYSLlqE9vtvgWQn08RZIz8XlKFU1CZoQRlu0aIzYjs5LaSMxdgwduUlKrfSCDwwA/qIO2jGjg==
   dependencies:
     "@oclif/command" "1.6.1"
     "@oclif/config" "1.15.1"
@@ -8651,7 +8651,7 @@ zapier-platform-cli@^10.1.1:
     lodash "4.17.19"
     marked "1.0.0"
     marked-terminal "4.1.0"
-    node-fetch "2.6.0"
+    node-fetch "2.6.1"
     ora "4.0.4"
     parse-gitignore "0.4.0"
     prettier "2.0.5"

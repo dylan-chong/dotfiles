@@ -11,6 +11,6 @@
     "neovim": "^4.8.0",
     "react-native-cli": "^2.0.1",
     "typescript-language-server": "^0.3.6",
-    "zapier-platform-cli": "^10.1.1"
+    "zapier-platform-cli": "^10.1.2"
   }
 }
