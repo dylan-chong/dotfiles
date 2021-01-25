@@ -125,11 +125,6 @@ function cr() {
     c "$LASTDIR"
 }
 
-function manbash() {
-    # https://unix.stackexchange.com/a/18092
-    man bash | less -p "^       $1 ";
-}
-
 function dowatch() {
     # Runs the given command when files change in the current directory
     local command=$@
@@ -327,11 +322,6 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
 
-
-# Git Completion
-source ~/.git-completion.bash
-source ~/.git-flow-completion.bash
-
 # Vim
 alias vi="nvim"
 
@@ -379,5 +369,8 @@ source ~/.bash_profile_private
 if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
+
+# brew bash-completion
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # }}}
