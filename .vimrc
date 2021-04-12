@@ -61,7 +61,7 @@ if has('nvim')
 endif
 
 " File-related stuff
-Plug 'brooth/far.vim'
+Plug 'dylan-chong/far.vim'
 Plug 'tpope/vim-eunuch'
 
 " FZF
@@ -133,9 +133,6 @@ Plug 'Galooshi/vim-import-js'
 Plug 'zefei/vim-wintabs'
 Plug 'zefei/vim-wintabs-powerline'
 
-" JSON
-Plug 'tpope/vim-jdaddy' " JSON formatting
-
 " REPL
 Plug 'metakirby5/codi.vim'
 
@@ -201,7 +198,8 @@ hi illuminatedWord ctermbg=15 guibg=#3B4750
 
 " Far.vim
 let g:far#source = 'rgnvim'
-let g:far#debug = 1
+let g:far#debug = 0
+" TODO replace with CocSearch
 nnoremap <Leader>vr "xyiw:Far <C-r>x<Space><Space>*<Left><Left>
 vnoremap <Leader>vr "xy:Far <C-r>x<Space><Space>*<Left><Left>
 
@@ -544,14 +542,6 @@ nnoremap <leader>n :Ranger<cr>
 " Vimtex
 let g:tex_flavor = "latex"
 
-" JDaddy (json)
-" TODO cant call it yet
-function! PrettifyJson()
-  call wintabs#close()
-  normal gqaj
-endfunction
-call CommandCabbr('PrettifyJson', 'call PrettifyJson()')
-
 " coc.nvim
 let g:node_client_debug = 1
 let g:has_initialised_coc = 0
@@ -618,8 +608,6 @@ function! s:init_coc()
   nmap <silent> <leader>li <Plug>(coc-implementation)
   nmap <silent> <leader>lr <Plug>(coc-references)
   " Using CocList
-  " Show all actions
-  nnoremap <silent> <leader>la  :<C-u>CocList actions<cr>
   " Show all errors
   nnoremap <silent> <leader>le  :<C-u>CocList --auto-preview diagnostics<cr>
   " Show commands
@@ -660,6 +648,9 @@ let g:indentLine_conceallevel = &conceallevel
 " vim-multiple-cursors
 let g:multi_cursor_select_all_word_key = '<M-n>'
 let g:multi_cursor_select_all_key      = 'g<M-n>'
+
+" vim-illuminate
+let g:Illuminate_delay = 50
 
 " }}}
 
@@ -835,8 +826,10 @@ nnoremap <Leader>Tc :tabclose
 nnoremap <Leader>To :tabonly<CR>
 nnoremap <Leader>Tm :tabm<Space>
 
+" Duplicate buffer in new tab and close original
+nmap <Leader>Td <C-w>s<C-w>T<Space>gh:q<CR><Space>gl
 " Duplicate buffer in new tab
-nnoremap <Leader>Td <C-w>s<C-w>T
+nnoremap <Leader>TD <C-w>s<C-w>T
 nmap <Leader>TD <C-w>d:tabm-<CR>
 
 " Maximise window
@@ -918,7 +911,7 @@ noremap <4-ScrollWheelDown> <Nop>
 
 " Text width
 set textwidth=79
-autocmd FileType elixir
+autocmd FileType elixir,sql
       \ setlocal textwidth=98
 
 " Don't wrap on typing
@@ -926,15 +919,15 @@ set formatoptions-=t
 
 " Indenting defaults
 " Defaults to 4 spaces for most filetypes
-if get(g:, '_has_set_default_indent_settings', 0) == 0
-  autocmd FileType typescript,javascript,jsx,tsx,scss,css,html,json,ruby,elixir,kotlin,vim,tmux,plantuml
-        \ setlocal expandtab tabstop=2 shiftwidth=2
-  " setglobal seems to not override sleuth when reloading vimrc
-  set expandtab
-  set tabstop=4
-  set shiftwidth=4
-  let g:_has_set_default_indent_settings = 1
-endif
+" if get(g:, '_has_set_default_indent_settings', 0) == 0
+  " autocmd FileType typescript,javascript,jsx,tsx,scss,css,html,json,ruby,elixir,kotlin,vim,tmux,plantuml,sql
+        " \ setlocal expandtab tabstop=2 shiftwidth=2
+  " " setglobal seems to not override sleuth when reloading vimrc
+  " set expandtab
+  " set tabstop=4
+  " set shiftwidth=4
+  " let g:_has_set_default_indent_settings = 1
+" endif
 
 " Line Numbers
 set relativenumber

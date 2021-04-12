@@ -35,3 +35,7 @@ endsnippet
 snippet prydebugger "Pry"
 require IEx; IEx.pry()
 endsnippet
+
+snippet prydebuggerspawn "Pry debugger but don't pause and don't timeout"
+(fn -> require IEx; IEx.pry() end) |> Task.async() |> Task.await()
+endsnippet

@@ -107,10 +107,23 @@ alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/
 
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
+function phone-music-update() {
+    echo 'Trimming playlist'
+    phone-sync &
+    bash -c "cd /Users/Dylan/Dropbox/Programming/GitHub/itunes-applescripts-no-dev/ && gulp be -s remove-recent"
+    phone-sync
+}
+
 function phone-sync() {
-    bash -c "cd /Users/Dylan/Dropbox/Programming/GitHub/itunes-applescripts-no-dev/ && gulp be -s remove-recent" && \
-        osascript ~/phone-sync.applescript && \
-        echo Done
+    echo 'Starting phone sync'
+    timeout 10 osascript ~/phone-sync.applescript
+
+    if [ "$?" -eq 0 ]; then
+        echo 'Sync started'
+    else
+        echo 'Sync failed to start. Device not found, trying again'
+        phone-sync
+    fi
 }
 
 function fp() {
@@ -128,7 +141,14 @@ function cr() {
 function dowatch() {
     # Runs the given command when files change in the current directory
     local command=$@
-    rg --files | entr -s "printf '\n\n\n.......... File change detected ..........\n\n\n\n' && $command"
+    # Run in a subprocess because entr changes the cwd and opening a new terminal would end up in ~
+    bash -c "rg --files | entr -s 'printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && $command'"
+}
+
+function loop() {
+    while true; do
+        $@
+    done
 }
 
 function notifydone() {
@@ -182,21 +202,23 @@ gphd() {
     git push -d origin $(current_branch)
 }
 
-alias gplph="git pull --rebase && git push"
-alias gplom="git pull origin master"
+alias gplph="git pull && git push"
+alias gplh="git pull origin HEAD"
 
 alias gfa="git fetch --all --prune --tags"
 alias grmt="git remote"
 alias grmtv="git remote -v"
 
 alias gco='git checkout `fbr`'
-alias gcom="gfa && git checkout origin/master"
+alias gcoh="gfa && git checkout origin/HEAD"
+alias gcb='git checkout -b'
 
 git_prune_branches() {
     git branch -v | grep gone | perl -pwe 's/^  ([^\s]+).*/$1/g' | xargs git branch -d
 }
 
 alias gcm="git commit -v"
+alias ga="git add"
 alias gap="git add -p"
 alias gaa="git add -A"
 alias gan="git add -N ."
@@ -217,6 +239,8 @@ alias gsh="git stash"
 
 # List untracked files
 alias glsu="git ls-files --others --exclude-standard"
+
+alias grb="git rebase"
 
 function gpr() {
     # Goes to the URL for creating a new pull request in the browser. For
@@ -239,6 +263,51 @@ function gpr() {
         *)
             open $url
     esac
+}
+
+# Quick commit, new branch, and push
+function gcmq() {
+    echo '> git status'
+    git status
+    echo
+
+    read -p "Are you checked on the right branch *and* does this show the right staged files [y/n]? " CONT
+    echo
+    if [ "$CONT" = "y" ]; then
+        echo '> git diff --cached'
+        git --no-pager diff --cached
+        echo
+
+        read -p "Do you want to commit these changes [y/n]? " CONT
+        echo
+        if [ "$CONT" = "y" ]; then
+            local branch=$1
+
+            # 1. Replace branch folder with `:`
+            # 2. Replace - or _ with space
+            # 3. Uppercase the first letter, and first letter after the `:`
+            local message=`echo "$1" | perl -pe 's/\//: /' | perl -pe 's/_|-/ /g' | perl -pe 's/(\w)(\w*:\s)(\w)(.*)/\U$1\L$2\U$3\L$4/'`
+
+            echo "New Branch: $branch"
+            echo "Commit message: $message"
+            echo
+
+            read -p "Are these correct [y/n]? " CONT
+            echo
+            if [ "$CONT" = "y" ]; then
+                git checkout -b "$branch" \
+                    && git commit -m "$message" \
+                    && gphu \
+                    && gpr -g
+            else
+                echo "Cancelling";
+            fi
+        else
+            echo "Cancelling";
+        fi
+    else
+        echo "Cancelling";
+    fi
 }
 
 # }}}
@@ -265,6 +334,9 @@ export PATH="/usr/local/sbin:$PATH"
 
 # ASDF
 . $(brew --prefix asdf)/asdf.sh
+
+# Gcloud
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 
 # }}}
 
