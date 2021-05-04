@@ -109,21 +109,28 @@ alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
 function phone-music-update() {
     echo 'Trimming playlist'
-    phone-sync &
+    phone-sync-once &
     bash -c "cd /Users/Dylan/Dropbox/Programming/GitHub/itunes-applescripts-no-dev/ && gulp be -s remove-recent"
     phone-sync
 }
 
 function phone-sync() {
     echo 'Starting phone sync'
-    timeout 10 osascript ~/phone-sync.applescript
 
-    if [ "$?" -eq 0 ]; then
-        echo 'Sync started'
-    else
-        echo 'Sync failed to start. Device not found, trying again'
-        phone-sync
-    fi
+    for ((i=0;i<100;i++)) do
+        timeout 10 osascript ~/phone-sync.applescript
+        if [ "$?" -eq 0 ]; then
+            echo 'Sync started'
+            break
+        else
+            echo 'Sync failed to start. Device not found'
+            sleep 3
+        fi
+    done
+}
+
+function phone-sync-once() {
+    timeout 10 osascript ~/phone-sync.applescript
 }
 
 function fp() {
@@ -209,9 +216,10 @@ alias gfa="git fetch --all --prune --tags"
 alias grmt="git remote"
 alias grmtv="git remote -v"
 
-alias gco='git checkout `fbr`'
+alias gco='git checkout'
+alias gcof='git checkout `fbr`'
 alias gcoh="gfa && git checkout origin/HEAD"
-alias gcb='git checkout -b'
+alias gcob='git checkout -b'
 
 git_prune_branches() {
     git branch -v | grep gone | perl -pwe 's/^  ([^\s]+).*/$1/g' | xargs git branch -d
@@ -334,6 +342,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 # ASDF
 . $(brew --prefix asdf)/asdf.sh
+export KERL_BUILD_DOCS=yes
 
 # Gcloud
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
@@ -442,7 +451,7 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 
-# brew bash-completion
+# brew bash-completion (disabled for now because it slows shell startyp)
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # }}}

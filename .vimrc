@@ -61,7 +61,7 @@ if has('nvim')
 endif
 
 " File-related stuff
-Plug 'dylan-chong/far.vim'
+Plug 'dylan-chong/far.vim', { 'branch': 'rg-git-ignore-but-break-globbing' }
 Plug 'tpope/vim-eunuch'
 
 " FZF
@@ -620,13 +620,13 @@ function! s:init_coc()
   nnoremap <silent> <leader>lo  :<C-u>CocList --auto-preview outline<cr>
   nnoremap <silent> <leader>lO  :<C-u>CocCommand workspace.showOutput<cr>
   " Search workspace symbols
-  nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
+  nnoremap <silent> <leader>lt  :<C-u>CocList -I symbols<cr>
   " Do default action for next item.
   nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
   " Do default action for previous item.
   nnoremap <silent> <leader>lk  :<C-u>CocPrev<CR>
   " Resume latest coc list
-  nnoremap <silent> <leader>lp  :<C-u>CocListResume<CR>
+  " nnoremap <silent> <leader>lp  :<C-u>CocListResume<CR>
   " Work with monorepos
   " Disable automatic detection of projects
   let g:coc_root_patterns = ['.vim']
@@ -830,7 +830,6 @@ nnoremap <Leader>Tm :tabm<Space>
 nmap <Leader>Td <C-w>s<C-w>T<Space>gh:q<CR><Space>gl
 " Duplicate buffer in new tab
 nnoremap <Leader>TD <C-w>s<C-w>T
-nmap <Leader>TD <C-w>d:tabm-<CR>
 
 " Maximise window
 nnoremap <C-w>+ <C-w>_<C-w><Bar>
