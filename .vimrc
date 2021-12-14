@@ -48,7 +48,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'danielwe/base16-vim'
 
 " CTags
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -199,6 +199,7 @@ hi illuminatedWord ctermbg=15 guibg=#3B4750
 " Far.vim
 let g:far#source = 'rgnvim'
 let g:far#debug = 0
+let g:far#enable_undo = 1
 " TODO replace with CocSearch
 nnoremap <Leader>vr "xyiw:Far <C-r>x<Space><Space>*<Left><Left>
 vnoremap <Leader>vr "xy:Far <C-r>x<Space><Space>*<Left><Left>
@@ -229,6 +230,8 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDSpaceDelims = 1
 nmap gc <leader>c<space>
 vmap gc <leader>c<space>
+nmap gC <leader>cs
+vmap gC <leader>cs
 
 " Supertab
 " let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -323,7 +326,7 @@ nnoremap <Leader>gap :wa<CR>:Git add -p<CR>i
 nnoremap <Leader>gdf :wa<CR>:Git diff<CR>i
 nnoremap <Leader>gph :wa<CR>:Gpush<Space>
 nnoremap <Leader>gpl :wa<CR>:Gpull<Space>
-nnoremap <Leader>gb :w<CR>:Gblame<CR>
+nnoremap <Leader>gb :w<CR>:Git blame<CR>
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
@@ -437,11 +440,11 @@ augroup vim_session_autosave
   au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save()
 augroup END
 
-" Gutentags
+" Gutentags (TODO can remove this plugin?)
 " rg respects gitignore files. This command also filters out certain file types
 " that we do not want tags for
-let g:gutentags_file_list_command = "rg -l '.' | rg -v '(md|json|plist)$'"
-let g:gutentags_define_advanced_commands = 1
+" let g:gutentags_file_list_command = "rg -l '.' | rg -v '(md|json|plist)$'"
+" let g:gutentags_define_advanced_commands = 1
 
 " FZF
 let g:fzf_history_dir = '~/.local/share/fzf-history'
@@ -450,7 +453,7 @@ let g:fzf_filemru_bufwrite = 1
 augroup custom_filemru
   autocmd!
   autocmd BufEnter * UpdateMru
-  autocmd BufLeave * UpdateMru
+  " autocmd BufLeave * UpdateMru
 augroup END
 " An action can be a reference to a function that processes selected lines
 function! s:fzf_build_quickfix_list(lines)
@@ -491,7 +494,7 @@ vnoremap <Leader>r "ry:Rg<Space><C-r>r
 vnoremap <Leader>R "ry:Rg<Space><C-r>r
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(
-      \   "rg --column --line-number --no-heading --color=always --smart-case -g '!.git' --hidden ".shellescape(<q-args>), 1,
+      \   "rg --column --line-number --no-heading --color=always --smart-case --multiline -g '!.git' --hidden ".shellescape(<q-args>), 1,
       \   fzf#vim#with_preview('right:35%'),
       \   <bang>0)
 cnoreabbrev rg Rg
@@ -644,6 +647,10 @@ set conceallevel=1
 set concealcursor=n
 let g:indentLine_concealcursor = &concealcursor
 let g:indentLine_conceallevel = &conceallevel
+" Exclude markdown because we don't want to conceal the code blocks and whatnot
+let g:indentLine_fileTypeExclude = ['markdown']
+autocmd FileType markdown setlocal conceallevel=0 | setlocal concealcursor=
+
 
 " vim-multiple-cursors
 let g:multi_cursor_select_all_word_key = '<M-n>'
@@ -685,7 +692,7 @@ nnoremap =p mz=ap`z
 nnoremap yaf mzggVGy`z
 nnoremap daf mzggVGd`z
 nnoremap =af mzggVG=`z
-vnoremap af mzggoG$
+vnoremap af mzgg0oG$
 
 " Replace (a (local) variable name)
 " Part 1: Yank current selection (for example a variableName)
@@ -708,7 +715,6 @@ nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
 
 " Exporting documents
 nnoremap <Leader>ed :saveas ~/Desktop/
-nnoremap <Leader>dm :w<CR>:!doc export '%'<CR>
 nnoremap <Leader>dt :w<CR>:!pdflatex '%' && open %:r.pdf<CR>
 
 " 'Inspections'
@@ -752,6 +758,7 @@ nnoremap <leader>ofj :set filetype=javascript<CR>
 nnoremap <leader>ofe :set filetype=elixir<CR>
 nnoremap <leader>ofr :set filetype=ruby<CR>
 nnoremap <leader>ofm :set filetype=markdown<CR>
+nnoremap <leader>ofs :set filetype=sql<CR>
 nnoremap <leader>omR :set makeprg=rubocop\ -f\ e<CR>
 
 " Select recently pasted text
@@ -918,15 +925,15 @@ set formatoptions-=t
 
 " Indenting defaults
 " Defaults to 4 spaces for most filetypes
-" if get(g:, '_has_set_default_indent_settings', 0) == 0
-  " autocmd FileType typescript,javascript,jsx,tsx,scss,css,html,json,ruby,elixir,kotlin,vim,tmux,plantuml,sql
-        " \ setlocal expandtab tabstop=2 shiftwidth=2
-  " " setglobal seems to not override sleuth when reloading vimrc
-  " set expandtab
-  " set tabstop=4
-  " set shiftwidth=4
-  " let g:_has_set_default_indent_settings = 1
-" endif
+if get(g:, '_has_set_default_indent_settings', 0) == 0
+  autocmd FileType typescript,javascript,jsx,tsx,scss,css,html,json,ruby,elixir,kotlin,vim,tmux,plantuml,sql
+        \ setlocal expandtab tabstop=2 shiftwidth=2
+  " setglobal seems to not override sleuth when reloading vimrc
+  set expandtab
+  set tabstop=4
+  set shiftwidth=4
+  let g:_has_set_default_indent_settings = 1
+endif
 
 " Line Numbers
 set relativenumber

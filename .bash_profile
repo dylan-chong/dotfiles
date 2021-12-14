@@ -107,31 +107,7 @@ alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/
 
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
-function phone-music-update() {
-    echo 'Trimming playlist'
-    phone-sync-once &
-    bash -c "cd /Users/Dylan/Dropbox/Programming/GitHub/itunes-applescripts-no-dev/ && gulp be -s remove-recent"
-    phone-sync
-}
-
-function phone-sync() {
-    echo 'Starting phone sync'
-
-    for ((i=0;i<100;i++)) do
-        timeout 10 osascript ~/phone-sync.applescript
-        if [ "$?" -eq 0 ]; then
-            echo 'Sync started'
-            break
-        else
-            echo 'Sync failed to start. Device not found'
-            sleep 3
-        fi
-    done
-}
-
-function phone-sync-once() {
-    timeout 10 osascript ~/phone-sync.applescript
-}
+source ~/bin/phone-sync-source.bash
 
 function fp() {
     local path=`pwd`/$1;
@@ -149,7 +125,7 @@ function dowatch() {
     # Runs the given command when files change in the current directory
     local command=$@
     # Run in a subprocess because entr changes the cwd and opening a new terminal would end up in ~
-    bash -c "rg --files | entr -s 'printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && $command'"
+    bash -c "rg --files | entr -s 'printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && ($command)'"
 }
 
 function loop() {
@@ -171,15 +147,29 @@ function spotdl-playlist() {
 
 # use `spotdl -s 'artist - title'` instead preferable
 function youtube-dl-song() {
-    youtube-dl --extract-audio --audio-format m4a --embed-thumbnail $@
+    youtube-dl --extract-audio --add-metadata --audio-format m4a --embed-thumbnail --ignore-errors $@
 }
 
 function youtube-dl-audio-quick() {
-    youtube-dl --extract-audio --no-playlist $@
+    youtube-dl --extract-audio --add-metadata --no-playlist --ignore-errors $@
+}
+
+function dl-upgrade() {
+    pip3 install --upgrade pip spotdl youtube-dl pytube
 }
 
 function elixir_recompile() {
     mix deps.clean $1 && mix deps.get && mix deps.compile $1
+}
+
+function whatismyip() {
+    curl -s 'https://whatsmyip.com' | grep 'Your public IP' | rg '(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)' --only-matching | head -n 1
+}
+
+# From https://www.stefaanlippens.net/pretty-csv.html
+# Note: Probably won't work if "," or newline inside a cell
+function pretty_csv {
+    perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s,
 }
 
 # }}}
@@ -220,6 +210,7 @@ alias gco='git checkout'
 alias gcof='git checkout `fbr`'
 alias gcoh="gfa && git checkout origin/HEAD"
 alias gcob='git checkout -b'
+alias gcop='git checkout -p'
 
 git_prune_branches() {
     git branch -v | grep gone | perl -pwe 's/^  ([^\s]+).*/$1/g' | xargs git branch -d
@@ -273,6 +264,10 @@ function gpr() {
     esac
 }
 
+function commit_message_to_branch() {
+    perl -pe 's/(:|\/)//g' | perl -pe 's/^(SOLV-\d+(?=:)?|[^:]+(?=:)):?\s*(.*\S)\s*$/\1\/\l\2/' | perl -pe 's/[\s:\-\."'\'']+/-/g' | tr '[:upper:]' '[:lower:]' | perl -pe 's/^solv/SOLV/'
+}
+
 # Quick commit, new branch, and push
 function gcmq() {
     echo '> git status'
@@ -282,34 +277,38 @@ function gcmq() {
     read -p "Are you checked on the right branch *and* does this show the right staged files [y/n]? " CONT
     echo
     if [ "$CONT" = "y" ]; then
-        echo '> git diff --cached'
-        git --no-pager diff --cached
+        if [ -z "$1" ]; then
+            # Take commit message from clipboard so you can copy the jira ticket number and description straight after it
+            local message=`pbpaste | tr '\n' ' ' | perl -pe 's/\s+/ /g'`
+            local branch=`echo "$message" | commit_message_to_branch`
+        else
+            # Check if argument is branch name or commit message
+            if [[ "$1" =~ ^[a-zA-Z]+\/[a-zA-Z]+.* ]]; then
+                # Argument was branch name
+                # Pass branch as argument and convert to commit messagee
+                # 1. Replace branch folder with `:`
+                # 2. Replace - or _ with space
+                # 3. Uppercase the first letter, and first letter after the `:`
+                local branch="$1"
+                local message=`echo "$branch" | perl -pe 's/\//: /' | perl -pe 's/_|-/ /g' | perl -pe 's/(\w)(\w*:\s)(\w)(.*)/\U$1\L$2\U$3\L$4/'`
+            else
+                # Argument was commit message
+                local message="$@"
+                local branch=`echo "$message" | commit_message_to_branch`
+            fi
+        fi
+
+        echo "New Branch: $branch"
+        echo "Commit message: $message"
         echo
 
-        read -p "Do you want to commit these changes [y/n]? " CONT
+        read -p "Are these correct [y/n]? " CONT
         echo
         if [ "$CONT" = "y" ]; then
-            local branch=$1
-
-            # 1. Replace branch folder with `:`
-            # 2. Replace - or _ with space
-            # 3. Uppercase the first letter, and first letter after the `:`
-            local message=`echo "$1" | perl -pe 's/\//: /' | perl -pe 's/_|-/ /g' | perl -pe 's/(\w)(\w*:\s)(\w)(.*)/\U$1\L$2\U$3\L$4/'`
-
-            echo "New Branch: $branch"
-            echo "Commit message: $message"
-            echo
-
-            read -p "Are these correct [y/n]? " CONT
-            echo
-            if [ "$CONT" = "y" ]; then
-                git checkout -b "$branch" \
-                    && git commit -m "$message" \
-                    && gphu \
-                    && gpr -g
-            else
-                echo "Cancelling";
-            fi
+            git checkout -b "$branch" \
+                && git commit -m "$message" \
+                && gphu \
+                && gpr -g
         else
             echo "Cancelling";
         fi
@@ -344,8 +343,17 @@ export PATH="/usr/local/sbin:$PATH"
 . $(brew --prefix asdf)/asdf.sh
 export KERL_BUILD_DOCS=yes
 
+# PHP
+
+export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
+
 # Gcloud
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+
+
+# Brew PHP
+export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
 
 # }}}
 

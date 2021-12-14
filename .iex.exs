@@ -18,6 +18,10 @@ IEx.configure [
 
 # Helper functions
 defmodule H do
+  def r do
+    IEx.Helpers.recompile()
+  end
+
   def c do
     IEx.Helpers.continue()
   end
