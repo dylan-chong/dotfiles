@@ -3,6 +3,9 @@
 
 set encoding=utf-8
 
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
+let g:ruby_host_prog = '/opt/homebrew/lib/ruby/gems/3.0.0/bin/neovim-ruby-host'
+
 " Easy leader
 let mapleader=" "
 
@@ -31,14 +34,6 @@ let g:vim_markdown_conceal = 0
 " Vim-Plug
 " {{{
 
-" Automatically install vim-plug if not installed
-" (https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 call plug#begin('~/.vim/plugged')
 
 " PLUGINS GO HERE
@@ -65,7 +60,7 @@ Plug 'dylan-chong/far.vim', { 'branch': 'rg-git-ignore-but-break-globbing' }
 Plug 'tpope/vim-eunuch'
 
 " FZF
-set rtp+=/usr/local/opt/fzf
+set rtp+=/opt/homebrew/opt/fzf
 Plug 'junegunn/fzf.vim'
 Plug 'tweekmonster/fzf-filemru'
 Plug 'dylan-chong/fzf_similar.vim', { 'branch': 'develop' }
@@ -94,7 +89,6 @@ Plug 'PeterRincker/vim-argumentative'
 " Language packs
 Plug 'sheerun/vim-polyglot'
 Plug 'mxw/vim-prolog'
-Plug 'lervag/vimtex'
 
 " Linting
 " Plug 'w0rp/ale'
@@ -152,6 +146,7 @@ endif
 Plug 'junegunn/vim-peekaboo' " Show register contents
 Plug 'Yggdroot/indentLine' " Show indenting columns
 Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-scripts/listmaps.vim' " Find where mappings are coming from
 
 " Text objects
 Plug 'kana/vim-textobj-user'
@@ -541,9 +536,6 @@ let g:NERDTreeHijackNetrw = 0
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 1
 nnoremap <leader>n :Ranger<cr>
-
-" Vimtex
-let g:tex_flavor = "latex"
 
 " coc.nvim
 let g:node_client_debug = 1
@@ -1063,10 +1055,11 @@ cnoreabbrev WQ wq
 set splitright
 set splitbelow
 
-" Get ruby host
-let g:ruby_host_prog = substitute(system('echo `gem environment gemdir`"/bin/neovim-ruby-host"'), '\n', '', 'g')
-
 " Better display for messages
 set cmdheight=2
 
 " }}}
+
+
+" TEMP due to neovim bug
+nnoremap Y yy

@@ -265,7 +265,7 @@ function gpr() {
 }
 
 function commit_message_to_branch() {
-    perl -pe 's/(:|\/)//g' | perl -pe 's/^(SOLV-\d+(?=:)?|[^:]+(?=:)):?\s*(.*\S)\s*$/\1\/\l\2/' | perl -pe 's/[\s:\-\."'\'']+/-/g' | tr '[:upper:]' '[:lower:]' | perl -pe 's/^solv/SOLV/'
+    perl -pe 's/(:|\/)//g' | perl -pe 's/^(SOLV-\d+(?=:)?|[^:]+(?=:)):?\s*(.*\S)\s*$/\1\/\l\2/' | perl -pe 's/[^\w\/]+/-/g' | tr '[:upper:]' '[:lower:]' | perl -pe 's/^solv/SOLV/'
 }
 
 # Quick commit, new branch, and push
@@ -324,36 +324,20 @@ function gcmq() {
 # Homes/Paths
 
 # {{{
-export PKG_CONFIG_PATH='/usr/local/Cellar/imagemagick@6/6.9.8-10/lib/pkgconfig/'
-
-export EASYDOC_DIR=~/Dropbox/Programming/GitHub/easydoc
-
-
-export GOPATH="$HOME/go"
-export PATH=$GOPATH/bin:$PATH:/usr/local/opt/go/libexec/bin
-
-export PATH=/usr/local/anaconda3/bin:"$PATH"
-
-export PATH_TO_FX=/Users/Dylan/Downloads/javafx-sdk-11.0.2/
+export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH"
 
 # Homebrew
-export PATH="/usr/local/sbin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # ASDF
 . $(brew --prefix asdf)/asdf.sh
-export KERL_BUILD_DOCS=yes
 
 # PHP
-
 export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
 
 # Gcloud
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
-
-
-# Brew PHP
-export PATH="/usr/local/opt/php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 
 # }}}
 
@@ -415,7 +399,8 @@ export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
 alias vi="nvim"
 
 # Prevent stupidity
-alias rm="rmtrash"
+# https://hasseg.org/trash/ (brew install trash)
+alias rm="trash"
 
 # Max line length when searching
 alias ag="ag -W 200"
