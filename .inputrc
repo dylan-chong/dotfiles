@@ -1,3 +1,5 @@
+#TODO not used by ZSH
+
 set editing-mode vi
 
 # https://unix.stackexchange.com/questions/318433/bash-urxvt-delay-after-esc-in-vi-mode
