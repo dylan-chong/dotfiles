@@ -1,8 +1,9 @@
 # Base 16 256 colours
 
 # {{{
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# TODO FIx
+# BASE16_SHELL=$HOME/.config/base16-shell/
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # }}}
 
@@ -66,7 +67,7 @@ wcme() {
 }
 
 # Tmux Count Panes
-alias tmuxcount="ps aux | grep '\-bash' | wc -l"
+alias tmuxcount="ps aux | grep '\-zsh' | wc -l"
 
 alias brewupgrade="echo 'Calling: brew upgrade' && \
     brew upgrade && \
@@ -78,7 +79,7 @@ alias iex='iex --erl "-kernel shell_history enabled"'
 alias kotlinc='rlwrap -a foo kotlinc'
 alias swipl='rlwrap -a foo swipl'
 
-alias soba="source ~/.bash_profile"
+alias soba="source ~/.zshrc"
 
 alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/server_osx.py"
 
@@ -338,33 +339,6 @@ export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
 
 # }}}
 
-# Terminal Coloured text from:
-
-# http://apple.stackexchange.com/questions/125637/iterm-colors-for-prompt-command-and-output
-# {{{
-
-function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-
-# base16-materia
-export PS1="\n\[\033[01;32m\]\u@\h:\[\033[01;31m\]\$(parse_git_branch)\
-\[\033[01;34m\]\w \[\033[34m\]\n>\[\e[0m\] "
-
-# gruvbox
-# export PS1="\n\[\033[1;32m\]\u@\h:\[\033[31m\]\$(parse_git_branch)\
-# \[\033[1;34m\]\w \[\033[01;34m\]\n>\[\e[0m\] "
-
-# vim-apprentice-theme-like
-# export PS1="\n\[\033[32m\]\u@\h:\[\033[01;35m\]\$(parse_git_branch)\
-# \[\033[01;31m\]\w \[\033[01;34m\]\n>\[\e[0m\] "
-
-# Original from stack overflow,
-# export PS1="\n\[\033[01;31m\]\u@\h:\[\033[01;34m\]\$(parse_git_branch) \[\033[01;32m\]\w \[\033[01;34m\]\n>\[\e[0m\] "
-
-# }}}
-
-
 
 # Coloured ls commands
 
@@ -420,29 +394,24 @@ export VISUAL=nvim
 # Prevent accidental logging out
 export IGNOREEOF=1
 
+# TODO FIX this
 # Share bash history between all shells
 # https://unix.stackexchange.com/a/1292
 # Avoid duplicates
-export HISTCONTROL=ignoreboth:erasedups
+# export HISTCONTROL=ignoreboth:erasedups
 # When the shell exits, append to the history file instead of overwriting it
-shopt -s histappend
+# shopt -s histappend
 # After each command, append to the history file and reread it
 # export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'} history -a; history -c; history -r;" # Doesnt work for some reason.
-export PROMPT_COMMAND="history -a; history -c; history -r;"
+# export PROMPT_COMMAND="history -a; history -c; history -r;"
 
 # Unlimited bash history
 HISTSIZE=9999999
 HISTFILESIZE=99999999
 
 # Load private stuff
-source ~/.bash_profile_private
+source ~/.zshrc_private
 
-# Load bashrc
-if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
-fi
-
-# brew bash-completion (disabled for now because it slows shell startyp)
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # }}}
