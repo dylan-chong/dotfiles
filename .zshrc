@@ -1,3 +1,27 @@
+# ZPlug
+
+# {{{
+
+# From Homebrew output
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+alias zp='zplug'
+alias zpr='soz; zpr__impl'
+alias zpr__impl='zplug install; zplug update; zplug clean; zplug load'
+alias zpi='zplug install'
+alias zpu='zplug update'
+
+# zplug 'dracula/zsh', as:theme
+# zplug carloscuesta/materialshell, from:github, as:theme
+zplug zpm-zsh/material-colors, use:material-colors.plugin.zsh, from:github, as:theme
+
+
+zplug load
+
+# }}}
+
+
 # Useful Paths
 
 # {{{
@@ -68,7 +92,7 @@ alias iex='iex --erl "-kernel shell_history enabled"'
 alias kotlinc='rlwrap -a foo kotlinc'
 alias swipl='rlwrap -a foo swipl'
 
-alias soba="source ~/.zshrc"
+alias soz="source ~/.zshrc"
 
 alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/server_osx.py"
 
