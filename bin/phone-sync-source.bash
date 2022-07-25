@@ -6,7 +6,7 @@ function phone-music-update() {
 
     echo 'Trimming playlist'
     phone-sync-once &
-    bash -c "cd /Users/Dylan/Dropbox/Programming/GitHub/itunes-applescripts/ && gulp be --no-dry-run -s remove-recent"
+    bash -c "cd /Users/Dylan/Dropbox/Programming/GitHub/itunes-applescripts/ && npm run gulp -- be --no-dry-run -s remove-recent"
     phone-sync
 }
 

@@ -193,11 +193,11 @@ hi illuminatedWord ctermbg=15 guibg=#3B4750
 
 " Far.vim
 let g:far#source = 'rgnvim'
-let g:far#debug = 0
+let g:far#debug = 1
 let g:far#enable_undo = 1
 " TODO replace with CocSearch
-nnoremap <Leader>vr "xyiw:Far <C-r>x<Space><Space>*<Left><Left>
-vnoremap <Leader>vr "xy:Far <C-r>x<Space><Space>*<Left><Left>
+nnoremap <Leader>vr "xyiw:w<Space><Bar><Space>Far <C-r>x<Space><Space>*<Left><Left>
+vnoremap <Leader>vr "xy:w<Space><Bar><Space>Far <C-r>x<Space><Space>*<Left><Left>
 
 " Vim Airline Plugin
 let g:airline_detect_modified=0
@@ -315,13 +315,10 @@ autocmd FileType markdown
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
-" Fugitive
-nnoremap <Leader>gcm :wa<CR>:Gcommit -v
-nnoremap <Leader>gap :wa<CR>:Git add -p<CR>i
-nnoremap <Leader>gdf :wa<CR>:Git diff<CR>i
-nnoremap <Leader>gph :wa<CR>:Gpush<Space>
-nnoremap <Leader>gpl :wa<CR>:Gpull<Space>
+" Fugitive (Git)
 nnoremap <Leader>gb :w<CR>:Git blame<CR>
+nnoremap <Leader>gs :tabnew <Bar> terminal bash --login<CR>Ags<CR>
+nnoremap <Leader>ga :wa<CR>:Git add %
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
@@ -443,6 +440,7 @@ augroup END
 
 " FZF
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.9, 'yoffset': 1, 'border': 'rounded' } }
 " FZF File MRU
 let g:fzf_filemru_bufwrite = 1
 augroup custom_filemru

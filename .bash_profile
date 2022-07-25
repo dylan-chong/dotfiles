@@ -42,14 +42,6 @@ alias gonodev="cl ~/Dropbox/Programming/GitHub/itunes-applescripts-no-dev"
 alias gotower="cl ~/Dropbox/Programming/GitHub/towers-of-hanoi"
 alias goaen="cl ~/Dropbox/Programming/GitHub/aenea-setup"
 
-alias gobash="cl ~/bash-settings"
-
-alias goschool="cl ~/Dropbox/School"
-alias gogroup="cl /Users/Dylan/Dropbox/Programming/GitHub/swen222-group-project"
-
-alias gopat="cl /Users/Dylan/Dropbox/Programming/design-patterns"
-
-alias gopart="cl /Users/Dylan/Dropbox/Sibelius\ Scores/Compositions/2016/partimenti"
 # }}}
 
 
@@ -135,7 +127,9 @@ function loop() {
 }
 
 function notifydone() {
-    osascript -e 'display notification "Done!"'
+    local message='Your script has completed!'
+    osascript -e "display notification \"$message\""
+    say "$message"
 }
 
 function spotdl-playlist() {
@@ -163,13 +157,19 @@ function elixir_recompile() {
 }
 
 function whatismyip() {
-    curl -s 'https://whatsmyip.com' | grep 'Your public IP' | rg '(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)' --only-matching | head -n 1
+    ip=`curl ipinfo.io/ip --silent`
+    echo "IP is $ip. Copying to clipboard"
+    echo "$ip" | pbcopy
 }
 
 # From https://www.stefaanlippens.net/pretty-csv.html
 # Note: Probably won't work if "," or newline inside a cell
 function pretty_csv {
     perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s,
+}
+
+function calculator {
+    vi ~/Desktop/calculator.js +Codi
 }
 
 # }}}
@@ -240,6 +240,9 @@ alias gsh="git stash"
 alias glsu="git ls-files --others --exclude-standard"
 
 alias grb="git rebase"
+alias grbh="git rebase origin/HEAD -i"
+
+alias gbr="git branch"
 
 function gpr() {
     # Goes to the URL for creating a new pull request in the browser. For
@@ -282,15 +285,34 @@ function gcmq() {
             local message=`pbpaste | tr '\n' ' ' | perl -pe 's/\s+/ /g'`
             local branch=`echo "$message" | commit_message_to_branch`
         else
-            # Check if argument is branch name or commit message
-            if [[ "$1" =~ ^[a-zA-Z]+\/[a-zA-Z]+.* ]]; then
+            # Check if argument is branch name or commit message by if it has
+            # no spaces and a / or _ or - in it
+            if [[ "$1" =~ ^[A-Za-z0-9_-]+[/_-][A-Za-z0-9/_-]+$ ]]; then
                 # Argument was branch name
-                # Pass branch as argument and convert to commit messagee
-                # 1. Replace branch folder with `:`
-                # 2. Replace - or _ with space
-                # 3. Uppercase the first letter, and first letter after the `:`
                 local branch="$1"
-                local message=`echo "$branch" | perl -pe 's/\//: /' | perl -pe 's/_|-/ /g' | perl -pe 's/(\w)(\w*:\s)(\w)(.*)/\U$1\L$2\U$3\L$4/'`
+
+                # If contains a slash
+                if [[ "$1" =~ / ]]; then
+                    local prefix=`echo $branch | perl -pe 's/\/.*//'`
+                    # Uppercase first letter of prefix
+                    local prefix_formatted=`echo "$prefix" | perl -pe 's/^(\w)/\U$1/'`
+                    local separator=': '
+                    local suffix=${branch#"$prefix"/}
+                    echo "prefix: $prefix"
+                    echo "suffix: $suffix"
+                else
+                    local prefix_formatted=''
+                    local separator=''
+                    local suffix="$branch"
+                fi
+
+                # Pass branch suffix as argument and convert to commit messagee
+                # 1. Replace all - and _ with spaces
+                # 2. Replace 2+ spaces with ' - ' so you can use '--' in the branch name represent an actual dash
+                # 3. Uppercase the first letter
+                local suffix_formatted=`echo "$suffix" | perl -pe 's/_|-/ /g' | perl -pe 's/\s\s+/ - /g' | perl -pe 's/^(\w)/\U$1/'`
+
+                local message="$prefix_formatted$separator$suffix_formatted"
             else
                 # Argument was commit message
                 local message="$@"
@@ -430,7 +452,8 @@ export HISTCONTROL=ignoreboth:erasedups
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 # After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r;"
+# export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'} history -a; history -c; history -r;" # Doesnt work for some reason.
+export PROMPT_COMMAND="history -a; history -c; history -r;"
 
 # Unlimited bash history
 HISTSIZE=9999999
