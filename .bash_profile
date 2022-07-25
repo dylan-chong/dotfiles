@@ -1,20 +1,3 @@
-# Uni
-
-# {{{
-function gitinspect() {
-    gitinspector \
-        --grading \
-        --format=htmlembedded \
-        --file-types=** \
-        --exclude="package-lock.json|yarn.lock" $@ > .inspection.html \
-        && open .inspection.html \
-        && sleep 2 \
-        && rm .inspection.html
-}
-# }}}
-
-
-
 # Base 16 256 colours
 
 # {{{
@@ -49,21 +32,23 @@ alias goaen="cl ~/Dropbox/Programming/GitHub/aenea-setup"
 # Useful commands
 
 # {{{
-alias prof="nvim ~/.bash_profile"
-alias virc="nvim ~/.vimrc"
 
 alias l="ls -lah"
+alias ..="c .."
+
 function c {
     cd "$@" && echo "" && l
     #cd "$@" && echo -e $(pwd) && echo "" && ls -G
 }
-function cl { # For backwards compatibility
-    c "$@"
+
+function cr() {
+    ranger --choosedir=$HOME/.rangerdir $@
+    local LASTDIR=`cat $HOME/.rangerdir`
+    c "$LASTDIR"
 }
-alias ..="c .."
 
 mkc() {
-    mkdir "$@" && cl "$@"
+    mkdir "$@" && c "$@"
 }
 
 wcme() {
@@ -105,12 +90,6 @@ function fp() {
     local path=`pwd`/$1;
     echo "Copied to clipboard: $path"
     echo $path | tr -d '\n' | pbcopy
-}
-
-function cr() {
-    ranger --choosedir=$HOME/.rangerdir $@
-    local LASTDIR=`cat $HOME/.rangerdir`
-    c "$LASTDIR"
 }
 
 function dowatch() {
@@ -356,10 +335,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # PHP
 export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
-
-# Gcloud
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
-source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
 
 # }}}
 
