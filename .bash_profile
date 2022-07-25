@@ -287,7 +287,7 @@ function gcmq() {
         else
             # Check if argument is branch name or commit message by if it has
             # no spaces and a / or _ or - in it
-            if [[ "$1" =~ ^[A-Za-z0-9_-]+[/_-][A-Za-z0-9/_-]+$ ]]; then
+            if [[ "$@" =~ ^[A-Za-z0-9_-]+[/_-][A-Za-z0-9/_-]+$ ]]; then
                 # Argument was branch name
                 local branch="$1"
 
@@ -315,7 +315,7 @@ function gcmq() {
                 local message="$prefix_formatted$separator$suffix_formatted"
             else
                 # Argument was commit message
-                local message="$@"
+                local message=`echo "$@" | perl -pe 's/^\s*//' | perl -pe 's/\s*$//'`
                 local branch=`echo "$message" | commit_message_to_branch`
             fi
         fi
