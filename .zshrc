@@ -1,27 +1,35 @@
-# ZPlug
+# ZPlug (brew install zplug)
 
 # {{{
 
-# Antigen: Installed with `brew install antigen`
-# Homebrew caveat
-source /opt/homebrew/share/antigen/antigen.zsh
+# From Homebrew output
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
-# Nice shell defaults
-antigen use oh-my-zsh
+alias zp='zplug'
+alias zpi='zplug install'
+alias zpu='zplug update'
 
-# antigen theme carloscuesta/materialshell materialshell
-antigen bundle chriskempson/base16-shell
+alias zpr='soz; zpr__impl'
+# Is a function to allow for soz to refresh the latest version
+function zpr__impl() {
+    zplug install
+    zplug update
+    zplug clean
+    zplug load
+}
 
-antigen apply
+# zplug 'dracula/zsh', as:theme
+# zplug carloscuesta/materialshell, from:github, as:theme
+zplug chriskempson/base16-shell, from:github
+
+zplug load
 
 # }}}
 
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
+# chriskempson/base16-shell,
+base16_materia
 
 
 # Useful Paths
