@@ -2,24 +2,26 @@
 
 # {{{
 
-# From Homebrew output
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
+# Antigen: Installed with `brew install antigen`
+# Homebrew caveat
+source /opt/homebrew/share/antigen/antigen.zsh
 
-alias zp='zplug'
-alias zpr='soz; zpr__impl'
-alias zpr__impl='zplug install; zplug update; zplug clean; zplug load'
-alias zpi='zplug install'
-alias zpu='zplug update'
+# Nice shell defaults
+antigen use oh-my-zsh
 
-# zplug 'dracula/zsh', as:theme
-# zplug carloscuesta/materialshell, from:github, as:theme
-zplug zpm-zsh/material-colors, use:material-colors.plugin.zsh, from:github, as:theme
+# antigen theme carloscuesta/materialshell materialshell
+antigen bundle chriskempson/base16-shell
 
-
-zplug load
+antigen apply
 
 # }}}
+
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 
 # Useful Paths
