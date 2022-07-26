@@ -30,8 +30,12 @@ zplug load
 alias zp='zplug'
 alias zpi='zplug install'
 alias zpu='zplug update'
+alias zl='soz; zl__impl'
+function zl__impl() {
+    zplug install
+    zplug load
+}
 alias zpr='soz; zpr__impl'
-# Is a function to allow for soz to refresh the latest version
 function zpr__impl() {
     zplug install
     zplug update

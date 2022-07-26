@@ -435,6 +435,7 @@ augroup vim_session_autosave
   au!
   au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save()
 augroup END
+let g:session_persist_colors = 0
 
 " Gutentags (TODO can remove this plugin?)
 " rg respects gitignore files. This command also filters out certain file types
