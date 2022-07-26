@@ -171,7 +171,9 @@ let g:enable_bold_font = 1
 " Colorscheme
 set background=dark
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-materia
+colorscheme base16-material-palenight
+" These make base16-material-palenight look better
+highlight clear LineNr
 
 " Highlight line/column
 " set cursorline
@@ -295,6 +297,8 @@ set updatetime=300
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
 let g:gitgutter_preview_win_floating = 0
+" Looks better with base16_material-palenight TODO not doing anything
+" highlight link hl-SignColumn NonText
 
 " PlantUML Previewer
 augroup plantuml_previewer_config

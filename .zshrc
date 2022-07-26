@@ -6,10 +6,30 @@
 export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+# Styling
+zplug chriskempson/base16-shell, from:github
+zplug spaceship-prompt/spaceship-prompt, from:github
+zplug zsh-users/zsh-syntax-highlighting, from:github
+
+zplug zsh-users/zsh-history-substring-search, from:github
+
+# zplug dylan-chong/gprq, from:github
+zplug "/Users/Dylan/Dropbox/Programming/GitHub/gprq/", from:local
+
+zplug load
+
+# }}}
+
+
+
+# Zplug config
+
+# {{{
+
+# Zplug commands
 alias zp='zplug'
 alias zpi='zplug install'
 alias zpu='zplug update'
-
 alias zpr='soz; zpr__impl'
 # Is a function to allow for soz to refresh the latest version
 function zpr__impl() {
@@ -19,22 +39,9 @@ function zpr__impl() {
     zplug load
 }
 
-zplug chriskempson/base16-shell, from:github
-zplug spaceship-prompt/spaceship-prompt, from:github
-
-zplug load
-
-# }}}
-
-
-
-# Zplug plugin config
-
-# {{{
-
 # chriskempson/base16-shell
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_materia
+base16_material-palenight
 
 # spaceship-prompt/spaceship-prompt
 # Commenting out prompts for speed (copied from
@@ -70,20 +77,36 @@ SPACESHIP_PROMPT_ORDER=(
   # kubectl       # Kubectl context section
   # terraform     # Terraform workspace section
   # ibmcloud      # IBM Cloud section
-  exec_time     # Execution time
-  line_sep      # Line break
+  # exec_time     # Execution time
   # battery       # Battery level and status
-  # vi_mode       # Vi-mode indicator
   jobs          # Background jobs indicator
   exit_code     # Exit code section
+  line_sep      # Line break
+  vi_mode       # Vi-mode indicator
   char          # Prompt character
 )
+# Time
 SPACESHIP_TIME_SHOW=true
+SPACESHIP_TIME_COLOR=cyan
 SPACESHIP_TIME_FORMAT='%D{%H:%M:%S.%.}'
-SPACESHIP_GIT_STATUS_SHOW=false
 # SPACESHIP_DIR_TRUNC doesn't work if SPACESHIP_DIR_TRUNC_REPO is true
-SPACESHIP_DIR_TRUNC=3
 SPACESHIP_DIR_TRUNC_REPO=false
+SPACESHIP_DIR_COLOR=blue
+SPACESHIP_DIR_TRUNC_PREFIX=.../
+SPACESHIP_DIR_TRUNC=2
+# I don't like the little symbols
+SPACESHIP_GIT_STATUS_SHOW=false
+SPACESHIP_GIT_BRANCH_COLOR=magenta
+
+# zsh-users/zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# zsh-users/zsh-history-substring-search
+HISTORY_SUBSTRING_SEARCH_PREFIXED=1
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # }}}
 
@@ -170,7 +193,8 @@ source ~/bin/phone-sync-source.bash
 function fp() {
     local path=`pwd`/$1;
     echo "Copied to clipboard: $path"
-    echo $path | tr -d '\n' | pbcopy
+    # TODO fix this
+    echo $path" | tr -d '\n' | pbcopy"
 }
 
 function dowatch() {
@@ -327,77 +351,6 @@ function gpr() {
     esac
 }
 
-function commit_message_to_branch() {
-    perl -pe 's/(:|\/)//g' | perl -pe 's/^(SOLV-\d+(?=:)?|[^:]+(?=:)):?\s*(.*\S)\s*$/\1\/\l\2/' | perl -pe 's/[^\w\/]+/-/g' | tr '[:upper:]' '[:lower:]' | perl -pe 's/^solv/SOLV/'
-}
-
-# Quick commit, new branch, and push
-function gcmq() {
-    echo '> git status'
-    git status
-    echo
-
-    read -p "Are you checked on the right branch *and* does this show the right staged files [y/n]? " CONT
-    echo
-    if [ "$CONT" = "y" ]; then
-        if [ -z "$1" ]; then
-            # Take commit message from clipboard so you can copy the jira ticket number and description straight after it
-            local message=`pbpaste | tr '\n' ' ' | perl -pe 's/\s+/ /g'`
-            local branch=`echo "$message" | commit_message_to_branch`
-        else
-            # Check if argument is branch name or commit message by if it has
-            # no spaces and a / or _ or - in it
-            if [[ "$@" =~ ^[A-Za-z0-9_-]+[/_-][A-Za-z0-9/_-]+$ ]]; then
-                # Argument was branch name
-                local branch="$1"
-
-                # If contains a slash
-                if [[ "$1" =~ / ]]; then
-                    local prefix=`echo $branch | perl -pe 's/\/.*//'`
-                    # Uppercase first letter of prefix
-                    local prefix_formatted=`echo "$prefix" | perl -pe 's/^(\w)/\U$1/'`
-                    local separator=': '
-                    local suffix=${branch#"$prefix"/}
-                    echo "prefix: $prefix"
-                    echo "suffix: $suffix"
-                else
-                    local prefix_formatted=''
-                    local separator=''
-                    local suffix="$branch"
-                fi
-
-                # Pass branch suffix as argument and convert to commit messagee
-                # 1. Replace all - and _ with spaces
-                # 2. Replace 2+ spaces with ' - ' so you can use '--' in the branch name represent an actual dash
-                # 3. Uppercase the first letter
-                local suffix_formatted=`echo "$suffix" | perl -pe 's/_|-/ /g' | perl -pe 's/\s\s+/ - /g' | perl -pe 's/^(\w)/\U$1/'`
-
-                local message="$prefix_formatted$separator$suffix_formatted"
-            else
-                # Argument was commit message
-                local message=`echo "$@" | perl -pe 's/^\s*//' | perl -pe 's/\s*$//'`
-                local branch=`echo "$message" | commit_message_to_branch`
-            fi
-        fi
-
-        echo "New Branch: $branch"
-        echo "Commit message: $message"
-        echo
-
-        read -p "Are these correct [y/n]? " CONT
-        echo
-        if [ "$CONT" = "y" ]; then
-            git checkout -b "$branch" \
-                && git commit -m "$message" \
-                && gphu \
-                && gpr -g
-        else
-            echo "Cancelling";
-        fi
-    else
-        echo "Cancelling";
-    fi
-}
 
 # }}}
 
@@ -464,16 +417,8 @@ export VISUAL=nvim
 # Prevent accidental logging out
 export IGNOREEOF=1
 
-# TODO FIX this
 # Share bash history between all shells
-# https://unix.stackexchange.com/a/1292
-# Avoid duplicates
-# export HISTCONTROL=ignoreboth:erasedups
-# When the shell exits, append to the history file instead of overwriting it
-# shopt -s histappend
-# After each command, append to the history file and reread it
-# export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'} history -a; history -c; history -r;" # Doesnt work for some reason.
-# export PROMPT_COMMAND="history -a; history -c; history -r;"
+setopt share_history
 
 # Unlimited bash history
 HISTSIZE=9999999
