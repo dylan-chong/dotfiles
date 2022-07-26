@@ -303,10 +303,6 @@ git_prune_branches() {
 alias gcm="git commit -v"
 alias ga="git add"
 alias gap="git add -p"
-alias gaa="git add -A"
-alias gan="git add -N ."
-alias gai="git add -i"
-alias gae="git add -e"
 
 alias grth="git reset --hard"
 
