@@ -13,7 +13,6 @@ zplug zsh-users/zsh-syntax-highlighting, from:github
 
 zplug zsh-users/zsh-history-substring-search, from:github
 
-# zplug dylan-chong/gprq, from:github
 zplug "/Users/Dylan/Dropbox/Programming/GitHub/gprq/", from:local
 
 zplug load
@@ -391,6 +390,10 @@ export EDITOR='nvim'
 # Vim
 alias vi="nvim"
 
+# ZSHZLE
+# Can backspace past where insert mode started
+bindkey "^?" backward-delete-char
+
 # Prevent stupidity
 # https://hasseg.org/trash/ (brew install trash)
 alias rm="trash"
@@ -415,7 +418,24 @@ export VISUAL=nvim
 
 # TODO fix
 # Prevent accidental logging out
-export IGNOREEOF=1
+# https://superuser.com/a/1309966
+setopt ignore_eof
+IGNOREEOF=1
+zle -N bash-ctrl-d
+bindkey '^D' bash-ctrl-d
+bash-ctrl-d() {
+  if [[ $CURSOR == 0 && -z $BUFFER ]]
+  then
+    [[ -z $IGNOREEOF || $IGNOREEOF == 0 ]] && exit
+    [[ $LASTWIDGET == bash-ctrl-d ]] \
+      && (( --__BASH_IGNORE_EOF == 0 )) \
+      && exit
+    : ${__BASH_IGNORE_EOF=$IGNOREEOF}
+    zle send-break
+  else
+    zle delete-char-or-list
+  fi
+}
 
 # Share bash history between all shells
 setopt share_history
