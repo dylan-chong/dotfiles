@@ -252,39 +252,6 @@ let g:AutoPairsMultilineClose = 0
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutToggle = ''
 
-" Ale
-" let g:ale_completion_enabled = 1
-" let g:ale_set_signs = 1
-" let g:ale_change_sign_column_color = 0
-" let g:ale_sign_column_always = 0
-" let g:ale_completion_delay = 500
-" let g:ale_linters = {
-      " \ 'java': [],
-      " \ 'typescript': ['eslint'],
-      " \ 'ruby': ['rubocop'],
-      " \ 'elixir': ['mix', 'credo'],
-      " \ }
-" " Turn linting errors into warnings
-" let g:ale_type_map = {
-      " \ 'eslint': {'ES': 'WS', 'E': 'W'},
-      " \ 'credo': {'ES': 'WS', 'E': 'W'}
-      " \ }
-" let g:ale_fixers = {
-      " \ 'typescript': ['eslint'],
-      " \ 'typescriptreact': ['eslint', 'tslint'],
-      " \ 'javascript': ['eslint'],
-      " \ 'python': ['autopep8'],
-      " \ 'ruby': ['rubocop'],
-      " \ 'elixir': ['mix_format'],
-      " \ }
-" let g:ale_typescript_tslint_use_global = 0
-" let g:ale_elixir_credo_use_global = 0
-" let g:ale_lint_on_enter = 0
-" nnoremap <leader>an :ALENextWrap<CR>
-" nnoremap <leader>ap :ALEPreviousWrap<CR>
-" nnoremap <leader>ad :ALEGoToDefinition<CR>
-" nnoremap <leader>af :ALEFix<CR>
-
 " Import JS
 nnoremap <leader>jj :ImportJSWord<CR>
 nnoremap <leader>jf :ImportJSFix<CR>
@@ -297,8 +264,9 @@ set updatetime=300
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
 let g:gitgutter_preview_win_floating = 0
-" Looks better with base16_material-palenight TODO not doing anything
-" highlight link hl-SignColumn NonText
+" Looks better with base16_material-palenight
+highlight clear SignColumn
+let g:gitgutter_set_sign_backgrounds=1
 
 " PlantUML Previewer
 augroup plantuml_previewer_config
@@ -712,7 +680,7 @@ nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
 nnoremap <Leader>ed :saveas ~/Desktop/
 nnoremap <Leader>dt :w<CR>:!pdflatex '%' && open %:r.pdf<CR>
 
-" 'Inspections'
+" Intelligent 'Inspections'
 " {{{
 " Split list/params by comma (except trailing comma)
 vnoremap <leader>i, mz:s/,\(\s*$\)\@\!/,\r<CR>=ap`z
@@ -726,6 +694,9 @@ nmap <leader>i<CR> v%<Right>o%%<Left><leader>i<CR>
 nmap <leader>i<C-j> v%<Right>o%%<Left><leader>i<C-j>
 " Split line into multiple lines by '.'
 vnoremap <leader>i. :s/\./\r\.<CR><ESC>mz=ap`z
+" Split bash pipe into multiple lines
+vnoremap <leader>i<Bar> :s/<Bar>\s\+/\\\r<Bar><Space><CR><ESC>mz=ap`z
+
 " }}}
 
 " Don't deselect text on indent
@@ -1058,8 +1029,8 @@ cnoreabbrev WQ wq
 set splitright
 set splitbelow
 
-" Better display for messages
-set cmdheight=2
+" Better display for messages (don't need anymore)
+" set cmdheight=2
 
 " }}}
 

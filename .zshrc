@@ -2,36 +2,9 @@
 
 # {{{
 
-# From Homebrew output
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
-
-# Styling
-zplug chriskempson/base16-shell, from:github
-zplug spaceship-prompt/spaceship-prompt, from:github
-zplug zsh-users/zsh-syntax-highlighting, from:github
-
-zplug zsh-users/zsh-history-substring-search, from:github
-
-zplug "/Users/Dylan/Dropbox/Programming/GitHub/gprq/", from:local
-
-zplug load
-
-# }}}
-
-
-
-# Zplug config
-
-# {{{
-
-# Zplug commands
-alias zp='zplug'
-alias zpi='zplug install'
-alias zpu='zplug update'
+# Zplug commands (first in case zplug doesn't load, can load it with `zl`)
 alias zl='soz; zl__impl'
 function zl__impl() {
-    zplug install
     zplug load
 }
 alias zpr='soz; zpr__impl'
@@ -41,6 +14,35 @@ function zpr__impl() {
     zplug clean
     zplug load
 }
+
+# From Homebrew output
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# Styling
+zplug chriskempson/base16-shell, from:github
+zplug spaceship-prompt/spaceship-prompt, from:github
+zplug zsh-users/zsh-syntax-highlighting, from:github
+
+# History/autocomplete
+zplug zsh-users/zsh-history-substring-search, from:github
+zplug zsh-users/zsh-autosuggestions, from:github
+
+# Random utils
+zplug MichaelAquilina/zsh-auto-notify
+zplug MichaelAquilina/zsh-you-should-use
+zplug "/Users/Dylan/Dropbox/Programming/GitHub/gprq/", from:local
+
+# Happens when starting up tmux session, due to lock/resource contention
+zplug load
+
+# }}}
+
+
+
+# Zplug config
+
+# {{{
 
 # chriskempson/base16-shell
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
@@ -110,6 +112,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 # zsh-users/zsh-history-substring-search
 HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+# MichaelAquilina/zsh-auto-notify
+export AUTO_NOTIFY_IGNORE=(docker man gap grb grbh gdf)
 
 # }}}
 
@@ -194,10 +199,9 @@ alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 source ~/bin/phone-sync-source.bash
 
 function fp() {
-    local path=`pwd`/$1;
-    echo "Copied to clipboard: $path"
-    # TODO fix this
-    echo $path" | tr -d '\n' | pbcopy"
+    local full_path="`pwd`/$1";
+    echo -n "$full_path" | pbcopy
+    echo "Copied to clipboard: $full_path"
 }
 
 function dowatch() {
@@ -296,6 +300,7 @@ alias grmtv="git remote -v"
 alias gco='git checkout'
 alias gcof='git checkout `fbr`'
 alias gcoh="gfa && git checkout origin/HEAD"
+alias gcuh="gfa && git checkout upstream/HEAD"
 alias gcob='git checkout -b'
 alias gcop='git checkout -p'
 
@@ -305,6 +310,7 @@ git_prune_branches() {
 
 alias gcm="git commit -v"
 alias ga="git add"
+alias gaa="git add -A"
 alias gap="git add -p"
 
 alias grth="git reset --hard"
@@ -417,25 +423,24 @@ function less() {
 export VISUAL=nvim
 
 # TODO fix
-# Prevent accidental logging out
-# https://superuser.com/a/1309966
+# Prevent accidental logging out https://superuser.com/a/1509672
 setopt ignore_eof
 IGNOREEOF=1
+# Emulate Bash $IGNOREEOF behavior
+function bash-ctrl-d() {
+    if [[ $CURSOR == 0 && -z $BUFFER ]]
+    then
+        [[ -z $IGNOREEOF || $IGNOREEOF == 0 ]] && exit
+        if [[ "$LASTWIDGET" == "bash-ctrl-d" ]]
+        then
+            (( --__BASH_IGNORE_EOF <= 0 )) && exit
+        else
+            (( __BASH_IGNORE_EOF = IGNOREEOF ))
+        fi
+    fi
+}
 zle -N bash-ctrl-d
 bindkey '^D' bash-ctrl-d
-bash-ctrl-d() {
-  if [[ $CURSOR == 0 && -z $BUFFER ]]
-  then
-    [[ -z $IGNOREEOF || $IGNOREEOF == 0 ]] && exit
-    [[ $LASTWIDGET == bash-ctrl-d ]] \
-      && (( --__BASH_IGNORE_EOF == 0 )) \
-      && exit
-    : ${__BASH_IGNORE_EOF=$IGNOREEOF}
-    zle send-break
-  else
-    zle delete-char-or-list
-  fi
-}
 
 # Share bash history between all shells
 setopt share_history
@@ -447,6 +452,12 @@ HISTFILESIZE=99999999
 # Load private stuff
 source ~/.zshrc_private
 
+# FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# WTF Zsh, can't type comments
+setopt INTERACTIVE_COMMENTS
+
+# ZSH
 
 # }}}
