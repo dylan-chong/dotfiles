@@ -34,6 +34,9 @@ let g:vim_markdown_conceal = 0
 " Vim-Plug
 " {{{
 
+" Refresh plug (install, update)
+nnoremap <Leader>pr :PlugUpdate<CR>
+
 call plug#begin('~/.vim/plugged')
 
 " PLUGINS GO HERE
@@ -67,6 +70,7 @@ Plug 'dylan-chong/fzf_similar.vim', { 'branch': 'develop' }
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 
 " Airline
@@ -674,7 +678,7 @@ vnoremap g<C-r> :s@\C\V<C-r>x@
 vnoremap g<C-u> :S@<C-r>x@
 
 " Reload .vimrc
-nnoremap <leader>sv :w<CR>:so $MYVIMRC<CR>
+nnoremap <leader>so w<CR>:so $MYVIMRC<CR>
 
 " Exporting documents
 nnoremap <Leader>ed :saveas ~/Desktop/

@@ -1,40 +1,32 @@
-# ZPlug (brew install zplug)
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+
+# Antigen
 
 # {{{
 
-# Zplug commands (first in case zplug doesn't load, can load it with `zl`)
-alias zl='soz; zl__impl'
-function zl__impl() {
-    zplug load
-}
-alias zpr='soz; zpr__impl'
-function zpr__impl() {
-    zplug install
-    zplug update
-    zplug clean
-    zplug load
-}
+ANTIGEN_LOG=~/.antigen/debug.log
+source "$(brew --prefix antigen)/share/antigen/antigen.zsh"
 
-# From Homebrew output
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
-
-# Styling
-zplug chriskempson/base16-shell, from:github
-zplug spaceship-prompt/spaceship-prompt, from:github
-zplug zsh-users/zsh-syntax-highlighting, from:github
+# Themes
+# base16-shell doesn't follow the zsh plug format so can't be used with `theme` (I think)
+antigen bundle chriskempson/base16-shell # --loc="base16-shell.plugin.zsh"
+antigen bundle spaceship-prompt/spaceship-prompt
+antigen bundle zsh-users/zsh-syntax-highlighting
 
 # History/autocomplete
-zplug zsh-users/zsh-history-substring-search, from:github
-zplug zsh-users/zsh-autosuggestions, from:github
+# antigen bundle zsh-users/zsh-history-substring-search
+# antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle marlonrichert/zsh-autocomplete@main
 
 # Random utils
-zplug MichaelAquilina/zsh-auto-notify
-zplug MichaelAquilina/zsh-you-should-use
-zplug "/Users/Dylan/Dropbox/Programming/GitHub/gprq/", from:local
+# antigen bundle MichaelAquilina/zsh-auto-notify # annoying. TODO delete when it sept
+antigen bundle MichaelAquilina/zsh-you-should-use
+antigen bundle "/Users/Dylan/Dropbox/Programming/GitHub/gprq/" --no-local-clone
 
-# Happens when starting up tmux session, due to lock/resource contention
-zplug load
+antigen apply
 
 # }}}
 
@@ -45,8 +37,8 @@ zplug load
 # {{{
 
 # chriskempson/base16-shell
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_material-palenight
+# Run this in the shell manually and that will set the global theme in ~/.base16_theme
+# base16_material-palenight
 
 # spaceship-prompt/spaceship-prompt
 # Commenting out prompts for speed (copied from
@@ -87,7 +79,7 @@ SPACESHIP_PROMPT_ORDER=(
   jobs          # Background jobs indicator
   exit_code     # Exit code section
   line_sep      # Line break
-  vi_mode       # Vi-mode indicator
+  # vi_mode       # Vi-mode indicator
   char          # Prompt character
 )
 # Time
@@ -104,17 +96,25 @@ SPACESHIP_GIT_STATUS_SHOW=false
 SPACESHIP_GIT_BRANCH_COLOR=magenta
 
 # zsh-users/zsh-history-substring-search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
+# bindkey -M vicmd 'k' history-substring-search-up
+# bindkey -M vicmd 'j' history-substring-search-down
 
 # zsh-users/zsh-history-substring-search
 HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS= # Remove "i" to history case sensitive
 
 # MichaelAquilina/zsh-auto-notify
-export AUTO_NOTIFY_IGNORE=(docker man gap grb grbh gdf)
+export AUTO_NOTIFY_IGNORE=(
+    docker man
+    git
+    gap grb grbh gdf
+    gprq
+    nvim vi
+    tmux
+)
 
 # }}}
 
@@ -145,12 +145,14 @@ alias goaen="c ~/Dropbox/Programming/GitHub/aenea-setup"
 
 # {{{
 
-alias l="ls -lah"
+function l() {
+    ls -lah "$@"
+}
+
 alias ..="c .."
 
 function c {
     cd "$@" && echo "" && l
-    #cd "$@" && echo -e $(pwd) && echo "" && ls -G
 }
 
 function cr() {
@@ -190,7 +192,7 @@ alias iex='iex --erl "-kernel shell_history enabled"'
 alias kotlinc='rlwrap -a foo kotlinc'
 alias swipl='rlwrap -a foo swipl'
 
-alias soz="source ~/.zshrc"
+alias so="source ~/.zshrc"
 
 alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/server_osx.py"
 
@@ -308,6 +310,10 @@ git_prune_branches() {
     git branch -v | grep gone | perl -pwe 's/^  ([^\s]+).*/$1/g' | xargs git branch -d
 }
 
+git_prune_branches__force__i_understand_that_this_will_delete_all_my_local_branches_without_remotes() {
+    git branch -v | grep gone | perl -pwe 's/^  ([^\s]+).*/$1/g' | xargs git branch -D
+}
+
 alias gcm="git commit -v"
 alias ga="git add"
 alias gaa="git add -A"
@@ -330,6 +336,9 @@ alias glsu="git ls-files --others --exclude-standard"
 
 alias grb="git rebase"
 alias grbh="git rebase origin/HEAD -i"
+alias grba="git rebase --abort"
+alias grbs="git rebase --skip"
+alias grbc="git rebase --continue"
 
 alias gbr="git branch"
 
@@ -338,11 +347,15 @@ function gpr() {
     # GitHub, the branch is selected automatically, and if the pull request
     # already exists for that branch, GitHub will redirect to the existing pull
     # request. For Bitbucket, the new pull request page is opened.
-    local base=`git remote get-url origin | perl -pe 's/\.git$//' | perl -pe 's/git\@([^:]+):/https:\/\/\1\//'`
-    if [[ $base == 'https://bitbucket.org'* ]]; then
+    local base=`git_remote_website`
+    if [[ "$base" == 'https://bitbucket.org'* ]]; then
         local url="$base/pull-requests/new"
-    else
+    elif [[ "$base" == 'https://github.com/'* ]]; then
+        # Github
         local url="$base/pull/`current_branch`"
+    else
+        echo "Unknown domain for url: $base"
+        return
     fi
     case $1 in
         --safari|-s)
@@ -356,6 +369,68 @@ function gpr() {
     esac
 }
 
+function gpr() {
+    # Goes to the URL for creating a new pull request in the browser. For
+    # GitHub, the branch is selected automatically, and if the pull request
+    # already exists for that branch, GitHub will redirect to the existing pull
+    # request. For Bitbucket, the new pull request page is opened.
+    local base=`git_remote_website`
+
+    if [[ "$base" == 'https://bitbucket.org'* ]]; then
+        local url="$base/pull-requests/new"
+    elif [[ "$base" == 'https://github.com/'* ]]; then
+        # Github
+        local url="$base/pull/`current_branch`"
+    else
+        echo "Unknown domain for url: $base"
+        return
+    fi
+
+    open_url_in_browser "$url" $1
+}
+
+function git_remote_website() {
+    git remote get-url origin \
+        | perl -pe 's/\.git$//' \
+        | perl -pe 's/git\@([^:]+):/https:\/\/\1\//'
+}
+
+function open_url_in_browser() {
+    local url="$1"
+    local browser_arg="$2"
+
+    case "$browser_arg" in
+        --safari|-s)
+            open -a 'Safari' "$url"
+            ;;
+        --chrome|-g|-c)
+            open -a 'Google Chrome' "$url"
+            ;;
+        *)
+            open "$url"
+    esac
+}
+
+# Can just use :GBrowse in vim
+function open_git_file_in_browser() {
+    local base=`git_remote_website`
+    # Path relative to root of repo
+    local file=`git ls-files --full-name "$1"`
+
+    if [[ "$base" == 'https://bitbucket.org'* ]]; then
+        echo "Bitbucket not implemented: $base"
+        return
+    elif [[ "$base" == 'https://github.com/'* ]]; then
+        # Github
+        local commit_sha=`git rev-parse HEAD`
+        local url="$base/blob/HEAD/$file"
+    else
+        echo "Unknown domain for url: $base"
+        return
+    fi
+
+    open_url_in_browser "$url"
+}
 
 # }}}
 
@@ -364,10 +439,6 @@ function gpr() {
 # Homes/Paths
 
 # {{{
-export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH"
-
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # ASDF
 . $(brew --prefix asdf)/asdf.sh
@@ -422,25 +493,29 @@ function less() {
 # v to open nvim in less
 export VISUAL=nvim
 
-# TODO fix
+# TODO fix - broken by the autocomplete plugin
 # Prevent accidental logging out https://superuser.com/a/1509672
-setopt ignore_eof
-IGNOREEOF=1
-# Emulate Bash $IGNOREEOF behavior
-function bash-ctrl-d() {
-    if [[ $CURSOR == 0 && -z $BUFFER ]]
-    then
-        [[ -z $IGNOREEOF || $IGNOREEOF == 0 ]] && exit
-        if [[ "$LASTWIDGET" == "bash-ctrl-d" ]]
-        then
-            (( --__BASH_IGNORE_EOF <= 0 )) && exit
-        else
-            (( __BASH_IGNORE_EOF = IGNOREEOF ))
-        fi
-    fi
-}
-zle -N bash-ctrl-d
-bindkey '^D' bash-ctrl-d
+# setopt ignore_eof
+# IGNOREEOF=1
+# # Emulate Bash $IGNOREEOF behavior
+# function bash-ctrl-d() {
+    # echo "CURSOR: $CURSOR"
+    # echo "BUFFER: $BUFFER"
+    # echo "IGNOREEOF: $IGNOREEOF"
+    # echo "__BASH_IGNORE_EOF: $__BASH_IGNORE_EOF"
+    # if [[ $CURSOR == 0 && -z $BUFFER ]]
+    # then
+        # [[ -z $IGNOREEOF || $IGNOREEOF == 0 ]] && exit
+        # if [[ "$LASTWIDGET" == "bash-ctrl-d" ]]
+        # then
+            # (( --__BASH_IGNORE_EOF <= 0 )) && exit
+        # else
+            # (( __BASH_IGNORE_EOF = IGNOREEOF ))
+        # fi
+    # fi
+# }
+# zle -N bash-ctrl-d
+# bindkey '^D' bash-ctrl-d
 
 # Share bash history between all shells
 setopt share_history
