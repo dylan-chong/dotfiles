@@ -461,6 +461,10 @@ setopt INTERACTIVE_COMMENTS
 # Vi mode
 bindkey -v
 export KEYTIMEOUT=1
+bindkey -M vicmd "^V" edit-command-line
+bindkey -M viins "^V" edit-command-line
+bindkey -M viins '^A' vi-beginning-of-line
+bindkey -M viins '^E' vi-end-of-line
 
 
 # }}}
