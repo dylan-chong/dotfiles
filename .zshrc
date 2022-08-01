@@ -339,33 +339,6 @@ function gpr() {
     # already exists for that branch, GitHub will redirect to the existing pull
     # request. For Bitbucket, the new pull request page is opened.
     local base=`git_remote_website`
-    if [[ "$base" == 'https://bitbucket.org'* ]]; then
-        local url="$base/pull-requests/new"
-    elif [[ "$base" == 'https://github.com/'* ]]; then
-        # Github
-        local url="$base/pull/`current_branch`"
-    else
-        echo "Unknown domain for url: $base"
-        return
-    fi
-    case $1 in
-        --safari|-s)
-            open -a 'Safari' $url
-            ;;
-        --chrome|-g|-c)
-            open -a 'Google Chrome' $url
-            ;;
-        *)
-            open $url
-    esac
-}
-
-function gpr() {
-    # Goes to the URL for creating a new pull request in the browser. For
-    # GitHub, the branch is selected automatically, and if the pull request
-    # already exists for that branch, GitHub will redirect to the existing pull
-    # request. For Bitbucket, the new pull request page is opened.
-    local base=`git_remote_website`
 
     if [[ "$base" == 'https://bitbucket.org'* ]]; then
         local url="$base/pull-requests/new"
@@ -378,49 +351,13 @@ function gpr() {
     fi
 
     open_url_in_browser "$url" $1
+    python3 -m 'webbrowser' -t "$url"
 }
 
 function git_remote_website() {
     git remote get-url origin \
         | perl -pe 's/\.git$//' \
         | perl -pe 's/git\@([^:]+):/https:\/\/\1\//'
-}
-
-function open_url_in_browser() {
-    local url="$1"
-    local browser_arg="$2"
-
-    case "$browser_arg" in
-        --safari|-s)
-            open -a 'Safari' "$url"
-            ;;
-        --chrome|-g|-c)
-            open -a 'Google Chrome' "$url"
-            ;;
-        *)
-            open "$url"
-    esac
-}
-
-# Can just use :GBrowse in vim
-function open_git_file_in_browser() {
-    local base=`git_remote_website`
-    # Path relative to root of repo
-    local file=`git ls-files --full-name "$1"`
-
-    if [[ "$base" == 'https://bitbucket.org'* ]]; then
-        echo "Bitbucket not implemented: $base"
-        return
-    elif [[ "$base" == 'https://github.com/'* ]]; then
-        # Github
-        local commit_sha=`git rev-parse HEAD`
-        local url="$base/blob/HEAD/$file"
-    else
-        echo "Unknown domain for url: $base"
-        return
-    fi
-
-    open_url_in_browser "$url"
 }
 
 # }}}
