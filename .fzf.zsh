@@ -42,10 +42,11 @@ fbr() {
   printf "$combined_list" | remove_duplicates | fzf
 }
 
-__fzf_history__() {
-  # Overrides fzf history function: Show history without duplicates
-  history | perl -pe 's/ *[0-9]*\*? *//' | tac | awk '!x[$0]++' | fzf --no-sort --query="'"
-}
+# Disabled in favour of https://github.com/marlonrichert/zsh-autocomplete
+# __fzf_history__() {
+  # # Overrides fzf history function: Show history without duplicates
+  # history | perl -pe 's/ *[0-9]*\*? *//' | tac | awk '!x[$0]++' | fzf --no-sort --query="'"
+# }
 
 # Various Settings
 # ---------------

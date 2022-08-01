@@ -10,21 +10,25 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 ANTIGEN_LOG=~/.antigen/debug.log
 source "$(brew --prefix antigen)/share/antigen/antigen.zsh"
 
+antigen use oh-my-zsh
+
+antigen bundle https://github.com/robbyrussell/oh-my-zsh.git plugins/vi-mode
+
 # Themes
 # base16-shell doesn't follow the zsh plug format so can't be used with `theme` (I think)
-antigen bundle chriskempson/base16-shell # --loc="base16-shell.plugin.zsh"
+antigen bundle chriskempson/base16-shell
 antigen bundle spaceship-prompt/spaceship-prompt
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # History/autocomplete
-# antigen bundle zsh-users/zsh-history-substring-search
-# antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle marlonrichert/zsh-autocomplete@main
 
 # Random utils
-# antigen bundle MichaelAquilina/zsh-auto-notify # annoying. TODO delete when it sept
 antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle "/Users/Dylan/Dropbox/Programming/GitHub/gprq/" --no-local-clone
+antigen bundle paulirish/git-open
 
 antigen apply
 
@@ -79,7 +83,7 @@ SPACESHIP_PROMPT_ORDER=(
   jobs          # Background jobs indicator
   exit_code     # Exit code section
   line_sep      # Line break
-  # vi_mode       # Vi-mode indicator
+  # vi_mode       # Vi-mode indicator - always shows I
   char          # Prompt character
 )
 # Time
@@ -96,25 +100,13 @@ SPACESHIP_GIT_STATUS_SHOW=false
 SPACESHIP_GIT_BRANCH_COLOR=magenta
 
 # zsh-users/zsh-history-substring-search
-# bindkey '^[[A' history-substring-search-up
-# bindkey '^[[B' history-substring-search-down
-# bindkey -M vicmd 'k' history-substring-search-up
-# bindkey -M vicmd 'j' history-substring-search-down
-
-# zsh-users/zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS= # Remove "i" to history case sensitive
-
-# MichaelAquilina/zsh-auto-notify
-export AUTO_NOTIFY_IGNORE=(
-    docker man
-    git
-    gap grb grbh gdf
-    gprq
-    nvim vi
-    tmux
-)
 
 # }}}
 
@@ -342,95 +334,101 @@ alias grbc="git rebase --continue"
 
 alias gbr="git branch"
 
+# Muscle memory backwards compatibility
 function gpr() {
-    # Goes to the URL for creating a new pull request in the browser. For
-    # GitHub, the branch is selected automatically, and if the pull request
-    # already exists for that branch, GitHub will redirect to the existing pull
-    # request. For Bitbucket, the new pull request page is opened.
-    local base=`git_remote_website`
-    if [[ "$base" == 'https://bitbucket.org'* ]]; then
-        local url="$base/pull-requests/new"
-    elif [[ "$base" == 'https://github.com/'* ]]; then
-        # Github
-        local url="$base/pull/`current_branch`"
-    else
-        echo "Unknown domain for url: $base"
-        return
-    fi
-    case $1 in
-        --safari|-s)
-            open -a 'Safari' $url
-            ;;
-        --chrome|-g|-c)
-            open -a 'Google Chrome' $url
-            ;;
-        *)
-            open $url
-    esac
+    git-open
 }
 
-function gpr() {
-    # Goes to the URL for creating a new pull request in the browser. For
-    # GitHub, the branch is selected automatically, and if the pull request
-    # already exists for that branch, GitHub will redirect to the existing pull
-    # request. For Bitbucket, the new pull request page is opened.
-    local base=`git_remote_website`
-
-    if [[ "$base" == 'https://bitbucket.org'* ]]; then
-        local url="$base/pull-requests/new"
-    elif [[ "$base" == 'https://github.com/'* ]]; then
-        # Github
-        local url="$base/pull/`current_branch`"
-    else
-        echo "Unknown domain for url: $base"
-        return
-    fi
-
-    open_url_in_browser "$url" $1
-}
-
-function git_remote_website() {
-    git remote get-url origin \
-        | perl -pe 's/\.git$//' \
-        | perl -pe 's/git\@([^:]+):/https:\/\/\1\//'
-}
-
-function open_url_in_browser() {
-    local url="$1"
-    local browser_arg="$2"
-
-    case "$browser_arg" in
-        --safari|-s)
-            open -a 'Safari' "$url"
-            ;;
-        --chrome|-g|-c)
-            open -a 'Google Chrome' "$url"
-            ;;
-        *)
-            open "$url"
-    esac
-}
-
-# Can just use :GBrowse in vim
-function open_git_file_in_browser() {
-    local base=`git_remote_website`
-    # Path relative to root of repo
-    local file=`git ls-files --full-name "$1"`
-
-    if [[ "$base" == 'https://bitbucket.org'* ]]; then
-        echo "Bitbucket not implemented: $base"
-        return
-    elif [[ "$base" == 'https://github.com/'* ]]; then
-        # Github
-        local commit_sha=`git rev-parse HEAD`
-        local url="$base/blob/HEAD/$file"
-    else
-        echo "Unknown domain for url: $base"
-        return
-    fi
-
-    open_url_in_browser "$url"
-}
+# Deprecated in favour of https://github.com/paulirish/git-open
+# function gpr() {
+#     # Goes to the URL for creating a new pull request in the browser. For
+#     # GitHub, the branch is selected automatically, and if the pull request
+#     # already exists for that branch, GitHub will redirect to the existing pull
+#     # request. For Bitbucket, the new pull request page is opened.
+#     local base=`git_remote_website`
+#     if [[ "$base" == 'https://bitbucket.org'* ]]; then
+#         local url="$base/pull-requests/new"
+#     elif [[ "$base" == 'https://github.com/'* ]]; then
+#         # Github
+#         local url="$base/pull/`current_branch`"
+#     else
+#         echo "Unknown domain for url: $base"
+#         return
+#     fi
+#     case $1 in
+#         --safari|-s)
+#             open -a 'Safari' $url
+#             ;;
+#         --chrome|-g|-c)
+#             open -a 'Google Chrome' $url
+#             ;;
+#         *)
+#             open $url
+#     esac
+# }
+#
+# function gpr() {
+#     # Goes to the URL for creating a new pull request in the browser. For
+#     # GitHub, the branch is selected automatically, and if the pull request
+#     # already exists for that branch, GitHub will redirect to the existing pull
+#     # request. For Bitbucket, the new pull request page is opened.
+#     local base=`git_remote_website`
+#
+#     if [[ "$base" == 'https://bitbucket.org'* ]]; then
+#         local url="$base/pull-requests/new"
+#     elif [[ "$base" == 'https://github.com/'* ]]; then
+#         # Github
+#         local url="$base/pull/`current_branch`"
+#     else
+#         echo "Unknown domain for url: $base"
+#         return
+#     fi
+#
+#     open_url_in_browser "$url" $1
+# }
+#
+# function git_remote_website() {
+#     git remote get-url origin \
+#         | perl -pe 's/\.git$//' \
+#         | perl -pe 's/git\@([^:]+):/https:\/\/\1\//'
+# }
+#
+# function open_url_in_browser() {
+#     local url="$1"
+#     local browser_arg="$2"
+#
+#     case "$browser_arg" in
+#         --safari|-s)
+#             open -a 'Safari' "$url"
+#             ;;
+#         --chrome|-g|-c)
+#             open -a 'Google Chrome' "$url"
+#             ;;
+#         *)
+#             open "$url"
+#     esac
+# }
+#
+# # Can just use :GBrowse in vim
+# function open_git_file_in_browser() {
+#     local base=`git_remote_website`
+#     # Path relative to root of repo
+#     local file=`git ls-files --full-name "$1"`
+#
+#     if [[ "$base" == 'https://bitbucket.org'* ]]; then
+#         echo "Bitbucket not implemented: $base"
+#         return
+#     elif [[ "$base" == 'https://github.com/'* ]]; then
+#         # Github
+#         local commit_sha=`git rev-parse HEAD`
+#         local url="$base/blob/HEAD/$file"
+#     else
+#         echo "Unknown domain for url: $base"
+#         return
+#     fi
+#
+#     open_url_in_browser "$url"
+# }
 
 # }}}
 
@@ -520,19 +518,19 @@ export VISUAL=nvim
 # Share bash history between all shells
 setopt share_history
 
-# Unlimited bash history
-HISTSIZE=9999999
-HISTFILESIZE=99999999
-
 # Load private stuff
 source ~/.zshrc_private
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# ZSH
 # WTF Zsh, can't type comments
 setopt INTERACTIVE_COMMENTS
 
-# ZSH
+# Vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
 
 # }}}

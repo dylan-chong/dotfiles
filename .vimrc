@@ -35,7 +35,7 @@ let g:vim_markdown_conceal = 0
 " {{{
 
 " Refresh plug (install, update)
-nnoremap <Leader>pr :PlugUpdate<CR>
+nnoremap <Leader>pu :PlugUpdate<CR>
 
 call plug#begin('~/.vim/plugged')
 
@@ -118,14 +118,14 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release', 'on': [] }
 " endif
 
 " Lilypond
-Plug 'gisraptor/vim-lilypond-integrator'
+" Plug 'gisraptor/vim-lilypond-integrator'
 
 " PlantUML
-Plug 'aklt/plantuml-syntax'
-Plug 'weirongxu/plantuml-previewer.vim'
+" Plug 'aklt/plantuml-syntax'
+" Plug 'weirongxu/plantuml-previewer.vim'
 
 " Javascript
-Plug 'Galooshi/vim-import-js'
+" Plug 'Galooshi/vim-import-js'
 
 " Wintabs (must be after vim-airline)
 Plug 'zefei/vim-wintabs'
@@ -151,6 +151,7 @@ Plug 'junegunn/vim-peekaboo' " Show register contents
 Plug 'Yggdroot/indentLine' " Show indenting columns
 Plug 'terryma/vim-multiple-cursors'
 Plug 'vim-scripts/listmaps.vim' " Find where mappings are coming from
+Plug 'vim-scripts/cmdline-completion'
 
 " Text objects
 Plug 'kana/vim-textobj-user'
