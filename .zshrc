@@ -136,6 +136,30 @@ alias goaen="c ~/Dropbox/Programming/GitHub/aenea-setup"
 
 # {{{
 
+# Vim
+alias vi="nvim"
+
+# Prevent stupidity
+# https://hasseg.org/trash/ (brew install trash)
+alias rm="trash"
+
+alias cat="bat"
+
+# Max line length when searching
+alias ag="ag -W 200"
+alias rag="rg -M 200 --smart-case"
+
+# Tmux Count Panes
+alias tmuxcount="tmux list-windows -a \
+    | egrep -v DUP \
+    | perl -pe 's/.*(\\d) panes.*/\\1/' \
+    | perl -lne '\$x += \$_; END { print \$x; }'"
+
+# Configure Less
+function less() {
+    `which -a less | grep '^/'` -NSI $@
+}
+
 function l() {
     ls -lah "$@"
 }
@@ -154,20 +178,6 @@ function cr() {
 
 mkc() {
     mkdir "$@" && c "$@"
-}
-
-wcme() {
-    if [ -z "$2" ]; then
-        NAME=`git config user.name`
-    else
-        NAME=$2
-    fi
-
-    git blame "$1" \
-        | egrep "\($NAME" \
-        | egrep -v '<!--' \
-        | perl -pe 's/.*\d+\)(.*)/\1/' \
-        | wc -w
 }
 
 # Tmux Count Panes
@@ -326,7 +336,7 @@ alias gsh="git stash"
 alias glsu="git ls-files --others --exclude-standard"
 
 alias grb="git rebase"
-alias grbh="git rebase origin/HEAD -i"
+alias grbh="git rebase origin/HEAD"
 alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
 alias grbc="git rebase --continue"
@@ -350,7 +360,6 @@ function gpr() {
         return
     fi
 
-    open_url_in_browser "$url" $1
     python3 -m 'webbrowser' -t "$url"
 }
 
@@ -378,6 +387,9 @@ export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
 export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
 
+# Ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
 # }}}
 
 
@@ -391,32 +403,6 @@ export CLICOLOR=1
 
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
-
-# Vim
-alias vi="nvim"
-
-# ZSHZLE
-# Can backspace past where insert mode started
-bindkey "^?" backward-delete-char
-
-# Prevent stupidity
-# https://hasseg.org/trash/ (brew install trash)
-alias rm="trash"
-
-# Max line length when searching
-alias ag="ag -W 200"
-alias rag="rg -M 200 --smart-case"
-
-# Tmux Count Panes
-alias tmuxcount="tmux list-windows -a \
-    | egrep -v DUP \
-    | perl -pe 's/.*(\\d) panes.*/\\1/' \
-    | perl -lne '\$x += \$_; END { print \$x; }'"
-
-# Configure Less
-function less() {
-    `which -a less | grep '^/'` -NSI $@
-}
 
 # v to open nvim in less
 export VISUAL=nvim
@@ -448,6 +434,24 @@ export VISUAL=nvim
 # Share bash history between all shells
 setopt share_history
 
+# Long history size (https://unix.stackexchange.com/questions/273861/unlimited-history-in-zsh)
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
 # Load private stuff
 source ~/.zshrc_private
 
@@ -465,6 +469,7 @@ bindkey -M vicmd "^V" edit-command-line
 bindkey -M viins "^V" edit-command-line
 bindkey -M viins '^A' vi-beginning-of-line
 bindkey -M viins '^E' vi-end-of-line
-
+# Can backspace past where insert mode started
+bindkey "^?" backward-delete-char # ZSHZLE
 
 # }}}

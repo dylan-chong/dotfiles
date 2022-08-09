@@ -202,7 +202,6 @@ hi illuminatedWord ctermbg=15 guibg=#3B4750
 let g:far#source = 'rgnvim'
 let g:far#debug = 1
 let g:far#enable_undo = 1
-" TODO replace with CocSearch
 nnoremap <Leader>vr "xyiw:w<Space><Bar><Space>Far <C-r>x<Space><Space>*<Left><Left>
 vnoremap <Leader>vr "xy:w<Space><Bar><Space>Far <C-r>x<Space><Space>*<Left><Left>
 
@@ -256,6 +255,7 @@ let g:AutoPairsMultilineClose = 0
       " \ }
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsMapCR = 0 " conflicts with imap <CR> for coc.nvim autocomplete
 
 " Import JS
 nnoremap <leader>jj :ImportJSWord<CR>
@@ -294,8 +294,8 @@ let g:vim_markdown_new_list_item_indent = 0
 
 " Fugitive (Git)
 nnoremap <Leader>gb :w<CR>:Git blame<CR>
-nnoremap <Leader>gs :tabnew <Bar> terminal bash --login<CR>Ags<CR>
-nnoremap <Leader>ga :wa<CR>:Git add %
+nnoremap <Leader>gs :tabnew <Bar> terminal zsh --login<CR>Ags<CR>
+nnoremap <Leader>ga :w<CR>:Git add %
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
@@ -484,22 +484,6 @@ let g:codi#interpreters = {
 " Globally enabled for all filetypes
 let g:wstrip_auto = 1
 
-" LanguageClient neovim
-" set hidden " Required for operations modifying multiple buffers like rename.
-" let g:LanguageClient_serverCommands = {
-      " \ 'typescript': ['typescript-language-server', '--stdio'],
-      " \ 'typescriptreact': ['typescript-language-server', '--stdio'],
-      " \ }
-" let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
-" let g:LanguageClient_loggingLevel = 'INFO'
-" let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
-" let g:LanguageClient_windowLogMessageLevel = 'Error'
-" let g:LanguageClient_diagnosticsList = 'Disabled'
-" nnoremap <Leader>ll :call LanguageClient_contextMenu()<CR>
-" nnoremap <Leader>ld :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <Leader>la :call LanguageClient#textDocument_codeAction()<CR>
-" nnoremap <Leader>lr <C-w>s<C-w>T:call LanguageClient#textDocument_rename()<CR>
-
 " NERDTree
 let NERDTreeShowLineNumbers=1 " enable line numbers
 autocmd FileType nerdtree setlocal relativenumber
@@ -533,29 +517,27 @@ function! s:init_coc()
   " Use tab for trigger completion with characters ahead and navigate.
   " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
   " other plugin before putting this into your config.
-  " https://github.com/neoclide/coc-snippets version
-  " inoremap <silent><expr> <TAB>
-      " \ pumvisible() ? coc#_select_confirm() :
-      " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      " \ <SID>check_back_space() ? "\<TAB>" :
-      " \ coc#refresh()
-  inoremap <silent><expr> <C-b>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "" :
-      \ coc#refresh()
-  " Original one
   inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-  function! s:check_back_space() abort
+        \ coc#pum#visible() ? coc#pum#next(1):
+        \ CheckBackspace() ? "\<Tab>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+  " Make <CR> to accept selected completion item or notify coc.nvim to format
+  " <C-g>u breaks current undo, please make your own choice.
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  function! CheckBackspace() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction
+
   " Use <c-space> to trigger completion.
-  inoremap <silent><expr> <c-space> coc#refresh()
+  if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+  else
+    inoremap <silent><expr> <c-@> coc#refresh()
+  endif
 
   " Use `[g` and `]g` to navigate diagnostics
   nmap <silent> [g <Plug>(coc-diagnostic-prev)
