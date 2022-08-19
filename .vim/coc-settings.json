@@ -6,5 +6,7 @@
   "list.maxHeight": 24,
   "list.source.symbols.defaultOptions": ["--auto-preview"],
   "elixirLS.dialyzerEnabled": false,
-  "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh"
+  "____elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
+  "elixir.pathToElixirLS": "/Users/Dylan/Dropbox/Programming/GitHub/elixir-ls/release/language_server.sh",
+  "elixir.trace.server": "verbose"
 }

@@ -45,9 +45,6 @@ call plug#begin('~/.vim/plugged')
 " Themes
 Plug 'danielwe/base16-vim'
 
-" CTags
-" Plug 'ludovicchabant/vim-gutentags'
-
 " NERDTree
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -61,6 +58,7 @@ endif
 " File-related stuff
 Plug 'dylan-chong/far.vim', { 'branch': 'rg-git-ignore-but-break-globbing' }
 Plug 'tpope/vim-eunuch'
+Plug 'dyng/ctrlsf.vim' " TODO this doesnt support adding multiple lines so could delete
 
 " FZF
 set rtp+=/opt/homebrew/opt/fzf
@@ -94,38 +92,8 @@ Plug 'PeterRincker/vim-argumentative'
 Plug 'sheerun/vim-polyglot'
 Plug 'mxw/vim-prolog'
 
-" Linting
-" Plug 'w0rp/ale'
-
-" LSP
-" Language client is not really well maintained
-" Plug 'autozimu/LanguageClient-neovim', {
-      " \ 'branch': 'next',
-      " \ 'do': 'bash install.sh',
-      " \ }
 " Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'neoclide/coc.nvim', { 'branch': 'release', 'on': [] }
-
-" Completion
-" TODO remove all these plugins
-" Plug 'ervandew/supertab' " Disabled because of coc
-" if has('nvim')
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-  " Plug 'Shougo/deoplete.nvim'
-  " Plug 'roxma/nvim-yarp'
-  " Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-
-" Lilypond
-" Plug 'gisraptor/vim-lilypond-integrator'
-
-" PlantUML
-" Plug 'aklt/plantuml-syntax'
-" Plug 'weirongxu/plantuml-previewer.vim'
-
-" Javascript
-" Plug 'Galooshi/vim-import-js'
 
 " Wintabs (must be after vim-airline)
 Plug 'zefei/vim-wintabs'
@@ -179,8 +147,10 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-material-palenight
 " These make base16-material-palenight look better
 highlight clear LineNr
+highlight clear TabLineFill
 
 " Highlight line/column
+" highlight CursorLine ctermbg=19 guibg=#32374D
 " set cursorline
 
 " End column
@@ -216,14 +186,6 @@ let g:airline_detect_paste=1
 let g:airline#extensions#hunks#enabled = 0
 set laststatus=2 " Always show status line
 
-" Deoplete
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#auto_complete_start_length = 1
-" let g:deoplete#enable_at_startup = 1 " TODO disabled while I try out coc.nvim
-let g:deoplete#enable_at_startup = 0
-" TODO disabled for now cos high cpu usage when typing, cant remember why it was set to 1 cos haven't looked at this url
-" call deoplete#custom#option('num_processes', 1) " Temporary workaround https://github.com/Shougo/deoplete.nvim/issues/761#issuecomment-389701983
-
 " Nerd Commenter
 " let g:NERDDefaultAlign = 'start'
 let g:NERDRemoveExtraSpaces = 0
@@ -234,25 +196,9 @@ vmap gc <leader>c<space>
 nmap gC <leader>cs
 vmap gC <leader>cs
 
-" Supertab
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" Alchemist
-let g:alchemist#elixir_erlang_src = '~/.elixir-completion/'
-" let g:alchemist_tag_disable = 0 " It is broken at the moment
-
 " AutoPairs
 let g:AutoPairsMapSpace = 1
 let g:AutoPairsMultilineClose = 0
-" let g:AutoPairs = {
-      " \ '`': '`',
-      " \ '"': '"',
-      " \ '{': '}',
-      " \ '''': '''',
-      " \ '(': ')',
-      " \ '[': ']',
-      " \ '<%': '%>',
-      " \ }
 let g:AutoPairsShortcutJump = ''
 let g:AutoPairsShortcutToggle = ''
 let g:AutoPairsMapCR = 0 " conflicts with imap <CR> for coc.nvim autocomplete
@@ -409,12 +355,6 @@ augroup vim_session_autosave
   au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save()
 augroup END
 let g:session_persist_colors = 0
-
-" Gutentags (TODO can remove this plugin?)
-" rg respects gitignore files. This command also filters out certain file types
-" that we do not want tags for
-" let g:gutentags_file_list_command = "rg -l '.' | rg -v '(md|json|plist)$'"
-" let g:gutentags_define_advanced_commands = 1
 
 " FZF
 let g:fzf_history_dir = '~/.local/share/fzf-history'
@@ -1015,9 +955,6 @@ cnoreabbrev WQ wq
 " Open up split windows and the more intuitive place
 set splitright
 set splitbelow
-
-" Better display for messages (don't need anymore)
-" set cmdheight=2
 
 " }}}
 

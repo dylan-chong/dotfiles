@@ -23,7 +23,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # History/autocomplete
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle marlonrichert/zsh-autocomplete@main
 
 # Random utils
 antigen bundle MichaelAquilina/zsh-you-should-use
