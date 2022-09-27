@@ -3,8 +3,8 @@
 
 set encoding=utf-8
 
-let g:python3_host_prog = '/opt/homebrew/bin/python3'
-let g:ruby_host_prog = '/opt/homebrew/lib/ruby/gems/3.0.0/bin/neovim-ruby-host'
+" let g:python3_host_prog = '/opt/homebrew/bin/python3'
+" let g:ruby_host_prog = '/opt/homebrew/lib/ruby/gems/3.0.0/bin/neovim-ruby-host'
 
 " Easy leader
 let mapleader=" "
@@ -76,6 +76,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Space/indenting
+Plug 'tpope/vim-sleuth' " Detects space/tab sizes of current file
 Plug 'tweekmonster/wstrip.vim' " Strip whitespace from lines changed
 Plug 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
 
@@ -120,6 +121,7 @@ Plug 'Yggdroot/indentLine' " Show indenting columns
 Plug 'terryma/vim-multiple-cursors'
 Plug 'vim-scripts/listmaps.vim' " Find where mappings are coming from
 Plug 'vim-scripts/cmdline-completion'
+Plug 'JamshedVesuna/vim-markdown-preview'
 
 " Text objects
 Plug 'kana/vim-textobj-user'
@@ -239,9 +241,10 @@ let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 
 " Fugitive (Git)
+nnoremap <Leader>gg :tabnew <Bar> G <Bar> only<CR>5<Down>
 nnoremap <Leader>gb :w<CR>:Git blame<CR>
 nnoremap <Leader>gs :tabnew <Bar> terminal zsh --login<CR>Ags<CR>
-nnoremap <Leader>ga :w<CR>:Git add %
+nnoremap <Leader>ga :w<CR>:Git add -p %
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
@@ -446,6 +449,7 @@ function! s:init_coc()
   endif
   let g:has_initialised_coc = 1
   call plug#load('coc.nvim')
+  :CocStart
 
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -513,7 +517,7 @@ function! s:init_coc()
   nnoremap <silent> <leader>lo  :<C-u>CocList --auto-preview outline<cr>
   nnoremap <silent> <leader>lO  :<C-u>CocCommand workspace.showOutput<cr>
   " Search workspace symbols
-  nnoremap <silent> <leader>lt  :<C-u>CocList -I symbols<cr>
+  nnoremap <silent> <leader>ls  :<C-u>CocList --auto-preview -I symbols<cr>
   " Do default action for next item.
   nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
   " Do default action for previous item.
@@ -525,6 +529,32 @@ function! s:init_coc()
   let g:coc_root_patterns = ['.vim']
   autocmd FileType * let b:coc_root_patterns = g:coc_root_patterns
   " let g:WorkspaceFolders = ['/Users/Dylan/Development/solve/solvedata/solve/api/src/']
+
+  " Inactivity to save on ram
+  let g:inactivity_limit = 10 * 60 " max Insert mode inactivity before fail, in seconds TODO this is like 4 seconds
+  let g:check_frequency = 1   " seconds between checks
+  let g:last_activity = []
+  augroup monitor
+    au!
+    au CursorMoved * let g:last_activity = reltime()
+    au CursorMovedI * let g:last_activity = reltime()
+  augroup END
+  func! MonitorActivity(timer_id)
+    if empty(g:last_activity)
+      let g:last_activity = reltime()
+      return
+    endif
+    let l:diff = reltime(g:last_activity)[0]
+    if l:diff >= g:inactivity_limit
+      echom "Inactivity limit reached. Stopping coc.nvim"
+      let g:last_activity = []
+      call coc#rpc#stop()
+      let g:has_initialised_coc = 0
+    else
+      " echom "Not inactivity reache." . l:diff
+    endif
+  endfunc
+  call timer_start(g:check_frequency * 1000, 'MonitorActivity', {'repeat' : -1})
 endfunction
 autocmd! InsertEnter * call <SID>init_coc()
 
@@ -548,6 +578,12 @@ let g:multi_cursor_select_all_key      = 'g<M-n>'
 
 " vim-illuminate
 let g:Illuminate_delay = 50
+
+" vim-markdown-preview
+let vim_markdown_preview_github=1
+" Disable mapping. Use
+let g:vim_markdown_preview_toggle=-9999
+command! MarkdownPreview w | call Vim_Markdown_Preview()
 
 " }}}
 

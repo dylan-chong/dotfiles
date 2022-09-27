@@ -8,5 +8,9 @@
   "elixirLS.dialyzerEnabled": false,
   "____elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
   "elixir.pathToElixirLS": "/Users/Dylan/Dropbox/Programming/GitHub/elixir-ls/release/language_server.sh",
-  "elixir.trace.server": "verbose"
+  "elixir.trace.server": "verbose",
+  "__comment__: javascript.validate.enable": "Prevents flowjs errors from tsserver",
+  "javascript.validate.enable": false,
+  "eslint.autoFixOnSave": true,
+  "eslint.fixOnSaveTimeout": 500
 }

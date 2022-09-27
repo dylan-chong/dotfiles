@@ -198,8 +198,6 @@ alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/
 
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
-source ~/bin/phone-sync-source.bash
-
 function fp() {
     local full_path="`pwd`/$1";
     echo -n "$full_path" | pbcopy
@@ -262,7 +260,11 @@ function pretty_csv {
 }
 
 function calculator {
-    vi ~/Desktop/calculator.js +Codi
+    /usr/bin/env nvim ~/Desktop/calculator.js +Codi
+}
+
+function pack {
+    cat package.json | jq --sort-keys .scripts | fx
 }
 
 # }}}
@@ -273,7 +275,6 @@ function calculator {
 
 # {{{
 alias gs="git status"
-alias gst="git status"
 
 alias gpl="git pull"
 alias gph="git push"
@@ -294,6 +295,7 @@ gphd() {
 
 alias gplph="git pull && git push"
 alias gplh="git pull origin HEAD"
+alias gpluh="git pull upstream HEAD"
 
 alias gfa="git fetch --all --prune --tags"
 alias grmt="git remote"
@@ -301,10 +303,43 @@ alias grmtv="git remote -v"
 
 alias gco='git checkout'
 alias gcof='git checkout `fbr`'
-alias gcoh="gfa && git checkout origin/HEAD"
-alias gcuh="gfa && git checkout upstream/HEAD"
+alias gcoh="git fetch origin && git checkout origin/HEAD"
+alias gcuh="git fetch upstream && git checkout upstream/HEAD"
 alias gcob='git checkout -b'
 alias gcop='git checkout -p'
+
+git_create_upstream_head() {
+    if [ ! -f .git/refs/remotes/origin/HEAD ]; then
+        echo '.git directory not found maybe'
+        return
+    fi
+
+    cat .git/refs/remotes/origin/HEAD | sed -e 's/remotes\/origin/remotes\/upstream/' > .git/refs/remotes/upstream/HEAD
+}
+
+git_infer_remote_from_origin() {
+    local new_remote_repo_owner="$1"
+    local new_remote_name="${2=upstream}"
+
+    local origin_url=`git remote get-url origin`
+    local new_remote_url=`echo $origin_url | perl -pe 's|\:[\w-]+/|\:'"$new_remote_repo_owner"'/|'`
+
+    echo ">" git remote add "$new_remote_name" "$new_remote_url"
+    git remote add "$new_remote_name" "$new_remote_url"
+    echo
+
+    echo ">" git remote -vv
+    git remote -vv
+    echo
+
+    echo ">" git fetch --all
+    git fetch --all
+}
+
+git_infer_upstream_spoke() {
+    git_infer_remote_from_origin spoke-ph
+    git_create_upstream_head
+}
 
 git_prune_branches() {
     git branch -v | grep gone | perl -pwe 's/^  ([^\s]+).*/$1/g' | xargs git branch -d
@@ -336,6 +371,7 @@ alias glsu="git ls-files --others --exclude-standard"
 
 alias grb="git rebase"
 alias grbh="git rebase origin/HEAD"
+alias grbuh="git rebase upstream/HEAD"
 alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
 alias grbc="git rebase --continue"
@@ -386,8 +422,14 @@ export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
 export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
 
-# Ruby
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+# Android Studio
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
+# Java
+# export JAVA_HOME=/Applications/Android Studio.app/Contents/jre/Contents/Home
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 
 # }}}
 
