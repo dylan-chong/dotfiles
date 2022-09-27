@@ -1,0 +1,3 @@
+#!/bin/bash
+source ~/bin/phone-sync-source.bash
+phone-music-update -k

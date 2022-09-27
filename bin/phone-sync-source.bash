@@ -27,4 +27,4 @@ function phone-sync() {
 
 function phone-sync-once() {
     timeout 10 osascript ~/bin/phone-sync.applescript
-}
+ }

@@ -1,5 +1,0 @@
-#!/bin/bash
-source ~/bin/phone-sync-source.bash
-phone-music-update -k >> ~/Desktop/Phone\ Sync.log
-
-# TODO doesn't work
