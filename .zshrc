@@ -27,6 +27,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 # Random utils
 antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle "/Users/Dylan/Dropbox/Programming/GitHub/gprq/" --no-local-clone
+antigen bundle grigorii-zander/zsh-npm-scripts-autocomplete@main
 
 antigen apply
 
@@ -145,8 +146,7 @@ alias rm="trash"
 alias cat="bat"
 
 # Max line length when searching
-alias ag="ag -W 200"
-alias rag="rg -M 200 --smart-case"
+alias rgn="rg --no-ignore"
 
 # Tmux Count Panes
 alias tmuxcount="tmux list-windows -a \
@@ -204,11 +204,15 @@ function fp() {
     echo "Copied to clipboard: $full_path"
 }
 
-function dowatch() {
+function w() {
     # Runs the given command when files change in the current directory
     local command=$@
     # Run in a subprocess because entr changes the cwd and opening a new terminal would end up in ~
-    bash -c "rg --files | entr -s 'printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && ($command)'"
+    zsh -c "rg --files | entr -s 'printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && ($command)'"
+}
+
+function wnr() {
+    w npm run $*
 }
 
 function loop() {
@@ -218,7 +222,7 @@ function loop() {
 }
 
 function notifydone() {
-    local message='Your script has completed!'
+    local message="${1:-'Your script has completed!'}"
     osascript -e "display notification \"$message\""
     say "$message"
 }
@@ -243,28 +247,65 @@ function dl-upgrade() {
     pip3 install --upgrade pip spotdl youtube-dl pytube
 }
 
-function elixir_recompile() {
+function elixir-recompile() {
     mix deps.clean $1 && mix deps.get && mix deps.compile $1
 }
 
 function whatismyip() {
-    ip=`curl ipinfo.io/ip --silent`
+    local ip=`curl ipinfo.io/ip --silent`
     echo "IP is $ip. Copying to clipboard"
     echo "$ip" | pbcopy
 }
 
 # From https://www.stefaanlippens.net/pretty-csv.html
 # Note: Probably won't work if "," or newline inside a cell
-function pretty_csv {
+function pretty-csv {
     perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s,
 }
 
-function calculator {
+function calc {
     /usr/bin/env nvim ~/Desktop/calculator.js +Codi
 }
 
-function pack {
-    cat package.json | jq --sort-keys .scripts | fx
+function ns {
+    cat package.json | jq --sort-keys .scripts
+}
+
+function diff-matches {
+  local pattern="$1" # e.g. 'configModelMock[^;\n]*\n[^;]+;'
+  local match_path="${2:-./}"
+
+  local results_dir=`mktemp -d`
+
+  local counter=-1
+
+  rg "$pattern" "$match_path" --multiline --json \
+    | jq 'select(.type == "match")' -c \
+    > "$results_dir/base.json"
+
+  local command='
+  require "json"
+  dir = "'"$results_dir"'"
+  i = 0
+
+  File.foreach("#{dir}/base.json") do |line|
+    map = JSON.parse(line)
+    line_number = map["data"]["line_number"]
+    text = map["data"]["lines"]["text"]
+
+    File.write("#{dir}/match-#{"%03d" % i}", "[Line #{line_number}]: #{text}")
+    i += 1
+  end
+  '
+  ruby -e "$command"
+
+  nvim -d -o `find -s "$results_dir" -name "match-*"`
+}
+
+function diff-matches-statement {
+  local pattern="$1"'[^;\n]*\n[^;]+;'
+  local match_path="${2:-./}"
+  diff-matches "$1" "$2"
 }
 
 # }}}
@@ -294,10 +335,13 @@ gphd() {
 }
 
 alias gplph="git pull && git push"
+alias gplrph="git pull -r && git push"
 alias gplh="git pull origin HEAD"
 alias gpluh="git pull upstream HEAD"
 
 alias gfa="git fetch --all --prune --tags"
+alias gfo="git fetch origin --prune --tags"
+alias gfu="git fetch upstream --prune --tags"
 alias grmt="git remote"
 alias grmtv="git remote -v"
 
@@ -334,11 +378,6 @@ git_infer_remote_from_origin() {
 
     echo ">" git fetch --all
     git fetch --all
-}
-
-git_infer_upstream_spoke() {
-    git_infer_remote_from_origin spoke-ph
-    git_create_upstream_head
 }
 
 git_prune_branches() {
@@ -378,6 +417,8 @@ alias grbc="git rebase --continue"
 
 alias gbr="git branch"
 
+alias gcpc='git rev-parse HEAD | pbcopy; git show | head; echo; echo Copied `pbpaste` to clipboard'
+
 function gpr() {
     # Goes to the URL for creating a new pull request in the browser. For
     # GitHub, the branch is selected automatically, and if the pull request
@@ -402,6 +443,22 @@ function git_remote_website() {
     git remote get-url origin \
         | perl -pe 's/\.git$//' \
         | perl -pe 's/git\@([^:]+):/https:\/\/\1\//'
+}
+
+# Stdin as input
+function simplify_package_lock() {
+    jq '(if .dependencies then .dependencies else .packages end) | to_entries[] | [.key, .value.version]' -c \
+        | perl -pe 's/node_modules\///' \
+        | grep -v 'node_modules' \
+        | grep -v '""' \
+        | sort
+}
+
+function diff_package_lock_with_master() {
+    git fetch upstream
+    git show upstream/master:./package-lock.json | simplify_package_lock > lock-master.jsonl
+    cat package-lock.json | simplify_package_lock > lock-new.jsonl
+    git diff --no-index lock-master.jsonl lock-new.jsonl
 }
 
 # }}}
@@ -514,3 +571,5 @@ bindkey -M viins '^E' vi-end-of-line
 bindkey "^?" backward-delete-char # ZSHZLE
 
 # }}}
+
+source /Users/Dylan/.docker/init-zsh.sh || true # Added by Docker Desktop

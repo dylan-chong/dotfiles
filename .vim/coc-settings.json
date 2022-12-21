@@ -12,5 +12,6 @@
   "__comment__: javascript.validate.enable": "Prevents flowjs errors from tsserver",
   "javascript.validate.enable": false,
   "eslint.autoFixOnSave": true,
-  "eslint.fixOnSaveTimeout": 500
+  "eslint.fixOnSaveTimeout": 500,
+  "snippets.ultisnips.pythonPrompt": false
 }

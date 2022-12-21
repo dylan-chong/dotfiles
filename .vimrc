@@ -76,7 +76,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Space/indenting
-Plug 'tpope/vim-sleuth' " Detects space/tab sizes of current file
+" Plug 'tpope/vim-sleuth' " Detects space/tab sizes of current file (disabled for now because of https://github.com/tpope/vim-sleuth/issues/87 and also because it doesn't seem to detect 2 spaces sometimes)
 Plug 'tweekmonster/wstrip.vim' " Strip whitespace from lines changed
 Plug 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
 
@@ -244,7 +244,8 @@ let g:vim_markdown_new_list_item_indent = 0
 nnoremap <Leader>gg :tabnew <Bar> G <Bar> only<CR>5<Down>
 nnoremap <Leader>gb :w<CR>:Git blame<CR>
 nnoremap <Leader>gs :tabnew <Bar> terminal zsh --login<CR>Ags<CR>
-nnoremap <Leader>ga :w<CR>:Git add -p %
+nnoremap <Leader>ga :w<CR>:Git add % -p
+nnoremap <Leader>gco :w<CR>:Git checkout %<Space>
 
 " Win Tabs
 let g:wintabs_ui_vimtab_name_format = '%t'
@@ -426,6 +427,10 @@ let g:codi#interpreters = {
 " WStrip
 " Globally enabled for all filetypes
 let g:wstrip_auto = 1
+augroup wstrip_markdown
+  autocmd!
+  autocmd FileType markdown let b:wstrip_trailing_max = 0
+augroup END
 
 " NERDTree
 let NERDTreeShowLineNumbers=1 " enable line numbers
@@ -443,6 +448,7 @@ nnoremap <leader>n :Ranger<cr>
 " coc.nvim
 let g:node_client_debug = 1
 let g:has_initialised_coc = 0
+let g:coc_channel_timeout = 4
 function! s:init_coc()
   if g:has_initialised_coc
     return
@@ -584,6 +590,11 @@ let vim_markdown_preview_github=1
 " Disable mapping. Use
 let g:vim_markdown_preview_toggle=-9999
 command! MarkdownPreview w | call Vim_Markdown_Preview()
+
+" Leap
+" if has('nvim')
+  " lua require('leap').set_default_keymaps()
+" endif
 
 " }}}
 
@@ -789,8 +800,9 @@ nnoremap [q :cprevious<CR>
 " Yank as one line
 vmap gy JgVyu
 
-" Don't clear clipboard when pressing S
+" Don't clear clipboard
 nnoremap S "zS
+nnoremap cc "zS
 
 " Turn function call into a pipe (mostly)
 nmap <Leader>t<Bar> ^f(vi,"xdBi<Bar>><Space><Esc>:s/\(<Bar>><Space>[a-zA-Z0-9._]\+\)(,\s\?/\1(/e<CR>O<C-r>x<Esc>
@@ -854,15 +866,18 @@ set formatoptions-=t
 
 " Indenting defaults
 " Defaults to 4 spaces for most filetypes
-if get(g:, '_has_set_default_indent_settings', 0) == 0
-  autocmd FileType typescript,javascript,jsx,tsx,scss,css,html,json,ruby,elixir,kotlin,vim,tmux,plantuml,sql
-        \ setlocal expandtab tabstop=2 shiftwidth=2
-  " setglobal seems to not override sleuth when reloading vimrc
-  set expandtab
-  set tabstop=4
-  set shiftwidth=4
-  let g:_has_set_default_indent_settings = 1
-endif
+" if get(g:, '_has_set_default_indent_settings', 0) == 0
+  " autocmd FileType typescript,javascript,jsx,tsx,scss,css,html,json,ruby,elixir,kotlin,vim,tmux,plantuml,sql
+        " \ setlocal expandtab tabstop=2 shiftwidth=2
+  " " setglobal seems to not override sleuth when reloading vimrc
+  " set expandtab
+  " set tabstop=4
+  " set shiftwidth=4
+  " let g:_has_set_default_indent_settings = 1
+" endif
+set expandtab
+set tabstop=2
+set shiftwidth=2
 
 " Line Numbers
 set relativenumber
@@ -991,6 +1006,8 @@ cnoreabbrev WQ wq
 " Open up split windows and the more intuitive place
 set splitright
 set splitbelow
+
+set eol
 
 " }}}
 
