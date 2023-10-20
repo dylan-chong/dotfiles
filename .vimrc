@@ -63,12 +63,6 @@ Plug 'dylan-chong/far.vim', { 'branch': 'rg-git-ignore-but-break-globbing' }
 Plug 'tpope/vim-eunuch'
 Plug 'dyng/ctrlsf.vim' " TODO this doesnt support adding multiple lines so could delete
 
-" FZF
-set rtp+=/opt/homebrew/opt/fzf
-Plug 'junegunn/fzf.vim'
-Plug 'tweekmonster/fzf-filemru'
-Plug 'dylan-chong/fzf_similar.vim', { 'branch': 'develop' }
-
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -362,60 +356,6 @@ augroup vim_session_autosave
   au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save()
 augroup END
 let g:session_persist_colors = 0
-
-" FZF
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.9, 'yoffset': 1, 'border': 'rounded' } }
-" FZF File MRU
-let g:fzf_filemru_bufwrite = 1
-augroup custom_filemru
-  autocmd!
-  autocmd BufEnter * UpdateMru
-  " autocmd BufLeave * UpdateMru
-augroup END
-" An action can be a reference to a function that processes selected lines
-function! s:fzf_build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-function! s:fzf_open_buffers(lines)
-  for file_name in a:lines
-    execute 'e ' . fnameescape(file_name)
-    WintabsRefresh
-  endfor
-endfunction
-let g:fzf_action = {
-      \ 'enter': function('s:fzf_open_buffers'),
-      \ 'ctrl-q': function('s:fzf_build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit',
-      \ }
-nnoremap <silent> <Leader>f :call fzf#vim#files('', fzf#vim#with_preview('right'))<CR>
-nnoremap <silent> <Leader>F :ProjectMru --tiebreak=end<cr>
-nnoremap <silent> <Leader><C-f>1 :call fzf_similar#find_similar_files()<CR>
-nnoremap <silent> <Leader><C-f>2 :call fzf_similar#find_similarly_named_files()<CR>
-nnoremap <silent> <Leader><C-f>3 :call fzf_similar#find_files_in_the_same_directory()<CR>
-nnoremap <silent> <Leader>zg :GFiles?<CR>
-nnoremap <silent> <Leader>zc :Commands<CR>
-nnoremap <silent> <Leader>zb :Buffers<CR>
-nnoremap <silent> <Leader>zt :Tags<CR>
-nnoremap <silent> <Leader>zl :BLines<CR>
-nnoremap <silent> <Leader>z/ :History/<CR>
-nnoremap <silent> <Leader>z: :History:<CR>
-nnoremap <silent> <Leader>zh :Helptags<CR>
-nnoremap <silent> <Leader>zm :Maps<CR>
-nnoremap <Leader>r :Rg<Space>
-nnoremap <Leader>R :Rg<Space><C-r><C-w>
-vnoremap <Leader>r "ry:Rg<Space><C-r>r
-vnoremap <Leader>R "ry:Rg<Space><C-r>r
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   "rg --column --line-number --no-heading --color=always --smart-case --multiline -g '!.git' --hidden ".shellescape(<q-args>), 1,
-      \   fzf#vim#with_preview('right:35%'),
-      \   <bang>0)
-cnoreabbrev rg Rg
 
 " Codi
 let g:codi#rightalign = 0
