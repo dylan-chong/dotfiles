@@ -893,3 +893,6 @@ set eol
 
 " TEMP due to neovim bug
 nnoremap Y yy
+
+" Load lua configs
+lua require("main")
