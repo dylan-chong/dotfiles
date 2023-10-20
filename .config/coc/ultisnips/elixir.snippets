@@ -25,15 +25,15 @@
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
 snippet ioinspect "Inspect the value"
-$1 |> IO.inspect(label: "_____________________________ #{__MODULE__} AAAAAAAAAAAAAAAAA $1")
+$1 |> IO.inspect(label: "_____________________________ #{__MODULE__} ################# $1")
 endsnippet
 
 snippet pioinspect "Inspect the value after a pipeline"
- |> IO.inspect(label: "_____________________________ #{__MODULE__} AAAAAAAAAAAAAAAAA $2")
+ |> IO.inspect(label: "_____________________________ #{__MODULE__} ################# $2")
 endsnippet
 
 snippet bioinspect "Inspect the local variables"
-binding() |> IO.inspect(label: "_____________________________ #{__MODULE__} AAAAAAAAAAAAAAAAA $1")
+binding() |> IO.inspect(label: "_____________________________ #{__MODULE__} ################# $1")
 endsnippet
 
 snippet prydebugger "Pry"
@@ -48,5 +48,5 @@ snippet timertc "Timer"
 {micros, result} = :timer.tc(fn ->
   $1
 end)
-IO.puts("AAAAAAAAAAAAAAAAA Processing took #{micros / 1000}ms")
+IO.puts("################# Processing took #{micros / 1000}ms")
 endsnippet

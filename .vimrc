@@ -45,6 +45,9 @@ call plug#begin('~/.vim/plugged')
 " Themes
 Plug 'danielwe/base16-vim'
 
+" Shared
+Plug 'tpope/vim-repeat' " optional for vim-surround
+
 " NERDTree
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -180,7 +183,9 @@ vnoremap <Leader>vr "xy:w<Space><Bar><Space>Far <C-r>x<Space><Space>*<Left><Left
 " Vim Airline Plugin
 let g:airline_detect_modified=0
 let g:airline_powerline_fonts=1
-let g:airline_section_x = ''
+let g:airline_section_b = '' " Turn off branch
+let g:airline_section_x = '' " Turn off filetype
+let g:airline_section_y = '' " Turn off file encoding
 let g:airline_section_z = '%3v'
 let g:airline_detect_spell=0
 let g:airline_detect_spelllang=0
@@ -245,6 +250,7 @@ nnoremap <Leader>gg :tabnew <Bar> G <Bar> only<CR>5<Down>
 nnoremap <Leader>gb :w<CR>:Git blame<CR>
 nnoremap <Leader>gs :tabnew <Bar> terminal zsh --login<CR>Ags<CR>
 nnoremap <Leader>ga :w<CR>:Git add % -p
+nnoremap <Leader>gA :w<CR>:Git add %
 nnoremap <Leader>gco :w<CR>:Git checkout %<Space>
 
 " Win Tabs
@@ -591,11 +597,6 @@ let vim_markdown_preview_github=1
 let g:vim_markdown_preview_toggle=-9999
 command! MarkdownPreview w | call Vim_Markdown_Preview()
 
-" Leap
-" if has('nvim')
-  " lua require('leap').set_default_keymaps()
-" endif
-
 " }}}
 
 
@@ -613,7 +614,7 @@ else
 endif
 
 " Splitting lines
-nnoremap <C-j> i<CR><ESC>
+nnoremap <C-j> i<CR><ESC><Right>
 
 " Emacs style moving to the end and start of line
 inoremap <C-a> <Esc>I

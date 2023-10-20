@@ -264,7 +264,7 @@ function pretty-csv {
 }
 
 function calc {
-    /usr/bin/env nvim ~/Desktop/calculator.js +Codi
+    /usr/bin/env nvim ~/Desktop/crap/calculator.js +Codi
 }
 
 function ns {
@@ -336,7 +336,7 @@ gphd() {
 
 alias gplph="git pull && git push"
 alias gplrph="git pull -r && git push"
-alias gplh="git pull origin HEAD"
+alias gploh="git pull origin HEAD"
 alias gpluh="git pull upstream HEAD"
 
 alias gfa="git fetch --all --prune --tags"
@@ -409,13 +409,14 @@ alias gsh="git stash"
 alias glsu="git ls-files --others --exclude-standard"
 
 alias grb="git rebase"
-alias grbh="git rebase origin/HEAD"
+alias grboh="git rebase origin/HEAD"
 alias grbuh="git rebase upstream/HEAD"
 alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
 alias grbc="git rebase --continue"
 
 alias gbr="git branch"
+alias gbra="git branch -avv"
 
 alias gcpc='git rev-parse HEAD | pbcopy; git show | head; echo; echo Copied `pbpaste` to clipboard'
 
@@ -436,6 +437,7 @@ function gpr() {
         return
     fi
 
+    echo Opening url "$url"
     python3 -m 'webbrowser' -t "$url"
 }
 
@@ -470,7 +472,7 @@ function diff_package_lock_with_master() {
 # {{{
 
 # ASDF
-. $(brew --prefix asdf)/asdf.sh
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 # PHP
 export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
@@ -572,4 +574,3 @@ bindkey "^?" backward-delete-char # ZSHZLE
 
 # }}}
 
-source /Users/Dylan/.docker/init-zsh.sh || true # Added by Docker Desktop
