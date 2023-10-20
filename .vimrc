@@ -96,9 +96,6 @@ Plug 'PeterRincker/vim-argumentative'
 Plug 'sheerun/vim-polyglot'
 Plug 'mxw/vim-prolog'
 
-" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'neoclide/coc.nvim', { 'branch': 'release', 'on': [] }
-
 " Wintabs (must be after vim-airline)
 Plug 'zefei/vim-wintabs'
 Plug 'zefei/vim-wintabs-powerline'
@@ -450,125 +447,6 @@ let g:NERDTreeHijackNetrw = 0
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 1
 nnoremap <leader>n :Ranger<cr>
-
-" coc.nvim
-let g:node_client_debug = 1
-let g:has_initialised_coc = 0
-let g:coc_channel_timeout = 4
-function! s:init_coc()
-  if g:has_initialised_coc
-    return
-  endif
-  let g:has_initialised_coc = 1
-  call plug#load('coc.nvim')
-  :CocStart
-
-  " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  " if hidden is not set, TextEdit might fail.
-  set hidden
-  " Use <c-space> to trigger completion.
-  inoremap <silent><expr> <c-space> coc#refresh()
-
-  " Use tab for trigger completion with characters ahead and navigate.
-  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-  " other plugin before putting this into your config.
-  inoremap <silent><expr> <TAB>
-        \ coc#pum#visible() ? coc#pum#next(1):
-        \ CheckBackspace() ? "\<Tab>" :
-        \ coc#refresh()
-  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-  " Make <CR> to accept selected completion item or notify coc.nvim to format
-  " <C-g>u breaks current undo, please make your own choice.
-  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-  function! CheckBackspace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
-
-  " Use <c-space> to trigger completion.
-  if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-  else
-    inoremap <silent><expr> <c-@> coc#refresh()
-  endif
-
-  " Use `[g` and `]g` to navigate diagnostics
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
-  " Use K to show documentation in preview window
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
-  " Use `:Format` to format current buffer
-  command! -nargs=0 Format :call CocAction('format')
-  " use `:OR` for organize import of current buffer
-  command! -nargs=0 OrganiseImport :call CocAction('runCommand', 'editor.action.organizeImport')
-  " Remap keys for gotos
-  nmap <silent> <leader>ld <Plug>(coc-definition)
-  nmap <silent> <leader>lD <Plug>(coc-type-definition)
-  nmap <silent> <leader>li <Plug>(coc-implementation)
-  nmap <silent> <leader>lr <Plug>(coc-references)
-  " Using CocList
-  " Show all errors
-  nnoremap <silent> <leader>le  :<C-u>CocList --auto-preview diagnostics<cr>
-  " Show commands
-  nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
-  " Show list
-  nnoremap <silent> <leader>ll  :<C-u>CocList --auto-preview<cr>
-  " Reshow list
-  nnoremap <silent> <leader>lL  :CocListResume<cr>
-  " Find symbol of current document
-  nnoremap <silent> <leader>lo  :<C-u>CocList --auto-preview outline<cr>
-  nnoremap <silent> <leader>lO  :<C-u>CocCommand workspace.showOutput<cr>
-  " Search workspace symbols
-  nnoremap <silent> <leader>ls  :<C-u>CocList --auto-preview -I symbols<cr>
-  " Do default action for next item.
-  nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
-  " Do default action for previous item.
-  nnoremap <silent> <leader>lk  :<C-u>CocPrev<CR>
-  " Resume latest coc list
-  " nnoremap <silent> <leader>lp  :<C-u>CocListResume<CR>
-  " Work with monorepos
-  " Disable automatic detection of projects
-  let g:coc_root_patterns = ['.vim']
-  autocmd FileType * let b:coc_root_patterns = g:coc_root_patterns
-  " let g:WorkspaceFolders = ['/Users/Dylan/Development/solve/solvedata/solve/api/src/']
-
-  " Inactivity to save on ram
-  let g:inactivity_limit = 10 * 60 " max Insert mode inactivity before fail, in seconds TODO this is like 4 seconds
-  let g:check_frequency = 1   " seconds between checks
-  let g:last_activity = []
-  augroup monitor
-    au!
-    au CursorMoved * let g:last_activity = reltime()
-    au CursorMovedI * let g:last_activity = reltime()
-  augroup END
-  func! MonitorActivity(timer_id)
-    if empty(g:last_activity)
-      let g:last_activity = reltime()
-      return
-    endif
-    let l:diff = reltime(g:last_activity)[0]
-    if l:diff >= g:inactivity_limit
-      echom "Inactivity limit reached. Stopping coc.nvim"
-      let g:last_activity = []
-      call coc#rpc#stop()
-      let g:has_initialised_coc = 0
-    else
-      " echom "Not inactivity reache." . l:diff
-    endif
-  endfunc
-  call timer_start(g:check_frequency * 1000, 'MonitorActivity', {'repeat' : -1})
-endfunction
-autocmd! InsertEnter * call <SID>init_coc()
 
 " vim-peekaboo
 let g:peekaboo_window = 'vert bo new'
