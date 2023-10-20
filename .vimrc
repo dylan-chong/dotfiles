@@ -122,6 +122,27 @@ Plug 'kana/vim-textobj-user'
 Plug 'andyl/vim-textobj-elixir'
 Plug 'Julian/vim-textobj-variable-segment'
 
+" Using new lua configs
+Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
+Plug 'nvim-lua/plenary.nvim' " Dep of telescope
+Plug 'stevearc/dressing.nvim' " Improved prompts
+
+" Using new lua configs - completion
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" Using new lua configs - snippets
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+
+" Using new lua configs - language server
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+
 " }
 
 call plug#end()
