@@ -39,10 +39,6 @@ antigen apply
 
 # {{{
 
-# chriskempson/base16-shell
-# Run this in the shell manually and that will set the global theme in ~/.base16_theme
-# base16_material-palenight
-
 # spaceship-prompt/spaceship-prompt
 # Commenting out prompts for speed (copied from
 # https://github.com/spaceship-prompt/spaceship-prompt/blob/master/docs/options.md#order)
