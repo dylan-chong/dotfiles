@@ -21,8 +21,6 @@
 	default = simple
 [credential]
 	helper = osxkeychain
-[commit]
-	template = /Users/Dylan/.stCommitMsg
 [gui]
 [diff]
 	tool = vimdiff
