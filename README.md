@@ -9,11 +9,12 @@ in there somewhere.
 ### Homebrew
 
 1. Install [homebrew](https://brew.sh)
-1. Restart your terminal
+1. Run the printed out command to load brew in the current shell (`eval ...` or
+   something)
 1. Install packages
     ```bash
     brew install google-chrome alfred slack rectangle maccy spotify discord
-    brew install git antigen asdf neovim ranger fzf trash tmux diff-so-fancy reattach-to-user-namespace bat
+    brew install git antigen asdf neovim ranger fzf trash tmux diff-so-fancy reattach-to-user-namespace bat ripgrep
     ```
 1. Close terminal and open app `Kitty`
 
@@ -28,7 +29,7 @@ in there somewhere.
     ```
 1. Move the contents of `dotfiles` into `~` (except `.git`)
 
-### Asdf
+### ASDF
 
 1. Install asdf
     ```bash
