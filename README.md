@@ -22,6 +22,11 @@ in there somewhere.
 5. Install packages
     ```bash
     brew install google-chrome alfred slack rectangle maccy spotify discord
-    brew install git antigen asdf neovim ranger fzf trash tmux diff-so-fancy reattach-to-user-namespace
+    brew install git antigen asdf neovim ranger fzf trash tmux diff-so-fancy reattach-to-user-namespace bat
     ```
-toolversions
+6. Install asdf
+    ```bash
+    cd ~
+    asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+    asdf install
+    ```
