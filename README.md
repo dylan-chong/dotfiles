@@ -27,10 +27,18 @@ in there somewhere.
 
 1. Install [WSL](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview>)
 1. Install [Git inside WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git)
-1. Generate your SSH key for git and set on your Git hosting service
+    - Also make sure you're running the [https://git-scm.com/download/linux](latest version of git inside WSL) 
+1. Generate your SSH key for git (on the host) and set on your Git hosting service
+1. Copy the SSH keys to WSL and change permissions
+    ```bash
+    cp -r /mnt/c/Users/DylanChong/.ssh .ssh/
+    chown -R .ssh
+    chmod 700 .ssh
+    chmod 600 .ssh/*
+    ```
 1. Install packages 
     ```bash
-    sudo apt-get install antigen # ... see list of 
+    sudo apt-get install antigen # ... the list of Main package from the mac section above
     ```
 
 ### Cloning this repo
@@ -39,10 +47,17 @@ in there somewhere.
     ```bash
     cd ~
     git clone https://github.com/dylan-chong/dotfiles
+    cd dotfiles
     git config core.worktree ~
     git config status.showUntrackedFiles no
     ```
 1. Move the contents of `dotfiles` into `~` (except `.git`)
+    ```bash
+    ls -A dotfiles | grep -v '^.git$' | while read -r content; do mv dotfiles/"$content" -t ~; done
+    ```
+1. Merge the `~/.gitconfig.example` into your `~/.gitconfig`
+    - Also update any `AAAAAA` spots
+
 
 ### ASDF
 
