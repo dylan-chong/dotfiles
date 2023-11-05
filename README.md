@@ -13,10 +13,23 @@ in there somewhere.
    something)
 1. Install packages
     ```bash
+    # Main packages
+    brew install git antigen asdf neovim ranger fzf trash tmux diff-so-fancy bat ripgrep
+    # UI
     brew install google-chrome alfred slack rectangle maccy spotify discord
-    brew install git antigen asdf neovim ranger fzf trash tmux diff-so-fancy reattach-to-user-namespace bat ripgrep
+    # Mac-specific
+    brew install reattach-to-user-namespace
     ```
 1. Close terminal and open app `Kitty`
+
+### If using WSL
+
+1. Install [WSL](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview>)
+1. Install [Git inside WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git)
+1. Install packages
+    ```bash
+    sudo apt-get install antigen # ... see list of 
+    ```
 
 ### Cloning this repo
 
