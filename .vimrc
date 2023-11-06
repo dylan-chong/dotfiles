@@ -723,8 +723,8 @@ set shiftwidth=2
 set relativenumber
 set number
 
-" Somehow maybe gets the Mac clipboard to work
-set clipboard=unnamed
+" Copies to system clipboard
+set clipboard=unnamedplus
 
 " Backspace fix
 set backspace=2
@@ -778,7 +778,7 @@ set nojoinspaces
 set t_ut=
 
 " Colors in neovim
-set termguicolors
+" set termguicolors TODO can remove as should be removed in linux?
 
 " No swapfiles
 set nobackup noswapfile

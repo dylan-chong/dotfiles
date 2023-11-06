@@ -1,5 +1,6 @@
 # Setup fzf
 # ---------
+# TODO update this file to replace homebrew folder with actual fzf folder
 if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
   export PATH="$PATH:/opt/homebrew/opt/fzf/bin"
 fi

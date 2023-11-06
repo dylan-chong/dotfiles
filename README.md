@@ -6,7 +6,7 @@ in there somewhere.
 
 ## Installation
 
-### Homebrew
+### If using Homebrew
 
 1. Install [homebrew](https://brew.sh)
 1. Run the printed out command to load brew in the current shell (`eval ...` or
@@ -14,11 +14,11 @@ in there somewhere.
 1. Install packages
     ```bash
     # Main packages
-    brew install git antigen asdf neovim ranger fzf trash tmux diff-so-fancy bat ripgrep
+    brew install git antigen asdf neovim ranger fzf tmux diff-so-fancy bat ripgrep
     # UI
     brew install google-chrome alfred slack rectangle maccy spotify discord
     # Mac-specific
-    brew install reattach-to-user-namespace
+    brew install reattach-to-user-namespace trash
     ```
 1. Close terminal and open app `Kitty`
 1. Generate your SSH key for git and set on your Git hosting service
@@ -36,10 +36,26 @@ in there somewhere.
     chmod 700 .ssh
     chmod 600 .ssh/*
     ```
-1. Install packages 
+1. Install packages - roughly the same ones from list of Main package from the mac section above
     ```bash
-    sudo apt-get install antigen # ... the list of Main package from the mac section above
+    sudo apt-get install zsh zsh-antigen 
+
+    # Download asdf from https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
+
+    sudo add-apt-repository ppa:aos1/diff-so-fancy
+
+    # Install the latest version of neovim
+    cd ~
+    mkdir .nvim
+    cd .nvim
+    # Run instructions from here https://github.com/neovim/neovim/wiki/Installing-Neovim#appimage-universal-linux-package
+    cd ~
+    mkdir -p ~/bin
+    ln -s ~/.nvim/nvim.appimage ~/bin/nvim
+
+    sudo apt-get install ranger fzf tmux diff-so-fancy bat ripgrep 
     ```
+1. Set default shell to zsh `chsh --shell $(which zsh)`
 
 ### Cloning this repo
 
@@ -57,11 +73,11 @@ in there somewhere.
     ```
 1. Merge the `~/.gitconfig.example` into your `~/.gitconfig`
     - Also update any `AAAAAA` spots
-
+1. Run `touch ~/.zshrc_private`
 
 ### ASDF
 
-1. Install asdf
+1. Install asdf plugins
     ```bash
     cd ~
     asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
@@ -70,18 +86,23 @@ in there somewhere.
 
 ### Neovim
 
+1. Install [vim-plug](https://github.com/junegunn/vim-plug#neovim)
 1. Create shortcut for nvim directory
     ```bash
     ln -s ~/.vim ~/.config/nvim
     ```
-1. Open `vi`, run `:PlugInstall` and close vim
+1. Open `vi`, run `:PlugInstall`
+1. Run `:checkhealth`
+1. Close vim
 
 ### tmux
 
+1. Install [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm#installation)
 1. Open `tmux` and press `CTRL-s I` to install plugins
 
 ### Terminal theme
 
-1. Set terminal theme `base16_material-palenight`
+1. Set terminal theme by running `base16_material-palenight`
 1. Install [fira code](https://github.com/tonsky/FiraCode/wiki/Installing)
+    - This will be applied automatically if using Kitty, otherwise set this as your terminal font manually
 1. Restart your terminal

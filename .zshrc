@@ -1,6 +1,5 @@
 # Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
+command -v brew && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 # Antigen
@@ -8,7 +7,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # {{{
 
 ANTIGEN_LOG=~/.antigen/debug.log
-source "$(brew --prefix antigen)/share/antigen/antigen.zsh"
+command -v brew && source "$(brew --prefix antigen)/share/antigen/antigen.zsh"
+# Ubuntu/WSL
+[ -f "/usr/share/zsh-antigen/antigen.zsh" ] && source "/usr/share/zsh-antigen/antigen.zsh"
 
 antigen use oh-my-zsh
 
@@ -137,7 +138,7 @@ alias vi="nvim"
 
 # Prevent stupidity
 # https://hasseg.org/trash/ (brew install trash)
-alias rm="trash"
+command -v brew && alias rm="trash"
 
 alias cat="bat"
 
@@ -152,7 +153,7 @@ alias tmuxcount="tmux list-windows -a \
 
 # Configure Less
 function less() {
-    `which -a less | grep '^/'` -NSI $@
+    `which -a less | grep '^/' | head -1` -NSI $@
 }
 
 function l() {
@@ -467,8 +468,12 @@ function diff_package_lock_with_master() {
 
 # {{{
 
+# Ubuntu / WSL (for custom binaries, like neovim)
+command -v brew || export PATH="$PATH:$HOME/bin"
+ 
 # ASDF
-. $(brew --prefix asdf)/libexec/asdf.sh
+command -v brew && . $(brew --prefix asdf)/libexec/asdf.sh
+[ -f "$HOME/.asdf/asdf.sh" ] && . "$HOME/.asdf/asdf.sh" # Ubuntu / WSL
 
 # PHP
 export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
@@ -476,15 +481,6 @@ export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
 # Python
 export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
-
-# Android Studio
-export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-
-# Java
-# export JAVA_HOME=/Applications/Android Studio.app/Contents/jre/Contents/Home
-export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 
 # }}}
 
