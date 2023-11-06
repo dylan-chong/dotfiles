@@ -1,3 +1,6 @@
+# Load private stuff
+source ~/.zshrc_private
+
 # Homebrew
 command -v brew && eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -27,7 +30,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 
 # Random utils
 antigen bundle MichaelAquilina/zsh-you-should-use
-antigen bundle "/Users/Dylan/Dropbox/Programming/GitHub/gprq/" --no-local-clone
+antigen bundle "$GPRQ_DIR" --no-local-clone
 antigen bundle grigorii-zander/zsh-npm-scripts-autocomplete@main
 
 antigen apply
@@ -543,9 +546,6 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
-
-# Load private stuff
-source ~/.zshrc_private
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
