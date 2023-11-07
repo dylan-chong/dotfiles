@@ -79,7 +79,7 @@ Plug 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
 
 " Low level editing
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'windwp/nvim-autopairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'scrooloose/nerdcommenter'
@@ -220,6 +220,13 @@ nmap gc <leader>c<space>
 vmap gc <leader>c<space>
 nmap gC <leader>cs
 vmap gC <leader>cs
+
+" AutoPairs
+let g:AutoPairsMapSpace = 1
+let g:AutoPairsMultilineClose = 0
+let g:AutoPairsShortcutJump = ''
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsMapCR = 0 " conflicts with imap <CR> for coc.nvim autocomplete
 
 " Import JS
 nnoremap <leader>jj :ImportJSWord<CR>
