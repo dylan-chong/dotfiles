@@ -792,7 +792,7 @@ set lazyredraw
 " Spelling
 setglobal spelllang=en_nz
 set dictionary+=/usr/share/dict/words
-autocmd FileType markdown,text,bib,latex,tex setlocal spell
+" autocmd FileType markdown,text,bib,latex,tex setlocal spell " Disabled as not using, and haven't set up nice colorscheme
 
 " Export plantuml
 function! g:PlantUMLSave()

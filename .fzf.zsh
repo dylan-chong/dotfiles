@@ -1,17 +1,15 @@
 # Setup fzf
 # ---------
-# TODO update this file to replace homebrew folder with actual fzf folder
-if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-  export PATH="$PATH:/opt/homebrew/opt/fzf/bin"
+
+if [ -d "/opt/homebrew/opt/fzf/bin" ]; then
+  if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+    export PATH="$PATH:/opt/homebrew/opt/fzf/bin"
+  fi
+  [[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
+  source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 fi
 
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-# ------------
-source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+# TODO update this file to replace homebrew folder with actual fzf folder
 
 fbr() {
   # TODO later make unique list and sort branches by last commit date like `git

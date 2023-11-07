@@ -36,6 +36,21 @@ in there somewhere.
     chmod 700 .ssh
     chmod 600 .ssh/*
     ```
+1. Install neovim
+    ```bash
+    # Install the latest version of neovim
+    cd ~
+    mkdir .nvim
+    cd .nvim
+
+    wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+    gunzip nvim-linux64.tar.gz
+    tar -x -f nvim-linux64.tar
+
+    cd ~
+    mkdir -p ~/bin
+    ln -s ~/.nvim/nvim-linux64/bin/nvim ~/bin/nvim
+    ```
 1. Install packages - roughly the same ones from list of Main package from the mac section above
     ```bash
     sudo apt-get install zsh zsh-antigen 
@@ -44,16 +59,11 @@ in there somewhere.
 
     sudo add-apt-repository ppa:aos1/diff-so-fancy
 
-    # Install the latest version of neovim
-    cd ~
-    mkdir .nvim
-    cd .nvim
-    # Run instructions from here https://github.com/neovim/neovim/wiki/Installing-Neovim#appimage-universal-linux-package
-    cd ~
+    sudo apt-get install bat
     mkdir -p ~/bin
-    ln -s ~/.nvim/nvim.appimage ~/bin/nvim
+    ln -s "`which batcat`" ~/bin/bat
 
-    sudo apt-get install ranger fzf tmux diff-so-fancy bat ripgrep 
+    sudo apt-get install ranger fzf tmux diff-so-fancy ripgrep 
     ```
 1. Set default shell to zsh `chsh --shell $(which zsh)`
 
