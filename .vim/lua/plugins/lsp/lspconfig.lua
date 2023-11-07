@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
 
     opts.desc = "Smart rename"
-    keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+    keymap.set("n", "<leader>lR", vim.lsp.buf.rename, opts) -- smart rename
 
     opts.desc = "Show buffer diagnostics"
     keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
@@ -57,9 +57,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-local capabilities = cmp_nvim_lsp.default_capabilities()
+local function organize_imports()
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = { vim.api.nvim_buf_get_name(0) },
+    title = ""
+  }
+  vim.lsp.buf.execute_command(params)
+end
 
-lspconfig['tsserver'].setup({})
+lspconfig['tsserver'].setup({
+  commands = {
+    OrganizeImports = {
+      organize_imports,
+      description = "Organize Imports"
+    }
+  }
+})
+
 lspconfig['html'].setup({})
 lspconfig['cssls'].setup({})
 lspconfig['tailwindcss'].setup({})

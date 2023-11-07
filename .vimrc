@@ -124,6 +124,7 @@ Plug 'Julian/vim-textobj-variable-segment'
 
 " Using new lua configs
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Currently breaks basic telescope search
 Plug 'nvim-lua/plenary.nvim' " Dep of telescope
 Plug 'stevearc/dressing.nvim' " Improved prompts
 
@@ -546,6 +547,9 @@ nnoremap gp `[v`]
 
 " Select current line except whitespace
 nnoremap gV ^v$<Left>
+
+" Strip ^M from recently pasted text
+command! StripLineCarriageReturns %s/\r$//
 
 " Copy current file to clipboard
 " TODO Use a plugin and instead of making the function myself
