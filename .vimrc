@@ -79,7 +79,7 @@ Plug 'ntpeters/vim-better-whitespace' " Used only for :StripWhitespace
 
 " Low level editing
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'scrooloose/nerdcommenter'
@@ -166,6 +166,11 @@ colorscheme base16-material-palenight
 " These make base16-material-palenight look better
 highlight clear LineNr
 highlight clear TabLineFill
+" Uses Comment highlight color
+highlight DiagnosticError ctermfg=8 guifg=#676e95
+highlight DiagnosticWarn ctermfg=8 guifg=#676e95
+highlight DiagnosticInfo ctermfg=8 guifg=#676e95
+highlight DiagnosticHint ctermfg=8 guifg=#676e95
 
 " Highlight line/column
 " highlight CursorLine ctermbg=19 guibg=#32374D
@@ -215,13 +220,6 @@ nmap gc <leader>c<space>
 vmap gc <leader>c<space>
 nmap gC <leader>cs
 vmap gC <leader>cs
-
-" AutoPairs
-let g:AutoPairsMapSpace = 1
-let g:AutoPairsMultilineClose = 0
-let g:AutoPairsShortcutJump = ''
-let g:AutoPairsShortcutToggle = ''
-let g:AutoPairsMapCR = 0 " conflicts with imap <CR> for coc.nvim autocomplete
 
 " Import JS
 nnoremap <leader>jj :ImportJSWord<CR>
