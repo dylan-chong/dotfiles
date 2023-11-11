@@ -167,8 +167,8 @@ colorscheme base16-material-palenight
 highlight clear LineNr
 highlight clear TabLineFill
 " Uses Comment highlight color
-highlight DiagnosticError ctermfg=8 guifg=#676e95
-highlight DiagnosticWarn ctermfg=8 guifg=#676e95
+" highlight DiagnosticError ctermfg=8 guifg=#676e95
+" highlight DiagnosticWarn ctermfg=8 guifg=#676e95
 highlight DiagnosticInfo ctermfg=8 guifg=#676e95
 highlight DiagnosticHint ctermfg=8 guifg=#676e95
 
@@ -559,7 +559,14 @@ command! StripLineCarriageReturns %s/\r$//
 " Copy current file to clipboard
 " TODO Use a plugin and instead of making the function myself
 function! g:CopySingleLine(string)
-  silent exec "!echo " . a:string . " | tr -d '\\n' | pbcopy"
+  if executable('pbcopy')
+    silent exec "!echo " . a:string . " | tr -d '\\n' | pbcopy"
+  elseif executable('clip.exe')
+    silent exec "!echo " . a:string . " | tr -d '\\n' | clip.exe"
+  else
+    echoerr 'No clipboard program found'
+    throw l:output
+  endif
   echom "Copied: '" . a:string . "'"
 endfunction
 nnoremap <Leader>% :call CopySingleLine(expand('%'))<Left><Left><Left>

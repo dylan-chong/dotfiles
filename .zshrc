@@ -2,7 +2,7 @@
 source ~/.zshrc_private
 
 # Homebrew
-command -v brew && eval "$(/opt/homebrew/bin/brew shellenv)"
+command -v brew &> /dev/null && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 # Antigen
@@ -10,7 +10,7 @@ command -v brew && eval "$(/opt/homebrew/bin/brew shellenv)"
 # {{{
 
 ANTIGEN_LOG=~/.antigen/debug.log
-command -v brew && source "$(brew --prefix antigen)/share/antigen/antigen.zsh"
+command -v brew &> /dev/null && source "$(brew --prefix antigen)/share/antigen/antigen.zsh"
 # Ubuntu/WSL
 [ -f "/usr/share/zsh-antigen/antigen.zsh" ] && source "/usr/share/zsh-antigen/antigen.zsh"
 
@@ -115,18 +115,19 @@ HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS= # Remove "i" to history case sensitive
 
 # {{{
 
-alias godesk="c ~/Desktop"
-alias gocrap="c ~/Desktop/crap"
-alias godown="c ~/Downloads"
-alias godrop="c ~/Dropbox"
+if command -v brew &> /dev/null; then
+  alias godesk="c ~/Desktop"
+  alias gocrap="c ~/Desktop/crap"
+  alias godown="c ~/Downloads"
 
-alias gogit="c ~/Dropbox/Programming/GitHub"
-alias godev="c ~/Development/"
+  alias gogit="c ~/Dropbox/Programming/GitHub"
+  alias godev="c ~/Development/"
 
-alias goscripts="c ~/Dropbox/Programming/GitHub/itunes-applescripts"
-alias gonodev="c ~/Dropbox/Programming/GitHub/itunes-applescripts-no-dev"
-alias gotower="c ~/Dropbox/Programming/GitHub/towers-of-hanoi"
-alias goaen="c ~/Dropbox/Programming/GitHub/aenea-setup"
+  alias goscripts="c ~/Dropbox/Programming/GitHub/itunes-applescripts"
+else
+  alias gopar="c ~/partly-development/"
+  alias godev="c ~/other-development/"
+fi
 
 # }}}
 
@@ -141,7 +142,7 @@ alias vi="nvim"
 
 # Prevent stupidity
 # https://hasseg.org/trash/ (brew install trash)
-command -v brew && alias rm="trash"
+command -v brew &> /dev/null && alias rm="trash"
 
 alias cat="bat"
 
@@ -430,15 +431,25 @@ function gpr() {
     if [[ "$base" == 'https://bitbucket.org'* ]]; then
         local url="$base/pull-requests/new"
     elif [[ "$base" == 'https://github.com/'* ]]; then
-        # Github
         local url="$base/pull/`current_branch`"
+    elif [[ "$base" == 'https://gitlab.com/'* ]]; then
+        local url="$base/-/merge_requests/new?merge_request%5Bsource_branch%5D=`current_branch | jq -sRr '@uri'`"
+        # TODO fix encoded space at the end of the branch
     else
         echo "Unknown domain for url: $base"
         return
     fi
 
-    echo Opening url "$url"
+    echo Opening url and copying to clipboard "$url"
     python3 -m 'webbrowser' -t "$url"
+
+    if command -v pbcopy &> /dev/null &> /dev/null; then
+        echo "$url" | pbcopy
+    elif command -v clip &> /dev/null.exe &> /dev/null; then
+        echo "$url" | clip.exe
+    else
+        echo "Unknown copy tool"
+    fi
 }
 
 function git_remote_website() {
@@ -472,10 +483,13 @@ function diff_package_lock_with_master() {
 # {{{
 
 # Ubuntu / WSL (for custom binaries, like neovim)
-command -v brew || export PATH="$PATH:$HOME/bin"
- 
+command -v brew &> /dev/null || export PATH="$PATH:$HOME/bin"
+
+# Ubuntu / WSL (Snap, if I ever use it)
+command -v snap &> /dev/null && export PATH="$PATH:/snap/bin"
+
 # ASDF
-command -v brew && . $(brew --prefix asdf)/libexec/asdf.sh
+command -v brew &> /dev/null && . $(brew --prefix asdf)/libexec/asdf.sh
 [ -f "$HOME/.asdf/asdf.sh" ] && . "$HOME/.asdf/asdf.sh" # Ubuntu / WSL
 
 # PHP
