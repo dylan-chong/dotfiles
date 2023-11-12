@@ -14,7 +14,7 @@ in there somewhere.
 1. Install packages
     ```bash
     # Main packages
-    brew install git antigen asdf neovim ranger fzf tmux diff-so-fancy bat ripgrep
+    brew install git antigen asdf neovim ranger fzf tmux diff-so-fancy bat ripgrep entr
     # UI
     brew install google-chrome alfred slack rectangle maccy spotify discord
     # Mac-specific

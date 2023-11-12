@@ -32,6 +32,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle "$GPRQ_DIR" --no-local-clone
 antigen bundle grigorii-zander/zsh-npm-scripts-autocomplete@main
+antigen bundle unixorn/fzf-zsh-plugin@main
 
 antigen apply
 
@@ -39,7 +40,7 @@ antigen apply
 
 
 
-# Zplug config
+# Antigen plugin config
 
 # {{{
 
@@ -106,6 +107,8 @@ bindkey -M vicmd 'j' history-substring-search-down
 HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS= # Remove "i" to history case sensitive
+
+# unixorn/fzf-zsh-plugin@main
 
 # }}}
 
@@ -209,7 +212,7 @@ function w() {
     # Runs the given command when files change in the current directory
     local command=$@
     # Run in a subprocess because entr changes the cwd and opening a new terminal would end up in ~
-    zsh -c "rg --files | entr -s 'printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && ($command)'"
+    zsh -c "rg --files | entr -s 'clear && printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && ($command)'"
 }
 
 function wnr() {
@@ -307,6 +310,10 @@ function diff-matches-statement {
   local pattern="$1"'[^;\n]*\n[^;]+;'
   local match_path="${2:-./}"
   diff-matches "$1" "$2"
+}
+
+function open-browser {
+  python3 -m 'webbrowser' -t "$@"
 }
 
 # }}}
@@ -441,7 +448,7 @@ function gpr() {
     fi
 
     echo Opening url and copying to clipboard "$url"
-    python3 -m 'webbrowser' -t "$url"
+    open-browser "$url"
 
     if command -v pbcopy &> /dev/null &> /dev/null; then
         echo "$url" | pbcopy
@@ -478,7 +485,7 @@ function diff_package_lock_with_master() {
 
 
 
-# Homes/Paths
+# Paths
 
 # {{{
 
@@ -487,6 +494,9 @@ command -v brew &> /dev/null || export PATH="$PATH:$HOME/bin"
 
 # Ubuntu / WSL (Snap, if I ever use it)
 command -v snap &> /dev/null && export PATH="$PATH:/snap/bin"
+
+# Ubuntu / WSL (Rustup)
+command -v brew &> /dev/null || export PATH="$PATH:$HOME/.cargo/bin"
 
 # ASDF
 command -v brew &> /dev/null && . $(brew --prefix asdf)/libexec/asdf.sh

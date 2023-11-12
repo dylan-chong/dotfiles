@@ -9,6 +9,9 @@ if [ -d "/opt/homebrew/opt/fzf/bin" ]; then
   source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 fi
 
+# Ubuntu / WSL TODO doesnt work
+[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
+
 # TODO update this file to replace homebrew folder with actual fzf folder
 
 fbr() {
@@ -53,3 +56,8 @@ fbr() {
 export FZF_DEFAULT_COMMAND="rg --files --hidden '.' --glob '!.git'"
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf.history"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# TODO get completion working
+# export FZF_COMPLETION_TRIGGER=''
+# bindkey '^T' fzf-completion
+# bindkey '^I' $fzf_default_completion
