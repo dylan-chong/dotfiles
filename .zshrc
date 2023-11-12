@@ -25,7 +25,6 @@ antigen bundle spaceship-prompt/spaceship-prompt
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # History/autocomplete
-antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Random utils
@@ -98,17 +97,6 @@ SPACESHIP_DIR_TRUNC=2
 # I don't like the little symbols
 SPACESHIP_GIT_STATUS_SHOW=false
 SPACESHIP_GIT_BRANCH_COLOR=magenta
-
-# zsh-users/zsh-history-substring-search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-HISTORY_SUBSTRING_SEARCH_PREFIXED=1
-HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS= # Remove "i" to history case sensitive
-
-# unixorn/fzf-zsh-plugin@main
 
 # }}}
 
@@ -571,9 +559,6 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
-# FZF bindings
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # ZSH
 # WTF Zsh, can't type comments
 setopt INTERACTIVE_COMMENTS
@@ -587,6 +572,10 @@ bindkey -M viins '^A' vi-beginning-of-line
 bindkey -M viins '^E' vi-end-of-line
 # Can backspace past where insert mode started
 bindkey "^?" backward-delete-char # ZSHZLE
+
+# Up/down arrows to browse shell history
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # }}}
 
