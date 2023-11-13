@@ -1,1 +1,5 @@
-nodejs 16.20.2
+nodejs 20.2.0
+yarn 1.22.19
+
+elixir v1.14.5
+erlang 26.0
