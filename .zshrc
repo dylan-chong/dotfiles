@@ -232,7 +232,7 @@ function youtube-dl-song() {
 }
 
 function youtube-dl-audio-quick() {
-    youtube-dl --extract-audio --add-metadata --no-playlist --ignore-errors $@
+    youtube-dl --extract-audio --add-metadata --no-playlist --ignore-errors --audio-format m4a $@
 }
 
 function dl-upgrade() {
