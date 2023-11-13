@@ -350,7 +350,7 @@ alias gcop='git checkout -p'
 
 git_create_upstream_head() {
     if [ ! -f .git/refs/remotes/origin/HEAD ]; then
-        echo '.git directory not found maybe'
+        echo '.git/refs/remotes/origin/HEAD not found'
         return
     fi
 

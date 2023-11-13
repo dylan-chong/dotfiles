@@ -125,6 +125,7 @@ Plug 'Julian/vim-textobj-variable-segment'
 " Using new lua configs
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Currently breaks basic telescope search
+Plug 'smartpde/telescope-recent-files'
 Plug 'nvim-lua/plenary.nvim' " Dep of telescope
 Plug 'stevearc/dressing.nvim' " Improved prompts
 

@@ -18,7 +18,7 @@ in there somewhere.
     # UI
     brew install google-chrome alfred slack rectangle maccy spotify discord
     # Mac-specific
-    brew install reattach-to-user-namespace trash
+    brew install reattach-to-user-namespace trash fd
     ```
 1. Close terminal and open app `Kitty`
 1. Generate your SSH key for git and set on your Git hosting service
@@ -63,7 +63,7 @@ in there somewhere.
     mkdir -p ~/bin
     ln -s "`which batcat`" ~/bin/bat
 
-    sudo apt-get install ranger fzf tmux diff-so-fancy ripgrep 
+    sudo apt-get install ranger fzf tmux diff-so-fancy ripgrep fd-find
     ```
 1. Set default shell to zsh `chsh --shell $(which zsh)`
 

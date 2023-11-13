@@ -28,18 +28,26 @@ telescope.setup{
       },
     },
   },
+  pickers = {
+    grep_string = {
+      additional_args = function(opts)
+        return {"--hidden"}
+      end
+    },
+  },
   extensions = {
     fzf = {},
   },
 }
 
 telescope.load_extension('fzf')
+telescope.load_extension('recent_files')
 
 vim.keymap.set('n', '<leader>Tr', builtin.resume, {})
 
-vim.keymap.set('n', '<leader>f', builtin.find_files, {})
+vim.keymap.set('n', '<leader>f', function() builtin.find_files({ hidden = true }) end, {})
+vim.keymap.set('n', '<leader>F', telescope.extensions.recent_files.pick, {})
 
--- TODO make these case insensitive
 vim.keymap.set('n', '<leader>r', ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '' })<Left><Left><Left><Left>", {})
 vim.keymap.set('n', '<leader>R', ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '<C-r><C-w>' })<Left><Left><Left><Left>", {})
 vim.keymap.set('v', '<leader>r', builtin.grep_string, {})
