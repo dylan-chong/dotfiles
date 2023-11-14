@@ -48,10 +48,6 @@ Plug 'danielwe/base16-vim'
 " Shared
 Plug 'tpope/vim-repeat' " optional for vim-surround
 
-" NERDTree
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
 " Ranger
 Plug 'francoiscabrol/ranger.vim'
 if has('nvim')
@@ -402,14 +398,6 @@ augroup wstrip_markdown
   autocmd!
   autocmd FileType markdown let b:wstrip_trailing_max = 0
 augroup END
-
-" NERDTree
-let NERDTreeShowLineNumbers=1 " enable line numbers
-autocmd FileType nerdtree setlocal relativenumber
-let NERDTreeShowHidden=1
-let g:NERDTreeWinSize=45
-let g:NERDTreeHijackNetrw = 0
-
 
 " Ranger
 let g:ranger_map_keys = 0
