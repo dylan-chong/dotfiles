@@ -17,7 +17,6 @@ telescope.setup{
         end,
         ["<C-t>"] = function(prompt_bufnr)
           actions.select_tab(prompt_bufnr)
-          builtin.resume()
         end,
         ["<C-v>"] = function(prompt_bufnr)
           actions.select_vertical(prompt_bufnr)

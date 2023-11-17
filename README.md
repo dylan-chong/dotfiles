@@ -113,6 +113,6 @@ in there somewhere.
 ### Terminal theme
 
 1. Set terminal theme by running `base16_material-palenight`
-1. Install [fira code](https://github.com/tonsky/FiraCode/wiki/Installing)
+1. Install the [Fira Code font](https://github.com/Trzcin/Fira-Code-Nerd) (not Fira Mono)
     - This will be applied automatically if using Kitty, otherwise set this as your terminal font manually
 1. Restart your terminal

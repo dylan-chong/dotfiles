@@ -55,7 +55,6 @@ if has('nvim')
 endif
 
 " File-related stuff
-Plug 'dylan-chong/far.vim', { 'branch': 'rg-git-ignore-but-break-globbing' }
 Plug 'tpope/vim-eunuch'
 Plug 'dyng/ctrlsf.vim' " TODO this doesnt support adding multiple lines so could delete
 
@@ -122,7 +121,7 @@ Plug 'Julian/vim-textobj-variable-segment'
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Currently breaks basic telescope search
 Plug 'smartpde/telescope-recent-files'
-Plug 'nvim-lua/plenary.nvim' " Dep of telescope
+Plug 'nvim-lua/plenary.nvim' " Dep of telescope, nvim-spectre
 Plug 'stevearc/dressing.nvim' " Improved prompts
 
 " Using new lua configs - completion
@@ -140,6 +139,10 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+
+" Using new lua configs - Miscellaneous
+Plug 'nvim-pack/nvim-spectre' " Find and replace
+Plug 'nvim-tree/nvim-web-devicons' " Dep of nvim-specture
 
 " }
 
@@ -188,12 +191,12 @@ hi illuminatedWord ctermbg=15 guibg=#3B4750
 " Plugin Config
 " {{{
 
-" Far.vim
-let g:far#source = 'rgnvim'
-let g:far#debug = 1
-let g:far#enable_undo = 1
-nnoremap <Leader>vr "xyiw:w<Space><Bar><Space>Far <C-r>x<Space><Space>*<Left><Left>
-vnoremap <Leader>vr "xy:w<Space><Bar><Space>Far <C-r>x<Space><Space>*<Left><Left>
+" Vim Plug
+" Install plugins on startup
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
 
 " Vim Airline Plugin
 let g:airline_detect_modified=0
