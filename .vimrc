@@ -587,34 +587,6 @@ inoremap <C-b>U <Esc>mzgUiw`za
 " Delete variable segment (depends on Julian/vim-textobj-variable-segment)
 imap <M-BS> <Esc>vivs
 
-" Place cursor on the tag when jumping to it
-" (https://vi.stackexchange.com/a/16679/11136)
-func! ModifiedTagJump()
-  " remember the WORD under the cursor and do the tag jump
-  let tag_word = expand('<cword>')
-  exec "norm! \<C-]>"
-
-  let landed_word = expand('<cword>')
-  if tag_word != landed_word
-    let curpos = getcurpos()
-    let curline = curpos[1]
-    let curcol = curpos[2]
-
-    " Look for tag_word as a standalone string on the current
-    " line (it shouldn't be a sub-string)
-    let srchres = searchpos("\\<" . tag_word . "\\>", 'zn')
-
-    if srchres[0] == curline && srchres[1] > curcol
-      " A match. Move the cursor forward.
-      exec "norm! " . srchres[1] . "|"
-    endif
-  endif
-endfunc
-nnoremap <C-]> :call ModifiedTagJump()<CR>
-
-" Unpop tag stack
-nnoremap <silent> <C-\> :tag<CR>
-
 " Tab
 nnoremap <Leader>Tn :tabnew<Space>
 nnoremap <Leader>Tc :tabclose
@@ -765,9 +737,6 @@ set autowriteall
 " Auto reload
 set autoread
 au FocusGained,BufEnter * :silent! checktime " Taken from https://stackoverflow.com/a/2329094/1726450
-
-" Tags
-set tags=./tags;
 
 " Don't wrap long lines onto the next line on the screen
 set nowrap
