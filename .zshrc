@@ -494,6 +494,9 @@ export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
 export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
 
+# Lvim
+export PATH="${PATH}:$HOME/.local/bin"
+
 # }}}
 
 

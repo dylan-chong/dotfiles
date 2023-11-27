@@ -14,7 +14,7 @@ in there somewhere.
 1. Install packages
     ```bash
     # Main packages
-    brew install git antigen asdf neovim ranger fzf tmux diff-so-fancy bat ripgrep entr
+    brew install git antigen asdf neovim ranger fzf tmux diff-so-fancy bat ripgrep entr python3
     # UI
     brew install google-chrome alfred slack rectangle maccy spotify discord
     # Mac-specific
@@ -65,7 +65,9 @@ in there somewhere.
     mkdir -p ~/bin
     ln -s "`which batcat`" ~/bin/bat
 
-    sudo apt-get install ranger fzf tmux diff-so-fancy ripgrep fd-find
+    # Install rustup https://rust-lang.github.io/rustup/installation/index.html
+
+    sudo apt-get install ranger fzf tmux diff-so-fancy ripgrep fd-find pip3
     ```
 1. Set default shell to zsh `chsh --shell $(which zsh)`
 
@@ -106,6 +108,9 @@ in there somewhere.
 1. Open `vi`, run `:PlugInstall`
 1. Run `:checkhealth`
 1. Close vim
+
+https://www.lunarvim.org/docs/installation
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 
 ### tmux
 
