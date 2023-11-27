@@ -57,6 +57,8 @@ in there somewhere.
 
     # Download asdf from https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
 
+    # Install wslu https://wslutiliti.es/wslu/install.html#debian
+
     sudo add-apt-repository ppa:aos1/diff-so-fancy
 
     sudo apt-get install bat

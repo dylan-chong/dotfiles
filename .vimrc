@@ -56,7 +56,6 @@ endif
 
 " File-related stuff
 Plug 'tpope/vim-eunuch'
-Plug 'dyng/ctrlsf.vim' " TODO this doesnt support adding multiple lines so could delete
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -132,7 +131,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
 " Using new lua configs - snippets
-Plug 'L3MON4D3/LuaSnip'
+Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
 Plug 'saadparwaiz1/cmp_luasnip'
 
 " Using new lua configs - language server

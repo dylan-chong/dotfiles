@@ -179,16 +179,13 @@ alias brewupgrade="echo 'Calling: brew upgrade' && \
     echo 'Calling: brew cleanup' && \
     brew cleanup"
 
-# alias iex='rlwrap -a foo iex'
 alias iex='iex --erl "-kernel shell_history enabled"'
-alias kotlinc='rlwrap -a foo kotlinc'
-alias swipl='rlwrap -a foo swipl'
 
 alias so="source ~/.zshrc"
 
-alias aenser="python2 ~/Dropbox/Programming/GitHub/aenea-setup/aenea/server/osx/server_osx.py"
-
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
+
+alias btm="bottom"
 
 function fp() {
     local full_path="`pwd`/$1";
@@ -303,6 +300,7 @@ function diff-matches-statement {
 function open-browser {
   python3 -m 'webbrowser' -t "$@"
 }
+command -v brew &> /dev/null || export BROWSER=wslview
 
 # }}}
 
@@ -428,8 +426,7 @@ function gpr() {
     elif [[ "$base" == 'https://github.com/'* ]]; then
         local url="$base/pull/`current_branch`"
     elif [[ "$base" == 'https://gitlab.com/'* ]]; then
-        local url="$base/-/merge_requests/new?merge_request%5Bsource_branch%5D=`current_branch | jq -sRr '@uri'`"
-        # TODO fix encoded space at the end of the branch
+        local url="$base/-/merge_requests/new?merge_request%5Bsource_branch%5D=`current_branch | perl -pe 's/\s*$//' | jq -sRr '@uri'`"
     else
         echo "Unknown domain for url: $base"
         return

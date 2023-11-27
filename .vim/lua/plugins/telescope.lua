@@ -24,6 +24,9 @@ telescope.setup{
         ["<C-x>"] = function(prompt_bufnr)
           actions.select_horizontal(prompt_bufnr)
         end,
+        ["<C-q>"] = function(prompt_bufnr)
+          builtin.quickfix()
+        end,
       },
     },
   },
