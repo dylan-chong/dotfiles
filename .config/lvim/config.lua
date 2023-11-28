@@ -7,9 +7,16 @@
 lvim.builtin.project.active = false
 
 lvim.plugins = {
+  {
+    'rmagatti/auto-session',
+    config = function()
+      require("auto-session").setup {
+      }
+    end,
+  },
 }
 
 -- Strip ^M from recently pasted text
 vim.api.nvim_command(
-  "command! StripLineCarriageReturns %s/\r$//"
+  "command! StripCarriageReturns %s/\r$//"
 )
