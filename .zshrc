@@ -2,7 +2,7 @@
 source ~/.zshrc_private
 
 # Homebrew
-command -v brew &> /dev/null && eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 # Antigen
