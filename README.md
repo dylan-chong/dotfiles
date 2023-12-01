@@ -74,7 +74,7 @@ in there somewhere.
 1. Clone and configure git
     ```bash
     cd ~
-    git clone https://github.com/dylan-chong/dotfiles
+    git clone git@github.com:dylan-chong/dotfiles.git
     cd dotfiles
     git config core.worktree ~
     git config status.showUntrackedFiles no

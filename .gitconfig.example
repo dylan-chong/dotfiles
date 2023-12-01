@@ -13,8 +13,6 @@
 	ui = true
 [push]
 	default = simple
-[credential]
-	helper = osxkeychain
 [gui]
 [diff]
 	tool = vimdiff
