@@ -129,7 +129,7 @@ fi
 # {{{
 
 # Vim
-alias vi="nvim"
+alias vi="lvim"
 
 # Prevent stupidity
 # https://hasseg.org/trash/ (brew install trash)
@@ -509,7 +509,7 @@ export PATH="${PATH}:$HOME/.local/bin"
 export CLICOLOR=1
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
+export EDITOR='lvim'
 
 # v to open nvim in less
 export VISUAL=nvim
