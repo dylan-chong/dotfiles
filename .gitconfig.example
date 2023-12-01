@@ -1,5 +1,5 @@
 [core]
-	editor = nvim
+	editor = lvim
 	excludesfile = ~/.gitignore_global
 	pager = diff-so-fancy | less --tabs=4 -+F -+X -S -I
 [user]
@@ -13,8 +13,6 @@
 	ui = true
 [push]
 	default = simple
-[credential]
-	helper = osxkeychain
 [gui]
 [diff]
 	tool = vimdiff
