@@ -17,23 +17,18 @@ lvim.plugins = {
   {
     'zefei/vim-wintabs',
     config = function()
-      vim.api.nvim_command([[
+      lvim.builtin.which_key.mappings['w'] = nil -- force saves by default in lunarvim, conflicts with Wintabs <leader>w
+
+      vim.api.nvim_exec2([[
         let g:wintabs_ui_vimtab_name_format = '%t'
         let g:wintabs_autoclose_vim = 1
         let g:wintabs_autoclose_vimtab = 1
         let g:wintabs_autoclose = 2
 
-        " Change tabs
-        nnoremap <Leader>gh gT
-        nnoremap <Leader>g<Left> gT
-        nnoremap <Leader>gl gt
-        nnoremap <Leader>g<Right> gt
-
         " Change buffers
         nmap gh <Plug>(wintabs_previous)
-        nmap g<Left> <Plug>(wintabs_previous)
         nmap gl <Plug>(wintabs_next)
-        nmap g<Right> <Plug>(wintabs_next)
+        " (Change tabs using default bindings of gt/gT)
 
         " Other buffer stuff
         nmap <Leader>wu <Plug>(wintabs_undo)
@@ -41,28 +36,29 @@ lvim.plugins = {
         nmap <Leader>wo <Plug>(wintabs_only)
         nnoremap <Leader>wO :tabonly<Bar>call<Space>wintabs#only()<Bar>only
 
-        " Copied from https://github.com/zefei/vim-wintabs/issues/47#issuecomment-451717800
-        function! WintabsCloseRight()
-          call wintabs#refresh_buflist(0)
-          let buflist = copy(w:wintabs_buflist)
-          call filter(buflist, 'v:key > '.index(buflist, bufnr('%')))
-          " 'v:key < ' for all tabs to the left
-          for buffer in buflist
-            execute 'buffer! '.buffer
-            WintabsClose
-          endfor
-        endfunction
-
         " Override q,q!,wq to avoid accidentally closing all of the buffers in the
         " tab
         function! SaveAndCloseCurrentBuffer()
           :up
         call wintabs#close()
         endfunction
+
+        " Function to replace built in commands
+        " Taken from: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
+        function! CommandCabbr(abbreviation, expansion)
+          execute 'cabbr '
+                \. a:abbreviation
+                \. ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "'
+                \. a:expansion
+                \. '" : "'
+                \. a:abbreviation
+                \. '"<CR>'
+        endfunction
+
         call CommandCabbr('q', 'call wintabs#close()')
         call CommandCabbr('q!', 'call wintabs#close()')
         call CommandCabbr('wq', 'call SaveAndCloseCurrentBuffer()')
-      ]])
+      ]], {})
     end,
   },
 
