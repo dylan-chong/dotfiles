@@ -158,7 +158,7 @@ function l() {
 alias ..="c .."
 
 function c {
-    cd "$@" && echo "" && l
+    cd "$@" && echo "" && ls -la
 }
 
 function cr() {
@@ -167,7 +167,7 @@ function cr() {
     c "$LASTDIR"
 }
 
-mkc() {
+function mkc() {
     mkdir "$@" && c "$@"
 }
 
@@ -513,30 +513,6 @@ export EDITOR='lvim'
 
 # v to open nvim in less
 export VISUAL=nvim
-
-# TODO fix - broken by the autocomplete plugin
-# Prevent accidental logging out https://superuser.com/a/1509672
-# setopt ignore_eof
-# IGNOREEOF=1
-# # Emulate Bash $IGNOREEOF behavior
-# function bash-ctrl-d() {
-    # echo "CURSOR: $CURSOR"
-    # echo "BUFFER: $BUFFER"
-    # echo "IGNOREEOF: $IGNOREEOF"
-    # echo "__BASH_IGNORE_EOF: $__BASH_IGNORE_EOF"
-    # if [[ $CURSOR == 0 && -z $BUFFER ]]
-    # then
-        # [[ -z $IGNOREEOF || $IGNOREEOF == 0 ]] && exit
-        # if [[ "$LASTWIDGET" == "bash-ctrl-d" ]]
-        # then
-            # (( --__BASH_IGNORE_EOF <= 0 )) && exit
-        # else
-            # (( __BASH_IGNORE_EOF = IGNOREEOF ))
-        # fi
-    # fi
-# }
-# zle -N bash-ctrl-d
-# bindkey '^D' bash-ctrl-d
 
 # Share bash history between all shells
 setopt share_history
