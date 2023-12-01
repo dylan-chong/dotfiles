@@ -511,9 +511,6 @@ export CLICOLOR=1
 # Preferred editor for local and remote sessions
 export EDITOR='lvim'
 
-# v to open nvim in less
-export VISUAL=nvim
-
 # Share bash history between all shells
 setopt share_history
 

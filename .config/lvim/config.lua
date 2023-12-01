@@ -5,6 +5,7 @@
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
 lvim.builtin.project.active = false
+lvim.builtin.lir.active = false
 
 lvim.plugins = {
   {
@@ -70,11 +71,49 @@ lvim.plugins = {
       })
     end,
   },
+
+  { "rbgrouleff/bclose.vim" }, -- Dep of ranger.vim
+  {
+    "francoiscabrol/ranger.vim",
+    config = function()
+      vim.api.nvim_exec2([[
+        let g:ranger_map_keys = 0
+        let g:ranger_replace_netrw = 1
+        nnoremap <leader>n :Ranger<cr>
+      ]], {})
+    end,
+  },
 }
 
 lvim.format_on_save.enabled = true
+
+-- File operations
+vim.api.nvim_exec2([[
+  nnoremap <C-q> :w<CR>
+  inoremap <C-q> <Esc>:w<CR>
+  nmap Q :wq<CR>
+
+  " C-c to exit
+  nnoremap <C-c> :wqa
+  augroup control_c_to_exit
+    autocmd!
+    autocmd CmdLineEnter : nunmap <C-c>
+    autocmd CmdLineLeave : nnoremap <C-c> :wqa
+  augroup END
+]], {})
+
+-- Tab
+vim.api.nvim_exec2([[
+  nnoremap <Leader>Tn :tabnew<Space>
+  nnoremap <Leader>Tc :tabclose
+  nnoremap <Leader>To :tabonly<CR>
+  nnoremap <Leader>Tm :tabm<Space>
+]], {})
 
 -- Strip ^M from recently pasted text
 vim.api.nvim_command(
   "command! StripCarriageReturns %s/\r$//"
 )
+
+vim.opt.number = true
+vim.opt.relativenumber = true
