@@ -105,13 +105,13 @@ vim.api.nvim_exec2([[
   augroup END
 ]], {})
 
--- Tab
-vim.api.nvim_exec2([[
-  nnoremap <Leader>Tn :tabnew<Space>
-  nnoremap <Leader>Tc :tabclose
-  nnoremap <Leader>To :tabonly<CR>
-  nnoremap <Leader>Tm :tabm<Space>
-]], {})
+-- Tab keys
+lvim.builtin.which_key.mappings['T'] = {
+  n = { ":tabnew<Space>", "New tab" },
+  c = { ":tabclose", "Close tab" },
+  o = { ":tabonly<CR>", "Close other tabs" },
+  m = { ":tabm<Space>", "Move tab" },
+}
 
 -- Strip ^M from recently pasted text
 vim.api.nvim_command(
