@@ -348,7 +348,7 @@ alias gcop='git checkout -p'
 
 git_create_upstream_head() {
     if [ ! -f .git/refs/remotes/origin/HEAD ]; then
-        echo '.git/refs/remotes/origin/HEAD not found'
+        echo '.git/refs/remotes/origin/HEAD not found. Run `git_infer_remote_from_origin OriginUser` first'
         return
     fi
 
@@ -361,6 +361,11 @@ git_infer_remote_from_origin() {
 
     local origin_url=`git remote get-url origin`
     local new_remote_url=`echo $origin_url | perl -pe 's|\:[\w-]+/|\:'"$new_remote_repo_owner"'/|'`
+
+    if [ -z "$new_remote_repo_owner" ]; then
+      echo 'Need to pass first argument `new_remote_repo_owner`'
+      return
+    fi
 
     echo ">" git remote add "$new_remote_name" "$new_remote_url"
     git remote add "$new_remote_name" "$new_remote_url"
