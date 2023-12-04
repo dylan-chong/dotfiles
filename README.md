@@ -86,7 +86,8 @@ in there somewhere.
     ```
 1. Merge the `~/.gitconfig.example` into your `~/.gitconfig`
     - Also update any `AAAAAA` spots
-1. Run `touch ~/.zshrc_private`
+1. Run `cp ~/.zshrc_private.example ~/.zshrc_private`
+    - Also update any `AAAAAA` spots
 1. Start a new shell
 
 ### ASDF
