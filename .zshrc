@@ -10,30 +10,34 @@ source ~/.zshrc_private
 # {{{
 
 ANTIGEN_LOG=~/.antigen/debug.log
+
+# Mac
 command -v brew &> /dev/null && source "$(brew --prefix antigen)/share/antigen/antigen.zsh"
 # Ubuntu/WSL
 [ -f "/usr/share/zsh-antigen/antigen.zsh" ] && source "/usr/share/zsh-antigen/antigen.zsh"
 
-antigen use oh-my-zsh
+if command -v antigen &> /dev/null; then
+  antigen use oh-my-zsh
 
-antigen bundle https://github.com/robbyrussell/oh-my-zsh.git plugins/vi-mode
+  antigen bundle https://github.com/robbyrussell/oh-my-zsh.git plugins/vi-mode
 
-# Themes
-# base16-shell doesn't follow the zsh plug format so can't be used with `theme` (I think)
-antigen bundle chriskempson/base16-shell
-antigen bundle spaceship-prompt/spaceship-prompt
-antigen bundle zsh-users/zsh-syntax-highlighting
+  # Themes
+  # base16-shell doesn't follow the zsh plug format so can't be used with `theme` (I think)
+  antigen bundle chriskempson/base16-shell
+  antigen bundle spaceship-prompt/spaceship-prompt
+  antigen bundle zsh-users/zsh-syntax-highlighting
 
-# History/autocomplete
-antigen bundle zsh-users/zsh-autosuggestions
+  # History/autocomplete
+  antigen bundle zsh-users/zsh-autosuggestions
 
-# Random utils
-antigen bundle MichaelAquilina/zsh-you-should-use
-antigen bundle "$GPRQ_DIR" --no-local-clone
-antigen bundle grigorii-zander/zsh-npm-scripts-autocomplete@main
-antigen bundle unixorn/fzf-zsh-plugin@main
+  # Random utils
+  antigen bundle MichaelAquilina/zsh-you-should-use
+  antigen bundle "$GPRQ_DIR" --no-local-clone
+  antigen bundle grigorii-zander/zsh-npm-scripts-autocomplete@main
+  antigen bundle unixorn/fzf-zsh-plugin@main
 
-antigen apply
+  antigen apply
+fi
 
 # }}}
 
@@ -300,7 +304,6 @@ function diff-matches-statement {
 function open-browser {
   python3 -m 'webbrowser' -t "$@"
 }
-command -v brew &> /dev/null || export BROWSER=wslview
 
 # }}}
 
@@ -479,25 +482,27 @@ function diff_package_lock_with_master() {
 
 # {{{
 
-# Ubuntu / WSL (for custom binaries, like neovim)
-command -v brew &> /dev/null || export PATH="$PATH:$HOME/bin"
+if [ -z "$NO_MODIFY_PATH" ]; then
+  # Ubuntu / WSL (for custom binaries, like neovim)
+  command -v brew &> /dev/null || export PATH="$PATH:$HOME/bin"
 
-# Ubuntu / WSL (Snap, if I ever use it)
-command -v snap &> /dev/null && export PATH="$PATH:/snap/bin"
+  # Ubuntu / WSL (Snap, if I ever use it)
+  command -v snap &> /dev/null && export PATH="$PATH:/snap/bin"
 
-# Ubuntu / WSL (Rustup)
-command -v brew &> /dev/null || export PATH="$PATH:$HOME/.cargo/bin"
+  # Ubuntu / WSL (Rustup)
+  command -v brew &> /dev/null || export PATH="$PATH:$HOME/.cargo/bin"
 
-# ASDF
-command -v brew &> /dev/null && . $(brew --prefix asdf)/libexec/asdf.sh
-[ -f "$HOME/.asdf/asdf.sh" ] && . "$HOME/.asdf/asdf.sh" # Ubuntu / WSL
+  # ASDF
+  command -v brew &> /dev/null && . $(brew --prefix asdf)/libexec/asdf.sh
+  [ -f "$HOME/.asdf/asdf.sh" ] && . "$HOME/.asdf/asdf.sh" # Ubuntu / WSL
 
-# PHP
-export PATH="$PATH:/Users/Dylan/.composer/vendor/bin/"
+  # Python
+  command -v brew &> /dev/null && export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+  command -v brew &> /dev/null && export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
 
-# Python
-export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
+  # Kinda path related...
+  [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ] || export BROWSER=wslview
+fi
 
 # Lvim
 export PATH="${PATH}:$HOME/.local/bin"
@@ -556,4 +561,3 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # }}}
-
