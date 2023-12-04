@@ -64,10 +64,13 @@ lvim.plugins = {
   },
 
   {
-    "Pocco81/auto-save.nvim",
+    "okuuva/auto-save.nvim",
     config = function()
       require("auto-save").setup({
-        trigger_events = { "BufLeave", "FocusLost" }
+        trigger_events = {
+          immediate_save = { "BufLeave", "FocusLost" },
+          defer_save = {},
+        },
       })
     end,
   },
