@@ -105,6 +105,24 @@ vim.api.nvim_exec2([[
   augroup END
 ]], {})
 
+
+-- Copy current file to clipboard
+-- TODO Use a plugin and instead of making the function myself
+vim.api.nvim_exec2([[
+  function! g:CopySingleLine(string)
+    if executable('pbcopy')
+      silent exec "!echo " . a:string . " | tr -d '\\n' | pbcopy"
+    elseif executable('clip.exe')
+      silent exec "!echo " . a:string . " | tr -d '\\n' | clip.exe"
+    else
+      echoerr 'No clipboard program found'
+      throw l:output
+    endif
+    echom "Copied: '" . a:string . "'"
+  endfunction
+]], {})
+lvim.builtin.which_key.mappings['%'] = { ":call CopySingleLine(expand('%'))<Left><Left><Left>", "Copy file path" }
+
 -- Tab keys
 lvim.builtin.which_key.mappings['T'] = {
   n = { ":tabnew<Space>", "New tab" },
