@@ -28,7 +28,7 @@ lvim.plugins = {
 
         " Change buffers
         nmap gh <Plug>(wintabs_previous)
-        nmap gl <Plug>(wintabs_next)
+        nmap g; <Plug>(wintabs_next)
         " (Change tabs using default bindings of gt/gT)
 
         " Other buffer stuff
