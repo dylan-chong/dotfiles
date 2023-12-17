@@ -106,6 +106,12 @@ in there somewhere.
 1. Run [installation steps](https://www.lunarvim.org/docs/installation)
     - Let it install dependencies
 
+#### TODOs
+
+- fix gl not working
+- fix telescope <space>f to open file, appears to delete current wintabs buffer (rather than adding a new one)
+- move keybinds into which-key declaration
+
 ### Neovim (optional - legacy - non LunarVim)
 
 1. Install [vim-plug](https://github.com/junegunn/vim-plug#neovim)
