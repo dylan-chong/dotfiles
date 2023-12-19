@@ -86,6 +86,41 @@ lvim.plugins = {
       ]], {})
     end,
   },
+
+  -- TODO put in main lunarvim repo if you can get it to work with telescope
+  {
+    'mrjones2014/legendary.nvim',
+    config = function()
+      require('legendary').setup({
+        extensions = {
+          which_key = {
+            -- Automatically add which-key tables to legendary
+            -- see WHICH_KEY.md for more details
+            auto_register = false,
+            -- you can put which-key.nvim tables here,
+            -- or alternatively have them auto-register,
+            -- see WHICH_KEY.md
+            mappings = {},
+            opts = {},
+            -- controls whether legendary.nvim actually binds they keymaps,
+            -- or if you want to let which-key.nvim handle the bindings.
+            -- if not passed, true by default
+            do_binding = true,
+            -- controls whether to use legendary.nvim item groups
+            -- matching your which-key.nvim groups; if false, all keymaps
+            -- are added at toplevel instead of in a group.
+            use_groups = true,
+            lazy_nvim = true,
+          },
+        },
+      })
+    end,
+    version = 'v2.1.0',
+    -- since legendary.nvim handles all your keymaps/commands,
+    -- its recommended to load legendary.nvim before other plugins
+    priority = 10000,
+    lazy = false,
+  }
 }
 
 lvim.format_on_save.enabled = true
