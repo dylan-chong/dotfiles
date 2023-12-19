@@ -107,7 +107,8 @@ vim.api.nvim_exec2([[
 
 
 -- Copy current file to clipboard
--- TODO Use a plugin and instead of making the function myself
+-- TODO NEXT just call https://github.com/tnakaz/path-to-clipboard.nvim/blob/main/lua/path-to-clipboard/init.lua
+--
 vim.api.nvim_exec2([[
   function! g:CopySingleLine(string)
     if executable('pbcopy')

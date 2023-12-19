@@ -64,7 +64,7 @@ in there somewhere.
     mkdir -p ~/bin
     ln -s "`which batcat`" ~/bin/bat
 
-    sudo apt-get install ranger fzf tmux ripgrep fd-find
+    sudo apt-get install ranger tmux ripgrep fd-find
     sudo snap install bottom diff-so-fancy
     ```
 1. Set default shell to zsh `chsh --shell $(which zsh)`

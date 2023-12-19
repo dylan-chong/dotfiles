@@ -25,6 +25,7 @@ telescope.setup{
           actions.select_horizontal(prompt_bufnr)
         end,
         ["<C-q>"] = function(prompt_bufnr)
+          -- TODO doesn't work
           builtin.quickfix()
         end,
       },

@@ -5,6 +5,40 @@ source ~/.zshrc_private
 [ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
+
+# Paths
+
+# {{{
+
+if [ -z "$NO_MODIFY_PATH" ]; then
+  # Ubuntu / WSL (for custom binaries, like neovim)
+  command -v brew &> /dev/null || export PATH="$PATH:$HOME/bin"
+
+  # Ubuntu / WSL (Snap, if I ever use it)
+  command -v snap &> /dev/null && export PATH="$PATH:/snap/bin"
+
+  # Ubuntu / WSL (Rustup)
+  command -v brew &> /dev/null || export PATH="$PATH:$HOME/.cargo/bin"
+
+  # ASDF
+  command -v brew &> /dev/null && . $(brew --prefix asdf)/libexec/asdf.sh
+  [ -f "$HOME/.asdf/asdf.sh" ] && . "$HOME/.asdf/asdf.sh" # Ubuntu / WSL
+
+  # Python
+  command -v brew &> /dev/null && export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+  command -v brew &> /dev/null && export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
+
+  # Kinda path related...
+  [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ] && export BROWSER=wslview
+fi
+
+# Lvim
+export PATH="${PATH}:$HOME/.local/bin"
+
+# }}}
+
+
+
 # Antigen
 
 # {{{
@@ -473,39 +507,6 @@ function diff_package_lock_with_master() {
     cat package-lock.json | simplify_package_lock > lock-new.jsonl
     git diff --no-index lock-master.jsonl lock-new.jsonl
 }
-
-# }}}
-
-
-
-# Paths
-
-# {{{
-
-if [ -z "$NO_MODIFY_PATH" ]; then
-  # Ubuntu / WSL (for custom binaries, like neovim)
-  command -v brew &> /dev/null || export PATH="$PATH:$HOME/bin"
-
-  # Ubuntu / WSL (Snap, if I ever use it)
-  command -v snap &> /dev/null && export PATH="$PATH:/snap/bin"
-
-  # Ubuntu / WSL (Rustup)
-  command -v brew &> /dev/null || export PATH="$PATH:$HOME/.cargo/bin"
-
-  # ASDF
-  command -v brew &> /dev/null && . $(brew --prefix asdf)/libexec/asdf.sh
-  [ -f "$HOME/.asdf/asdf.sh" ] && . "$HOME/.asdf/asdf.sh" # Ubuntu / WSL
-
-  # Python
-  command -v brew &> /dev/null && export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-  command -v brew &> /dev/null && export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
-
-  # Kinda path related...
-  [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ] || export BROWSER=wslview
-fi
-
-# Lvim
-export PATH="${PATH}:$HOME/.local/bin"
 
 # }}}
 
