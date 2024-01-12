@@ -223,7 +223,7 @@ alias so="source ~/.zshrc"
 
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
 
-alias btm="bottom"
+command -v bottom &> /dev/null && alias btm="bottom"
 
 function fp() {
     local full_path="`pwd`/$1";
@@ -284,14 +284,8 @@ function whatismyip() {
     echo "$ip" | pbcopy
 }
 
-# From https://www.stefaanlippens.net/pretty-csv.html
-# Note: Probably won't work if "," or newline inside a cell
-function pretty-csv {
-    perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s,
-}
-
 function calc {
-    /usr/bin/env nvim ~/Desktop/crap/calculator.js +Codi
+    /usr/bin/env nvim ~/calculator.js +Codi
 }
 
 function ns {
