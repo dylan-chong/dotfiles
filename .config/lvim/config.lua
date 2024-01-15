@@ -103,6 +103,14 @@ lvim.plugins = {
       require("nvim-surround").setup({})
     end
   },
+
+  {
+    "hinell/lsp-timeout.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    init = function()
+      vim.g.lspTimeoutConfig = {}
+    end
+  },
 }
 
 lvim.format_on_save.enabled = true

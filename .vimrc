@@ -139,6 +139,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'folke/trouble.nvim' " TODO add to lunar
+Plug 'hinell/lsp-timeout.nvim'
 
 " Using new lua configs - Miscellaneous
 Plug 'nvim-pack/nvim-spectre' " Find and replace
