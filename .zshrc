@@ -33,6 +33,7 @@ if [ -z "$NO_MODIFY_PATH" ]; then
 fi
 
 # Lvim
+export LVIM_DEV_MODE=1
 export PATH="${PATH}:$HOME/.local/bin"
 
 # }}}
