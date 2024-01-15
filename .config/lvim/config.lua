@@ -6,6 +6,9 @@
 
 lvim.builtin.project.active = false
 lvim.builtin.lir.active = false
+lvim.builtin.telescope.defaults.layout_strategy = 'vertical' -- TODO see emails to fix border symbols
+lvim.builtin.telescope.defaults.layout_config.height = 0.95  -- TODO change defaults in lunarvim
+lvim.builtin.telescope.defaults.layout_config.width = 0.95
 
 lvim.plugins = {
   {
@@ -20,6 +23,12 @@ lvim.plugins = {
     config = function()
       lvim.builtin.which_key.mappings['w'] = nil -- force saves by default in lunarvim, conflicts with Wintabs <leader>w
 
+      local line_diagnostics = lvim.lsp.buffer_mappings.normal_mode['gl']
+      if line_diagnostics then
+        lvim.lsp.buffer_mappings.normal_mode['gl'] = nil
+        lvim.lsp.buffer_mappings.normal_mode['gK'] = line_diagnostics
+      end
+
       vim.api.nvim_exec2([[
         let g:wintabs_ui_vimtab_name_format = '%t'
         let g:wintabs_autoclose_vim = 1
@@ -28,8 +37,7 @@ lvim.plugins = {
 
         " Change buffers
         nmap gh <Plug>(wintabs_previous)
-        nmap g; <Plug>(wintabs_next)
-        " (Change tabs using default bindings of gt/gT)
+        nmap gl <Plug>(wintabs_next)
 
         " Other buffer stuff
         nmap <Leader>wu <Plug>(wintabs_undo)
@@ -134,7 +142,9 @@ vim.api.nvim_exec2([[
 lvim.builtin.which_key.mappings['%'] = { ":call CopySingleLine(expand('%'))<Left><Left><Left>", "Copy file path" }
 
 -- Tab keys
-lvim.builtin.which_key.mappings['T'] = {
+lvim.builtin.which_key.mappings['t'] = {
+  h = { "gT", "Previous tab" },
+  l = { "gt", "Next tab" },
   n = { ":tabnew<Space>", "New tab" },
   c = { ":tabclose", "Close tab" },
   o = { ":tabonly<CR>", "Close other tabs" },
