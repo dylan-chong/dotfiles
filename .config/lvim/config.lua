@@ -4,11 +4,19 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
+--------------- Builtin plugin config ---------------
+
 lvim.builtin.project.active = false
 lvim.builtin.lir.active = false
+
 lvim.builtin.telescope.defaults.layout_strategy = 'vertical' -- TODO see emails to fix border symbols
 lvim.builtin.telescope.defaults.layout_config.height = 0.95  -- TODO change defaults in lunarvim
 lvim.builtin.telescope.defaults.layout_config.width = 0.95
+lvim.builtin.telescope.pickers.find_files.path_display = { "absolute" } -- TODO doesn't work
+
+lvim.format_on_save.enabled = true
+
+--------------- Custom plugins ---------------
 
 lvim.plugins = {
   {
@@ -113,7 +121,7 @@ lvim.plugins = {
   },
 }
 
-lvim.format_on_save.enabled = true
+--------------- Custom configurations ---------------
 
 -- File operations
 vim.api.nvim_exec2([[
