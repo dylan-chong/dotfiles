@@ -33,7 +33,6 @@ if [ -z "$NO_MODIFY_PATH" ]; then
 fi
 
 # Lvim
-export LVIM_DEV_MODE=1
 export PATH="${PATH}:$HOME/.local/bin"
 
 # }}}
@@ -174,7 +173,7 @@ alias vi="lvim"
 # https://hasseg.org/trash/ (brew install trash)
 command -v brew &> /dev/null && alias rm="trash"
 
-alias cat="bat"
+command -v bat &> /dev/null && alias cat="bat"
 
 # Max line length when searching
 alias rgn="rg --no-ignore"
