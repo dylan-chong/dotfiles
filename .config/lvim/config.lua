@@ -92,9 +92,11 @@ lvim.plugins = {
     end,
   },
 
-  { "rbgrouleff/bclose.vim" }, -- Dep of ranger.vim
   {
     "francoiscabrol/ranger.vim",
+    dependencies = {
+      "rbgrouleff/bclose.vim"
+    },
     config = function()
       vim.api.nvim_exec2([[
         let g:ranger_map_keys = 0
