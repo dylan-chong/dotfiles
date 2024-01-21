@@ -97,5 +97,3 @@ lspconfig['lua_ls'].setup({
     },
   }
 })
-
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
