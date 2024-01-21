@@ -9,10 +9,15 @@
 lvim.builtin.project.active = false
 lvim.builtin.lir.active = false
 
-lvim.builtin.telescope.defaults.layout_strategy = 'vertical'            -- TODO see emails to fix border symbols
-lvim.builtin.telescope.defaults.layout_config.height = 0.95             -- TODO change defaults in lunarvim
-lvim.builtin.telescope.defaults.layout_config.width = 0.95
+lvim.builtin.telescope.defaults.layout_strategy = 'vertical'
+lvim.builtin.telescope.theme = nil                                      -- TODO copy to lunarvim repo
 lvim.builtin.telescope.pickers.find_files.path_display = { "absolute" } -- TODO doesn't work
+lvim.builtin.which_key.mappings['f'] = {
+  function()
+    require("lvim.core.telescope.custom-finders").find_project_files { previewer = true } -- TODO copy to lunarvim repo
+  end,
+  "Find File",
+}
 
 lvim.format_on_save.enabled = true
 
