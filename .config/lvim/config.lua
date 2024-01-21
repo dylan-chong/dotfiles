@@ -183,3 +183,6 @@ vim.api.nvim_command(
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.relativenumber = true
+
+-- Get command mode completion to work more nicely (TODO copy to lunarvim repo)
+vim.opt.smartcase = true
