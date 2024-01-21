@@ -24,6 +24,7 @@ lvim.format_on_save.enabled = true
 --------------- Custom plugins ---------------
 
 lvim.plugins = {
+  -- TODO this doesn't save wintabs buffers
   {
     'rmagatti/auto-session',
     config = function()
