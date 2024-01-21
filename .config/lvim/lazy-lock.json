@@ -3,7 +3,6 @@
   "LuaSnip": { "branch": "master", "commit": "1def35377854535bb3b0f4cc7a33c083cdb12571" },
   "alpha-nvim": { "branch": "main", "commit": "234822140b265ec4ba3203e3e0be0e0bb826dff5" },
   "auto-save.nvim": { "branch": "main", "commit": "e98cafef75271ec83dc84c933f124ab1bb675ef8" },
-  "auto-session": { "branch": "main", "commit": "51196ca66b38fc1660fdf50031cb0b31a199b7c9" },
   "bclose.vim": { "branch": "master", "commit": "99018b4a2dd18aea1cbd3aa23565b01a0f8c5b73" },
   "bigfile.nvim": { "branch": "main", "commit": "9616b73670ffeb92679677554ded88854ae42cf8" },
   "bufferline.nvim": { "branch": "main", "commit": "357cc8f8eeb64702e6fcf2995e3b9becee99a5d3" },
@@ -44,6 +43,8 @@
   "toggleterm.nvim": { "branch": "main", "commit": "c80844fd52ba76f48fabf83e2b9f9b93273f418d" },
   "tokyonight.nvim": { "branch": "main", "commit": "633039585dff7fd2b9b62fb190bf768702609d95" },
   "vim-illuminate": { "branch": "master", "commit": "3bd2ab64b5d63b29e05691e624927e5ebbf0fb86" },
+  "vim-misc": { "branch": "master", "commit": "3e6b8fb6f03f13434543ce1f5d24f6a5d3f34f0b" },
+  "vim-session": { "branch": "master", "commit": "fb80488745d0853d60129f401df5eff2946e5207" },
   "vim-wintabs": { "branch": "master", "commit": "6d18d62ae0f293a108afee8c514706027faefcf3" },
   "which-key.nvim": { "branch": "main", "commit": "6962dae3565369363b59dd51fb206051555fcb4d" }
 }
