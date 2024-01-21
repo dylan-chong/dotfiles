@@ -179,10 +179,10 @@ lvim.builtin.which_key.mappings['%'] = {
 lvim.builtin.which_key.mappings['t'] = {
   h = { "gT", "Previous tab" },
   l = { "gt", "Next tab" },
-  n = { ":tabnew<Space>", "New tab" },
-  c = { ":tabclose", "Close tab" },
+  n = { ":tabnew<Space><C-f>a", "New tab" },
+  c = { ":tabclose<C-f>a", "Close tab" },
   o = { ":tabonly<CR>", "Close other tabs" },
-  m = { ":tabm<Space>", "Move tab" },
+  m = { ":tabm<Space><C-f>a", "Move tab" },
 }
 
 -- Strip ^M from recently pasted text
