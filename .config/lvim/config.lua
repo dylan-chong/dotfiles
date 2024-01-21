@@ -163,7 +163,17 @@ vim.api.nvim_exec2([[
     echom "Copied: '" . a:string . "'"
   endfunction
 ]], {})
-lvim.builtin.which_key.mappings['%'] = { ":call CopySingleLine(expand('%'))<Left><Left><Left>", "Copy file path" }
+
+-- Copy file path
+function CopyPath(expand)
+  local string = vim.fn.expand(expand)
+  vim.fn.setreg('+', string)
+  print('Copied: ' .. string)
+end
+lvim.builtin.which_key.mappings['%'] = {
+  ":lua CopyPath('%')<Left><Left><C-f>i",
+  "Copy file path"
+}
 
 -- Tab keys
 lvim.builtin.which_key.mappings['t'] = {
