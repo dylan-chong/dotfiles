@@ -225,6 +225,8 @@ lvim.builtin.which_key.mappings['t'] = {
   c = { ":tabclose<C-f>a", "Close tab" },
   o = { ":tabonly<CR>", "Close other tabs" },
   m = { ":tabm<Space><C-f>a", "Move tab" },
+  d = { "<C-w>s<C-w>T<Space>gh:q<CR><Space>gl", "Move buffer to new tab" },
+  D = { "<C-w>s<C-w>T", "Duplicate buffer in new tab" },
 }
 
 -- Strip ^M from recently pasted text
