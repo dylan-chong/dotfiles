@@ -147,6 +147,27 @@ lvim.plugins = {
       vim.g.lspTimeoutConfig = {}
     end
   },
+
+  -- TODO - copy to lunar
+  {
+    "nvim-pack/nvim-spectre",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+    init = function()
+      local spectre = require('spectre')
+      spectre.setup()
+      lvim.builtin.which_key.mappings['r'] = {
+        function() spectre.toggle() end,
+        "Find and replace"
+      }
+      lvim.builtin.which_key.vmappings['r'] = {
+        function() spectre.open_visual() end,
+        "Find and replace"
+      }
+    end
+  },
+
+  -- TODO auto detect indent
+  -- TODO fix auto format does not respect prettier
 }
 
 --------------- Custom configurations ---------------
