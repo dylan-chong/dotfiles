@@ -10,13 +10,23 @@ lvim.builtin.project.active = false
 lvim.builtin.lir.active = false
 
 lvim.builtin.telescope.defaults.layout_strategy = 'vertical'
-lvim.builtin.telescope.theme = nil                                      -- TODO copy to lunarvim repo
-lvim.builtin.telescope.pickers.find_files.path_display = { "absolute" } -- TODO doesn't work
+lvim.builtin.telescope.theme = nil                            -- TODO copy to lunarvim repo
+lvim.builtin.telescope.defaults.path_display = { "absolute" } -- TODO add to docs on lunarvim repo
 lvim.builtin.which_key.mappings['f'] = {
   function()
     require("lvim.core.telescope.custom-finders").find_project_files { previewer = true } -- TODO copy to lunarvim repo
   end,
   "Find File",
+}
+lvim.builtin.which_key.mappings['s']['T'] = {
+  ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '' })<Left><Left><Left><Left>",
+  "Text (FZF)",
+}
+lvim.builtin.which_key.vmappings['s'] = {
+  T = {
+    ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '<C-r><C-w>' })<Left><Left><Left><Left>",
+    "Text (FZF)",
+  }
 }
 
 lvim.format_on_save.enabled = true
@@ -104,7 +114,6 @@ lvim.plugins = {
     end,
   },
 
-  -- TODO fix switching to last tab on save
   {
     "okuuva/auto-save.nvim",
     config = function()
@@ -168,6 +177,8 @@ lvim.plugins = {
 
   -- TODO auto detect indent
   -- TODO fix auto format does not respect prettier
+  -- TODO param hints
+  -- TODO search visual selection
 }
 
 --------------- Custom configurations ---------------
