@@ -19,12 +19,12 @@ lvim.builtin.which_key.mappings['f'] = {
   "Find File",
 }
 lvim.builtin.which_key.mappings['s']['T'] = {
-  ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '' })<Left><Left><Left><Left>",
+  ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '' })<Left><Left><Left><Left><C-f>i",
   "Text (FZF)",
 }
 lvim.builtin.which_key.vmappings['s'] = {
   T = {
-    ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '<C-r><C-w>' })<Left><Left><Left><Left>",
+    ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '<C-r><C-w>' })<Left><Left><Left><Left><C-f>i",
     "Text (FZF)",
   }
 }
