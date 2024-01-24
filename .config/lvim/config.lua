@@ -251,3 +251,7 @@ vim.opt.relativenumber = true
 
 -- Get command mode completion to work more nicely (TODO copy to lunarvim repo)
 vim.opt.smartcase = true
+
+-- Fix bug https://github.com/LunarVim/LunarVim/issues/3007#issuecomment-1281428877
+-- TODO disable this in luanrvim
+vim.api.nvim_del_augroup_by_name('_auto_resize')
