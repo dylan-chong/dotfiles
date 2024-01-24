@@ -168,6 +168,7 @@ fi
 
 # Vim
 alias vi="lvim"
+alias vs="lvim -S"
 
 # Prevent stupidity
 # https://hasseg.org/trash/ (brew install trash)
