@@ -30,6 +30,8 @@ if [ -z "$NO_MODIFY_PATH" ]; then
 
   # Kinda path related...
   [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ] && export BROWSER=wslview
+
+  command -v go &> /dev/null && export PATH="$(go env GOPATH)/bin:$PATH"
 fi
 
 # Lvim
@@ -201,6 +203,7 @@ function c {
 }
 
 function cr() {
+    # TODO use lf instead of ranger
     ranger --choosedir=$HOME/.rangerdir $@
     local LASTDIR=`cat $HOME/.rangerdir`
     c "$LASTDIR"

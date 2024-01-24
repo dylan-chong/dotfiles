@@ -127,16 +127,16 @@ lvim.plugins = {
   },
 
   {
-    "francoiscabrol/ranger.vim",
+    "lmburns/lf.nvim",
     dependencies = {
-      "rbgrouleff/bclose.vim"
+      "toggleterm.nvim"
     },
     config = function()
-      vim.api.nvim_exec2([[
-        let g:ranger_map_keys = 0
-        let g:ranger_replace_netrw = 1
-        nnoremap <leader>n :Ranger<cr>
-      ]], {})
+      require("lf").setup({})
+      lvim.builtin.which_key.mappings.n = {
+        function() require("lf").start() end,
+        "Browse Files"
+      }
     end,
   },
 

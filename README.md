@@ -14,7 +14,7 @@ in there somewhere.
 1. Install packages
     ```bash
     # Main packages
-    brew install git antigen asdf neovim ranger fzf tmux diff-so-fancy bat ripgrep entr bottom
+    brew install git antigen asdf neovim fzf tmux diff-so-fancy bat ripgrep entr bottom lf
     # UI
     brew install google-chrome alfred slack rectangle maccy spotify discord
     # Mac-specific
@@ -60,11 +60,13 @@ in there somewhere.
 
     # Install wslu https://wslutiliti.es/wslu/install.html#debian
 
+    # Install lf https://github.com/gokcehan/lf?tab=readme-ov-file#installation
+
     sudo apt-get install bat
     mkdir -p ~/bin
     ln -s "`which batcat`" ~/bin/bat
 
-    sudo apt-get install ranger tmux ripgrep fd-find
+    sudo apt-get install tmux ripgrep fd-find
     sudo snap install bottom diff-so-fancy
     ```
 1. Set default shell to zsh `chsh --shell $(which zsh)`
