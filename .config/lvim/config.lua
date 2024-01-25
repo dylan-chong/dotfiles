@@ -158,6 +158,7 @@ lvim.plugins = {
       require("nvim-surround").setup({})
     end
   },
+  { "tpope/vim-abolish" }, -- :S substitution, casing changes
 
   {
     "hinell/lsp-timeout.nvim",
