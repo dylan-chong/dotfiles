@@ -30,6 +30,8 @@ lvim.builtin.which_key.vmappings['s'] = {
   }
 }
 
+lvim.format_on_save.enabled = true
+
 --------------- Custom plugins ---------------
 
 lvim.plugins = {
@@ -184,22 +186,8 @@ lvim.plugins = {
     end
   },
 
-  {
-    "elentok/format-on-save.nvim",
-    config = function()
-      local format_on_save = require("format-on-save")
-      local formatters = require("format-on-save.formatters")
-
-      format_on_save.setup({
-        formatter_by_ft = {
-          rust = formatters.lsp,
-          typescript = formatters.prettierd,
-        },
-      })
-    end
-  },
-
   -- TODO auto detect indent
+  -- TODO fix auto format does not respect prettier
   -- TODO param hints
   -- TODO search visual selection
 }
