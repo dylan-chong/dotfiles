@@ -134,8 +134,17 @@ lvim.plugins = {
     },
     config = function()
       require("lf").setup({})
+      local fn = vim.fn
+      local o = vim.o
+
       lvim.builtin.which_key.mappings.n = {
-        function() require("lf").start() end,
+        function()
+          require("lf").start({
+            height = 99999,
+            width = 99999,
+            winblend = 0,
+          })
+        end,
         "Browse Files"
       }
     end,
