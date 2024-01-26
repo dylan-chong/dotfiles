@@ -11,7 +11,8 @@ lvim.builtin.lir.active = false
 
 lvim.builtin.telescope.defaults.layout_strategy = 'vertical'
 lvim.builtin.telescope.theme = nil                              -- TODO copy to lunarvim repo
-lvim.builtin.telescope.defaults.path_display = { "absolute" }   -- TODO add to docs on lunarvim repo
+lvim.builtin.telescope.defaults.path_display = { "truncate" }   -- TODO add to docs on lunarvim repo
+lvim.builtin.telescope.defaults.previewer = true   -- TODO add nil value to defaults?
 lvim.builtin.telescope.pickers.grep_string.only_sort_text = nil -- Allow filtering by file names using fzf
 lvim.builtin.which_key.mappings['f'] = {
   function()
