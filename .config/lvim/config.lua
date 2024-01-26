@@ -184,6 +184,11 @@ lvim.plugins = {
     end
   },
 
+  -- TODO copy to lunar
+  {
+    'stevearc/dressing.nvim'
+  },
+
   {
     "elentok/format-on-save.nvim",
     config = function()
