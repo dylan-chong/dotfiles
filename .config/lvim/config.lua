@@ -31,6 +31,8 @@ lvim.builtin.which_key.vmappings['s'] = {
   }
 }
 
+-- TODO in lunarvim, s/'reset hunk'/'revert hunk'
+
 --------------- Custom plugins ---------------
 
 lvim.plugins = {
@@ -158,6 +160,25 @@ lvim.plugins = {
     end
   },
   { "tpope/vim-abolish" }, -- :S substitution, casing changes
+
+  {
+    -- TODO get working?
+    "AckslD/nvim-revJ.lua",
+    config = function()
+      lvim.builtin.which_key.vmappings.J = {
+        function() require('revj').format_visual() end,
+        "Split line into multiple lines"
+      }
+    end
+  },
+
+  {
+    "mizlan/iswap.nvim",
+    config = function() 
+      lvim.builtin.which_key.mappings['<'] = { ":ISwapWithLeft<CR>", "Swap current element with previous" }
+      lvim.builtin.which_key.mappings['>'] = { ":ISwapWithRight<CR>", "Swap current element with next" }
+    end
+  },
 
   {
     "hinell/lsp-timeout.nvim",
