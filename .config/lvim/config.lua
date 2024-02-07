@@ -185,7 +185,9 @@ lvim.plugins = {
     "hinell/lsp-timeout.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
     init = function()
-      vim.g.lspTimeoutConfig = {}
+      vim.g.lspTimeoutConfig = {
+        startTimeout = 1000 * 1,
+      }
     end
   },
 
