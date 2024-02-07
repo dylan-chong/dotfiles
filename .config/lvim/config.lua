@@ -164,6 +164,7 @@ lvim.plugins = {
   {
     -- TODO get working?
     "AckslD/nvim-revJ.lua",
+    dependencies = {"wellle/targets.vim"},
     config = function()
       lvim.builtin.which_key.vmappings.J = {
         function() require('revj').format_visual() end,
