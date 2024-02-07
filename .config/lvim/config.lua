@@ -229,6 +229,13 @@ lvim.plugins = {
     end
   },
 
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      lvim.builtin.which_key.mappings.g.l = { '<cmd>Git blame<cr>', 'Git Blame' }
+    end
+  },
+
   -- TODO auto detect indent
   -- TODO param hints
   -- TODO search visual selection
