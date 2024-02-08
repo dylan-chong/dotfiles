@@ -1,7 +1,7 @@
 {
   "condep": {
     "prefix": "condep",
-    "body": ["console.log(JSON.stringify({ label: 'AAAAAAAAA $0', z }, null, 2))"],
+    "body": ["console.log('AAAAAAAAA $0', JSON.stringify({ z }, null, 2))"],
     "description": "console.log with better max depth / array / string length settings"
   },
   "doccom": {
