@@ -31,6 +31,9 @@ lvim.builtin.which_key.vmappings['s'] = {
   }
 }
 
+-- TODO add to lunarvim readme
+lvim.builtin.lualine.sections.lualine_c = { { 'filename', path = 1 } }
+
 -- TODO in lunarvim, s/'reset hunk'/'revert hunk'
 
 --------------- Custom plugins ---------------
