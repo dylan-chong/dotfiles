@@ -239,6 +239,8 @@ lvim.plugins = {
     end
   },
 
+  { 'tpope/vim-eunuch' }, -- File related stuff
+
   -- TODO auto detect indent
   -- TODO param hints
   -- TODO search visual selection
