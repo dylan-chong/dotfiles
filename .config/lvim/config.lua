@@ -31,8 +31,8 @@ lvim.builtin.which_key.vmappings['s'] = {
   }
 }
 
--- TODO add to lunarvim readme
-lvim.builtin.lualine.sections.lualine_c = { { 'filename', path = 1 } }
+-- TODO add to lunarvim readme?
+lvim.builtin.lualine.sections.lualine_c = { { 'filename', path = 4 } }
 
 -- TODO in lunarvim, s/'reset hunk'/'revert hunk'
 
@@ -287,9 +287,12 @@ function CopyPath(expand)
 end
 
 lvim.builtin.which_key.mappings['%'] = {
-  ":lua CopyPath('%')<Left><Left><C-f>i",
+  ":lua CopyPath('%.')<Left><Left><C-f>i",
   "Copy file path"
 }
+vim.keymap.set('n', '<C-g>', function ()
+  print(vim.fn.expand('%:.'))
+end)
 
 -- Tab keys (goes well with wintabs)
 lvim.builtin.which_key.mappings['t'] = {
