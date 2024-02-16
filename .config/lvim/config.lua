@@ -250,6 +250,7 @@ lvim.plugins = {
         formatter_by_ft = {
           rust = formatters.lsp,
           typescript = formatters.prettierd,
+          typescriptreact = formatters.prettierd,
         },
       })
     end
