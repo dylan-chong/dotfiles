@@ -32,7 +32,8 @@ lvim.builtin.which_key.vmappings['s'] = {
 }
 
 -- TODO add to lunarvim readme?
-lvim.builtin.lualine.sections.lualine_c = { { 'filename', path = 4 } }
+local lualine_components = require("lvim.core.lualine.components")
+lvim.builtin.lualine.sections.lualine_c = { { 'filename', path = 4 }, lualine_components.diff, lualine_components.python_env }
 
 -- TODO in lunarvim, s/'reset hunk'/'revert hunk'
 
