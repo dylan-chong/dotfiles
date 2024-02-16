@@ -80,7 +80,7 @@ lvim.plugins = {
   },
 
   {
-    'zefei/vim-wintabs',
+    'dylan-chong/vim-wintabs',
     config = function()
       lvim.builtin.which_key.mappings['w'] = nil -- force saves by default in lunarvim, conflicts with Wintabs <leader>w
 
@@ -91,6 +91,16 @@ lvim.plugins = {
       end
 
       vim.api.nvim_exec2([[
+        function! g:Wintabs_ui_bufname(bufnr)
+          let file = fnamemodify(bufname(a:bufnr), ':t')
+
+          if index(['index.tsx', 'index.ts', 'index.jsx', 'index.js'], file) != -1
+            let parent_dir = fnamemodify(bufname(a:bufnr), ':h:t')
+            return parent_dir . '/i'
+          endif
+
+          return file
+        endfunction
         let g:wintabs_ui_vimtab_name_format = '%t'
         let g:wintabs_autoclose_vim = 1
         let g:wintabs_autoclose_vimtab = 1
