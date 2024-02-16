@@ -37,6 +37,18 @@ lvim.builtin.lualine.sections.lualine_c = { { 'filename', path = 4 }, lualine_co
 
 -- TODO in lunarvim, s/'reset hunk'/'revert hunk'
 
+local function organize_imports()
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = { vim.api.nvim_buf_get_name(0) },
+    title = ""
+  }
+  vim.lsp.buf.execute_command(params)
+end
+lvim.builtin.which_key.mappings.l.o = {
+  organize_imports, "Organize imports"
+}
+
 --------------- Custom plugins ---------------
 
 lvim.plugins = {
