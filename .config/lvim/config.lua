@@ -309,7 +309,7 @@ function CopyPath(expand)
 end
 
 lvim.builtin.which_key.mappings['%'] = {
-  ":lua CopyPath('%.')<Left><Left><C-f>i",
+  ":lua CopyPath('%:.')<Left><Left><C-f>i",
   "Copy file path"
 }
 
