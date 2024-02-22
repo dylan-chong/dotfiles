@@ -31,6 +31,13 @@ lvim.builtin.which_key.vmappings['s'] = {
   }
 }
 
+local function PrettyPath()
+  local rel = vim.fn.expand('%:.')
+  return vim.fn.substitute(rel, '/', ' > ', 'g')
+end
+local lualine_components = require("lvim.core.lualine.components")
+lvim.builtin.lualine.sections.lualine_c = { { PrettyPath }, lualine_components.diff, lualine_components.python_env }
+
 -- TODO in lunarvim, s/'reset hunk'/'revert hunk'
 
 local function organize_imports()
@@ -315,7 +322,7 @@ lvim.builtin.which_key.mappings['%'] = {
 
 -- Nicer looking C-g file output
 vim.keymap.set('n', '<C-g>', function ()
-  print(vim.fn.substitute(vim.fn.expand('%:.'), '/', ' > ', 'g'))
+  print(PrettyPath())
 end)
 
 -- Tab keys (goes well with wintabs)
