@@ -239,7 +239,7 @@ function w() {
     # Runs the given command when files change in the current directory
     local command=$@
     # Run in a subprocess because entr changes the cwd and opening a new terminal would end up in ~
-    zsh -c "rg --files | entr -s 'clear && printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && ($command)'"
+    zsh -c "rg --files | entr -a -s 'clear && printf \"\\n\\n\\n.......... File change detected ..........\\n\\n\\n\\n\" && ($command)'"
 }
 
 function wnr() {
@@ -448,6 +448,7 @@ alias grbuh="git rebase upstream/HEAD"
 alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
 alias grbc="git rebase --continue"
+alias gma="git merge --abort"
 
 alias gbr="git branch"
 alias gbra="git branch -avv"
