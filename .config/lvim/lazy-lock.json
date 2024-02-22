@@ -53,6 +53,5 @@
   "vim-illuminate": { "branch": "master", "commit": "3bd2ab64b5d63b29e05691e624927e5ebbf0fb86" },
   "vim-misc": { "branch": "master", "commit": "3e6b8fb6f03f13434543ce1f5d24f6a5d3f34f0b" },
   "vim-session": { "branch": "master", "commit": "fb80488745d0853d60129f401df5eff2946e5207" },
-  "vim-wintabs": { "branch": "master", "commit": "6d18d62ae0f293a108afee8c514706027faefcf3" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }

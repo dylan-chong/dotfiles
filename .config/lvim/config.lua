@@ -94,12 +94,23 @@ lvim.plugins = {
       end
 
       vim.api.nvim_exec2([[
+        function! g:Shorten_string(string, max_length)
+          let suffix = '...'
+          if len(a:string) > a:max_length
+            return a:string[:a:max_length - len(suffix) - 1] . suffix
+          else
+            return a:string
+          endif
+        endfunction
+
+        let g:_wintabs_ui_bufname_max_length = 20
         function! g:Wintabs_ui_bufname(bufnr)
-          let file = fnamemodify(bufname(a:bufnr), ':t')
+          let file = Shorten_string(fnamemodify(bufname(a:bufnr), ':t'), g:_wintabs_ui_bufname_max_length)
 
           if index(['index.tsx', 'index.ts', 'index.jsx', 'index.js'], file) != -1
-            let parent_dir = fnamemodify(bufname(a:bufnr), ':h:t')
-            return parent_dir . '/i'
+            let suffix = '/i'
+            let parent_dir = Shorten_string(fnamemodify(bufname(a:bufnr), ':h:t'), g:_wintabs_ui_bufname_max_length - len(suffix))
+            return parent_dir . suffix
           endif
 
           return file
