@@ -239,12 +239,16 @@ lvim.plugins = {
       local spectre = require('spectre')
       spectre.setup()
       lvim.builtin.which_key.mappings['r'] = {
-        function() spectre.toggle() end,
-        "Find and replace"
+        r = { 
+          function() spectre.toggle() end,
+          "Find and replace",
+        },
       }
       lvim.builtin.which_key.vmappings['r'] = {
-        function() spectre.open_visual() end,
-        "Find and replace"
+        r = {
+          function() spectre.open_visual() end,
+          "Find and replace",
+        },
       }
     end
   },
@@ -335,6 +339,9 @@ lvim.builtin.which_key.mappings['%'] = {
 vim.keymap.set('n', '<C-g>', function ()
   print(PrettyPath())
 end)
+
+-- Select current line except whitespace
+vim.keymap.set('n', 'gV', '^v$<Left>')
 
 -- Tab keys (goes well with wintabs)
 lvim.builtin.which_key.mappings['t'] = {

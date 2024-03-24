@@ -254,8 +254,12 @@ function loop() {
 
 function notifydone() {
     local message="${1:-'Your script has completed!'}"
-    osascript -e "display notification \"$message\""
-    say "$message"
+    if command -v osascript &> /dev/null; then
+        osascript -e "display notification \"$message\""
+        say "$message"
+    else
+        tmux display-popup echo "$message"
+    fi
 }
 
 function spotdl-playlist() {
@@ -462,11 +466,11 @@ function gpr() {
     # request. For Bitbucket, the new pull request page is opened.
     local base=`git_remote_website`
 
-    if [[ "$base" == 'https://bitbucket.org'* ]]; then
+    if [[ "$base" == 'https://'*bitbucket.org* ]]; then
         local url="$base/pull-requests/new"
-    elif [[ "$base" == 'https://github.com/'* ]]; then
+    elif [[ "$base" == 'https://'*github* ]]; then
         local url="$base/pull/`current_branch`"
-    elif [[ "$base" == 'https://gitlab.com/'* ]]; then
+    elif [[ "$base" == 'https://'*gitlab* ]]; then
         local url="$base/-/merge_requests/new?merge_request%5Bsource_branch%5D=`current_branch | perl -pe 's/\s*$//' | jq -sRr '@uri'`"
     else
         echo "Unknown domain for url: $base"
