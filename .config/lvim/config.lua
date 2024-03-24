@@ -115,7 +115,11 @@ lvim.plugins = {
 
           return file
         endfunction
+
         let g:wintabs_ui_vimtab_name_format = '%t'
+        let g:wintabs_ui_sep_inbetween = ''
+        let g:wintabs_ui_active_left = ''
+        let g:wintabs_ui_active_right = ''
         let g:wintabs_autoclose_vim = 1
         let g:wintabs_autoclose_vimtab = 1
         let g:wintabs_autoclose = 2
@@ -264,11 +268,16 @@ lvim.plugins = {
       local format_on_save = require("format-on-save")
       local formatters = require("format-on-save.formatters")
 
+      local js_formatters = { formatters.prettierd }
+
       format_on_save.setup({
         formatter_by_ft = {
           rust = formatters.lsp,
-          typescript = formatters.prettierd,
-          typescriptreact = formatters.prettierd,
+          -- TODO can maybe just use lunarvim's built in stuff? delete eslint_d_fix as it bork on partly monorepo
+          typescript = js_formatters,
+          typescriptreact = js_formatters,
+          javascript = js_formatters,
+          javascriptreact = js_formatters,
         },
       })
     end
@@ -282,6 +291,8 @@ lvim.plugins = {
   },
 
   { 'tpope/vim-eunuch' }, -- File related stuff
+
+  { 'rickhowe/diffchar.vim' }
 
   -- TODO auto detect indent
   -- TODO param hints

@@ -1,4 +1,9 @@
 {
+  "conlog": {
+    "prefix": "conlog",
+    "body": ["console.log('AAAAAAAAA ${1:label}', { ${2:object} })"],
+    "description": "console.log with better max depth / array / string length settings"
+  },
   "condep": {
     "prefix": "condep",
     "body": ["console.log('AAAAAAAAA $0', JSON.stringify({ z }, null, 2))"],
