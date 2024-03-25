@@ -12,7 +12,7 @@ lvim.builtin.lir.active = false
 lvim.builtin.telescope.defaults.layout_strategy = 'vertical'
 lvim.builtin.telescope.theme = nil                              -- TODO copy to lunarvim repo
 lvim.builtin.telescope.defaults.path_display = { "truncate" }   -- TODO add to docs on lunarvim repo
-lvim.builtin.telescope.defaults.previewer = true   -- TODO add nil value to defaults?
+lvim.builtin.telescope.defaults.previewer = true                -- TODO add nil value to defaults?
 lvim.builtin.telescope.pickers.grep_string.only_sort_text = nil -- Allow filtering by file names using fzf
 lvim.builtin.which_key.mappings['f'] = {
   function()
@@ -39,6 +39,24 @@ local lualine_components = require("lvim.core.lualine.components")
 lvim.builtin.lualine.sections.lualine_c = { { PrettyPath }, lualine_components.diff, lualine_components.python_env }
 
 -- TODO in lunarvim, s/'reset hunk'/'revert hunk'
+
+-- LSP Lint
+lvim.format_on_save.enabled = true
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { name = "eslint_d", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } },
+}
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    name = "prettierd",
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  },
+  {
+    name = "eslint_d",
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  },
+}
 
 local function organize_imports()
   local params = {
@@ -208,7 +226,7 @@ lvim.plugins = {
   {
     -- TODO get working?
     "AckslD/nvim-revJ.lua",
-    dependencies = {"wellle/targets.vim"},
+    dependencies = { "wellle/targets.vim" },
     config = function()
       lvim.builtin.which_key.vmappings.J = {
         function() require('revj').format_visual() end,
@@ -219,7 +237,7 @@ lvim.plugins = {
 
   {
     "mizlan/iswap.nvim",
-    config = function() 
+    config = function()
       lvim.builtin.which_key.mappings['<'] = { ":ISwapWithLeft<CR>", "Swap current element with previous" }
       lvim.builtin.which_key.mappings['>'] = { ":ISwapWithRight<CR>", "Swap current element with next" }
     end
@@ -243,7 +261,7 @@ lvim.plugins = {
       local spectre = require('spectre')
       spectre.setup()
       lvim.builtin.which_key.mappings['r'] = {
-        r = { 
+        r = {
           function() spectre.toggle() end,
           "Find and replace",
         },
@@ -260,27 +278,6 @@ lvim.plugins = {
   -- TODO copy to lunar
   {
     'stevearc/dressing.nvim'
-  },
-
-  {
-    "elentok/format-on-save.nvim",
-    config = function()
-      local format_on_save = require("format-on-save")
-      local formatters = require("format-on-save.formatters")
-
-      local js_formatters = { formatters.prettierd }
-
-      format_on_save.setup({
-        formatter_by_ft = {
-          rust = formatters.lsp,
-          -- TODO can maybe just use lunarvim's built in stuff? delete eslint_d_fix as it bork on partly monorepo
-          typescript = js_formatters,
-          typescriptreact = js_formatters,
-          javascript = js_formatters,
-          javascriptreact = js_formatters,
-        },
-      })
-    end
   },
 
   {
@@ -347,7 +344,7 @@ lvim.builtin.which_key.mappings['%'] = {
 }
 
 -- Nicer looking C-g file output
-vim.keymap.set('n', '<C-g>', function ()
+vim.keymap.set('n', '<C-g>', function()
   print(PrettyPath())
 end)
 
