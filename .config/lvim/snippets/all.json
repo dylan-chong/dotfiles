@@ -1,17 +1,25 @@
 {
   "conlog": {
-    "prefix": "conlog",
-    "body": ["console.log('AAAAAAAAA ${1:label}', { ${2:object} })"],
+    "prefix": "colo",
+    "body": [
+      "console.log('AAAAAAAAA ${1:label}', { ${2:object} })"
+    ],
     "description": "console.log with better max depth / array / string length settings"
   },
   "condep": {
-    "prefix": "condep",
-    "body": ["console.log('AAAAAAAAA $0', JSON.stringify({ z }, null, 2))"],
+    "prefix": "codep",
+    "body": [
+      "console.log('AAAAAAAAA $0', JSON.stringify({ z }, null, 2))"
+    ],
     "description": "console.log with better max depth / array / string length settings"
   },
   "doccom": {
     "prefix": "doccom",
-    "body": ["/**", " * $0", " */"],
+    "body": [
+      "/**",
+      " * $0",
+      " */"
+    ],
     "description": "Documentation comment"
   }
 }
