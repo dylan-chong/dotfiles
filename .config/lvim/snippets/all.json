@@ -1,15 +1,22 @@
 {
-  "conlog": {
+  "colo": {
     "prefix": "colo",
     "body": [
       "console.log('AAAAAAAAA ${1:label}', { ${2:object} })"
     ],
-    "description": "console.log with better max depth / array / string length settings"
+    "description": "console.log with label"
   },
-  "condep": {
+  "codir": {
+    "prefix": "codir",
+    "body": [
+      "console.dir(['AAAAAAAAA ${1:label}', { ${2:object} }], { depth: null, maxArrayLength: null, maxStringLength: null })"
+    ],
+    "description": "console.dir with better max depth / array / string length settings (TODO Not needed?)"
+  },
+  "codep": {
     "prefix": "codep",
     "body": [
-      "console.log('AAAAAAAAA $0', JSON.stringify({ z }, null, 2))"
+      "console.log('AAAAAAAAA ${1:label}', JSON.stringify({ ${2:object} }, null, 2))"
     ],
     "description": "console.log with better max depth / array / string length settings"
   },

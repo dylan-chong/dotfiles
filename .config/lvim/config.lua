@@ -20,8 +20,8 @@ lvim.builtin.which_key.mappings['f'] = {
   end,
   "Find File",
 }
-lvim.builtin.which_key.mappings['s']['T'] = {
-  ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '' })<Left><Left><Left><Left><C-f>i",
+lvim.builtin.which_key.mappings['s']['t'] = {
+  ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '\\\\b\\\\b' })<Left><Left><Left><Left><Left><Left><Left><C-f>i",
   "Text (FZF)",
 }
 lvim.builtin.which_key.vmappings['s'] = {
@@ -41,7 +41,7 @@ lvim.builtin.lualine.sections.lualine_c = { { PrettyPath }, lualine_components.d
 -- TODO in lunarvim, s/'reset hunk'/'revert hunk'
 
 -- LSP Lint
-lvim.format_on_save.enabled = true
+lvim.format_on_save = { enabled = true, pattern = '*.ts,*.tsx,*.js,*.jsx,*.lua' }
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { name = "eslint_d", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } },
@@ -53,6 +53,7 @@ formatters.setup {
     filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   },
   {
+    -- TODO autofix doesnt work here
     name = "eslint_d",
     filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   },
@@ -289,18 +290,35 @@ lvim.plugins = {
 
   { 'tpope/vim-eunuch' }, -- File related stuff
 
-  { 'rickhowe/diffchar.vim' }
+  { 'rickhowe/diffchar.vim' },
+
+  {
+    -- TODO copy to lunar
+    "ray-x/lsp_signature.nvim",
+    event = "BufRead",
+    config = function()
+      -- Copied from https://github.com/ray-x/lsp_signature.nvim?tab=readme-ov-file#configure
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local bufnr = args.buf
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if vim.tbl_contains({ 'null-ls' }, client.name) then -- blacklist lsp
+            return
+          end
+          require("lsp_signature").on_attach({}, bufnr)
+        end,
+      })
+    end,
+  },
 
   -- TODO auto detect indent
-  -- TODO param hints
-  -- TODO search visual selection
 }
 
 --------------- Custom configurations ---------------
 
 -- File operations
 vim.api.nvim_exec2([[
-  nnoremap <C-q> :w<CR>
+  nnoremap <C-q> :w<CR>:e<CR>
   inoremap <C-q> <Esc>:w<CR>
   nmap Q :wq<CR>
 
