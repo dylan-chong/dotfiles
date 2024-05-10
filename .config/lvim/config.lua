@@ -41,7 +41,8 @@ lvim.builtin.lualine.sections.lualine_c = { { PrettyPath }, lualine_components.d
 -- TODO in lunarvim, s/'reset hunk'/'revert hunk'
 
 -- LSP Lint
-lvim.format_on_save = { enabled = true, pattern = '*.ts,*.tsx,*.js,*.jsx,*.lua' }
+lvim.format_on_save.enabled = true
+lvim.format_on_save.pattern = '*.ts,*.tsx,*.js,*.jsx,*.lua'
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { name = "eslint_d", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } },
@@ -305,7 +306,7 @@ lvim.plugins = {
           if vim.tbl_contains({ 'null-ls' }, client.name) then -- blacklist lsp
             return
           end
-          require("lsp_signature").on_attach({}, bufnr)
+          require("lsp_signature").on_attach({ hint_enable = false, hi_parameter = 'Search' }, bufnr)
         end,
       })
     end,
