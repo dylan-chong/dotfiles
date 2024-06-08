@@ -29,7 +29,7 @@ if [ -z "$NO_MODIFY_PATH" ]; then
   command -v brew &> /dev/null && export PATH="/Users/Dylan/Library/Python/3.9/bin:${PATH}"
 
   # Kinda path related...
-  [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ] && export BROWSER=wslview
+  # [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ] && export BROWSER=wslview
 
   command -v go &> /dev/null && export PATH="$(go env GOPATH)/bin:$PATH"
 fi
