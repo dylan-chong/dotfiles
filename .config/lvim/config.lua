@@ -251,6 +251,7 @@ lvim.plugins = {
     init = function()
       vim.g.lspTimeoutConfig = {
         startTimeout = 1000 * 1,
+        --stopTimeout = 1000 * 60 * 999,
       }
     end
   },
