@@ -23,28 +23,29 @@ in there somewhere.
 1. Close terminal and open app `Kitty`
 1. Generate your SSH key for git and set on your Git hosting service
 
-### If using WSL
+### If using Ubuntu or WSL+Ubuntu
 
-1. Install [WSL](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview>)
-1. Set the default shell to be Ubuntu, not PowerShell
-1. Install [Git inside WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git)
-    - Also make sure you're running the [https://git-scm.com/download/linux](latest version of git inside WSL) 
+1. WSL Setup
+   1. Install [WSL](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview>)
+   1. Set the default shell to be Ubuntu, not PowerShell
+   1. Install [Git inside WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git)
+       - Also make sure you're running the [https://git-scm.com/download/linux](latest version of git inside WSL) 
 1. Generate your SSH key for git (on the host) and set on your Git hosting service
-1. Copy the SSH keys to WSL and change permissions
+1. (WSL only) Copy the SSH keys to WSL and change permissions
     ```bash
     cp -r /mnt/c/Users/DylanChong/.ssh .ssh/
     chown -R $USER .ssh
     chmod 700 .ssh
     chmod 600 .ssh/*
     ```
-1. Install [snap](https://snapcraft.io/docs/installing-snapd)
+1. Install [snap](https://snapcraft.io/docs/installing-snapd) TODO remove?
 1. Install neovim
     ```bash
     cd ~
     mkdir .nvim
     cd .nvim
 
-    wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+    wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
     gunzip nvim-linux64.tar.gz
     tar -x -f nvim-linux64.tar
 
