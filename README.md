@@ -6,6 +6,8 @@ in there somewhere.
 
 ## Installation
 
+Follow relevant instructions from top to bottom
+
 ### If using Homebrew
 
 1. Install [homebrew](https://brew.sh)
@@ -22,6 +24,7 @@ in there somewhere.
     ```
 1. Close terminal and open app `Kitty`
 1. Generate your SSH key for git and set on your Git hosting service
+1. Follow relevant steps from the `If using Ubuntu or WSL+Ubuntu` section for setting up the rest of stuff
 
 ### If using Ubuntu or WSL+Ubuntu
 
@@ -39,38 +42,19 @@ in there somewhere.
     chmod 600 .ssh/*
     ```
 1. Install [snap](https://snapcraft.io/docs/installing-snapd) TODO remove?
-1. Install neovim
+1. Install packages that need manual installing, e.g., neovim
     ```bash
-    cd ~
-    mkdir .nvim
-    cd .nvim
-
-    wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-    gunzip nvim-linux64.tar.gz
-    tar -x -f nvim-linux64.tar
-
-    cd ~
-    mkdir -p ~/bin
-    ln -s ~/.nvim/nvim-linux64/bin/nvim ~/bin/nvim
+    brex_install_upgrade
     ```
+
 1. Install packages - roughly the same ones from list of Main package from the mac section above
     ```bash
-    sudo apt-get install zsh zsh-antigen python3 python3-pip build-essential
-
-    # Download asdf from https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
-
-    # Install wslu https://wslutiliti.es/wslu/install.html#debian
-
-    # Install lf https://github.com/gokcehan/lf?tab=readme-ov-file#installation
-
-    sudo apt-get install bat
-    mkdir -p ~/bin
-    ln -s "`which batcat`" ~/bin/bat
-
-    sudo apt-get install tmux ripgrep fd-find
-    sudo snap install bottom diff-so-fancy
+    sudo apt-get install zsh zsh-antigen python3 python3-pip build-essential bat lf tmux ripgrep fd-find
+    sudo snap install bottom diff-so-fancy # TODO
     ```
+1. (WSL only) Install [wslu](https://wslutiliti.es/wslu/install.html)
 1. Set default shell to zsh `chsh --shell $(which zsh)`
+    1. Restart computer later to apply this
 
 ### Cloning this repo
 
@@ -85,16 +69,25 @@ in there somewhere.
 1. Move the contents of `dotfiles` into `~` (except `.git`)
     ```bash
     cd ~
+
+    # Note `mv -t` errors for directories, so do the git checkout steps below to move those
+    rm -r ~/dotfiles/.config/
+    git checkout ../config # This doesn't delete existing files in ~/.config
+
     ls -A dotfiles | grep -v '^.git$' | while read -r content; do mv dotfiles/"$content" -t ~; done
+
+    cd ~/dotfiles
     ```
 1. Merge the `~/.gitconfig.example` into your `~/.gitconfig`
     - Also update any `AAAAAA` spots
+1. Clone [`gprq`](git@github.com:dylan-chong/gprq.git)
 1. Run `cp ~/.zshrc_private.example ~/.zshrc_private`
     - Also update any `AAAAAA` spots
-1. Start a new shell
+
 
 ### ASDF
 
+1. Download asdf from https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
 1. Install asdf plugins
     ```bash
     cd ~
@@ -107,11 +100,10 @@ in there somewhere.
 
 1. Install [rustup](https://www.rust-lang.org/tools/install) using the default options
 1. Run [installation steps](https://www.lunarvim.org/docs/installation)
-    - Let it install dependencies
+    - Let it install dependencies except `neovim` and `tree-sitter-cli` are not needed
 
 #### TODOs
 
-- fix gl not working
 - fix telescope <space>f to open file, appears to delete current wintabs buffer (rather than adding a new one)
 - move keybinds into which-key declaration
 

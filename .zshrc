@@ -12,7 +12,8 @@ source ~/.zshrc_private
 
 if [ -z "$NO_MODIFY_PATH" ]; then
   # Ubuntu / WSL (for custom binaries, like neovim)
-  command -v brew &> /dev/null || export PATH="$PATH:$HOME/bin"
+  command -v brew &> /dev/null || export PATH="$PATH:$HOME/.local/bin"
+  command -v brew &> /dev/null || export PATH="$PATH:$HOME/bin" # (Legacy, prefer ~/.local/bin)
 
   # Ubuntu / WSL (Snap, if I ever use it)
   command -v snap &> /dev/null && export PATH="$PATH:/snap/bin"
@@ -36,6 +37,26 @@ fi
 
 # Lvim
 export PATH="${PATH}:$HOME/.local/bin"
+
+# }}}
+
+
+
+# Custom programs (brex: brew for linux, except shit)
+
+# {{{
+
+function brex_install_upgrade() {
+  brex_setup_local_binary_dirs && brex_install_neovim
+}
+
+function brex_setup_local_binary_dirs() {
+  mkdir -p ~/.local/bin ~/.local/lib
+}
+
+function brex_install_neovim() {
+  bash -c "cd ~/.local/lib && wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz && gunzip -f nvim-linux64.tar.gz && tar -x -f nvim-linux64.tar && rm nvim-linux64.tar && ln -f -s ~/.local/lib/nvim-linux64/bin/nvim ~/.local/bin/nvim"
+}
 
 # }}}
 
@@ -226,6 +247,8 @@ alias iex='iex --erl "-kernel shell_history enabled"'
 alias so="source ~/.zshrc"
 
 alias tmutil-clear="tmutil thinlocalsnapshots / 898989898989898989 3"
+
+command -v batcat &> /dev/null && alias bat="batcat"
 
 command -v bottom &> /dev/null && alias btm="bottom"
 
