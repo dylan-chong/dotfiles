@@ -52,9 +52,10 @@ Follow relevant instructions from top to bottom
     sudo apt-get install zsh zsh-antigen python3 python3-pip build-essential bat lf tmux ripgrep fd-find
     sudo snap install bottom diff-so-fancy # TODO
     ```
+1. (Ubuntu Wayland only) `sudo apt install wl-clipboard`
 1. (WSL only) Install [wslu](https://wslutiliti.es/wslu/install.html)
 1. Set default shell to zsh `chsh --shell $(which zsh)`
-    1. Restart computer later to apply this
+    1. Restart your computer to apply
 
 ### Cloning this repo
 
@@ -128,4 +129,4 @@ Follow relevant instructions from top to bottom
 1. Set terminal theme by running `base16_material-palenight`
 1. Install the [Fira Code font](https://www.nerdfonts.com/font-downloads) (not Fira Mono)
     - This will be applied automatically if using Kitty, otherwise set this as your terminal font manually
-1. Restart your terminal
+1. Restart your terminal to check it applies
