@@ -167,19 +167,14 @@ SPACESHIP_GIT_BRANCH_COLOR=magenta
 
 # {{{
 
-if command -v brew &> /dev/null; then
-  alias godesk="c ~/Desktop"
-  alias gocrap="c ~/Desktop/crap"
-  alias godown="c ~/Downloads"
+[ -d ~/Desktop ] && alias godesk="c ~/Desktop"
+[ -d ~/Desktop/crap ] && alias gocrap="c ~/Desktop/crap"
+[ -d ~/Downloads ] && alias godown="c ~/Downloads"
 
-  alias gogit="c ~/Dropbox/Programming/GitHub"
-  alias godev="c ~/Development/"
+[ -d ~/Dropbox/Programming/GitHub ] && alias gogit="c ~/Dropbox/Programming/GitHub"
+[ -d ~/Development/ ] && alias godev="c ~/Development/"
 
-  alias goscripts="c ~/Dropbox/Programming/GitHub/itunes-applescripts"
-else
-  alias gopar="c ~/partly-development/"
-  alias godev="c ~/other-development/"
-fi
+[ -d ~/Dropbox/Programming/GitHub/itunes-applescripts ] && alias goscripts="c ~/Dropbox/Programming/GitHub/itunes-applescripts"
 
 # }}}
 
