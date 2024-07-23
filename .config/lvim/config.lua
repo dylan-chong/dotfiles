@@ -313,6 +313,8 @@ lvim.plugins = {
     end,
   },
 
+  { 'BlackLight/nvim-http' },
+
   -- TODO auto detect indent
 }
 

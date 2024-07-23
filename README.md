@@ -102,6 +102,13 @@ Follow relevant instructions from top to bottom
 1. Install [rustup](https://www.rust-lang.org/tools/install) using the default options
 1. Run [installation steps](https://www.lunarvim.org/docs/installation)
     - Let it install dependencies except `neovim` and `tree-sitter-cli` are not needed
+1.  If pynvim didn't install, run:
+    - (Ubuntu / WSL Ubuntu):
+        ```bash
+        sudo apt install python3-pynvim
+        sudo apt remove neovim
+        ```
+    - Mac: Probably the same as the above but with brew.
 
 #### TODOs
 
