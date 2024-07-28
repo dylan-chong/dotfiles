@@ -58,6 +58,12 @@ function brex_install_neovim() {
   bash -c "cd ~/.local/lib && wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz && gunzip -f nvim-linux64.tar.gz && tar -x -f nvim-linux64.tar && rm nvim-linux64.tar && ln -f -s ~/.local/lib/nvim-linux64/bin/nvim ~/.local/bin/nvim"
 }
 
+function brex_install_bottom() {
+  curl -LO https://github.com/ClementTsang/bottom/releases/download/0.9.7/bottom_0.9.7_amd64.deb
+  sudo dpkg -i bottom_0.9.7_amd64.deb
+  rm bottom_0.9.7_amd64.deb
+}
+
 # }}}
 
 
@@ -466,6 +472,7 @@ alias glsu="git ls-files --others --exclude-standard"
 
 alias grb="git rebase"
 alias grboh="git rebase origin/HEAD"
+alias gfrboh="gfa && git rebase origin/HEAD"
 alias grbuh="git rebase upstream/HEAD"
 alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
