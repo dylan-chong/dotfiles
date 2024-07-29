@@ -536,6 +536,10 @@ function diff_package_lock_with_master() {
     git diff --no-index lock-master.jsonl lock-new.jsonl
 }
 
+function add_dashes_to_uuid() {
+  echo $1 | perl -pe 's/^(.{8})(.{4})(.{4})(.{4})(.{12})$/\1-\2-\3-\4-\5/'
+}
+
 # }}}
 
 
