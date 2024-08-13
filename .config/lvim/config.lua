@@ -313,7 +313,16 @@ lvim.plugins = {
     end,
   },
 
-  { 'BlackLight/nvim-http' },
+  {
+    "abidibo/nvim-httpyac",
+    config = function()
+      require('nvim-httpyac').setup()
+      lvim.builtin.which_key.mappings['r']['h'] = {
+        ':NvimHttpYac<CR>',
+        "Run http request with Http Yac",
+      }
+    end
+  },
 
   -- TODO auto detect indent
 }
