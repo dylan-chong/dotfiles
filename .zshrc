@@ -47,7 +47,7 @@ export PATH="${PATH}:$HOME/.local/bin"
 # {{{
 
 function brex_install_upgrade() {
-  brex_setup_local_binary_dirs && brex_install_neovim
+  brex_setup_local_binary_dirs && brex_install_neovim && brex_install_bottom
 }
 
 function brex_setup_local_binary_dirs() {
