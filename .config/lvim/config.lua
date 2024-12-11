@@ -42,6 +42,7 @@ lvim.builtin.lualine.sections.lualine_c = { { PrettyPath }, lualine_components.d
 
 -- LSP Lint
 lvim.format_on_save.enabled = true
+lvim.format_on_save.timeout = 2000
 lvim.format_on_save.pattern = '*.ts,*.tsx,*.js,*.jsx,*.lua'
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
@@ -98,6 +99,8 @@ lvim.plugins = {
           au FocusLost,BufWritePost,VimLeave * silent! call xolox#session#auto_save()
         augroup END
         let g:session_persist_colors = 0
+
+        " TODO add support for tab local variable storage
       ]], {})
     end,
   },
@@ -121,6 +124,16 @@ lvim.plugins = {
           else
             return a:string
           endif
+        endfunction
+
+        function! g:Set_wintabs_tab_name()
+          let new_name = input('Tab name: ', get(t:, 'wintabs_custom_tab_name', ''))
+          let t:wintabs_custom_tab_name = new_name
+        endfunction
+        command! WintabsSetTabName call g:Set_wintabs_tab_name()
+
+        function! g:Wintabs_ui_tablabel(tabnr)
+          return gettabvar(a:tabnr, 'wintabs_custom_tab_name')
         endfunction
 
         let g:_wintabs_ui_bufname_max_length = 20
@@ -386,6 +399,7 @@ vim.keymap.set('n', 'gV', '^v$<Left>')
 lvim.builtin.which_key.mappings['t'] = {
   h = { "gT", "Previous tab" },
   l = { "gt", "Next tab" },
+  N = { ":tabnew<Space><C-f>a", "New tab" },
   n = { ":tabnew<Space><C-f>a", "New tab" },
   c = { ":tabclose<C-f>a", "Close tab" },
   o = { ":tabonly<CR>", "Close other tabs" },

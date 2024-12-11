@@ -14,7 +14,7 @@
     "description": "console.dir with better max depth / array / string length settings (TODO Not needed?)"
   },
   "codep": {
-    "prefix": "codep",
+    "prefix": "cojson",
     "body": [
       "console.log('AAAAAAAAA ${1:label}', JSON.stringify({ ${2:object} }, null, 2))"
     ],
@@ -28,5 +28,12 @@
       " */"
     ],
     "description": "Documentation comment"
+  },
+  "prinn": {
+    "prefix": "prinn",
+    "body": [
+      "println!(\"AAAAAAAAA ${1:label} {:#?}\", (\n  \"${2:object}\", &${2:object},\n));"
+    ],
+    "description": "tracing with label"
   }
 }
