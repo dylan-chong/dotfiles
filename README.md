@@ -22,7 +22,7 @@ Follow relevant instructions from top to bottom
     # Mac-specific
     brew install reattach-to-user-namespace trash fd
     ```
- 1. Configure chrome
+ 1. Configure Chrome
     1. Sign into chrome
     1. Install Adguard chrome extension
     1. Use DuckDuckGo
@@ -81,13 +81,14 @@ Follow relevant instructions from top to bottom
 1. (WSL only) Install [wslu](https://wslutiliti.es/wslu/install.html)
 1. Set default shell to zsh `chsh --shell $(which zsh)`
     1. Restart your computer to apply
+1. Continue down this README
 
-### Cloning this repo
+### Clone this repo
 
 1. Clone and configure git
     ```bash
     cd ~
-    git clone git@github.com:dylan-chong/dotfiles.git
+    git clone --verbose git@github_personal:dylan-chong/dotfiles.git     
     cd dotfiles
     git config core.worktree ~
     git config status.showUntrackedFiles no
@@ -106,14 +107,14 @@ Follow relevant instructions from top to bottom
     ```
 1. Merge the `~/.gitconfig.example` into your `~/.gitconfig`
     - Also update any `AAAAAA` spots
-1. Clone [`gprq`](git@github.com:dylan-chong/gprq.git)
+1. Clone [`gprq`](git@github_personal:dylan-chong/gprq.git)
 1. Run `cp ~/.zshrc_private.example ~/.zshrc_private`
     - Also update any `AAAAAA` spots
-
+1. Continue down this README
 
 ### ASDF
 
-1. Download asdf from https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
+1. Download `asdf` from https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
 1. Install asdf plugins
     ```bash
     cd ~
