@@ -8,7 +8,7 @@ in there somewhere.
 
 Follow relevant instructions from top to bottom
 
-### If using Homebrew
+### If using Mac
 
 1. Install [homebrew](https://brew.sh)
 1. Run the printed out command to load brew in the current shell (`eval ...` or
@@ -18,13 +18,27 @@ Follow relevant instructions from top to bottom
     # Main packages
     brew install git antigen asdf neovim fzf tmux diff-so-fancy bat ripgrep entr bottom lf
     # UI
-    brew install google-chrome alfred slack rectangle maccy spotify discord
+    brew install google-chrome alfred slack rectangle maccy spotify discord kitty raycast
     # Mac-specific
     brew install reattach-to-user-namespace trash fd
     ```
+ 1. Configure chrome
+    1. Sign into chrome
+    1. Install Adguard chrome extension
+    1. Use DuckDuckGo
+1. Mac settings
+    1. Adjust dock icons to have only Chrome and Downloads
+    1. Set caps lock key to control
+    1. Auto hide dock
+    1. Increase key repeat to max speed / min delay
+1. Open and configure flux
+1. Configure Rectangle
+    - Use Spectacle key binds
+    - Choose disable macOS window tiling
+    - Clear bottom/top half keybindings
+    - Use Cmd+Alt+Down as fullscreen
 1. Close terminal and open app `Kitty`
-1. Generate your SSH key for git and set on your Git hosting service
-1. Follow relevant steps from the `If using Ubuntu or WSL+Ubuntu` section for setting up the rest of stuff
+1. Follow relevant steps from the `If using Ubuntu or WSL+Ubuntu` section for setting up the rest of stuff (ignore linux stuff)
 
 ### If using Ubuntu or WSL+Ubuntu
 
@@ -34,6 +48,19 @@ Follow relevant instructions from top to bottom
    1. Install [Git inside WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git)
        - Also make sure you're running the [https://git-scm.com/download/linux](latest version of git inside WSL) 
 1. Generate your SSH key for git (on the host) and set on your Git hosting service
+   1. Create ssh keys
+       ```
+       ssh-add --apple-use-keychain ~/.ssh/id_github_personal
+       ```
+   1. https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent 
+   1. Add SSH Key to GitHub
+   1. Setup `~/.ssh/config`
+       ```
+       Host github_personal
+       HostName github.com
+       AddKeysToAgent yes
+       IdentityFile ~/.ssh/id_github_personal
+       ```
 1. (WSL only) Copy the SSH keys to WSL and change permissions
     ```bash
     cp -r /mnt/c/Users/DylanChong/.ssh .ssh/
@@ -41,7 +68,6 @@ Follow relevant instructions from top to bottom
     chmod 700 .ssh
     chmod 600 .ssh/*
     ```
-1. Install [snap](https://snapcraft.io/docs/installing-snapd) TODO remove?
 1. Install packages that need manual installing, e.g., neovim
     ```bash
     brex_install_upgrade
@@ -50,7 +76,6 @@ Follow relevant instructions from top to bottom
 1. Install packages - roughly the same ones from list of Main package from the mac section above
     ```bash
     sudo apt-get install zsh zsh-antigen python3 python3-pip build-essential bat lf tmux ripgrep fd-find
-    sudo snap install bottom diff-so-fancy # TODO
     ```
 1. (Ubuntu Wayland only) `sudo apt install wl-clipboard`
 1. (WSL only) Install [wslu](https://wslutiliti.es/wslu/install.html)
