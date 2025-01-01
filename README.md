@@ -18,7 +18,7 @@ Follow relevant instructions from top to bottom
     # Main packages
     brew install git antigen asdf neovim fzf tmux diff-so-fancy bat ripgrep entr bottom lf
     # UI
-    brew install google-chrome alfred slack rectangle maccy spotify discord kitty raycast
+    brew install google-chrome alfred slack rectangle maccy spotify discord kitty
     # Mac-specific
     brew install reattach-to-user-namespace trash fd
     ```
