@@ -22,9 +22,10 @@ Follow relevant instructions from top to bottom
     # Mac-specific
     brew install reattach-to-user-namespace trash fd
     ```
- 1. Configure Chrome
+1. Configure Chrome
     1. Sign into chrome
     1. Install Adguard chrome extension
+    1. Install Vimium chrome extension
     1. Use DuckDuckGo
 1. Mac settings
     1. Adjust dock icons to have only Chrome and Downloads
@@ -32,6 +33,9 @@ Follow relevant instructions from top to bottom
     1. Auto hide dock
     1. Increase key repeat to max speed / min delay
 1. Open and configure flux
+1. Open and configure Alfred
+1. Open and configure Maccy
+    1. Enable open at login
 1. Configure Rectangle
     - Use Spectacle key binds
     - Choose disable macOS window tiling
@@ -95,26 +99,23 @@ Follow relevant instructions from top to bottom
     ```
 1. Move the contents of `dotfiles` into `~` (except `.git`)
     ```bash
-    cd ~
-
-    # Note `mv -t` errors for directories, so do the git checkout steps below to move those
-    rm -r ~/dotfiles/.config/
-    git checkout ../config # This doesn't delete existing files in ~/.config
-
-    ls -A dotfiles | grep -v '^.git$' | while read -r content; do mv dotfiles/"$content" -t ~; done
-
     cd ~/dotfiles
+
+    find . -type f | perl -pe 's/^\.\///' | grep -v '^\.git\b' | while read file; do mv "$file" "$HOME/$file"; done
+    # TODO does this work on linux?:
+    find . -type d | perl -pe 's/^\.\///' | grep -v '^\.git\b' | while read file; do mv "$file" "$HOME/$file"; done
     ```
 1. Merge the `~/.gitconfig.example` into your `~/.gitconfig`
     - Also update any `AAAAAA` spots
-1. Clone [`gprq`](git@github_personal:dylan-chong/gprq.git)
+1. Clone `git@github_personal:dylan-chong/gprq.git`
 1. Run `cp ~/.zshrc_private.example ~/.zshrc_private`
     - Also update any `AAAAAA` spots
 1. Continue down this README
 
 ### ASDF
 
-1. Download `asdf` from https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
+1. Download [`asdf`](https://asdf-vm.com/guide/getting-started.html#_2-download-asdf)
+    unless already installed with a package manager
 1. Install asdf plugins
     ```bash
     cd ~
@@ -126,6 +127,7 @@ Follow relevant instructions from top to bottom
 ### LunarVim
 
 1. Install [rustup](https://www.rust-lang.org/tools/install) using the default options
+    1. Mac: `brew install rustup`
 1. Run [installation steps](https://www.lunarvim.org/docs/installation)
     - Let it install dependencies except `neovim` and `tree-sitter-cli` are not needed
 1.  If pynvim didn't install, run:
