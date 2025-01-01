@@ -138,11 +138,6 @@ Follow relevant instructions from top to bottom
         ```
     - Mac: Probably the same as the above but with brew.
 
-#### TODOs
-
-- fix telescope <space>f to open file, appears to delete current wintabs buffer (rather than adding a new one)
-- move keybinds into which-key declaration
-
 ### Neovim (optional - legacy - non LunarVim)
 
 1. Install [vim-plug](https://github.com/junegunn/vim-plug#neovim)
