@@ -39,8 +39,9 @@ Follow relevant instructions from top to bottom
 1. Configure Rectangle
     - Use Spectacle key binds
     - Choose disable macOS window tiling
-    - Clear bottom/top half keybindings
+    - Clear bottom/top half and centre keybindings
     - Use Cmd+Alt+Down as fullscreen
+    - Change next/previous display to Ctrl+Page Up/Down
 1. Close terminal and open app `Kitty`
 1. Follow relevant steps from the `If using Ubuntu or WSL+Ubuntu` section for setting up the rest of stuff (ignore linux stuff)
 
