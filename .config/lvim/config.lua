@@ -401,6 +401,24 @@ vim.api.nvim_command(
   "command! StripCarriageReturns %s/\r$//"
 )
 
+lvim.builtin.which_key.mappings['c'] = {
+  [[:lua complete_todo()<CR>]],
+  "Complete Todo"
+}
+function complete_todo()
+  local current_pos = vim.fn.getpos('.')
+  local current_line = vim.fn.getline('.')
+  local datetime = os.date("%Y-%m-%d %H:%M:%S")
+
+  vim.api.nvim_input('dd')
+
+  -- Append the line with datetime at the beginning to the bottom
+  vim.fn.append('$', '- ' .. datetime .. ' ' .. current_line)
+
+  -- Move the cursor back to the original position
+  vim.fn.setpos('.', current_pos)
+end
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
