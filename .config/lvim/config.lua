@@ -385,15 +385,18 @@ vim.keymap.set('n', 'gV', '^v$<Left>')
 
 -- Tab keys (goes well with wintabs)
 lvim.builtin.which_key.mappings['t'] = {
-  h = { "gT", "Previous tab" },
-  l = { "gt", "Next tab" },
-  N = { ":tabnew<Space><C-f>a", "New tab" },
-  n = { ":tabnew<Space><C-f>a", "New tab" },
-  c = { ":tabclose<C-f>a", "Close tab" },
-  o = { ":tabonly<CR>", "Close other tabs" },
-  m = { ":tabm<Space><C-f>a", "Move tab" },
-  d = { "<C-w>s<C-w>TgT:WintabsClose<CR>:tabnext<CR>", "Move buffer to new tab" },
-  D = { "<C-w>s<C-w>T", "Duplicate buffer in new tab" },
+  {
+    h = { "gT", "Previous tab" },
+    l = { "gt", "Next tab" },
+    N = { ":tabnew<Space><C-f>a", "New tab" },
+    n = { ":tabnew<Space><C-f>a", "New tab" },
+    c = { ":tabclose<C-f>a", "Close tab" },
+    o = { ":tabonly<CR>", "Close other tabs" },
+    m = { ":tabm<Space><C-f>a", "Move tab" },
+    d = { "<C-w>s<C-w>TgT:WintabsClose<CR>:tabnext<CR>", "Move buffer to new tab" },
+    D = { "<C-w>s<C-w>T", "Duplicate buffer in new tab" },
+  },
+  "Tab"
 }
 
 -- Strip ^M from recently pasted text

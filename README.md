@@ -16,7 +16,7 @@ Follow relevant instructions from top to bottom
 1. Install packages
     ```bash
     # Main packages
-    brew install git antigen asdf neovim fzf tmux diff-so-fancy bat ripgrep entr bottom lf
+    brew install git antigen asdf neovim tmux diff-so-fancy bat ripgrep entr bottom lf
     # UI
     brew install google-chrome alfred slack rectangle maccy spotify discord kitty mos
     # Mac-specific
