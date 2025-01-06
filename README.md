@@ -18,7 +18,7 @@ Follow relevant instructions from top to bottom
     # Main packages
     brew install git antigen asdf neovim fzf tmux diff-so-fancy bat ripgrep entr bottom lf
     # UI
-    brew install google-chrome alfred slack rectangle maccy spotify discord kitty
+    brew install google-chrome alfred slack rectangle maccy spotify discord kitty mos
     # Mac-specific
     brew install reattach-to-user-namespace trash fd
     ```
@@ -36,11 +36,13 @@ Follow relevant instructions from top to bottom
 1. Open and configure Alfred
 1. Open and configure Maccy
     1. Enable open at login
+1. Open and configure Mos
 1. Configure Rectangle
     - Use Spectacle key binds
     - Choose disable macOS window tiling
     - Clear bottom/top half and centre keybindings
     - Use Cmd+Alt+Down as fullscreen
+    - Use Cmd+Alt+Up as centre
     - Change next/previous display to Ctrl+Page Up/Down
 1. Close terminal and open app `Kitty`
 1. Follow relevant steps from the `If using Ubuntu or WSL+Ubuntu` section for setting up the rest of stuff (ignore linux stuff)
