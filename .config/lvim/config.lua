@@ -21,8 +21,12 @@ lvim.builtin.which_key.mappings['f'] = {
   "Find File",
 }
 lvim.builtin.which_key.mappings['s']['t'] = {
-  ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '\\\\b\\\\b' })<Left><Left><Left><Left><Left><Left><Left><C-f>i",
+  ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '' })<Left><Left><Left><Left><C-f>i",
   "Text (FZF)",
+}
+lvim.builtin.which_key.mappings['s']['T'] = {
+  ":lua require('telescope.builtin').grep_string({ use_regex = true, search = '\\\\b\\\\b' })<Left><Left><Left><Left><Left><Left><Left><C-f>i",
+  "Text with word boundaries (FZF)",
 }
 lvim.builtin.which_key.vmappings['s'] = {
   T = {
@@ -43,7 +47,7 @@ lvim.builtin.lualine.sections.lualine_c = { { PrettyPath }, lualine_components.d
 -- LSP Lint
 lvim.format_on_save.enabled = true
 lvim.format_on_save.timeout = 2000
-lvim.format_on_save.pattern = '*.ts,*.tsx,*.js,*.jsx,*.lua'
+lvim.format_on_save.pattern = '*.ts,*.tsx,*.lua'
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { name = "eslint_d", filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" } },
