@@ -22,8 +22,8 @@ if [ -z "$NO_MODIFY_PATH" ]; then
   command -v brew &> /dev/null || export PATH="$PATH:$HOME/.cargo/bin"
 
   # ASDF
-  command -v brew &> /dev/null && . $(brew --prefix asdf)/libexec/asdf.sh
-  [ -f "$HOME/.asdf/asdf.sh" ] && . "$HOME/.asdf/asdf.sh" # Ubuntu / WSL
+  export ASDF_DATA_DIR=$HOME/.asdf
+  command -v asdf &> /dev/null && export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
   # Python
   command -v brew &> /dev/null && export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
@@ -55,10 +55,12 @@ function brex_setup_local_binary_dirs() {
 }
 
 function brex_install_neovim() {
+  brex_setup_local_binary_dirs
   bash -c "cd ~/.local/lib && wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz && gunzip -f nvim-linux64.tar.gz && tar -x -f nvim-linux64.tar && rm nvim-linux64.tar && ln -f -s ~/.local/lib/nvim-linux64/bin/nvim ~/.local/bin/nvim"
 }
 
 function brex_install_bottom() {
+  brex_setup_local_binary_dirs
   curl -LO https://github.com/ClementTsang/bottom/releases/download/0.9.7/bottom_0.9.7_amd64.deb
   sudo dpkg -i bottom_0.9.7_amd64.deb
   rm bottom_0.9.7_amd64.deb

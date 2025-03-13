@@ -349,6 +349,23 @@ vim.api.nvim_exec2([[
   augroup END
 ]], {})
 
+-- vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+--   pattern = "Podfile",
+--   callback = function()
+--     vim.cmd("setfiletype ruby")
+--   end,
+-- })
+
+local function diff_all_splits()
+  local current_win = vim.api.nvim_get_current_win()
+  local windows = vim.api.nvim_tabpage_list_wins(0)
+  for _, win in ipairs(windows) do
+    vim.api.nvim_set_current_win(win)
+    vim.cmd("diffthis")
+  end
+  vim.api.nvim_set_current_win(current_win)
+end
+vim.api.nvim_create_user_command('DiffThisAll', diff_all_splits, {})
 
 -- Copy current file to clipboard
 -- TODO NEXT just call https://github.com/tnakaz/path-to-clipboard.nvim/blob/main/lua/path-to-clipboard/init.lua
@@ -417,7 +434,7 @@ function complete_todo()
   local current_line = vim.fn.getline('.')
   local datetime = os.date("%Y-%m-%d %H:%M:%S")
 
-  vim.api.nvim_input('dd')
+  vim.api.nvim_input('"zdd')
 
   -- Append the line with datetime at the beginning to the bottom
   vim.fn.append('$', '- ' .. datetime .. ' ' .. current_line)
