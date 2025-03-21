@@ -15,7 +15,7 @@ return {
       function()
         require("ranger-nvim").open(true)
       end,
-      desc = "list and browse files with ranger",
+      desc = "List and browse files with ranger",
     },
   },
 }

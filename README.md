@@ -95,7 +95,7 @@ Follow relevant instructions from top to bottom
 1. Clone and configure git
     ```bash
     cd ~
-    git clone --verbose git@github_personal:dylan-chong/dotfiles.git     
+    git clone --verbose git@github_personal:dylan-chong/dotfiles.git
     cd dotfiles
     git config core.worktree ~
     git config status.showUntrackedFiles no
