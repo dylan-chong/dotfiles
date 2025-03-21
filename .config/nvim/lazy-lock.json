@@ -36,5 +36,6 @@
   "ts-comments.nvim": { "branch": "main", "commit": "872dcfa0418f4a33b7437fb4d9f4e89f2f000d74" },
   "vim-misc": { "branch": "master", "commit": "3e6b8fb6f03f13434543ce1f5d24f6a5d3f34f0b" },
   "vim-session": { "branch": "master", "commit": "fb80488745d0853d60129f401df5eff2946e5207" },
+  "vim-wintabs": { "branch": "master", "commit": "0a769044ff8742e7f78068c9ebde45e33154a36d" },
   "which-key.nvim": { "branch": "main", "commit": "8ab96b38a2530eacba5be717f52e04601eb59326" }
 }

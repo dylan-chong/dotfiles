@@ -124,7 +124,7 @@ Follow relevant instructions from top to bottom
     ```
     - Ignore warnings about plugins not being installed if you don't want to use those
 
-### LunarVim
+### LunarVim (optional - legacy)
 
 1. Install [rustup](https://www.rust-lang.org/tools/install) using the default options
     1. Mac: `brew install rustup`
