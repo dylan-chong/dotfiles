@@ -37,5 +37,6 @@
   "vim-misc": { "branch": "master", "commit": "3e6b8fb6f03f13434543ce1f5d24f6a5d3f34f0b" },
   "vim-session": { "branch": "master", "commit": "fb80488745d0853d60129f401df5eff2946e5207" },
   "vim-wintabs": { "branch": "master", "commit": "0a769044ff8742e7f78068c9ebde45e33154a36d" },
+  "vim-wintabs-powerline": { "branch": "master", "commit": "c6713349aa965ed32c0f6927e7121c8e04b27163" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
 }
