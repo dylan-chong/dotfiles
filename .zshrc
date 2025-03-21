@@ -193,8 +193,8 @@ SPACESHIP_GIT_BRANCH_COLOR=magenta
 # {{{
 
 # Vim
-alias vi="lvim"
-alias vs="lvim -S"
+alias vi="nvim"
+alias vs="nvim -S"
 
 # Prevent stupidity
 # https://hasseg.org/trash/ (brew install trash)
