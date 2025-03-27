@@ -40,3 +40,20 @@ function CopyPath(expand)
   print("Copied: " .. string)
 end
 vim.keymap.set("n", "<leader>%", ":lua CopyPath('%:.')<Left><Left><C-f>i", { desc = "Copy file path" })
+
+---- Complete Todos ----
+
+function CompleteTodo()
+  local current_pos = vim.fn.getpos(".")
+  local current_line = vim.fn.getline(".")
+  local datetime = os.date("%Y-%m-%d %H:%M:%S")
+
+  vim.api.nvim_input('"zdd')
+
+  -- Append the line with datetime at the beginning to the bottom
+  vim.fn.append("$", "- " .. datetime .. " " .. current_line)
+
+  -- Move the cursor back to the original position
+  vim.fn.setpos(".", current_pos)
+end
+vim.keymap.set("n", "<leader>C", CompleteTodo, { desc = "Move tab" })
