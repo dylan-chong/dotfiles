@@ -23,14 +23,9 @@ vim.api.nvim_exec2(
 
 ---- Tabs ----
 
-vim.keymap.set(
-  "n",
-  "<leader><tab>d",
-  "<C-w>s<C-w>TgT:WintabsClose<CR>:tabnext<CR>",
-  { desc = "Move buffer to new tab" }
-)
+vim.keymap.set("n", "<leader>td", "<C-w>s<C-w>TgT:WintabsClose<CR>:tabnext<CR>", { desc = "Move buffer to new tab" })
 
-vim.keymap.set("n", "<leader><tab>m", ":tabm<Space><C-f>a", { desc = "Move tab" })
+vim.keymap.set("n", "<leader>tm", ":tabm<Space><C-f>a", { desc = "Move tab" })
 
 ---- Clipboard ----
 

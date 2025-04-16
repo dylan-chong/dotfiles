@@ -411,6 +411,10 @@ alias gcuh="git fetch upstream && git checkout upstream/HEAD"
 alias gcob='git checkout -b'
 alias gcop='git checkout -p'
 
+git_changed_test_files() {
+  git diff --name-only upstream/HEAD | grep '\.test\.'
+}
+
 git_create_upstream_head() {
     if [ ! -f .git/refs/remotes/origin/HEAD ]; then
         echo '.git/refs/remotes/origin/HEAD not found. Run `git_infer_remote_from_origin OriginUser` first'
