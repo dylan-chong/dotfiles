@@ -7,6 +7,7 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
+
 -- Autosave copied from https://github.com/LazyVim/LazyVim/discussions/1022
 local function save()
   local buf = vim.api.nvim_get_current_buf()
