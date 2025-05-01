@@ -56,4 +56,10 @@ nnoremap <C-]> <C-]>
 " Comment line, without moving the cursor down one line
 nnoremap gc :action CommentByLineComment<CR>:action EditorUp<CR>
 
+" Files
+nnoremap <C-q> :w<CR>:e<CR>
+inoremap <C-q> <Esc>:w<CR>
+nmap Q :wq<CR>
+
+
 " }}}

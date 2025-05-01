@@ -52,3 +52,17 @@ function CompleteTodo()
   vim.fn.setpos(".", current_pos)
 end
 vim.keymap.set("n", "<leader>C", CompleteTodo, { desc = "Move tab" })
+
+
+---- Diff ----
+
+local function diff_all_splits()
+  local current_win = vim.api.nvim_get_current_win()
+  local windows = vim.api.nvim_tabpage_list_wins(0)
+  for _, win in ipairs(windows) do
+    vim.api.nvim_set_current_win(win)
+    vim.cmd("diffthis")
+  end
+  vim.api.nvim_set_current_win(current_win)
+end
+vim.api.nvim_create_user_command('DiffAll', diff_all_splits, {})

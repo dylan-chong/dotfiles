@@ -457,6 +457,150 @@ git_prune_branches__force__i_understand_that_this_will_delete_all_my_local_branc
 }
 
 alias gcm="git commit -v"
+function gcmq() {
+    # Function to shorten paths, keeping only the last two segments
+    shorten_path() {
+        echo "$1" | awk -F/ '{
+            if (NF <= 2) {
+                print $0
+            } else {
+                print ".../" $(NF-1) "/" $NF
+            }
+        }'
+    }
+
+    # Function to trim whitespace (shell-agnostic)
+    trim() {
+        local var="$*"
+        # Remove leading whitespace
+        var="${var#"${var%%[![:space:]]*}"}"
+        # Remove trailing whitespace
+        var="${var%"${var##*[![:space:]]}"}"
+        echo "$var"
+    }
+
+    # Function to process a list of files and shorten their paths (zsh compatible)
+    process_files() {
+        local files="$1"
+        local result=""
+
+        # zsh-compatible string splitting
+        old_IFS="$IFS"
+        IFS=','
+        for file in ${=files}; do
+            IFS="$old_IFS"
+            if [ ! -z "$result" ]; then
+                result+=", "
+            fi
+            # Trim whitespace
+            file=$(trim "$file")
+            if [ ! -z "$file" ]; then
+                result+=$(shorten_path "$file")
+            fi
+        done
+        IFS="$old_IFS"
+        echo "$result"
+    }
+
+    # Function to process renamed files (special case, zsh compatible)
+    process_renamed_files() {
+        local files="$1"
+        local result=""
+
+        # zsh-compatible string splitting
+        old_IFS="$IFS"
+        IFS=','
+        for file_pair in ${=files}; do
+            IFS="$old_IFS"
+            if [ ! -z "$result" ]; then
+                result+=", "
+            fi
+            # Trim whitespace
+            file_pair=$(trim "$file_pair")
+            if [ ! -z "$file_pair" ]; then
+                # Extract old and new filenames
+                old_file=$(echo "$file_pair" | awk -F' -> ' '{print $1}')
+                new_file=$(echo "$file_pair" | awk -F' -> ' '{print $2}')
+                # Trim again to be safe
+                old_file=$(trim "$old_file")
+                new_file=$(trim "$new_file")
+                result+="$(shorten_path "$old_file") -> $(shorten_path "$new_file")"
+            fi
+        done
+        IFS="$old_IFS"
+        echo "$result"
+    }
+
+    # Check if there are staged changes
+    if ! git diff --cached --quiet; then
+        # Get lists of changed files by type
+        MODIFIED_FILES_RAW=$(git diff --cached --name-status | grep "^M" | cut -f2 | tr '\n' ',' | sed 's/,$//')
+        ADDED_FILES_RAW=$(git diff --cached --name-status | grep "^A" | cut -f2 | tr '\n' ',' | sed 's/,$//')
+        DELETED_FILES_RAW=$(git diff --cached --name-status | grep "^D" | cut -f2 | tr '\n' ',' | sed 's/,$//')
+
+        # Handle renamed files - Git marks them with R followed by the old and new names
+        RENAMED_FILES_RAW=""
+        git diff --cached --name-status | while read -r line; do
+            if [[ "$line" == R* ]]; then
+                # Extract old and new filenames
+                old_file=$(echo "$line" | cut -f2)
+                new_file=$(echo "$line" | cut -f3)
+
+                if [ -z "$RENAMED_FILES_RAW" ]; then
+                    RENAMED_FILES_RAW="$old_file -> $new_file"
+                else
+                    RENAMED_FILES_RAW="$RENAMED_FILES_RAW,$old_file -> $new_file"
+                fi
+            fi
+        done
+
+        # Process files to shorten paths
+        MODIFIED_FILES=$(process_files "$MODIFIED_FILES_RAW")
+        ADDED_FILES=$(process_files "$ADDED_FILES_RAW")
+        DELETED_FILES=$(process_files "$DELETED_FILES_RAW")
+        RENAMED_FILES=$(process_renamed_files "$RENAMED_FILES_RAW")
+
+        # Initialize commit message
+        COMMIT_MSG=""
+
+        # Add each section only if there are files of that type
+        if [ ! -z "$ADDED_FILES" ]; then
+            COMMIT_MSG+="ADD: $ADDED_FILES"
+        fi
+
+        if [ ! -z "$DELETED_FILES" ]; then
+            if [ ! -z "$COMMIT_MSG" ]; then
+                COMMIT_MSG+="; "
+            fi
+            COMMIT_MSG+="DEL: $DELETED_FILES"
+        fi
+
+        if [ ! -z "$RENAMED_FILES" ]; then
+            if [ ! -z "$COMMIT_MSG" ]; then
+                COMMIT_MSG+="; "
+            fi
+            COMMIT_MSG+="REN: $RENAMED_FILES"
+        fi
+
+        if [ ! -z "$MODIFIED_FILES" ]; then
+            if [ ! -z "$COMMIT_MSG" ]; then
+                COMMIT_MSG+="; "
+            fi
+            COMMIT_MSG+="MOD: $MODIFIED_FILES"
+        fi
+
+        # If no changes were classified (unlikely but possible)
+        if [ -z "$COMMIT_MSG" ]; then
+            COMMIT_MSG="Update repository"
+        fi
+
+        # Perform the commit with the generated message, passing through any additional arguments
+        git commit "$@" -m "$COMMIT_MSG"
+    else
+        echo "No changes staged for commit."
+    fi
+}
+
 alias ga="git add"
 alias gaa="git add -A"
 alias gap="git add -p"
