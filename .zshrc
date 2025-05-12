@@ -464,7 +464,7 @@ function gcmq() {
             if (NF <= 2) {
                 print $0
             } else {
-                print ".../" $(NF-1) "/" $NF
+                print $(NF-1) "/" $NF
             }
         }'
     }
@@ -604,6 +604,7 @@ function gcmq() {
 alias ga="git add"
 alias gaa="git add -A"
 alias gap="git add -p"
+alias gan="git add -AN"
 
 alias grth="git reset --hard"
 
