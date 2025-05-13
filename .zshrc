@@ -426,7 +426,7 @@ git_create_upstream_head() {
 
 git_infer_remote_from_origin() {
     local new_remote_repo_owner="$1"
-    local new_remote_name="${2=upstream}"
+    local new_remote_name="${2=$new_remote_repo_owner}"
 
     local origin_url=`git remote get-url origin`
     local new_remote_url=`echo $origin_url | perl -pe 's|\:[\w-]+/|\:'"$new_remote_repo_owner"'/|'`
