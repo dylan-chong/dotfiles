@@ -458,147 +458,184 @@ git_prune_branches__force__i_understand_that_this_will_delete_all_my_local_branc
 
 alias gcm="git commit -v"
 function gcmq() {
-    # Function to shorten paths, keeping only the last two segments
-    shorten_path() {
-        echo "$1" | awk -F/ '{
-            if (NF <= 2) {
-                print $0
-            } else {
-                print $(NF-1) "/" $NF
-            }
-        }'
-    }
+  # Function to generate an adjective-noun pair with 3 alphanumeric tokens
+  random_word_tokens() {
+    # Array of sophisticated adjectives
+    local adjectives=(
+      "Ephemeral" "Ubiquitous" "Mellifluous" "Quintessential" "Eloquent"
+      "Ineffable" "Esoteric" "Perspicacious" "Idiosyncratic" "Loquacious"
+      "Voracious" "Tenacious" "Meticulous" "Magnanimous" "Capricious"
+      "Diaphanous" "Insidious" "Superfluous" "Surreptitious" "Vicarious"
+      "Fastidious" "Enigmatic" "Labyrinthine" "Recalcitrant" "Quixotic"
+      "Sagacious" "Taciturn" "Nebulous" "Vociferous" "Gregarious"
+      "Indolent" "Peripatetic" "Obsequious" "Austere" "Verbose"
+      "Indefatigable" "Judicious" "Mercurial" "Nefarious" "Perfunctory"
+      "Resilient" "Scrupulous" "Tenebrous" "Verbose" "Zealous"
+      "Ardent" "Benevolent" "Cogent" "Discerning" "Erroneous"
+    )
 
-    # Function to trim whitespace (shell-agnostic)
-    trim() {
-        local var="$*"
-        # Remove leading whitespace
-        var="${var#"${var%%[![:space:]]*}"}"
-        # Remove trailing whitespace
-        var="${var%"${var##*[![:space:]]}"}"
-        echo "$var"
-    }
+    # Array of sophisticated nouns
+    local nouns=(
+      "Paradigm" "Juxtaposition" "Cacophony" "Serendipity" "Obfuscation"
+      "Equanimity" "Perniciousness" "Epiphany" "Dichotomy" "Ubiquity"
+      "Alacrity" "Ephemera" "Panacea" "Penultimate" "Acumen"
+      "Confluence" "Ardor" "Brevity" "Cognizance" "Dichotomy"
+      "Elucidation" "Fortitude" "Gesticulation" "Hegemony" "Impetus"
+      "Juxtaposition" "Kaleidoscope" "Luminescence" "Machination" "Nuance"
+      "Obsolescence" "Predilection" "Quintessence" "Rumination" "Synthesis"
+      "Tenacity" "Ubiquity" "Veracity" "Whimsy" "Xenophobia"
+      "Yearning" "Zeitgeist" "Amalgamation" "Benefaction" "Conundrum"
+      "Dialectic" "Empiricism" "Fallacy" "Grandiloquence" "Hypothesis"
+    )
 
-    # Function to process a list of files and shorten their paths (zsh compatible)
-    process_files() {
-        local files="$1"
-        local result=""
 
-        # zsh-compatible string splitting
-        old_IFS="$IFS"
-        IFS=','
-        for file in ${=files}; do
-            IFS="$old_IFS"
-            if [ ! -z "$result" ]; then
-                result+=", "
-            fi
-            # Trim whitespace
-            file=$(trim "$file")
-            if [ ! -z "$file" ]; then
-                result+=$(shorten_path "$file")
-            fi
-        done
-        IFS="$old_IFS"
-        echo "$result"
-    }
+    # Cross-platform random number generation using /dev/urandom
+    # This approach works on both macOS and Linux
+    local adj_size=${#adjectives[@]}
+    local noun_size=${#nouns[@]}
 
-    # Function to process renamed files (special case, zsh compatible)
-    process_renamed_files() {
-        local files="$1"
-        local result=""
+    # Use head -c for raw bytes, hexdump for consistent output across platforms
+    local adj_index=$(head -c 4 /dev/urandom | hexdump -n 4 -e '1/4 "%u"' | awk '{print $1 % '"$adj_size"'}')
+    local noun_index=$(head -c 4 /dev/urandom | hexdump -n 4 -e '1/4 "%u"' | awk '{print $1 % '"$noun_size"'}')
 
-        # zsh-compatible string splitting
-        old_IFS="$IFS"
-        IFS=','
-        for file_pair in ${=files}; do
-            IFS="$old_IFS"
-            if [ ! -z "$result" ]; then
-                result+=", "
-            fi
-            # Trim whitespace
-            file_pair=$(trim "$file_pair")
-            if [ ! -z "$file_pair" ]; then
-                # Extract old and new filenames
-                old_file=$(echo "$file_pair" | awk -F' -> ' '{print $1}')
-                new_file=$(echo "$file_pair" | awk -F' -> ' '{print $2}')
-                # Trim again to be safe
-                old_file=$(trim "$old_file")
-                new_file=$(trim "$new_file")
-                result+="$(shorten_path "$old_file") -> $(shorten_path "$new_file")"
-            fi
-        done
-        IFS="$old_IFS"
-        echo "$result"
-    }
+    # Select random words
+    local random_adj=${adjectives[$adj_index]}
+    local random_noun=${nouns[$noun_index]}
 
-    # Check if there are staged changes
-    if ! git diff --cached --quiet; then
-        # Get lists of changed files by type
-        MODIFIED_FILES_RAW=$(git diff --cached --name-status | grep "^M" | cut -f2 | tr '\n' ',' | sed 's/,$//')
-        ADDED_FILES_RAW=$(git diff --cached --name-status | grep "^A" | cut -f2 | tr '\n' ',' | sed 's/,$//')
-        DELETED_FILES_RAW=$(git diff --cached --name-status | grep "^D" | cut -f2 | tr '\n' ',' | sed 's/,$//')
+    # Generate three random 3-character alphanumeric tokens
+    local token=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 3)
 
-        # Handle renamed files - Git marks them with R followed by the old and new names
-        RENAMED_FILES_RAW=""
-        git diff --cached --name-status | while read -r line; do
-            if [[ "$line" == R* ]]; then
-                # Extract old and new filenames
-                old_file=$(echo "$line" | cut -f2)
-                new_file=$(echo "$line" | cut -f3)
+    # Print the result in the format "Adjective-Noun-token1token2token3"
+    echo "$random_adj-$random_noun-$token"
+  }
 
-                if [ -z "$RENAMED_FILES_RAW" ]; then
-                    RENAMED_FILES_RAW="$old_file -> $new_file"
-                else
-                    RENAMED_FILES_RAW="$RENAMED_FILES_RAW,$old_file -> $new_file"
-                fi
-            fi
-        done
+  # Function to shorten paths, keeping only the last two segments
+  shorten_path() {
+      echo "$1" | awk -F/ '{
+          if (NF <= 2) {
+              print $0
+          } else {
+              print $(NF-1) "/" $NF
+          }
+      }'
+  }
 
-        # Process files to shorten paths
-        MODIFIED_FILES=$(process_files "$MODIFIED_FILES_RAW")
-        ADDED_FILES=$(process_files "$ADDED_FILES_RAW")
-        DELETED_FILES=$(process_files "$DELETED_FILES_RAW")
-        RENAMED_FILES=$(process_renamed_files "$RENAMED_FILES_RAW")
+  # Function to trim whitespace (shell-agnostic)
+  trim() {
+      local var="$*"
+      # Remove leading whitespace
+      var="${var#"${var%%[![:space:]]*}"}"
+      # Remove trailing whitespace
+      var="${var%"${var##*[![:space:]]}"}"
+      echo "$var"
+  }
 
-        # Initialize commit message
-        COMMIT_MSG=""
+  # Function to process a list of files and shorten their paths (zsh compatible)
+  process_files() {
+      local files="$1"
+      local result=""
 
-        # Add each section only if there are files of that type
-        if [ ! -z "$ADDED_FILES" ]; then
-            COMMIT_MSG+="ADD: $ADDED_FILES"
-        fi
+      # zsh-compatible string splitting
+      old_IFS="$IFS"
+      IFS=','
+      for file in ${=files}; do
+          IFS="$old_IFS"
+          if [ ! -z "$result" ]; then
+              result+=", "
+          fi
+          # Trim whitespace
+          file=$(trim "$file")
+          if [ ! -z "$file" ]; then
+              result+=$(shorten_path "$file")
+          fi
+      done
+      IFS="$old_IFS"
+      echo "$result"
+  }
 
-        if [ ! -z "$DELETED_FILES" ]; then
-            if [ ! -z "$COMMIT_MSG" ]; then
-                COMMIT_MSG+="; "
-            fi
-            COMMIT_MSG+="DEL: $DELETED_FILES"
-        fi
+  # Function to process renamed files (special case, zsh compatible)
+  process_renamed_files() {
+      local files="$1"
+      local result=""
 
-        if [ ! -z "$RENAMED_FILES" ]; then
-            if [ ! -z "$COMMIT_MSG" ]; then
-                COMMIT_MSG+="; "
-            fi
-            COMMIT_MSG+="REN: $RENAMED_FILES"
-        fi
+      # zsh-compatible string splitting
+      old_IFS="$IFS"
+      IFS=','
+      for file_pair in ${=files}; do
+          IFS="$old_IFS"
+          if [ ! -z "$result" ]; then
+              result+=", "
+          fi
+          # Trim whitespace
+          file_pair=$(trim "$file_pair")
+          if [ ! -z "$file_pair" ]; then
+              # Extract old and new filenames
+              old_file=$(echo "$file_pair" | awk -F' -> ' '{print $1}')
+              new_file=$(echo "$file_pair" | awk -F' -> ' '{print $2}')
+              # Trim again to be safe
+              old_file=$(trim "$old_file")
+              new_file=$(trim "$new_file")
+              result+="$(shorten_path "$old_file") -> $(shorten_path "$new_file")"
+          fi
+      done
+      IFS="$old_IFS"
+      echo "$result"
+  }
 
-        if [ ! -z "$MODIFIED_FILES" ]; then
-            if [ ! -z "$COMMIT_MSG" ]; then
-                COMMIT_MSG+="; "
-            fi
-            COMMIT_MSG+="MOD: $MODIFIED_FILES"
-        fi
+  # Check if there are staged changes
+  if ! git diff --cached --quiet; then
+      # Get lists of changed files by type
+      MODIFIED_FILES_RAW=$(git diff --cached --name-status | grep "^M" | cut -f2 | tr '\n' ',' | sed 's/,$//')
+      ADDED_FILES_RAW=$(git diff --cached --name-status | grep "^A" | cut -f2 | tr '\n' ',' | sed 's/,$//')
+      DELETED_FILES_RAW=$(git diff --cached --name-status | grep "^D" | cut -f2 | tr '\n' ',' | sed 's/,$//')
 
-        # If no changes were classified (unlikely but possible)
-        if [ -z "$COMMIT_MSG" ]; then
-            COMMIT_MSG="Update repository"
-        fi
+      # Handle renamed files - Git marks them with R followed by the old and new names
+      RENAMED_FILES_RAW=""
+      git diff --cached --name-status | while read -r line; do
+          if [[ "$line" == R* ]]; then
+              # Extract old and new filenames
+              old_file=$(echo "$line" | cut -f2)
+              new_file=$(echo "$line" | cut -f3)
 
-        # Perform the commit with the generated message, passing through any additional arguments
-        git commit "$@" -m "$COMMIT_MSG"
-    else
-        echo "No changes staged for commit."
-    fi
+              if [ -z "$RENAMED_FILES_RAW" ]; then
+                  RENAMED_FILES_RAW="$old_file -> $new_file"
+              else
+                  RENAMED_FILES_RAW="$RENAMED_FILES_RAW,$old_file -> $new_file"
+              fi
+          fi
+      done
+
+      # Process files to shorten paths
+      MODIFIED_FILES=$(process_files "$MODIFIED_FILES_RAW")
+      ADDED_FILES=$(process_files "$ADDED_FILES_RAW")
+      DELETED_FILES=$(process_files "$DELETED_FILES_RAW")
+      RENAMED_FILES=$(process_renamed_files "$RENAMED_FILES_RAW")
+
+      # Initialize commit message
+      COMMIT_MSG="$(random_word_tokens)"
+
+      # Add each section only if there are files of that type
+      if [ ! -z "$ADDED_FILES" ]; then
+          COMMIT_MSG+="; ADD: $ADDED_FILES"
+      fi
+
+      if [ ! -z "$DELETED_FILES" ]; then
+          COMMIT_MSG+="; DEL: $DELETED_FILES"
+      fi
+
+      if [ ! -z "$RENAMED_FILES" ]; then
+          COMMIT_MSG+="; REN: $RENAMED_FILES"
+      fi
+
+      if [ ! -z "$MODIFIED_FILES" ]; then
+          COMMIT_MSG+="; MOD: $MODIFIED_FILES"
+      fi
+
+      # Perform the commit with the generated message, passing through any additional arguments
+      git commit "$@" -m "$COMMIT_MSG"
+  else
+      echo "No changes staged for commit."
+  fi
 }
 
 alias ga="git add"
