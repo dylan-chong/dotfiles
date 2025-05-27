@@ -159,7 +159,7 @@ Follow relevant instructions from top to bottom
 
 ### Terminal theme
 
-1. Set terminal theme by running `base16_material-palenight`
+1. Set terminal theme by running `base16_tokyo-night-moon`
 1. Install the [Fira Code font](https://www.nerdfonts.com/font-downloads) (not Fira Mono)
     - This will be applied automatically if using Kitty, otherwise set this as your terminal font manually
 1. Restart your terminal to check it applies

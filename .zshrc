@@ -88,7 +88,7 @@ if command -v antigen &> /dev/null; then
 
   # Themes
   # base16-shell doesn't follow the zsh plug format so can't be used with `theme` (I think)
-  antigen bundle chriskempson/base16-shell
+  antigen bundle dylan-chong/base16-shell
   antigen bundle spaceship-prompt/spaceship-prompt
   antigen bundle zsh-users/zsh-syntax-highlighting
 
