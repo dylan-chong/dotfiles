@@ -64,7 +64,12 @@ return {
       " tab
       function! SaveAndCloseCurrentBuffer()
         :up
-      call wintabs#close()
+        " Close in case it's last window to avoid cannot close last window error
+        try
+          WintabsClose
+        catch
+          quit
+        endtry
       endfunction
 
       " Function to replace built in commands
