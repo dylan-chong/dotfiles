@@ -1,5 +1,5 @@
 [core]
-	editor = lvim
+	editor = nvim
 	excludesfile = ~/.gitignore_global
 	pager = less --tabs=4 -+F -+X -S -I
 [user]
