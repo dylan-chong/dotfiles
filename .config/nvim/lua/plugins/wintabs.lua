@@ -46,8 +46,8 @@ return {
       let g:wintabs_ui_sep_inbetween = ''
       let g:wintabs_ui_active_left = ''
       let g:wintabs_ui_active_right = ''
-      let g:wintabs_autoclose_vim = 1
-      let g:wintabs_autoclose_vimtab = 1
+      let g:wintabs_autoclose_vim = 1 " This doesn't work and using try catch in SaveAndCloseCurrentBuffer
+      let g:wintabs_autoclose_vimtab = 1 " This doesn't work and using try catch in SaveAndCloseCurrentBuffer
       let g:wintabs_autoclose = 2
 
       " Change buffers
