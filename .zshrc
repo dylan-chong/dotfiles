@@ -458,55 +458,10 @@ git_prune_branches__force__i_understand_that_this_will_delete_all_my_local_branc
 
 alias gcm="git commit -v"
 function gcmq() {
-  # Function to generate an adjective-noun pair with 3 alphanumeric tokens
   random_word_tokens() {
-    # Array of sophisticated adjectives
-    local adjectives=(
-      "Ephemeral" "Ubiquitous" "Mellifluous" "Quintessential" "Eloquent"
-      "Ineffable" "Esoteric" "Perspicacious" "Idiosyncratic" "Loquacious"
-      "Voracious" "Tenacious" "Meticulous" "Magnanimous" "Capricious"
-      "Diaphanous" "Insidious" "Superfluous" "Surreptitious" "Vicarious"
-      "Fastidious" "Enigmatic" "Labyrinthine" "Recalcitrant" "Quixotic"
-      "Sagacious" "Taciturn" "Nebulous" "Vociferous" "Gregarious"
-      "Indolent" "Peripatetic" "Obsequious" "Austere" "Verbose"
-      "Indefatigable" "Judicious" "Mercurial" "Nefarious" "Perfunctory"
-      "Resilient" "Scrupulous" "Tenebrous" "Verbose" "Zealous"
-      "Ardent" "Benevolent" "Cogent" "Discerning" "Erroneous"
-    )
-
-    # Array of sophisticated nouns
-    local nouns=(
-      "Paradigm" "Juxtaposition" "Cacophony" "Serendipity" "Obfuscation"
-      "Equanimity" "Perniciousness" "Epiphany" "Dichotomy" "Ubiquity"
-      "Alacrity" "Ephemera" "Panacea" "Penultimate" "Acumen"
-      "Confluence" "Ardor" "Brevity" "Cognizance" "Dichotomy"
-      "Elucidation" "Fortitude" "Gesticulation" "Hegemony" "Impetus"
-      "Juxtaposition" "Kaleidoscope" "Luminescence" "Machination" "Nuance"
-      "Obsolescence" "Predilection" "Quintessence" "Rumination" "Synthesis"
-      "Tenacity" "Ubiquity" "Veracity" "Whimsy" "Xenophobia"
-      "Yearning" "Zeitgeist" "Amalgamation" "Benefaction" "Conundrum"
-      "Dialectic" "Empiricism" "Fallacy" "Grandiloquence" "Hypothesis"
-    )
-
-
-    # Cross-platform random number generation using /dev/urandom
-    # This approach works on both macOS and Linux
-    local adj_size=${#adjectives[@]}
-    local noun_size=${#nouns[@]}
-
-    # Use head -c for raw bytes, hexdump for consistent output across platforms
-    local adj_index=$(head -c 4 /dev/urandom | hexdump -n 4 -e '1/4 "%u"' | awk '{print $1 % '"$adj_size"'}')
-    local noun_index=$(head -c 4 /dev/urandom | hexdump -n 4 -e '1/4 "%u"' | awk '{print $1 % '"$noun_size"'}')
-
-    # Select random words
-    local random_adj=${adjectives[$adj_index]}
-    local random_noun=${nouns[$noun_index]}
-
     # Generate three random 3-character alphanumeric tokens
     local token=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 3)
-
-    # Print the result in the format "Adjective-Noun-token1token2token3"
-    echo "$random_adj-$random_noun-$token"
+    echo "$token"
   }
 
   # Function to shorten paths, keeping only the last two segments
