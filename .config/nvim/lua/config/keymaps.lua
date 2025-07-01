@@ -51,7 +51,7 @@ function CompleteTodo()
   -- Move the cursor back to the original position
   vim.fn.setpos(".", current_pos)
 end
-vim.keymap.set("n", "<leader>C", CompleteTodo, { desc = "Move tab" })
+vim.keymap.set("n", "<leader>C", CompleteTodo, { desc = "Complete Todo" })
 
 
 ---- Diff ----
