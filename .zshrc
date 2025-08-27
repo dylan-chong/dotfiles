@@ -374,6 +374,7 @@ function open-browser {
 # Useful git commands
 
 # {{{
+alias cu.="cursor ."
 alias gs="git status"
 
 alias gpl="git pull"
@@ -567,25 +568,38 @@ function gcmq() {
       RENAMED_FILES=$(process_renamed_files "$RENAMED_FILES_RAW")
 
       # Initialize commit message
-      COMMIT_MSG="$(random_word_tokens)"
-
+      COMMIT_MSG=""
+      
       # Add each section only if there are files of that type
       if [ ! -z "$ADDED_FILES" ]; then
-          COMMIT_MSG+="; ADD: $ADDED_FILES"
+          if [ ! -z "$COMMIT_MSG" ]; then
+              COMMIT_MSG+="; ADD: $ADDED_FILES"
+          else
+              COMMIT_MSG="ADD: $ADDED_FILES"
+          fi
       fi
-
       if [ ! -z "$DELETED_FILES" ]; then
-          COMMIT_MSG+="; DEL: $DELETED_FILES"
+          if [ ! -z "$COMMIT_MSG" ]; then
+              COMMIT_MSG+="; DEL: $DELETED_FILES"
+          else
+              COMMIT_MSG="DEL: $DELETED_FILES"
+          fi
       fi
-
       if [ ! -z "$RENAMED_FILES" ]; then
-          COMMIT_MSG+="; REN: $RENAMED_FILES"
+          if [ ! -z "$COMMIT_MSG" ]; then
+              COMMIT_MSG+="; REN: $RENAMED_FILES"
+          else
+              COMMIT_MSG="REN: $RENAMED_FILES"
+          fi
       fi
-
       if [ ! -z "$MODIFIED_FILES" ]; then
-          COMMIT_MSG+="; MOD: $MODIFIED_FILES"
+          if [ ! -z "$COMMIT_MSG" ]; then
+              COMMIT_MSG+="; MOD: $MODIFIED_FILES"
+          else
+              COMMIT_MSG="MOD: $MODIFIED_FILES"
+          fi
       fi
-
+      
       # Perform the commit with the generated message, passing through any additional arguments
       git commit "$@" -m "$COMMIT_MSG"
   else
