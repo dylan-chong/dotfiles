@@ -709,7 +709,7 @@ function add_dashes_to_uuid() {
 export CLICOLOR=1
 
 # Preferred editor for local and remote sessions
-export EDITOR='lvim'
+export EDITOR='nvim'
 
 # Share bash history between all shells
 setopt share_history
