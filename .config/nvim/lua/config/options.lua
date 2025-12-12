@@ -6,3 +6,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.swapfile = false
 vim.opt.conceallevel = 0
+
+
+vim.o.termguicolors = true
+vim.g.kitty_fast_forwarding = 1

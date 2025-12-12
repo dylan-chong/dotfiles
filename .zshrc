@@ -33,6 +33,8 @@ if [ -z "$NO_MODIFY_PATH" ]; then
   # [ -f "/proc/sys/fs/binfmt_misc/WSLInterop" ] && export BROWSER=wslview
 
   command -v go &> /dev/null && export PATH="$(go env GOPATH)/bin:$PATH"
+
+  export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 fi
 
 # Lvim
@@ -202,8 +204,7 @@ command -v brew &> /dev/null && alias rm="trash"
 
 command -v bat &> /dev/null && alias cat="bat"
 
-# Max line length when searching
-alias rgn="rg --no-ignore"
+alias rgn="rg --no-ignore --hidden"
 
 # Tmux Count Panes
 alias tmuxcount="tmux list-windows -a \
@@ -412,8 +413,12 @@ alias gcuh="git fetch upstream && git checkout upstream/HEAD"
 alias gcob='git checkout -b'
 alias gcop='git checkout -p'
 
-git_changed_test_files() {
+git_changed_test_files_branch() {
   git diff --name-only upstream/HEAD | grep '\.test\.'
+}
+
+git_changed_test_files() {
+  git diff --name-only | grep '\.test\.'
 }
 
 git_create_upstream_head() {
@@ -695,6 +700,11 @@ function diff_package_lock_with_master() {
 
 function add_dashes_to_uuid() {
   echo $1 | perl -pe 's/^(.{8})(.{4})(.{4})(.{4})(.{12})$/\1-\2-\3-\4-\5/' | tr -d '\n'
+}
+
+urlencode() {
+  local raw_url="$1"
+  printf '%s' "$raw_url" | jq -sRr @uri
 }
 
 # }}}
