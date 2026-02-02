@@ -450,8 +450,8 @@ git_infer_remote_from_origin() {
     git remote -vv
     echo
 
-    echo ">" git fetch --all
-    git fetch --all
+    echo ">" git fetch "$new_remote_name"
+    git fetch "$new_remote_name"
 }
 
 git_prune_branches() {
