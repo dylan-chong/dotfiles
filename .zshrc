@@ -707,6 +707,127 @@ urlencode() {
   printf '%s' "$raw_url" | jq -sRr @uri
 }
 
+mem_usage() {
+  local detail_cat=""
+  if [[ "$1" == --* ]]; then
+    detail_cat="${1#--}"
+  fi
+
+  ps -eo rss,command | awk -v detail_cat="$detail_cat" '
+    BEGIN {
+      pats[++n] = "nvim";        labels[n] = "nvim"
+      pats[++n] = "node";        labels[n] = "node"
+      pats[++n] = "chrome";      labels[n] = "chrome"
+      pats[++n] = "python";      labels[n] = "python"
+      pats[++n] = "ruby";        labels[n] = "ruby"
+      pats[++n] = "docker";      labels[n] = "docker"
+      pats[++n] = "cursor";      labels[n] = "cursor"
+      pats[++n] = "code";        labels[n] = "code"
+      pats[++n] = "webstorm";    labels[n] = "WebStorm"
+      pats[++n] = "intellij";    labels[n] = "IntelliJ"
+      pats[++n] = "sublime";     labels[n] = "Sublime"
+      pats[++n] = "emacs";       labels[n] = "Emacs"
+      pats[++n] = "atom";        labels[n] = "Atom"
+      pats[++n] = "zed";         labels[n] = "Zed"
+      pats[++n] = "slack";       labels[n] = "Slack"
+      pats[++n] = "spotify";     labels[n] = "spotify"
+      pats[++n] = "firefox";     labels[n] = "firefox"
+      pats[++n] = "safari";      labels[n] = "safari"
+      pats[++n] = "teams";       labels[n] = "teams"
+      pats[++n] = "zoom";        labels[n] = "zoom"
+      pats[++n] = "spoke phone"; labels[n] = "Spoke Phone"
+      pats[++n] = "spoke labs";  labels[n] = "Spoke Labs"
+
+      for (i = 1; i <= n; i++)
+        label_lower[i] = tolower(labels[i])
+
+      detail_lower = tolower(detail_cat)
+      detail_idx = 0
+      if (detail_cat != "") {
+        for (i = 1; i <= n; i++) {
+          if (label_lower[i] == detail_lower || pats[i] == detail_lower) {
+            detail_idx = i
+            break
+          }
+        }
+        if (detail_idx == 0 && detail_lower != "other") {
+          printf "Unknown category: %s\n", detail_cat
+          printf "Available: "
+          for (i = 1; i <= n; i++) printf "%s%s", labels[i], (i < n ? ", " : "\n")
+          printf "          other\n"
+          exit 1
+        }
+      }
+    }
+    NR == 1 { next }
+    {
+      rss = $1
+      cmd = $0; sub(/^[ ]*[0-9]+[ ]+/, "", cmd)
+      lcmd = tolower($0)
+      total_rss += rss
+      total_count++
+      matched = 0
+      for (i = 1; i <= n; i++) {
+        if (lcmd ~ pats[i]) {
+          counts[i]++
+          mem[i] += rss
+          matched = 1
+          if (detail_idx == i) {
+            detail_procs[++dp] = sprintf("%012d|%7.1f MB  %s", rss, rss / 1024, cmd)
+          }
+          break
+        }
+      }
+      if (!matched) {
+        other_count++
+        other_mem += rss
+        if (detail_lower == "other") {
+          detail_procs[++dp] = sprintf("%012d|%7.1f MB  %s", rss, rss / 1024, cmd)
+        }
+      }
+    }
+    END {
+      if (detail_cat != "") {
+        for (i = 1; i <= dp; i++)
+          for (j = i + 1; j <= dp; j++)
+            if (detail_procs[i] < detail_procs[j]) { tmp = detail_procs[i]; detail_procs[i] = detail_procs[j]; detail_procs[j] = tmp }
+
+        cat_name = (detail_idx > 0) ? labels[detail_idx] : "other"
+        cat_count = (detail_idx > 0) ? counts[detail_idx] : other_count
+        cat_mem = (detail_idx > 0) ? mem[detail_idx] : other_mem
+        printf "%s — %d processes, %.1f MB\n\n", cat_name, cat_count, cat_mem / 1024
+        for (i = 1; i <= dp; i++) {
+          sub(/^[0-9]+\|/, "", detail_procs[i])
+          printf "  %s\n", detail_procs[i]
+        }
+        exit 0
+      }
+
+      r = 0
+      for (i = 1; i <= n; i++) {
+        if (counts[i] > 0)
+          rows[++r] = sprintf("%012d|%-14s|%9d|%7.1f MB", mem[i], labels[i], counts[i], mem[i] / 1024)
+      }
+      rows[++r] = sprintf("%012d|%-14s|%9d|%7.1f MB", other_mem, "other", other_count, other_mem / 1024)
+
+      for (i = 1; i <= r; i++)
+        for (j = i + 1; j <= r; j++)
+          if (rows[i] < rows[j]) { tmp = rows[i]; rows[i] = rows[j]; rows[j] = tmp }
+
+      printf "┌────────────────┬───────────┬────────────┐\n"
+      printf "│ %-14s │ %9s │ %10s │\n", "Category", "Processes", "Memory"
+      printf "├────────────────┼───────────┼────────────┤\n"
+      for (i = 1; i <= r; i++) {
+        split(rows[i], f, "|")
+        printf "│ %s │ %s │ %s │\n", f[2], f[3], f[4]
+      }
+      printf "├────────────────┼───────────┼────────────┤\n"
+      printf "│ %-14s │ %9d │ %7.1f MB │\n", "TOTAL", total_count, total_rss / 1024
+      printf "└────────────────┴───────────┴────────────┘\n"
+    }
+  '
+}
+
 # }}}
 
 
