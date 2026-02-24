@@ -5,6 +5,7 @@ return {
     local dormant = true
     local idle_timer = nil
     local IDLE_TIMEOUT_MS = 3 * 60 * 60 * 1000
+    -- local IDLE_TIMEOUT_MS = 10 * 1000
     local PREFIX = "[lsp-dormant] "
 
     local wake_up
@@ -91,19 +92,22 @@ return {
       end))
     end
 
-    vim.api.nvim_create_autocmd(
-      { "CursorMoved", "CursorMovedI", "InsertEnter", "TextChanged", "TextChangedI" },
-      {
-        callback = function()
-          if dormant then
-            wake_up()
-          else
-            reset_idle_timer()
-          end
-        end,
-      }
-    )
+    vim.defer_fn(function()
+      vim.api.nvim_create_autocmd(
+        { "CursorMoved", "CursorMovedI", "InsertEnter", "TextChanged", "TextChangedI" },
+        {
+          callback = function()
+            if dormant then
+              wake_up()
+            else
+              reset_idle_timer()
+            end
+          end,
+        }
+      )
+      log("Activity listener registered")
+    end, 2000)
 
-    log("Plugin loaded")
+    log("Plugin loaded (dormant)")
   end,
 }
