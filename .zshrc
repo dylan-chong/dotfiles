@@ -715,6 +715,7 @@ mem_usage() {
 
   ps -eo rss,command | awk -v detail_cat="$detail_cat" '
     BEGIN {
+      pats[++n] = "zsh";         labels[n] = "zsh"
       pats[++n] = "nvim";        labels[n] = "nvim"
       pats[++n] = "node";        labels[n] = "node"
       pats[++n] = "chrome";      labels[n] = "chrome"
