@@ -715,27 +715,10 @@ mem_usage() {
 
   ps -eo rss,command | awk -v detail_cat="$detail_cat" '
     BEGIN {
-      pats[++n] = "zsh";         labels[n] = "zsh"
       pats[++n] = "nvim";        labels[n] = "nvim"
       pats[++n] = "node";        labels[n] = "node"
       pats[++n] = "chrome";      labels[n] = "chrome"
-      pats[++n] = "python";      labels[n] = "python"
-      pats[++n] = "ruby";        labels[n] = "ruby"
-      pats[++n] = "docker";      labels[n] = "docker"
       pats[++n] = "cursor";      labels[n] = "cursor"
-      pats[++n] = "code";        labels[n] = "code"
-      pats[++n] = "webstorm";    labels[n] = "WebStorm"
-      pats[++n] = "intellij";    labels[n] = "IntelliJ"
-      pats[++n] = "sublime";     labels[n] = "Sublime"
-      pats[++n] = "emacs";       labels[n] = "Emacs"
-      pats[++n] = "atom";        labels[n] = "Atom"
-      pats[++n] = "zed";         labels[n] = "Zed"
-      pats[++n] = "slack";       labels[n] = "Slack"
-      pats[++n] = "spotify";     labels[n] = "spotify"
-      pats[++n] = "firefox";     labels[n] = "firefox"
-      pats[++n] = "safari";      labels[n] = "safari"
-      pats[++n] = "teams";       labels[n] = "teams"
-      pats[++n] = "zoom";        labels[n] = "zoom"
       pats[++n] = "spoke phone"; labels[n] = "Spoke Phone"
       pats[++n] = "spoke labs";  labels[n] = "Spoke Labs"
 
