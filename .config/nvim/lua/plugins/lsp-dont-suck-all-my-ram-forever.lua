@@ -1,12 +1,12 @@
 return {
   dir = vim.fn.stdpath("config"),
-  name = "lsp-dormant",
+  name = "lsp-dont-suck-all-my-ram-forever",
   config = function()
     local dormant = true
     local idle_timer = nil
     local IDLE_TIMEOUT_MS = 3 * 60 * 60 * 1000
     -- local IDLE_TIMEOUT_MS = 10 * 1000
-    local PREFIX = "[lsp-dormant] "
+    local PREFIX = "[lsp-dont-suck-all-my-ram-forever] "
 
     local wake_up
 
