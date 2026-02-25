@@ -24,6 +24,7 @@ vim.api.nvim_exec2(
 ---- Tabs ----
 
 vim.keymap.set("n", "<leader><Tab>d", "<C-w>s<C-w>TgT:WintabsClose<CR>:tabnext<CR>", { desc = "Move buffer to new tab" })
+vim.keymap.set("n", "<leader><Tab>D", ":tabnew %<CR>", { desc = "Duplicate buffer in new tab" })
 
 vim.keymap.set("n", "<leader><Tab>m", ":tabm<Space><C-f>a", { desc = "Move tab" })
 
