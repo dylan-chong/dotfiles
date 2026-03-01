@@ -713,14 +713,49 @@ mem_usage() {
     detail_cat="${1#--}"
   fi
 
-  ps -eo rss,command | awk -v detail_cat="$detail_cat" '
+  python3 -c '
+import ctypes, ctypes.util, subprocess
+libc = ctypes.CDLL(ctypes.util.find_library("c"))
+class R(ctypes.Structure):
+    _fields_ = [
+        ("ri_uuid", ctypes.c_uint8 * 16),
+        ("ri_user_time", ctypes.c_uint64),
+        ("ri_system_time", ctypes.c_uint64),
+        ("ri_pkg_idle_wkups", ctypes.c_uint64),
+        ("ri_interrupt_wkups", ctypes.c_uint64),
+        ("ri_pageins", ctypes.c_uint64),
+        ("ri_wired_size", ctypes.c_uint64),
+        ("ri_resident_size", ctypes.c_uint64),
+        ("ri_phys_footprint", ctypes.c_uint64),
+        ("ri_proc_start_abstime", ctypes.c_uint64),
+        ("ri_proc_exit_abstime", ctypes.c_uint64),
+        ("ri_child_user_time", ctypes.c_uint64),
+        ("ri_child_system_time", ctypes.c_uint64),
+        ("ri_child_pkg_idle_wkups", ctypes.c_uint64),
+        ("ri_child_interrupt_wkups", ctypes.c_uint64),
+        ("ri_child_pageins", ctypes.c_uint64),
+        ("ri_child_elapsed_abstime", ctypes.c_uint64),
+        ("ri_diskio_bytesread", ctypes.c_uint64),
+        ("ri_diskio_byteswritten", ctypes.c_uint64),
+    ]
+for line in subprocess.check_output(["ps", "-eo", "pid=,rss=,command="], text=True).strip().split("\n"):
+    parts = line.strip().split(None, 2)
+    if len(parts) < 3: continue
+    try: pid, rss = int(parts[0]), int(parts[1])
+    except ValueError: continue
+    info = R()
+    if libc.proc_pid_rusage(pid, 2, ctypes.byref(info)) == 0:
+        print(f"{info.ri_phys_footprint // 1024} {parts[2]}")
+    else:
+        print(f"{rss} {parts[2]}")
+' | awk -v detail_cat="$detail_cat" '
     BEGIN {
-      pats[++n] = "nvim";        labels[n] = "nvim"
-      pats[++n] = "node";        labels[n] = "node"
-      pats[++n] = "chrome";      labels[n] = "chrome"
+      pats[++n] = "(^|[ /])nvim( |$)"; labels[n] = "nvim"
       pats[++n] = "cursor";      labels[n] = "cursor"
+      pats[++n] = "chrome";      labels[n] = "chrome"
       pats[++n] = "spoke phone"; labels[n] = "Spoke Phone"
       pats[++n] = "spoke labs";  labels[n] = "Spoke Labs"
+      pats[++n] = "node";        labels[n] = "node"
 
       for (i = 1; i <= n; i++)
         label_lower[i] = tolower(labels[i])
@@ -743,7 +778,6 @@ mem_usage() {
         }
       }
     }
-    NR == 1 { next }
     {
       rss = $1
       cmd = $0; sub(/^[ ]*[0-9]+[ ]+/, "", cmd)
