@@ -55,6 +55,14 @@ end
 vim.keymap.set("n", "<leader>C", CompleteTodo, { desc = "Complete Todo" })
 
 
+---- Tmux-aware navigation (override LazyVim defaults) ----
+
+local nav = require("nvim-tmux-navigation")
+vim.keymap.set("n", "<C-h>", nav.NvimTmuxNavigateLeft)
+vim.keymap.set("n", "<C-j>", nav.NvimTmuxNavigateDown)
+vim.keymap.set("n", "<C-k>", nav.NvimTmuxNavigateUp)
+vim.keymap.set("n", "<C-l>", nav.NvimTmuxNavigateRight)
+
 ---- Diff ----
 
 local function diff_all_splits()
