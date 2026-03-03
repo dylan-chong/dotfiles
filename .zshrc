@@ -752,6 +752,7 @@ for line in subprocess.check_output(["ps", "-eo", "pid=,rss=,command="], text=Tr
     BEGIN {
       pats[++n] = "(^|[ /])nvim( |$)"; labels[n] = "nvim"
       pats[++n] = "cursor";      labels[n] = "cursor"
+      pats[++n] = "claude";      labels[n] = "claude"
       pats[++n] = "chrome";      labels[n] = "chrome"
       pats[++n] = "spoke phone"; labels[n] = "Spoke Phone"
       pats[++n] = "spoke labs";  labels[n] = "Spoke Labs"
