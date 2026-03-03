@@ -194,6 +194,11 @@ SPACESHIP_GIT_BRANCH_COLOR=magenta
 
 # {{{
 
+alias cl=clear
+fucntion cll() {
+  clear && tmux clear-history
+}
+
 # Vim
 alias vi="nvim"
 alias vs="nvim -S"
