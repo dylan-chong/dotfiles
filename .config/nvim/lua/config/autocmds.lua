@@ -13,8 +13,9 @@ local FOCUSED_BG = "#1b1d2b"
 local DEFOCUSED_BG = "NONE"
 
 local function set_bg(bg)
-  vim.api.nvim_set_hl(0, "Normal", { bg = bg })
-  vim.api.nvim_set_hl(0, "NormalFloat", { bg = bg })
+  local normal_fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg
+  vim.api.nvim_set_hl(0, "Normal", { fg = normal_fg, bg = bg })
+  vim.api.nvim_set_hl(0, "NormalFloat", { fg = normal_fg, bg = bg })
 end
 
 vim.api.nvim_create_autocmd("FocusLost", {

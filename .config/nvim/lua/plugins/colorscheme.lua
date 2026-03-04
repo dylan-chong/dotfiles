@@ -3,8 +3,8 @@ return {
     "folke/tokyonight.nvim",
     opts = {
       style = "moon",
-      on_highlights = function(hl)
-        -- hl.NormalNC = { bg = "#141620" }
+      on_highlights = function(hl, c)
+        hl.NormalNC = { fg = c.fg, bg = c.bg }
       end,
     },
   },
