@@ -3,6 +3,7 @@ return {
     "claudecode/claudecode.nvim",
     opts = {
       terminal = {
+        split_width_percentage = 0.35,
         snacks_win_opts = {
           keys = {
             nav_h = { "<C-h>", function() vim.cmd("stopinsert") vim.cmd("NvimTmuxNavigateLeft") end, mode = "t", desc = "Navigate left" },
