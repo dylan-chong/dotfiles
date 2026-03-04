@@ -4,7 +4,7 @@ return {
     opts = {
       style = "moon",
       on_highlights = function(hl)
-        hl.NormalNC = { bg = "#141620" }
+        -- hl.NormalNC = { bg = "#141620" }
       end,
     },
   },

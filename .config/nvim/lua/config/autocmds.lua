@@ -10,14 +10,15 @@
 -- Dim background when neovim loses focus
 vim.api.nvim_create_autocmd("FocusLost", {
   callback = function()
-    vim.api.nvim_set_hl(0, "Normal", { bg = "#222436" })
+    vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
   end,
 })
 vim.api.nvim_create_autocmd("FocusGained", {
   callback = function()
-    vim.api.nvim_set_hl(0, "Normal", { bg = "#1b1d2b" })
+    vim.api.nvim_set_hl(0, "Normal", { bg = "#141620" })
   end,
 })
+vim.api.nvim_set_hl(0, "Normal", { bg = "#141620" })
 
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "diff",
