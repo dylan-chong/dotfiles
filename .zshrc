@@ -195,7 +195,7 @@ SPACESHIP_GIT_BRANCH_COLOR=magenta
 # {{{
 
 alias cl=clear
-fucntion cll() {
+function clr() {
   clear && tmux clear-history
 }
 
