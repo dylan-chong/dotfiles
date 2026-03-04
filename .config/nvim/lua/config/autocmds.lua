@@ -15,10 +15,10 @@ vim.api.nvim_create_autocmd("FocusLost", {
 })
 vim.api.nvim_create_autocmd("FocusGained", {
   callback = function()
-    vim.api.nvim_set_hl(0, "Normal", { bg = "#141620" })
+    vim.api.nvim_set_hl(0, "Normal", { bg = "#1b1d2b" })
   end,
 })
-vim.api.nvim_set_hl(0, "Normal", { bg = "#141620" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "#1b1d2b" })
 
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "diff",
