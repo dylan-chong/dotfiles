@@ -1,7 +1,12 @@
 return {
   {
     "folke/tokyonight.nvim",
-    opts = { style = "moon" },
+    opts = {
+      style = "moon",
+      on_highlights = function(hl)
+        hl.NormalNC = { bg = "#141620" }
+      end,
+    },
   },
   -- {
   --   "RRethy/base16-nvim",

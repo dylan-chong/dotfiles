@@ -7,6 +7,18 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
+-- Dim background when neovim loses focus
+vim.api.nvim_create_autocmd("FocusLost", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "Normal", { bg = "#141620" })
+  end,
+})
+vim.api.nvim_create_autocmd("FocusGained", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "Normal", { bg = "#222436" })
+  end,
+})
+
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "diff",
   callback = function()
