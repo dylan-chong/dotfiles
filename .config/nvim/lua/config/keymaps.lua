@@ -35,7 +35,8 @@ function CopyPath(expand)
   vim.fn.setreg("+", string)
   print("Copied: " .. string)
 end
-vim.keymap.set("n", "<leader>%", ":lua CopyPath('%:.')<Left><Left><C-f>i", { desc = "Copy file path" })
+vim.keymap.set("n", "<leader>yp", ":lua CopyPath('%:.')<Left><Left><C-f>i", { desc = "Copy file path" })
+vim.keymap.set("n", "<leader>yf", ':%y<CR><C-o>', { desc = "Copy file to clipboard" })
 
 ---- Complete Todos ----
 
