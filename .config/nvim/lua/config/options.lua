@@ -10,3 +10,5 @@ vim.opt.conceallevel = 0
 
 vim.o.termguicolors = true
 vim.g.kitty_fast_forwarding = 1
+
+vim.o.termsync = true -- Might fix claudecode.nvim text rendering bug on focus
