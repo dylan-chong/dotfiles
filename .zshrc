@@ -621,6 +621,7 @@ alias ga="git add"
 alias gaa="git add -A"
 alias gap="git add -p"
 alias gan="git add -AN"
+alias gau='git add $(git diff --name-only --diff-filter=U)'
 
 alias grth="git reset --hard"
 
