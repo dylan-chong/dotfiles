@@ -294,25 +294,10 @@ function notifydone() {
     fi
 }
 
-function spotdl-playlist() {
-    mkdir spotdl-playlist && \
-        cd spotdl-playlist && \
-        spotdl $1 #&& \
-        #spotdl --output-ext m4a --list downloaded-* --search-format '{artist} - {track-name}'
-}
-
-# use `spotdl -s 'artist - title'` instead preferable
-function youtube-dl-song() {
-    youtube-dl --extract-audio --add-metadata --audio-format m4a --embed-thumbnail --ignore-errors $@
-}
-
-function youtube-dl-audio-quick() {
-    youtube-dl --extract-audio --add-metadata --no-playlist --ignore-errors --audio-format m4a $@
-}
-
-function dl-upgrade() {
-    pip3 install --upgrade pip spotdl youtube-dl pytube
-}
+# Load youtube-spot-dl functions if available
+if [ -f "$HOME/Dropbox/Programming/GitHub/youtube-spot-dl/functions.sh" ]; then
+    source "$HOME/Dropbox/Programming/GitHub/youtube-spot-dl/functions.sh"
+fi
 
 function elixir-recompile() {
     mix deps.clean $1 && mix deps.get && mix deps.compile $1
