@@ -668,9 +668,19 @@ function gpr() {
 }
 
 function git_remote_website() {
-    git remote get-url origin \
+    local remote="${1:-origin}"
+    git remote get-url "$remote" \
         | perl -pe 's/\.git$//' \
-        | perl -pe 's/git\@([^:]+):/https:\/\/\1\//'
+        | perl -pe 's/git\@([^:]+):/https:\/\/\1\//' \
+        | perl -pe 'BEGIN { open my $fh, "<", "$ENV{HOME}/.ssh/config"; while (<$fh>) { if (/^\s*Host\s+(\S+)/i) { $c=$1 } elsif ($c && /^\s*HostName\s+(\S+)/i) { $h{$c}=$1 } } } s|https://([^/]+)/|"https://".($h{$1}//$1)."/"|e'
+}
+
+function gprs() {
+    local remote=origin
+    if git remote get-url upstream &>/dev/null; then
+        remote=upstream
+    fi
+    open-browser "$(git_remote_website $remote)/pulls"
 }
 
 # Stdin as input
