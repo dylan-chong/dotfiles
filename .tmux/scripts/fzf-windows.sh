@@ -30,7 +30,7 @@ for name, meta in sorted(index.get('sessions', {}).items()):
         sess = json.load(sf)
     for w in sess.get('windows', []):
         wname = w.get('name', '')
-        print(f'saved\t{name}\t0\t{name} -> {wname} (saved)')
+        print(f'saved\t{name}\t{wname}\t{name} -> {wname} (saved)')
 " 2>/dev/null)
 fi
 
@@ -47,7 +47,9 @@ if [[ "$TYPE" == "saved" ]]; then
     tmux has-session -t "$SESSION_NAME" 2>/dev/null && break
     sleep 0.2
   done
+  WINDOW_NAME=$(printf '%s' "$SELECTION" | cut -f3)
   tmux switch-client -t "$SESSION_NAME"
+  tmux select-window -t "$SESSION_NAME:$WINDOW_NAME"
 else
   SESSION_ID=$(printf '%s' "$SELECTION" | cut -f1)
   WINDOW_ID=$(printf '%s' "$SELECTION" | cut -f2)
