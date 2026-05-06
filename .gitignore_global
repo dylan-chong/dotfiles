@@ -14,3 +14,5 @@ Session.vim
 ~$*
 
 solve/api/src/.tool-versions
+
+.claude/

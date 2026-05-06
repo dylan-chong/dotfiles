@@ -23,7 +23,12 @@ vim.api.nvim_exec2(
 
 ---- Tabs ----
 
-vim.keymap.set("n", "<leader><Tab>d", "<C-w>s<C-w>TgT:WintabsClose<CR>:tabnext<CR>", { desc = "Move buffer to new tab" })
+vim.keymap.set(
+  "n",
+  "<leader><Tab>d",
+  "<C-w>s<C-w>TgT:WintabsClose<CR>:tabnext<CR>",
+  { desc = "Move buffer to new tab" }
+)
 vim.keymap.set("n", "<leader><Tab>D", ":tabnew %<CR>", { desc = "Duplicate buffer in new tab" })
 
 vim.keymap.set("n", "<leader><Tab>m", ":tabm<Space><C-f>a", { desc = "Move tab" })
@@ -36,7 +41,18 @@ function CopyPath(expand)
   print("Copied: " .. string)
 end
 vim.keymap.set("n", "<leader>yp", ":lua CopyPath('%:.')<Left><Left><C-f>i", { desc = "Copy file path" })
-vim.keymap.set("n", "<leader>yf", ':%y<CR><C-o>', { desc = "Copy file to clipboard" })
+vim.keymap.set("n", "<leader>yl", function()
+  local path = vim.fn.expand("%:p") .. ":" .. vim.fn.line(".")
+  vim.fn.setreg("+", path)
+  print("Copied: " .. path)
+end, { desc = "Copy absolute path with line number" })
+vim.keymap.set("v", "<leader>yl", function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+  local path = vim.fn.expand("%:p") .. ":" .. vim.fn.line("'<") .. "-" .. vim.fn.line("'>")
+  vim.fn.setreg("+", path)
+  print("Copied: " .. path)
+end, { desc = "Copy absolute path with line range" })
+vim.keymap.set("n", "<leader>yf", ":%y<CR><C-o>", { desc = "Copy file to clipboard" })
 
 ---- Complete Todos ----
 
@@ -55,7 +71,6 @@ function CompleteTodo()
 end
 vim.keymap.set("n", "<leader>C", CompleteTodo, { desc = "Complete Todo" })
 
-
 ---- Diff ----
 
 local function diff_all_splits()
@@ -67,4 +82,4 @@ local function diff_all_splits()
   end
   vim.api.nvim_set_current_win(current_win)
 end
-vim.api.nvim_create_user_command('DiffAll', diff_all_splits, {})
+vim.api.nvim_create_user_command("DiffAll", diff_all_splits, {})
