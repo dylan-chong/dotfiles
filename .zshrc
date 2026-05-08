@@ -602,6 +602,10 @@ function gcmq() {
   fi
 }
 
+function gcmqa() {
+  gcmq -a
+}
+
 alias ga="git add"
 alias gaa="git add -A"
 alias gap="git add -p"
