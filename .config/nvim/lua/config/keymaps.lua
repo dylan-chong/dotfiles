@@ -4,9 +4,15 @@
 
 ---- Save/Exit ----
 
+vim.keymap.set("n", "<C-q>", function()
+  if vim.api.nvim_buf_line_count(0) < 10000 then
+    vim.cmd("TrimWhitespace")
+  end
+  vim.cmd("w | e")
+end)
+
 vim.api.nvim_exec2(
   [[
-  nnoremap <C-q> :w<CR>:e<CR>
   inoremap <C-q> <Esc>:w<CR>
   nmap Q :wq<CR>
 

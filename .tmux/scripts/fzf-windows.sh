@@ -6,13 +6,15 @@
 LAZY_DIR="${HOME}/.local/share/lazy-tmux"
 RUNNING_SESSIONS=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 
-# Running windows: session_id<TAB>window_id<TAB>last_visited<TAB>session_name -> window_name
-RUNNING=$(tmux list-windows -a -F $'#{session_id}\t#{window_id}\t#{@last_visited}\t#{session_name} -> #{window_name}' 2>/dev/null | sort -t$'\t' -k3,3rn)
+# Stream running windows first (instant), then saved windows (async via python3).
+# fzf reads stdin progressively so the popup appears immediately.
+SELECTION=$({
+  # Running windows: session_id<TAB>window_id<TAB>last_visited<TAB>session_name -> window_name
+  tmux list-windows -a -F $'#{session_id}\t#{window_id}\t#{@last_visited}\t#{session_name} -> #{window_name}' 2>/dev/null | sort -t$'\t' -k3,3rn
 
-# Saved-but-not-running windows from lazy-tmux
-SAVED=""
-if [[ -f "$LAZY_DIR/index.json" ]]; then
-  SAVED=$(python3 -c "
+  # Saved-but-not-running windows from lazy-tmux
+  if [[ -f "$LAZY_DIR/index.json" ]]; then
+    python3 -c "
 import json, sys, os
 
 with open('$LAZY_DIR/index.json') as f:
@@ -31,11 +33,9 @@ for name, meta in sorted(index.get('sessions', {}).items()):
     for w in sess.get('windows', []):
         wname = w.get('name', '')
         print(f'saved\t{name}\t{wname}\t{name} -> {wname} (saved)')
-" 2>/dev/null)
-fi
-
-# Combine and pick
-SELECTION=$(printf '%s\n%s' "$RUNNING" "$SAVED" | grep -v '^$' | fzf-tmux --with-nth=4.. --delimiter=$'\t') || exit 0
+" 2>/dev/null
+  fi
+} | grep -v '^$' | fzf-tmux --with-nth=4.. --delimiter=$'\t') || exit 0
 
 TYPE=$(printf '%s' "$SELECTION" | cut -f1)
 

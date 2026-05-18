@@ -13,4 +13,3 @@ vim.g.kitty_fast_forwarding = 1
 
 vim.o.termsync = true -- Might fix claudecode.nvim text rendering bug on focus
 
-vim.lsp.inlay_hint.enable(false)

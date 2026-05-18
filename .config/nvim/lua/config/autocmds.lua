@@ -40,3 +40,38 @@ vim.api.nvim_create_autocmd("OptionSet", {
     end
   end,
 })
+
+vim.api.nvim_create_user_command("TrimWhitespace", function()
+  local hunks = require("gitsigns").get_hunks()
+  if not hunks then
+    return
+  end
+  local view = vim.fn.winsaveview()
+  for _, hunk in ipairs(hunks) do
+    local start = hunk.added.start
+    local count = hunk.added.count
+    if count > 0 then
+      for lnum = start, start + count - 1 do
+        local line = vim.fn.getline(lnum)
+        local trimmed = line:gsub("%s+$", "")
+        if line ~= trimmed then
+          vim.fn.setline(lnum, trimmed)
+        end
+      end
+    end
+  end
+  vim.fn.winrestview(view)
+end, {})
+
+vim.api.nvim_create_user_command("Delete", function()
+  local filepath = vim.api.nvim_buf_get_name(0)
+  if filepath == "" then
+    vim.notify("Buffer has no file", vim.log.levels.ERROR)
+    return
+  end
+  os.remove(filepath)
+  local relpath = vim.fn.fnamemodify(filepath, ":~:.")
+  vim.bo.modified = false
+  vim.cmd("call wintabs#close()")
+  vim.notify("File " .. relpath .. " deleted")
+end, {})
