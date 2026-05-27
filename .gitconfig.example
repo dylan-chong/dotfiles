@@ -1,7 +1,7 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
-	pager = less --tabs=4 -+F -+X -S -I
+	pager = delta
 [user]
 	name = Dylan Chong
 	email = <AAAAAAAAAAAAAAAAAAA YOUR EMAIL HERE>
@@ -16,21 +16,22 @@
 [gui]
 [diff]
 	tool = vimdiff
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = yellow
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+[delta]
+	navigate = true
+	dark = true
+	line-numbers = true
+	syntax-theme = base16
+	minus-style = syntax "#3a273a"
+	minus-emph-style = syntax "#6b2e43"
+	plus-style = syntax "#273849"
+	plus-emph-style = syntax "#305f6f"
+	line-numbers-minus-style = "#c53b53"
+	line-numbers-plus-style = "#4fd6be"
+[interactive]
+	diffFilter = delta --color-only
+[merge]
+	conflictstyle = zdiff3
 [pull]
 	rebase = false
 [init]
 	defaultBranch = main
-[diff-so-fancy]
-	stripLeadingSymbols = false
