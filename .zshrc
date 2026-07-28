@@ -453,6 +453,7 @@ git_prune_branches__force__i_understand_that_this_will_delete_all_my_local_branc
 }
 
 alias gcm="git commit -v"
+
 function gcmq() {
   random_word_tokens() {
     # Generate three random 3-character alphanumeric tokens
@@ -533,16 +534,33 @@ function gcmq() {
       echo "$result"
   }
 
-  # Check if there are staged changes
-  if ! git diff --cached --quiet; then
+  # Check if -a/--all is in the arguments (stages all tracked modified files)
+  local has_all=false
+  for arg in "$@"; do
+      if [[ "$arg" == "-a" || "$arg" == "--all" || ( "$arg" == -* && "$arg" != --* && "$arg" == *a* ) ]]; then
+          has_all=true
+          break
+      fi
+  done
+
+  # Check if there are staged changes (or unstaged tracked changes when -a is used)
+  if ! git diff --cached --quiet || $has_all; then
+      # When -a is used, show both staged and unstaged tracked changes
+      diff_output() {
+          git diff --cached --name-status
+          if $has_all; then
+              git diff --name-status
+          fi
+      }
+
       # Get lists of changed files by type
-      MODIFIED_FILES_RAW=$(git diff --cached --name-status | grep "^M" | cut -f2 | tr '\n' ',' | sed 's/,$//')
-      ADDED_FILES_RAW=$(git diff --cached --name-status | grep "^A" | cut -f2 | tr '\n' ',' | sed 's/,$//')
-      DELETED_FILES_RAW=$(git diff --cached --name-status | grep "^D" | cut -f2 | tr '\n' ',' | sed 's/,$//')
+      MODIFIED_FILES_RAW=$(diff_output | grep "^M" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
+      ADDED_FILES_RAW=$(diff_output | grep "^A" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
+      DELETED_FILES_RAW=$(diff_output | grep "^D" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
 
       # Handle renamed files - Git marks them with R followed by the old and new names
       RENAMED_FILES_RAW=""
-      git diff --cached --name-status | while read -r line; do
+      diff_output | while read -r line; do
           if [[ "$line" == R* ]]; then
               # Extract old and new filenames
               old_file=$(echo "$line" | cut -f2)
@@ -600,10 +618,6 @@ function gcmq() {
   else
       echo "No changes staged for commit."
   fi
-}
-
-function gcmqa() {
-  gcmq -a
 }
 
 alias ga="git add"
