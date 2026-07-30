@@ -543,81 +543,63 @@ function gcmq() {
       fi
   done
 
-  # Check if there are staged changes (or unstaged tracked changes when -a is used)
-  if ! git diff --cached --quiet || $has_all; then
-      # When -a is used, show both staged and unstaged tracked changes
-      diff_output() {
-          git diff --cached --name-status
-          if $has_all; then
-              git diff --name-status
-          fi
-      }
-
-      # Get lists of changed files by type
-      MODIFIED_FILES_RAW=$(diff_output | grep "^M" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
-      ADDED_FILES_RAW=$(diff_output | grep "^A" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
-      DELETED_FILES_RAW=$(diff_output | grep "^D" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
-
-      # Handle renamed files - Git marks them with R followed by the old and new names
-      RENAMED_FILES_RAW=""
-      diff_output | while read -r line; do
-          if [[ "$line" == R* ]]; then
-              # Extract old and new filenames
-              old_file=$(echo "$line" | cut -f2)
-              new_file=$(echo "$line" | cut -f3)
-
-              if [ -z "$RENAMED_FILES_RAW" ]; then
-                  RENAMED_FILES_RAW="$old_file -> $new_file"
-              else
-                  RENAMED_FILES_RAW="$RENAMED_FILES_RAW,$old_file -> $new_file"
-              fi
-          fi
-      done
-
-      # Process files to shorten paths
-      MODIFIED_FILES=$(process_files "$MODIFIED_FILES_RAW")
-      ADDED_FILES=$(process_files "$ADDED_FILES_RAW")
-      DELETED_FILES=$(process_files "$DELETED_FILES_RAW")
-      RENAMED_FILES=$(process_renamed_files "$RENAMED_FILES_RAW")
-
-      # Initialize commit message
-      COMMIT_MSG=""
-      
-      # Add each section only if there are files of that type
-      if [ ! -z "$ADDED_FILES" ]; then
-          if [ ! -z "$COMMIT_MSG" ]; then
-              COMMIT_MSG+="; ADD: $ADDED_FILES"
-          else
-              COMMIT_MSG="ADD: $ADDED_FILES"
-          fi
-      fi
-      if [ ! -z "$DELETED_FILES" ]; then
-          if [ ! -z "$COMMIT_MSG" ]; then
-              COMMIT_MSG+="; DEL: $DELETED_FILES"
-          else
-              COMMIT_MSG="DEL: $DELETED_FILES"
-          fi
-      fi
-      if [ ! -z "$RENAMED_FILES" ]; then
-          if [ ! -z "$COMMIT_MSG" ]; then
-              COMMIT_MSG+="; REN: $RENAMED_FILES"
-          else
-              COMMIT_MSG="REN: $RENAMED_FILES"
-          fi
-      fi
-      if [ ! -z "$MODIFIED_FILES" ]; then
-          if [ ! -z "$COMMIT_MSG" ]; then
-              COMMIT_MSG+="; MOD: $MODIFIED_FILES"
-          else
-              COMMIT_MSG="MOD: $MODIFIED_FILES"
-          fi
-      fi
-      
-      # Perform the commit with the generated message, passing through any additional arguments
-      git commit "$@" -m "$COMMIT_MSG"
-  else
+  if git diff --cached --quiet && ! $has_all; then
       echo "No changes staged for commit."
+      return
   fi
+
+  git commit "$@" -m "$(gcmq__build_msg $has_all)"
+}
+
+gcmq__diff_output() {
+    local has_all=$1
+    git diff --cached --name-status
+    if $has_all; then
+        git diff --name-status
+    fi
+}
+
+gcmq__build_msg() {
+    local has_all=$1
+
+    local MODIFIED_FILES_RAW=$(gcmq__diff_output $has_all | grep "^M" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
+    local ADDED_FILES_RAW=$(gcmq__diff_output $has_all | grep "^A" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
+    local DELETED_FILES_RAW=$(gcmq__diff_output $has_all | grep "^D" | cut -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
+
+    local RENAMED_FILES_RAW=""
+    gcmq__diff_output $has_all | while read -r line; do
+        if [[ "$line" == R* ]]; then
+            local old_file=$(echo "$line" | cut -f2)
+            local new_file=$(echo "$line" | cut -f3)
+            if [ -z "$RENAMED_FILES_RAW" ]; then
+                RENAMED_FILES_RAW="$old_file -> $new_file"
+            else
+                RENAMED_FILES_RAW="$RENAMED_FILES_RAW,$old_file -> $new_file"
+            fi
+        fi
+    done
+
+    local MODIFIED_FILES=$(process_files "$MODIFIED_FILES_RAW")
+    local ADDED_FILES=$(process_files "$ADDED_FILES_RAW")
+    local DELETED_FILES=$(process_files "$DELETED_FILES_RAW")
+    local RENAMED_FILES=$(process_renamed_files "$RENAMED_FILES_RAW")
+
+    local COMMIT_MSG=""
+    gcmq__append_section() {
+        local prefix=$1 files=$2
+        if [ ! -z "$files" ]; then
+            if [ ! -z "$COMMIT_MSG" ]; then
+                COMMIT_MSG+="; "
+            fi
+            COMMIT_MSG+="$prefix: $files"
+        fi
+    }
+    gcmq__append_section "ADD" "$ADDED_FILES"
+    gcmq__append_section "DEL" "$DELETED_FILES"
+    gcmq__append_section "REN" "$RENAMED_FILES"
+    gcmq__append_section "MOD" "$MODIFIED_FILES"
+
+    echo "$COMMIT_MSG"
 }
 
 alias ga="git add"
