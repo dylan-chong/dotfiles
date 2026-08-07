@@ -16,18 +16,22 @@ COST_FMT=$(printf "%.2f" "$SESSION_COST")
 # cause triple-counting.
 TRANSCRIPT=$(echo "$input" | jq -r '.transcript_path // empty')
 CUM_IN=0
+CUM_CACHE=0
 CUM_OUT=0
 if [ -n "$TRANSCRIPT" ] && [ -f "$TRANSCRIPT" ]; then
-  read -r CUM_IN CUM_OUT <<< "$(jq -rs '
+  read -r CUM_IN CUM_CACHE CUM_OUT <<< "$(jq -rs '
     [.[] | select(.type=="assistant" and .message.usage) | {id: .message.id, u: .message.usage}]
     | unique_by(.id)
-    | [ (map(.u.input_tokens + .u.cache_creation_input_tokens + .u.cache_read_input_tokens) | add // 0),
+    | [ (map(.u.input_tokens) | add // 0),
+        (map(.u.cache_creation_input_tokens + .u.cache_read_input_tokens) | add // 0),
         (map(.u.output_tokens) | add // 0) ]
     | @tsv' "$TRANSCRIPT" 2>/dev/null)"
   CUM_IN=${CUM_IN:-0}
+  CUM_CACHE=${CUM_CACHE:-0}
   CUM_OUT=${CUM_OUT:-0}
 fi
 CUM_IN_FMT=$(printf "%'d" "$CUM_IN")
+CUM_CACHE_FMT=$(printf "%'d" "$CUM_CACHE")
 CUM_OUT_FMT=$(printf "%'d" "$CUM_OUT")
 
 # Build progress bar
@@ -59,4 +63,4 @@ if [ -n "$EFFORT" ]; then
   EFFORT_SEGMENT=" | Effort: ${EFFORT}"
 fi
 
-echo -e "[$MODEL] ${COLOR}$BAR ${PCT}%${RESET} | Session tokens: ${CUM_IN_FMT} in / ${CUM_OUT_FMT} out | Session cost: \$${COST_FMT}${EFFORT_SEGMENT}"
+echo -e "[$MODEL] ${COLOR}$BAR ${PCT}%${RESET} | ${CUM_IN_FMT}T in / ${CUM_CACHE_FMT}T cache / ${CUM_OUT_FMT}T out | Session cost: \$${COST_FMT}${EFFORT_SEGMENT}"
