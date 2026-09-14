@@ -27,6 +27,10 @@
 	plus-emph-style = syntax "#305f6f"
 	line-numbers-minus-style = "#c53b53"
 	line-numbers-plus-style = "#4fd6be"
+	file-style = bold yellow
+	file-decoration-style = yellow box
+	hunk-header-style = dim syntax
+	hunk-header-decoration-style = dim
 [interactive]
 	diffFilter = delta --color-only
 [merge]
