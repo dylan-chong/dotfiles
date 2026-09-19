@@ -1,1 +1,1 @@
-restore_allowlist = ["claude", "nvim", "nvim -S", "vi", "vs", "/opt/homebrew/bin/nvim", "/Users/Dylan/Dropbox/Programming/GitHub/copy-to-icloud-userscripts.sh"]
+restore_allowlist = ["claude", "/opt/homebrew/bin/claude", "nvim", "nvim -S", "vi", "vs", "/opt/homebrew/bin/nvim", "/Users/Dylan/Dropbox/Programming/GitHub/copy-to-icloud-userscripts.sh"]
