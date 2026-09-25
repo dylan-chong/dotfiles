@@ -75,3 +75,10 @@ vim.api.nvim_create_user_command("Delete", function()
   vim.cmd("call wintabs#close()")
   vim.notify("File " .. relpath .. " deleted")
 end, {})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.foldenable = false
+  end,
+})

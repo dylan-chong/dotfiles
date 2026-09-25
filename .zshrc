@@ -708,12 +708,9 @@ urlencode() {
   printf '%s' "$raw_url" | jq -sRr @uri
 }
 
-mem_usage() {
-  local detail_cat=""
-  if [[ "$1" == --* ]]; then
-    detail_cat="${1#--}"
-  fi
-
+# Prints "<pid> <footprint_kb> <command>" per process. Uses phys_footprint (what
+# Activity Monitor shows) since RSS misses compressed/swapped memory.
+__proc_footprints() {
   python3 -c '
 import ctypes, ctypes.util, subprocess
 libc = ctypes.CDLL(ctypes.util.find_library("c"))
@@ -746,10 +743,19 @@ for line in subprocess.check_output(["ps", "-eo", "pid=,rss=,command="], text=Tr
     except ValueError: continue
     info = R()
     if libc.proc_pid_rusage(pid, 2, ctypes.byref(info)) == 0:
-        print(f"{info.ri_phys_footprint // 1024} {parts[2]}")
+        print(f"{pid} {info.ri_phys_footprint // 1024} {parts[2]}")
     else:
-        print(f"{rss} {parts[2]}")
-' | awk -v detail_cat="$detail_cat" '
+        print(f"{pid} {rss} {parts[2]}")
+'
+}
+
+mem_usage() {
+  local detail_cat=""
+  if [[ "$1" == --* ]]; then
+    detail_cat="${1#--}"
+  fi
+
+  __proc_footprints | cut -d' ' -f2- | awk -v detail_cat="$detail_cat" '
     BEGIN {
       pats[++n] = "(^|[ /])nvim( |$)"; labels[n] = "nvim"
       pats[++n] = "cursor";      labels[n] = "cursor"
@@ -846,6 +852,53 @@ for line in subprocess.check_output(["ps", "-eo", "pid=,rss=,command="], text=Tr
       printf "└────────────────┴───────────┴────────────┘\n"
     }
   '
+}
+
+# List nvim processes using more than N MB (default 500). PPID 1 = orphaned (UI gone).
+# Usage: big_nvims [--kill] [threshold_mb]   (--kill prompts before sending SIGTERM)
+big_nvims() {
+  local kill_them=0
+  if [[ "$1" == --kill ]]; then
+    kill_them=1
+    shift
+  fi
+  local threshold_mb="${1:-500}"
+  local pid kb cmd ppid cwd total_kb=0 count=0 reply
+  local -a pids
+
+  printf "%7s %7s %10s  %-50s %s\n" PID PPID MEMORY CWD COMMAND
+  while read -r pid kb cmd; do
+    ppid=$(ps -o ppid= -p "$pid" | tr -d ' ')
+    [[ "$ppid" == 1 ]] && ppid="orphan"
+    cwd=$(lsof -a -p "$pid" -d cwd -Fn 2>/dev/null | sed -n 's/^n//p')
+    printf "%7s %7s %7.1f MB  %-50s %s\n" "$pid" "$ppid" $((kb / 1024.0)) "${cwd/#$HOME/~}" "$cmd"
+    (( total_kb += kb, count++ ))
+    pids+=("$pid")
+  done < <(__proc_footprints \
+    | awk -v min_kb=$((threshold_mb * 1024)) '{ split($3, p, "/") } p[length(p)] == "nvim" && $2 > min_kb' \
+    | sort -k2 -nr)
+  printf "\n%d nvims over %d MB, %.1f MB total\n" "$count" "$threshold_mb" $((total_kb / 1024.0))
+
+  (( kill_them && count > 0 )) || return 0
+  read -r "reply?Kill these $count nvims? [y/N] "
+  if [[ "$reply" == [yY]* ]]; then
+    kill "${pids[@]}" 2>/dev/null
+    echo "Sent SIGTERM to $count nvims"
+    # Orphaned nvims often hang in getout() -> wait_return() ("Press ENTER") with no UI
+    # to answer it, so SIGTERM is ignored. SIGKILL whatever's left after a few seconds.
+    local i; local -a survivors
+    for i in {1..6}; do
+      survivors=(${(f)"$(ps -o pid= -p ${(j:,:)pids} 2>/dev/null | tr -d ' ')"})
+      (( ${#survivors} == 0 )) && break
+      sleep 0.5
+    done
+    if (( ${#survivors} > 0 )); then
+      kill -9 "${survivors[@]}" 2>/dev/null
+      echo "Sent SIGKILL to ${#survivors} nvims that ignored SIGTERM"
+    fi
+  else
+    echo "Aborted"
+  fi
 }
 
 # }}}
